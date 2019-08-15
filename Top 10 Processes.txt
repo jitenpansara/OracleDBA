@@ -1,0 +1,28 @@
+Displaying top CPU_consuming processes
+======================================
+ps aux | head -1; ps aux | sort -rn +2 | head -10
+
+
+Displaying top 10 memory-consuming processes
+============================================
+ps aux | head -1; ps aux | sort -rn +3 | head
+
+
+Displaying the process in order of real memory use 
+==================================================
+ps vx | head -1; ps vx | grep -v PID | sort -rn +6 | head -10
+
+
+Displaying process in order of nice value
+=========================================
+ps -eakl | sort -n +7
+
+
+Displaying the process in order of I/O 
+======================================
+ps vx | head -1; ps vx | grep -v PID | sort -rn +4 | head -10
+
+find / -name filename
+
+
+
