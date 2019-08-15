@@ -1,0 +1,12 @@
+connect target /
+connect catalog RMANUKPRISMNPC/cateye@rmanp
+
+run 
+{
+allocate channel adsm_5 device type 'SBT_TAPE' parms 'ENV=(TDPO_OPTFILE=C:\TSM\AgentOBA64\tdpo_PRISMNPC_arch.opt)';
+allocate channel adsm_6 device type 'SBT_TAPE' parms 'ENV=(TDPO_OPTFILE=C:\TSM\AgentOBA64\tdpo_PRISMNPC_arch.opt)';
+set command id to 'Backup Archivelog';
+backup filesperset 10 archivelog all delete input format 'ARCH_%c_%d_%I_t%t_s%s_p%p';
+release channel adsm_5;
+release channel adsm_6;
+}

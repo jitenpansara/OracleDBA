@@ -1,0 +1,64 @@
+
+
+-----------------OPTION 1--------------------------
+
+rman target /
+ 
+connect catalog <CATUSR>/<CATPSW>@<CATCON>
+ 
+CONFIGURE CONTROLFILE AUTOBACKUP ON;
+ 
+show all;
+ 
+run {
+  allocate channel channel_1 device type disk;
+  allocate channel channel_2 device type disk;
+ 
+  set command id to 'Backup Database';
+ 
+    backup incremental level 0 database
+      filesperset 10
+      format '/mnt1/backup/INC0_%d_%I_s%s_p%p' current controlfile format '/mnt1/backup/CTL_%d_C_%T_%u';
+  release channel channel_1;
+  release channel channel_2;
+ 
+#
+sql 'alter system archive log current';
+#
+# Backup Archivelog
+#
+   set backup copies=2;
+ 
+   allocate channel channel_5 device type disk;
+   allocate channel channel_6 device type disk;
+ 
+   set command id to 'Backup Archivelog';
+ 
+      backup filesperset 10
+      archivelog all delete input
+      format '/mnt1/backup/ARCH_%c_%d_%I_t%t_s%s_p%p';
+}
+
+-----------------OPTION 2--------------------------
+rman target /
+ 
+run {
+   allocate channel c1 type DISK;
+   allocate channel c2 type DISK;
+   set command id to 'Backup Database';
+   backup database include current controlfile format '/backup1/PROD/MOPP/Inc0_MOPP_%d_%U_s%s_p%p';
+   release channel c1;
+   release channel c2;
+   sql 'alter system archive log current';
+   allocate channel c3 type DISK;
+   allocate channel c4 type DISK;
+   set command id to 'Backup Archivelog';
+   backup current controlfile format '/backup1/PROD/MOPP/control.ctl';
+   backup archivelog all format '/backup1/PROD/MOPP/ARCH_%c_%d_%U_s%s_p%p'; 
+   release channel c3;
+   release channel c4;
+}
+
+
+
+

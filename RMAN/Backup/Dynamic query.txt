@@ -1,0 +1,57 @@
+To kill inactive sessions:
+select 'alter system kill session ''' ||sid|| ',' || serial#|| ''' immediate;' from v$session where status='INACTIVE' and username not in ('SYS');
+
+select 'alter user '|| username||' temporary tablespace temporary_data; ' from dba_users where temporary_tablespace like '%deleted%';
+
+select 'alter package '|| owner ||'.'||object_name||' compile;' from dba_objects 
+                where object_type like '%PACKAGE%' and status = 'INVALID';
+                
+                select 'alter package '|| owner ||'.'||object_name||' compile body;'
+                from dba_objects where object_type like '%PACKAGE BODY%' and status = 'INVALID';
+                
+                select 'alter trigger '|| owner ||'.'||object_name||' compile;' from dba_objects
+                where object_type like '%TRIGGER%' and status = 'INVALID';
+                
+                select 'alter view '|| owner ||'.'||object_name||' compile;' from dba_objects
+                where object_type like '%VIEW%' and status = 'INVALID';
+                
+                select 'alter materialized view '|| owner ||'.'||object_name||' compile;' from dba_objects
+                where object_type like '%MATERIALIZED VIEW%' and status = 'INVALID';
+
+                select 'alter type '|| owner || '.'||object_name||' compile;' from dba_objects
+                where object_type like 'TYPE' and status = 'INVALID';
+                
+                select 'alter procedure '|| owner || '.'||object_name||' compile;' from dba_objects
+                where object_type like '%PROCEDURE%' and status = 'INVALID';
+                
+                select 'alter function '|| owner || '.'||object_name||' compile;' from dba_objects
+                where object_type like '%FUNCTION%' and status = 'INVALID';
+                
+                select 'alter type '|| owner || '.'||object_name||' compile;' from dba_objects
+                where object_type like 'SYNONYM' and status = 'INVALID';
+
+
+-------------Get All Users------------------------
+set head off
+set lines 300 pages 200
+set long 999999999
+spool user_prod2.sql
+
+SELECT DBMS_METADATA.GET_DDL('USER', USERNAME) || '/' DDL FROM DBA_USERS
+UNION ALL
+SELECT DBMS_METADATA.GET_GRANTED_DDL('ROLE_GRANT', USERNAME) || '/' DDL
+FROM 
+   DBA_USERS
+UNION ALL
+SELECT DBMS_METADATA.GET_GRANTED_DDL('SYSTEM_GRANT', USERNAME) || '/' DDL
+FROM DBA_USERS
+UNION ALL
+SELECT DBMS_METADATA.GET_GRANTED_DDL('OBJECT_GRANT', USERNAME) || '/' DDL FROM DBA_USERS;
+
+spool off;
+
+-------------Get All Indexes------------------------
+
+select dbms_metadata.get_ddl('INDEX', index_name, owner)
+from all_indexes
+where owner in ('HHDC');

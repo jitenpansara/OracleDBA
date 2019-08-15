@@ -1,0 +1,37 @@
+3. Detailed Procedure
+
+
+1.	Enable Flashback 
+
+To enable flashback we need to set two parameters: 
+DB_RECOVERY_FILE_DEST and DB_RECOVERY_FILE_DEST_SIZE
+
+2.	Set Parameters 
+
+alter system set db_recovery_file_dest_size=300g;
+alter system set db_recovery_file_dest='/oracle/XXX/arch/FRA';
+show parameter db_recovery_file
+
+3.	Turn on flashback:
+
+select flashback_on from v$database;
+alter database flashback on;
+select flashback_on from v$database;
+
+4.	Create Guarantee Restore Point:
+
+CREATE RESTORE POINT TST_AJ GUARANTEE FLASHBACK DATABASE;
+
+5.	Crosscheck Guarantee Restore Point
+
+SELECT NAME, SCN, TIME, DATABASE_INCARNATION#, GUARANTEE_FLASHBACK_DATABASE, STORAGE_SIZE FROM V$RESTORE_POINT WHERE GUARANTEE_FLASHBACK_DATABASE='YES';
+
+6.	Drop Guarantee Restore Point:
+
+DROP RESTORE POINT TST_AJ;
+
+7.	DISABLE FLASHBACK:
+
+select flashback_on from v$database;
+alter database flashback off;
+select flashback_on from v$database;

@@ -1,0 +1,2397 @@
+login as: UI513018
+UI513018@rs294a's password:
+Last unsuccessful login: Tue 12 Jun 11:18:33 2018 on ssh from 10.174.217.150
+Last login: Wed 27 Jun 15:43:43 2018 on ssh from 10.174.217.150
+*******************************************************************************
+*                                                                             *
+*                                                                             *
+*       This system is owned by INNOGY                                        *
+*                                                                             *
+*       Access to it for any reason must be specifically authorised.          *
+*       Your continued access and further inquiry may expose you to           *
+*       criminal activities and/or civil proceedings.                         *
+*       INNOGY reserves the right to access and disclose all information sent *
+*       through  or stored in this computer system, for any purposes.         *
+*                                                                             *
+*       Your activities are subject to full monitoring and logging.           *
+*                                                                             *
+*                                                                             *
+*                                                                             *
+*******************************************************************************
+
+
+#     # ####### #     #
+##    # #     # ##    #
+# #   # #     # # #   #
+#  #  # #     # #  #  #
+#   # # #     # #   # #
+#    ## #     # #    ##
+#     # ####### #     #
+
+######
+#     #  #####    ####   #####   #    #   ####    #####     #     ####   #    #
+#     #  #    #  #    #  #    #  #    #  #    #     #       #    #    #  ##   #
+######   #    #  #    #  #    #  #    #  #          #       #    #    #  # #  #
+#        #####   #    #  #    #  #    #  #          #       #    #    #  #  # #
+#        #   #   #    #  #    #  #    #  #    #     #       #    #    #  #   ##
+#        #    #   ####   #####    ####    ####      #       #     ####   #    #
+
+ #####
+#     #   #   #   ####    #####  ######  #    #
+#          # #   #          #    #       ##  ##
+ #####      #     ####      #    #####   # ## #
+      #     #         #     #    #       #    #
+#     #     #    #    #     #    #       #    #
+ #####      #     ####      #    ######  #    #
+
+$ ps -ef|grep pmon
+ oraftss 15073302        1   0   17 Jun      -  1:02 ora_pmon_CDB_FTSS
+UI513018 22282490 15466520   0 09:27:46  pts/4  0:00 grep pmon
+oramoffb 24838234        1   0   17 Jun      -  0:59 ora_pmon_CDB_MOFB
+ oraftsd 38338912        1   0 09:06:06      -  0:00 ora_pmon_CDB_FTSD
+  orapms 16843374        1   0   18 Jun      -  0:56 ora_pmon_CMOFFPMS
+$ sudo su - oraftss
+$ sqlplus
+ksh: sqlplus:  not found.
+$ cd bin
+ksh: bin:  not found.
+$ ls -ltr
+total 16
+-rw-r--r--    1 oraftss  dba              45 15 Jun 14:25 oraInst.loc
+-rw-r--r--    1 oraftss  dba             598 18 Jun 15:50 FTSS.env
+$ . FTSS.env
+oraftss.CDB_FTSS - sqlplus
+
+SQL*Plus: Release 12.1.0.2.0 Production on Thu Jul 12 09:28:19 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter user-name: / as sysdba
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing opt                                                      ions
+
+SQL> select name from v$database;
+
+NAME
+---------
+CDB_FTSS
+
+SQL> show pdbs
+
+    CON_ID CON_NAME                       OPEN MODE  RESTRICTED
+---------- ------------------------------ ---------- ----------
+         2 PDB$SEED                       READ ONLY  NO
+         3 FTSS                           READ WRITE NO
+SQL> select file_name from dba_data_files;
+
+FILE_NAME
+--------------------------------------------------------------------------------
+/oracle/CDB_FTSS/data01/system01.dbf
+/oracle/CDB_FTSS/data01/sysaux01.dbf
+/oracle/CDB_FTSS/data01/undotbs06.dbf
+/oracle/CDB_FTSS/data01/undotbs05.dbf
+/oracle/CDB_FTSS/data01/undotbs04.dbf
+/oracle/CDB_FTSS/data01/undotbs03.dbf
+/oracle/CDB_FTSS/data01/undotbs02.dbf
+/oracle/CDB_FTSS/data01/undotbs01.dbf
+/oracle/CDB_FTSS/data01/users01.dbf
+
+9 rows selected.
+
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+oraftss.CDB_FTSS - df -gt
+Filesystem    GB blocks      Used      Free %Used Mounted on
+/dev/hd4           2.00      1.62      0.38   82% /
+/dev/hd2           7.00      3.95      3.05   57% /usr
+/dev/hd9var        3.00      1.37      1.63   46% /var
+/dev/hd3          11.00      0.98     10.02    9% /tmp
+/dev/hd1           2.00      0.38      1.62   20% /home
+/dev/hd11admin      1.00      0.00      1.00    1% /admin
+/proc                 -         -         -    - /proc
+/dev/hd10opt       2.00      0.91      1.09   46% /opt
+/dev/livedump      1.00      0.00      1.00    1% /var/adm/ras/livedump
+/dev/rootlv01      1.00      0.00      1.00    1% /rwe
+/dev/rootlv02      2.00      0.07      1.93    4% /rwe/log
+/dev/rootlv03      1.00      0.00      1.00    1% /rwe/core
+/dev/rootlv04      1.00      0.04      0.96    4% /UC4
+/dev/patrollv      2.00      1.36      0.64   69% /opt/patrol
+/dev/varnmonlv      3.00      0.17      2.83    6% /var/nmon
+/dev/moffblv1     30.00     14.33     15.67   48% /oracle/CDB_MOFFB/12.1.0.2
+/dev/moffblv2      5.00      2.02      2.98   41% /oracle/CDB_MOFFB/redo01
+/dev/moffblv3      5.00      2.02      2.98   41% /oracle/CDB_MOFFB/redo02
+/dev/moffblv4    690.00    287.18    402.82   42% /oracle/CDB_MOFFB/arch
+/dev/moffblv5     50.00      1.76     48.24    4% /oracle/CDB_MOFFB/temp
+/dev/moffblv6    350.00    114.58    235.42   33% /oracle/CDB_MOFFB/data01
+/dev/moffblv7   2200.00   2068.45    131.55   95% /oracle/PDB_MOFFB/data01
+/dev/moffblv8   1400.00   1236.69    163.31   89% /oracle/PDB_MOFFB/data02
+/dev/moffblv9   1000.00    786.13    213.87   79% /oracle/PDB_MOFFB/data03
+/dev/moffblv10   1400.00   1291.59    108.41   93% /oracle/PDB_MOFFB/data04
+/dev/moffblv11      5.00      0.02      4.98    1% /oracle/MOFFB/app/temp
+/dev/mofftlv1     30.00     15.39     14.61   52% /oracle/CDB_FTSD/12.1.0.2
+/dev/mofftlv2      5.00      2.02      2.98   41% /oracle/CDB_FTSD/redo01
+/dev/mofftlv3      5.00      2.52      2.48   51% /oracle/CDB_FTSD/redo02
+/dev/mofftlv4    690.00    210.50    479.50   31% /oracle/CDB_FTSD/arch
+/dev/mofftlv5     50.00      5.30     44.70   11% /oracle/CDB_FTSD/temp
+/dev/mofftlv6    250.00    114.58    135.42   46% /oracle/CDB_FTSD/data01
+/dev/mofftlv7   1100.00     67.22   1032.78    7% /oracle/PDB_FTSD/data01
+/dev/mofftlv8    700.00     51.92    648.08    8% /oracle/PDB_FTSD/data02
+/dev/mofftlv9    500.00     87.00    413.00   18% /oracle/PDB_FTSD/data03
+/dev/mofftlv10    700.00     70.79    629.21   11% /oracle/PDB_FTSD/data04
+/dev/mofftlv11         -         -         -    - /oracle/FTSD/app/temp
+/dev/cmoffpmslv00     30.00     12.84     17.16   43% /oracle/CMOFFPMS/12.1.0.2
+/dev/cmoffpmslv01      5.00      2.02      2.98   41% /oracle/CMOFFPMS/redo01
+/dev/cmoffpmslv02      5.00      2.02      2.98   41% /oracle/CMOFFPMS/redo02
+/dev/cmoffpmslv03     60.00      7.95     52.05   14% /oracle/CMOFFPMS/temp
+/dev/cmoffpmslv04    250.00    114.60    135.40   46% /oracle/CMOFFPMS/data01
+/dev/cmoffpmslv05    700.00     67.22    632.78   10% /oracle/CMOFFPMS/arch
+/dev/cmoffpmslv06   2200.00   2068.49    131.51   95% /oracle/MOFFPMS/data01
+/dev/cmoffpmslv07   1500.00   1236.82    263.18   83% /oracle/MOFFPMS/data02
+/dev/cmoffpmslv08   1000.00    786.15    213.85   79% /oracle/MOFFPMS/data03
+/dev/cmoffpmslv09   1500.00   1291.73    208.27   87% /oracle/MOFFPMS/data04
+rs127a:/oracle/FTSD/app/fts          -         -         -    - /oracle/FTSD/app/fts
+rs127a:/oracle/MOFFB/app/moffice      30.00     13.54     16.46   46% /oracle/MOFFB/app/moffice
+rs127a:/oracle/FTSS/app/fts      30.00     12.43     17.57   42% /oracle/FTSS/app/fts
+/dev/FTSSlv01     15.00      0.16     14.84    2% /oracle/CDB_FTSS
+/dev/FTSSlv02     30.00     12.82     17.18   43% /oracle/CDB_FTSS/12.1.0.2
+/dev/FTSSlv03    250.00    114.56    135.44   46% /oracle/CDB_FTSS/data01
+/dev/FTSSlv04    800.00     66.88    733.12    9% /oracle/PDB_FTSS/data01
+/dev/FTSSlv05    500.00     51.70    448.30   11% /oracle/PDB_FTSS/data02
+/dev/FTSSlv06    500.00     87.00    413.00   18% /oracle/PDB_FTSS/data03
+/dev/FTSSlv07    500.00     70.58    429.42   15% /oracle/PDB_FTSS/data04
+/dev/FTSSlv08    400.00     40.56    359.44   11% /oracle/CDB_FTSS/arch
+/dev/FTSSlv09     60.00      0.25     59.75    1% /oracle/CDB_FTSS/temp
+/dev/FTSSlv10      5.00      2.02      2.98   41% /oracle/CDB_FTSS/redo01
+/dev/FTSSlv11      5.00      2.02      2.98   41% /oracle/CDB_FTSS/redo02
+/dev/FTSSlv12      5.00      0.02      4.98    1% /oracle/FTSS/app/temp
+/dev/oemlv00      15.00      0.06     14.94    1% /u01/OEM/oracle
+rs127a:/oracle/MOFFPMS/app/moffice      30.00     22.61      7.39   76% /oracle/MOFFPMS/app/moffice
+/dev/ftsdlv00     15.00      0.06     14.94    1% /oracle/FTSD
+/dev/ftsdlv01     30.00     14.36     15.64   48% /oracle/FTSD/12.1.0.2
+/dev/ftsdlv02      5.00      2.04      2.96   41% /oracle/FTSD/redo01
+/dev/ftsdlv03      5.00      2.04      2.96   41% /oracle/FTSD/redo02
+/dev/ftsdlv04    300.00      0.55    299.45    1% /oracle/FTSD/arch
+/dev/ftsdlv05     50.00     50.00      0.00  100% /oracle/FTSD/temp
+/dev/ftsdlv06    500.00    260.76    239.24   53% /oracle/FTSD/data01
+/dev/ftsslv00     15.00      0.06     14.94    1% /oracle/ftss
+/dev/ftsslv01     30.00      0.12     29.88    1% /oracle/ftss/12.1.0.2
+/dev/ftsslv02      5.00      0.02      4.98    1% /oracle/ftss/redo01
+/dev/ftsslv03      5.00      0.02      4.98    1% /oracle/ftss/redo02
+/dev/ftsslv04    300.00      0.55    299.45    1% /oracle/ftss/arch
+/dev/ftsslv05     50.00      0.20     49.80    1% /oracle/ftss/temp
+/dev/ftsslv06    400.00      0.56    399.44    1% /oracle/ftss/data01
+/dev/ftsqlv00     15.00      0.06     14.94    1% /oracle/FTSQ
+oraftss.CDB_FTSS - sqlplus
+
+SQL*Plus: Release 12.1.0.2.0 Production on Thu Jul 12 09:29:10 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter user-name: / as sysdba
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+
+SQL> select file_name from dba_data_Files;
+
+FILE_NAME
+--------------------------------------------------------------------------------
+/oracle/CDB_FTSS/data01/system01.dbf
+/oracle/CDB_FTSS/data01/sysaux01.dbf
+/oracle/CDB_FTSS/data01/undotbs06.dbf
+/oracle/CDB_FTSS/data01/undotbs05.dbf
+/oracle/CDB_FTSS/data01/undotbs04.dbf
+/oracle/CDB_FTSS/data01/undotbs03.dbf
+/oracle/CDB_FTSS/data01/undotbs02.dbf
+/oracle/CDB_FTSS/data01/undotbs01.dbf
+/oracle/CDB_FTSS/data01/users01.dbf
+
+9 rows selected.
+
+SQL> show pdbs
+
+    CON_ID CON_NAME                       OPEN MODE  RESTRICTED
+---------- ------------------------------ ---------- ----------
+         2 PDB$SEED                       READ ONLY  NO
+         3 FTSS                           READ WRITE NO
+SQL> alter system set container=FTSS;
+alter system set container=FTSS
+                 *
+ERROR at line 1:
+ORA-02065: illegal option for ALTER SYSTEM
+
+
+SQL> alter session set container=FTSS;
+
+Session altered.
+
+SQL> select file_name from dba_data_files;
+
+FILE_NAME
+--------------------------------------------------------------------------------
+/oracle/PDB_FTSS/data03/system01.dbf
+/oracle/PDB_FTSS/data03/sysaux01.dbf
+/oracle/PDB_FTSS/data01/user_data01.dbf
+/oracle/PDB_FTSS/data01/quest_data01.dbf
+/oracle/PDB_FTSS/data02/quest_indexes01.dbf
+/oracle/PDB_FTSS/data01/perfstat01.dbf
+/oracle/PDB_FTSS/data01/apex_data01.dbf
+/oracle/PDB_FTSS/data03/genf_data_ts01.dbf
+/oracle/PDB_FTSS/data03/genf_data_ts02.dbf
+/oracle/PDB_FTSS/data03/genf_data_ts03.dbf
+/oracle/PDB_FTSS/data03/genf_data_ts04.dbf
+
+FILE_NAME
+--------------------------------------------------------------------------------
+/oracle/PDB_FTSS/data04/genf_IDX_01.dbf
+/oracle/PDB_FTSS/data04/genf_IDX_02.dbf
+/oracle/PDB_FTSS/data04/genf_IDX_03.dbf
+/oracle/PDB_FTSS/data01/REPORTING_DATA_TS_01.dbf
+/oracle/PDB_FTSS/data01/REPORTING_DATA_TS_02.dbf
+/oracle/PDB_FTSS/data01/REPORTING_DATA_TS_03.dbf
+/oracle/PDB_FTSS/data01/REPORTING_DATA_TS_04.dbf
+/oracle/PDB_FTSS/data02/REPORTING_IDX_01.dbf
+/oracle/PDB_FTSS/data02/REPORTING_IDX_02.dbf
+/oracle/PDB_FTSS/data02/REPORTING_IDX_03.dbf
+/oracle/PDB_FTSS/data03/MOFFICE_DATA_TS01.dbf
+
+FILE_NAME
+--------------------------------------------------------------------------------
+/oracle/PDB_FTSS/data03/MOFFICE_DATA_TS02.dbf
+/oracle/PDB_FTSS/data04/MOFFICE_DATA_TS03.dbf
+/oracle/PDB_FTSS/data04/MOFFICE_DATA_TS04.dbf
+/oracle/PDB_FTSS/data01/MOFFICE_IDX_01.dbf
+/oracle/PDB_FTSS/data01/MOFFICE_IDX_02.dbf
+/oracle/PDB_FTSS/data02/MOFFICE_IDX_03.dbf
+/oracle/PDB_FTSS/data02/MOFFICE_IDX_04.dbf
+
+29 rows selected.
+
+SQL> select name from v$database;
+
+NAME
+---------
+CDB_FTSS
+
+SQL> shut immediate;
+Pluggable Database closed.
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+oraftss.CDB_FTSS - sqlplus
+
+SQL*Plus: Release 12.1.0.2.0 Production on Thu Jul 12 09:47:38 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter user-name: / as sysdba
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+
+SQL> show pdbs
+
+    CON_ID CON_NAME                       OPEN MODE  RESTRICTED
+---------- ------------------------------ ---------- ----------
+         2 PDB$SEED                       READ ONLY  NO
+         3 FTSS                           MOUNTED
+SQL> shut immediate;
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+oraftss.CDB_FTSS - df -gt
+Filesystem    GB blocks      Used      Free %Used Mounted on
+/dev/hd4           2.00      1.63      0.37   82% /
+/dev/hd2           7.00      3.95      3.05   57% /usr
+/dev/hd9var        3.00      1.37      1.63   46% /var
+/dev/hd3          11.00      0.98     10.02    9% /tmp
+/dev/hd1           2.00      0.38      1.62   20% /home
+/dev/hd11admin      1.00      0.00      1.00    1% /admin
+/proc                 -         -         -    - /proc
+/dev/hd10opt       2.00      0.91      1.09   46% /opt
+/dev/livedump      1.00      0.00      1.00    1% /var/adm/ras/livedump
+/dev/rootlv01      1.00      0.00      1.00    1% /rwe
+/dev/rootlv02      2.00      0.07      1.93    4% /rwe/log
+/dev/rootlv03      1.00      0.00      1.00    1% /rwe/core
+/dev/rootlv04      1.00      0.04      0.96    4% /UC4
+/dev/patrollv      2.00      1.36      0.64   69% /opt/patrol
+/dev/varnmonlv      3.00      0.17      2.83    6% /var/nmon
+/dev/moffblv1     30.00     14.33     15.67   48% /oracle/CDB_MOFFB/12.1.0.2
+/dev/moffblv2      5.00      2.02      2.98   41% /oracle/CDB_MOFFB/redo01
+/dev/moffblv3      5.00      2.02      2.98   41% /oracle/CDB_MOFFB/redo02
+/dev/moffblv4    690.00    287.18    402.82   42% /oracle/CDB_MOFFB/arch
+/dev/moffblv5     50.00      1.76     48.24    4% /oracle/CDB_MOFFB/temp
+/dev/moffblv6    350.00    114.58    235.42   33% /oracle/CDB_MOFFB/data01
+/dev/moffblv7   2200.00   2068.45    131.55   95% /oracle/PDB_MOFFB/data01
+/dev/moffblv8   1400.00   1236.69    163.31   89% /oracle/PDB_MOFFB/data02
+/dev/moffblv9   1000.00    786.13    213.87   79% /oracle/PDB_MOFFB/data03
+/dev/moffblv10   1400.00   1291.59    108.41   93% /oracle/PDB_MOFFB/data04
+/dev/moffblv11      5.00      0.02      4.98    1% /oracle/MOFFB/app/temp
+/dev/mofftlv1     30.00     15.39     14.61   52% /oracle/CDB_FTSD/12.1.0.2
+/dev/mofftlv2      5.00      2.02      2.98   41% /oracle/CDB_FTSD/redo01
+/dev/mofftlv3      5.00      2.52      2.48   51% /oracle/CDB_FTSD/redo02
+/dev/mofftlv4    690.00    210.50    479.50   31% /oracle/CDB_FTSD/arch
+/dev/mofftlv5     50.00      5.30     44.70   11% /oracle/CDB_FTSD/temp
+/dev/mofftlv6    250.00    114.58    135.42   46% /oracle/CDB_FTSD/data01
+/dev/mofftlv7   1100.00     67.22   1032.78    7% /oracle/PDB_FTSD/data01
+/dev/mofftlv8    700.00     51.92    648.08    8% /oracle/PDB_FTSD/data02
+/dev/mofftlv9    500.00     87.00    413.00   18% /oracle/PDB_FTSD/data03
+/dev/mofftlv10    700.00     70.79    629.21   11% /oracle/PDB_FTSD/data04
+/dev/mofftlv11         -         -         -    - /oracle/FTSD/app/temp
+/dev/cmoffpmslv00     30.00     12.84     17.16   43% /oracle/CMOFFPMS/12.1.0.2
+/dev/cmoffpmslv01      5.00      2.02      2.98   41% /oracle/CMOFFPMS/redo01
+/dev/cmoffpmslv02      5.00      2.02      2.98   41% /oracle/CMOFFPMS/redo02
+/dev/cmoffpmslv03     60.00      7.95     52.05   14% /oracle/CMOFFPMS/temp
+/dev/cmoffpmslv04    250.00    114.60    135.40   46% /oracle/CMOFFPMS/data01
+/dev/cmoffpmslv05    700.00     67.22    632.78   10% /oracle/CMOFFPMS/arch
+/dev/cmoffpmslv06   2200.00   2068.49    131.51   95% /oracle/MOFFPMS/data01
+/dev/cmoffpmslv07   1500.00   1236.82    263.18   83% /oracle/MOFFPMS/data02
+/dev/cmoffpmslv08   1000.00    786.15    213.85   79% /oracle/MOFFPMS/data03
+/dev/cmoffpmslv09   1500.00   1291.73    208.27   87% /oracle/MOFFPMS/data04
+rs127a:/oracle/FTSD/app/fts          -         -         -    - /oracle/FTSD/app/fts
+rs127a:/oracle/MOFFB/app/moffice      30.00     13.54     16.46   46% /oracle/MOFFB/app/moffice
+rs127a:/oracle/FTSS/app/fts      30.00     12.43     17.57   42% /oracle/FTSS/app/fts
+/dev/FTSSlv01     15.00      0.16     14.84    2% /oracle/CDB_FTSS
+/dev/FTSSlv02     30.00     12.82     17.18   43% /oracle/CDB_FTSS/12.1.0.2
+/dev/FTSSlv03    250.00    114.56    135.44   46% /oracle/CDB_FTSS/data01
+/dev/FTSSlv04    800.00     66.88    733.12    9% /oracle/PDB_FTSS/data01
+/dev/FTSSlv05    500.00     51.70    448.30   11% /oracle/PDB_FTSS/data02
+/dev/FTSSlv06    500.00     87.00    413.00   18% /oracle/PDB_FTSS/data03
+/dev/FTSSlv07    500.00     70.58    429.42   15% /oracle/PDB_FTSS/data04
+/dev/FTSSlv08    400.00     40.56    359.44   11% /oracle/CDB_FTSS/arch
+/dev/FTSSlv09     60.00      0.25     59.75    1% /oracle/CDB_FTSS/temp
+/dev/FTSSlv10      5.00      2.02      2.98   41% /oracle/CDB_FTSS/redo01
+/dev/FTSSlv11      5.00      2.02      2.98   41% /oracle/CDB_FTSS/redo02
+/dev/FTSSlv12      5.00      0.02      4.98    1% /oracle/FTSS/app/temp
+/dev/oemlv00      15.00      0.06     14.94    1% /u01/OEM/oracle
+rs127a:/oracle/MOFFPMS/app/moffice      30.00     22.61      7.39   76% /oracle/MOFFPMS/app/moffice
+/dev/ftsdlv00     15.00      0.06     14.94    1% /oracle/FTSD
+/dev/ftsdlv01     30.00     14.36     15.64   48% /oracle/FTSD/12.1.0.2
+/dev/ftsdlv02      5.00      2.04      2.96   41% /oracle/FTSD/redo01
+/dev/ftsdlv03      5.00      2.04      2.96   41% /oracle/FTSD/redo02
+/dev/ftsdlv04    300.00      0.55    299.45    1% /oracle/FTSD/arch
+/dev/ftsdlv05     50.00     50.00      0.00  100% /oracle/FTSD/temp
+/dev/ftsdlv06    500.00    388.09    111.91   78% /oracle/FTSD/data01
+/dev/ftsslv00     15.00      0.06     14.94    1% /oracle/ftss
+/dev/ftsslv01     30.00      0.12     29.88    1% /oracle/ftss/12.1.0.2
+/dev/ftsslv02      5.00      0.02      4.98    1% /oracle/ftss/redo01
+/dev/ftsslv03      5.00      0.02      4.98    1% /oracle/ftss/redo02
+/dev/ftsslv04    300.00      0.55    299.45    1% /oracle/ftss/arch
+/dev/ftsslv05     50.00      0.20     49.80    1% /oracle/ftss/temp
+/dev/ftsslv06    400.00      0.56    399.44    1% /oracle/ftss/data01
+/dev/ftsqlv00     15.00      0.06     14.94    1% /oracle/FTSQ
+/dev/ftsqlv01     30.00      0.12     29.88    1% /oracle/FTSQ/12.1.0.2
+/dev/ftsqlv02      5.00      0.02      4.98    1% /oracle/FTSQ/redo01
+/dev/ftsqlv03      5.00      0.02      4.98    1% /oracle/FTSQ/redo02
+/dev/ftsqlv04    300.00      0.55    299.45    1% /oracle/FTSQ/arch
+/dev/ftsqlv05     50.00      0.20     49.80    1% /oracle/FTSQ/temp
+/dev/ftsqlv06    400.00      0.56    399.44    1% /oracle/FTSQ/data01
+oraftss.CDB_FTSS - cd ~
+oraftss.CDB_FTSS - ls -ltr
+total 16
+-rw-r--r--    1 oraftss  dba              45 15 Jun 14:25 oraInst.loc
+-rw-r--r--    1 oraftss  dba             598 18 Jun 15:50 FTSS.env
+oraftss.CDB_FTSS - cat FTSS.env
+export ORACLE_SID=CDB_FTSS
+export ORACLE_HOME=/oracle/CDB_FTSS/12.1.0.2
+export TNS_ADMIN=$ORACLE_HOME/network/admin
+export NLSPATH=/usr/lib/nls/msg/%L/%N:/usr/lib/nls/msg/en_US/%N:/usr/lib/nls/msg/%L/%N.cat:/usr/lib/nls/msg/en_US/%N.cat
+set -o vi
+ID=`id -un`
+PS1="$ID.$ORACLE_SID - "
+umask 022
+export PATH=$ORACLE_HOME/bin:$ORACLE_HOME/OPatch:$PATH
+export LD_LIBRARY_PATH=$ORACLE_HOME/bin:$ORACLE_HOME/lib
+export LIBPATH=$ORACLE_HOME/bin:$ORACLE_HOME/lib
+alias sql="sqlplus / as sysdba"
+alias tns="vi $ORACLE_HOME/network/admin/tnsnames.ora"
+alias lsnr="vi $ORACLE_HOME/network/admin/listener.ora"
+oraftss.CDB_FTSS - cp FTSS.env FTSS_new.env
+oraftss.CDB_FTSS - vi FTSS.env
+oraftss.CDB_FTSS - ls -la
+total 72
+drwxr-xr-x    3 oraftss  dba             256 12 Jul 09:50 .
+drwxr-xr-x   36 bin      bin            4096 12 Jul 09:44 ..
+-rw-r--r--    1 oraftss  dba             594 12 Jul 09:52 FTSS.env
+-rw-r--r--    1 oraftss  dba             598 12 Jul 09:50 FTSS_new.env
+-rw-r--r--    1 oraftss  dba              45 15 Jun 14:25 oraInst.loc
+-rwxr-----    1 oraftss  dba             255 12 Jun 09:29 .profile
+-rw-------    1 oraftss  dba           16222 12 Jul 09:52 .sh_history
+drwx------    2 oraftss  dba             256 15 Jun 15:47 .ssh
+oraftss.CDB_FTSS - cat .profile
+
+
+PATH=/usr/bin:/etc:/usr/sbin:/usr/ucb:$HOME/bin:/usr/bin/X11:/sbin:.
+
+export PATH
+
+if [ -s "$MAIL" ]           # This is at Shell startup.  In normal
+then echo "$MAILMSG"        # operation, the Shell checks
+fi                          # periodically.
+
+oraftss.CDB_FTSS - env | grep ORA
+ORACLE_SID=CDB_FTSS
+ORACLE_HOME=/oracle/CDB_FTSS/12.1.0.2
+oraftss.CDB_FTSS - ps -ef|grep tns
+oramoffb 18612462        1   0   26 Feb      -  2:37 /oracle/CDB_MOFFB/12.1.0.2/product/bin/tnslsnr EXTERNAL_MOFFB -inherit
+ oraftss 23265508        1   0   17 Jun      -  0:35 /oracle/CDB_FTSS/12.1.0.2/bin/tnslsnr LISTENER_FTSS -inherit
+ oraftss  6226314        1   0   17 Jun      -  0:27 /oracle/CDB_FTSS/12.1.0.2/bin/tnslsnr EXTERNAL_FTSS -inherit
+ oraftsd 31260950        1   0 09:11:54  pts/1  0:00 /oracle/FTSD/12.1.0.2/product/bin/tnslsnr EXTERNAL_FTSD -inherit
+  orapms  6292130        1   0   25 Jun      -  0:23 /oracle/CMOFFPMS/12.1.0.2/product/bin/tnslsnr LISTENER_MOFFPMS -inherit
+ oraftsd 11928082        1   0 09:11:42  pts/1  0:00 /oracle/FTSD/12.1.0.2/product/bin/tnslsnr LISTENER_FTSD -inherit
+oramoffb 20972250        1   0   26 Feb      -  4:15 /oracle/CDB_MOFFB/12.1.0.2/product/bin/tnslsnr LISTENER_MOFFB -inherit
+oraftss.CDB_FTSS - lsnrctl stop LISTENER_FTSS
+
+LSNRCTL for IBM/AIX RISC System/6000: Version 12.1.0.2.0 - Production on 12-JUL-2018 09:54:25
+
+Copyright (c) 1991, 2016, Oracle.  All rights reserved.
+
+Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=rs294a)(PORT=1531)))
+The command completed successfully
+oraftss.CDB_FTSS - lsnrctl stop EXTERNAL_FTSS
+
+LSNRCTL for IBM/AIX RISC System/6000: Version 12.1.0.2.0 - Production on 12-JUL-2018 09:54:36
+
+Copyright (c) 1991, 2016, Oracle.  All rights reserved.
+
+Connecting to (ADDRESS=(PROTOCOL=IPC)(KEY=extproc_FTSS))
+The command completed successfully
+oraftss.CDB_FTSS - pwd
+/home/oraftss
+oraftss.CDB_FTSS - cp -Rp /oracle/CDB_FTSS/12.1.0.2/ /oracle/ftss/12.1.0.2/
+cp: cwallet.sso.lck: The file access permissions do not allow the specified action.
+cp: ewallet.p12: The file access permissions do not allow the specified action.
+cp: ewallet.p12.lck: The file access permissions do not allow the specified action.
+cp: ewallet.p12_090218: The file access permissions do not allow the specified action.
+cp: ewallet.p12_27Aug2015: The file access permissions do not allow the specified action.
+oraftss.CDB_FTSS - ls -ltr
+total 24
+-rw-r--r--    1 oraftss  dba              45 15 Jun 14:25 oraInst.loc
+-rw-r--r--    1 oraftss  dba             598 12 Jul 09:50 FTSS_new.env
+-rw-r--r--    1 oraftss  dba             594 12 Jul 09:52 FTSS.env
+oraftss.CDB_FTSS - df -gt
+Filesystem    GB blocks      Used      Free %Used Mounted on
+/dev/hd4           2.00      1.63      0.37   82% /
+/dev/hd2           7.00      3.95      3.05   57% /usr
+/dev/hd9var        3.00      1.37      1.63   46% /var
+/dev/hd3          11.00      0.98     10.02    9% /tmp
+/dev/hd1           2.00      0.38      1.62   20% /home
+/dev/hd11admin      1.00      0.00      1.00    1% /admin
+/proc                 -         -         -    - /proc
+/dev/hd10opt       2.00      0.91      1.09   46% /opt
+/dev/livedump      1.00      0.00      1.00    1% /var/adm/ras/livedump
+/dev/rootlv01      1.00      0.00      1.00    1% /rwe
+/dev/rootlv02      2.00      0.07      1.93    4% /rwe/log
+/dev/rootlv03      1.00      0.00      1.00    1% /rwe/core
+/dev/rootlv04      1.00      0.04      0.96    4% /UC4
+/dev/patrollv      2.00      1.36      0.64   69% /opt/patrol
+/dev/varnmonlv      3.00      0.17      2.83    6% /var/nmon
+/dev/moffblv1     30.00     14.33     15.67   48% /oracle/CDB_MOFFB/12.1.0.2
+/dev/moffblv2      5.00      2.02      2.98   41% /oracle/CDB_MOFFB/redo01
+/dev/moffblv3      5.00      2.02      2.98   41% /oracle/CDB_MOFFB/redo02
+/dev/moffblv4    690.00    287.18    402.82   42% /oracle/CDB_MOFFB/arch
+/dev/moffblv5     50.00      1.76     48.24    4% /oracle/CDB_MOFFB/temp
+/dev/moffblv6    350.00    114.58    235.42   33% /oracle/CDB_MOFFB/data01
+/dev/moffblv7   2200.00   2068.45    131.55   95% /oracle/PDB_MOFFB/data01
+/dev/moffblv8   1400.00   1236.69    163.31   89% /oracle/PDB_MOFFB/data02
+/dev/moffblv9   1000.00    786.13    213.87   79% /oracle/PDB_MOFFB/data03
+/dev/moffblv10   1400.00   1291.59    108.41   93% /oracle/PDB_MOFFB/data04
+/dev/moffblv11      5.00      0.02      4.98    1% /oracle/MOFFB/app/temp
+/dev/mofftlv1     30.00     15.39     14.61   52% /oracle/CDB_FTSD/12.1.0.2
+/dev/mofftlv2      5.00      2.02      2.98   41% /oracle/CDB_FTSD/redo01
+/dev/mofftlv3      5.00      2.52      2.48   51% /oracle/CDB_FTSD/redo02
+/dev/mofftlv4    690.00    210.50    479.50   31% /oracle/CDB_FTSD/arch
+/dev/mofftlv5     50.00      5.30     44.70   11% /oracle/CDB_FTSD/temp
+/dev/mofftlv6    250.00    114.58    135.42   46% /oracle/CDB_FTSD/data01
+/dev/mofftlv7   1100.00     67.22   1032.78    7% /oracle/PDB_FTSD/data01
+/dev/mofftlv8    700.00     51.92    648.08    8% /oracle/PDB_FTSD/data02
+/dev/mofftlv9    500.00     87.00    413.00   18% /oracle/PDB_FTSD/data03
+/dev/mofftlv10    700.00     70.79    629.21   11% /oracle/PDB_FTSD/data04
+/dev/mofftlv11         -         -         -    - /oracle/FTSD/app/temp
+/dev/cmoffpmslv00     30.00     12.84     17.16   43% /oracle/CMOFFPMS/12.1.0.2
+/dev/cmoffpmslv01      5.00      2.02      2.98   41% /oracle/CMOFFPMS/redo01
+/dev/cmoffpmslv02      5.00      2.02      2.98   41% /oracle/CMOFFPMS/redo02
+/dev/cmoffpmslv03     60.00      7.95     52.05   14% /oracle/CMOFFPMS/temp
+/dev/cmoffpmslv04    250.00    114.60    135.40   46% /oracle/CMOFFPMS/data01
+/dev/cmoffpmslv05    700.00     67.22    632.78   10% /oracle/CMOFFPMS/arch
+/dev/cmoffpmslv06   2200.00   2068.49    131.51   95% /oracle/MOFFPMS/data01
+/dev/cmoffpmslv07   1500.00   1236.82    263.18   83% /oracle/MOFFPMS/data02
+/dev/cmoffpmslv08   1000.00    786.15    213.85   79% /oracle/MOFFPMS/data03
+/dev/cmoffpmslv09   1500.00   1291.73    208.27   87% /oracle/MOFFPMS/data04
+rs127a:/oracle/FTSD/app/fts          -         -         -    - /oracle/FTSD/app/fts
+rs127a:/oracle/MOFFB/app/moffice      30.00     13.54     16.46   46% /oracle/MOFFB/app/moffice
+rs127a:/oracle/FTSS/app/fts      30.00     12.43     17.57   42% /oracle/FTSS/app/fts
+/dev/FTSSlv01     15.00      0.16     14.84    2% /oracle/CDB_FTSS
+/dev/FTSSlv02     30.00     12.82     17.18   43% /oracle/CDB_FTSS/12.1.0.2
+/dev/FTSSlv03    250.00    114.56    135.44   46% /oracle/CDB_FTSS/data01
+/dev/FTSSlv04    800.00     66.88    733.12    9% /oracle/PDB_FTSS/data01
+/dev/FTSSlv05    500.00     51.70    448.30   11% /oracle/PDB_FTSS/data02
+/dev/FTSSlv06    500.00     87.00    413.00   18% /oracle/PDB_FTSS/data03
+/dev/FTSSlv07    500.00     70.58    429.42   15% /oracle/PDB_FTSS/data04
+/dev/FTSSlv08    400.00     40.56    359.44   11% /oracle/CDB_FTSS/arch
+/dev/FTSSlv09     60.00      0.25     59.75    1% /oracle/CDB_FTSS/temp
+/dev/FTSSlv10      5.00      2.02      2.98   41% /oracle/CDB_FTSS/redo01
+/dev/FTSSlv11      5.00      2.02      2.98   41% /oracle/CDB_FTSS/redo02
+/dev/FTSSlv12      5.00      0.02      4.98    1% /oracle/FTSS/app/temp
+/dev/oemlv00      15.00      0.06     14.94    1% /u01/OEM/oracle
+rs127a:/oracle/MOFFPMS/app/moffice      30.00     22.61      7.39   76% /oracle/MOFFPMS/app/moffice
+/dev/ftsdlv00     15.00      0.07     14.93    1% /oracle/FTSD
+/dev/ftsdlv01     30.00     14.36     15.64   48% /oracle/FTSD/12.1.0.2
+/dev/ftsdlv02      5.00      2.04      2.96   41% /oracle/FTSD/redo01
+/dev/ftsdlv03      5.00      2.04      2.96   41% /oracle/FTSD/redo02
+/dev/ftsdlv04    300.00      0.55    299.45    1% /oracle/FTSD/arch
+/dev/ftsdlv05     50.00     20.00     30.00   41% /oracle/FTSD/temp
+/dev/ftsdlv06    500.00    388.09    111.91   78% /oracle/FTSD/data01
+/dev/ftsslv00     15.00      0.06     14.94    1% /oracle/ftss
+/dev/ftsslv01     30.00     13.37     16.63   45% /oracle/ftss/12.1.0.2
+/dev/ftsslv02      5.00      0.02      4.98    1% /oracle/ftss/redo01
+/dev/ftsslv03      5.00      0.02      4.98    1% /oracle/ftss/redo02
+/dev/ftsslv04    300.00      0.55    299.45    1% /oracle/ftss/arch
+/dev/ftsslv05     50.00      0.20     49.80    1% /oracle/ftss/temp
+/dev/ftsslv06    400.00      0.56    399.44    1% /oracle/ftss/data01
+/dev/ftsqlv00     15.00      0.06     14.94    1% /oracle/FTSQ
+/dev/ftsqlv01     30.00      0.12     29.88    1% /oracle/FTSQ/12.1.0.2
+/dev/ftsqlv02      5.00      0.02      4.98    1% /oracle/FTSQ/redo01
+/dev/ftsqlv03      5.00      0.02      4.98    1% /oracle/FTSQ/redo02
+/dev/ftsqlv04    300.00      0.55    299.45    1% /oracle/FTSQ/arch
+/dev/ftsqlv05     50.00      0.20     49.80    1% /oracle/FTSQ/temp
+/dev/ftsqlv06    400.00      0.56    399.44    1% /oracle/FTSQ/data01
+oraftss.CDB_FTSS - cd /oracle/ftss/12.1.0.2
+oraftss.CDB_FTSS - ls -ltr
+total 8
+drwxrwxr-x   73 oraftss  dba            4096 17 Jun 17:44 12.1.0.2
+drwxr-xr-x    2 root     system          256 12 Jul 08:52 lost+found
+oraftss.CDB_FTSS - cd 12.1.0.2
+oraftss.CDB_FTSS - ls -ltr
+total 192
+-rw-r-----    1 oraftss  dba              56 18 Apr 2017  oraInst.loc
+drwxr-x---   14 oraftss  dba            4096 16 Apr 10:05 OPatch
+drwxrwxr-x    2 oraftss  dba             256 15 Jun 12:39 lost+found
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 R
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:12 crs
+drwxr-xr-x    9 oraftss  dba             256 15 Jun 15:12 assistants
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 wwg
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 15:12 usm
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 15:12 sysman
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 sqlj
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 slax
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 15:12 scheduler
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 relnotes
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:12 precomp
+drwxr-xr-x    5 oraftss  dba             256 15 Jun 15:12 perl
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 15:12 owm
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:12 ord
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 15:12 oracore
+drwxr-xr-x    5 oraftss  dba             256 15 Jun 15:12 olap
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:12 odbc
+drwxr-xr-x    5 oraftss  dba             256 15 Jun 15:12 nls
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:12 md
+drwxr-xr-x    8 oraftss  dba             256 15 Jun 15:12 javavm
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 15:12 has
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 dv
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 diagnostics
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 demo
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:12 cv
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:12 plsql
+drwxr-xr-x    2 oraftss  dba             256 15 Jun 15:13 utl
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:13 xdk
+drwxr-xr-x    2 oraftss  dba             256 15 Jun 15:13 instantclient
+drwxr-xr-x    8 oraftss  dba            4096 15 Jun 15:13 dmu
+drwxr-xr-x   19 oraftss  dba            4096 15 Jun 15:13 oc4j
+drwxr-xr-x    2 oraftss  dba             256 15 Jun 15:13 rest
+drwxr-xr-x   15 oraftss  dba            4096 15 Jun 15:14 sqldeveloper
+drwxr-xr-x    2 oraftss  dba             256 15 Jun 15:14 dc_ocm
+drwxr-xr-x    8 oraftss  dba            4096 15 Jun 15:14 jdk
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:15 ucp
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:15 jdbc
+drwxr-xr-x    7 oraftss  dba            4096 15 Jun 15:15 OPatch_old
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:15 ccr
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:15 mgw
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:15 opmn
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:15 css
+drwxr-xr-x    5 oraftss  dba             256 15 Jun 15:15 clone
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:15 cdata
+drwxr-xr-x    2 oraftss  dba             256 15 Jun 15:15 addnode
+drwxr-xr-x    9 oraftss  dba             256 15 Jun 15:15 srvm
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:15 racg
+drwxr-xr-x   12 oraftss  dba            4096 15 Jun 15:15 ldap
+drwxr-xr-x   11 oraftss  dba            4096 15 Jun 15:15 ctx
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:16 sqlplus
+drwxr-xr-x    8 oraftss  dba            4096 15 Jun 15:16 oui
+drwxr-xr-x   10 oraftss  dba             256 15 Jun 15:16 network
+drwxr-xr-x    5 oraftss  dba            4096 15 Jun 15:16 deinstall
+-rwxr-x---    1 oraftss  dba             384 15 Jun 15:16 root.sh
+drwxr-xr-x   14 oraftss  dba            4096 15 Jun 15:16 rdbms
+drwxr-xr-x    5 oraftss  dba             256 15 Jun 15:16 hs
+drwxr-xr-x    7 oraftss  dba            4096 15 Jun 15:22 install
+drwxr-xr-x    5 oraftss  dba             256 15 Jun 15:41 cfgtoollogs
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 16:59 suptools
+drwxr-x---   14 oraftss  dba            4096 15 Jun 16:59 inventory
+drwxr-xr-x    2 oraftss  dba            4096 15 Jun 17:00 jlib
+drwxr-xr-x   18 oraftss  dba            4096 15 Jun 17:08 sqlpatch
+drwxr-xr-x    2 oraftss  dba           12288 15 Jun 17:13 lib
+drwxr-xr-x    2 oraftss  dba            8192 15 Jun 17:32 bin
+drwxr-xr-x    4 oraftss  dba             256 17 Jun 17:52 log
+drwxr-xr-x    2 oraftss  dba             256 17 Jun 21:37 QOpatch
+drwxr-xr-x    8 oraftss  dba            4096 27 Jun 17:00 apex
+drwxr-xr-x    6 oraftss  dba             256 28 Jun 15:52 admin
+drwxr-xr-x    2 oraftss  dba            4096 12 Jul 09:48 dbs
+oraftss.CDB_FTSS - pwd
+/oracle/ftss/12.1.0.2/12.1.0.2
+oraftss.CDB_FTSS - cd ..
+oraftss.CDB_FTSS - ls -ltr
+total 8
+drwxrwxr-x   73 oraftss  dba            4096 17 Jun 17:44 12.1.0.2
+drwxr-xr-x    2 root     system          256 12 Jul 08:52 lost+found
+oraftss.CDB_FTSS - pwd
+/oracle/ftss/12.1.0.2
+oraftss.CDB_FTSS - rm -rf 12.1.0.2
+oraftss.CDB_FTSS - ls -ltr
+total 0
+drwxr-xr-x    2 root     system          256 12 Jul 08:52 lost+found
+oraftss.CDB_FTSS - df -gt
+Filesystem    GB blocks      Used      Free %Used Mounted on
+/dev/hd4           2.00      1.63      0.37   82% /
+/dev/hd2           7.00      3.95      3.05   57% /usr
+/dev/hd9var        3.00      1.37      1.63   46% /var
+/dev/hd3          11.00      0.98     10.02    9% /tmp
+/dev/hd1           2.00      0.38      1.62   20% /home
+/dev/hd11admin      1.00      0.00      1.00    1% /admin
+/proc                 -         -         -    - /proc
+/dev/hd10opt       2.00      0.91      1.09   46% /opt
+/dev/livedump      1.00      0.00      1.00    1% /var/adm/ras/livedump
+/dev/rootlv01      1.00      0.00      1.00    1% /rwe
+/dev/rootlv02      2.00      0.07      1.93    4% /rwe/log
+/dev/rootlv03      1.00      0.00      1.00    1% /rwe/core
+/dev/rootlv04      1.00      0.04      0.96    4% /UC4
+/dev/patrollv      2.00      1.36      0.64   69% /opt/patrol
+/dev/varnmonlv      3.00      0.17      2.83    6% /var/nmon
+/dev/moffblv1     30.00     14.33     15.67   48% /oracle/CDB_MOFFB/12.1.0.2
+/dev/moffblv2      5.00      2.02      2.98   41% /oracle/CDB_MOFFB/redo01
+/dev/moffblv3      5.00      2.02      2.98   41% /oracle/CDB_MOFFB/redo02
+/dev/moffblv4    690.00    287.18    402.82   42% /oracle/CDB_MOFFB/arch
+/dev/moffblv5     50.00      1.76     48.24    4% /oracle/CDB_MOFFB/temp
+/dev/moffblv6    350.00    114.58    235.42   33% /oracle/CDB_MOFFB/data01
+/dev/moffblv7   2200.00   2068.45    131.55   95% /oracle/PDB_MOFFB/data01
+/dev/moffblv8   1400.00   1236.69    163.31   89% /oracle/PDB_MOFFB/data02
+/dev/moffblv9   1000.00    786.13    213.87   79% /oracle/PDB_MOFFB/data03
+/dev/moffblv10   1400.00   1291.59    108.41   93% /oracle/PDB_MOFFB/data04
+/dev/moffblv11      5.00      0.02      4.98    1% /oracle/MOFFB/app/temp
+/dev/mofftlv1     30.00     15.39     14.61   52% /oracle/CDB_FTSD/12.1.0.2
+/dev/mofftlv2      5.00      2.02      2.98   41% /oracle/CDB_FTSD/redo01
+/dev/mofftlv3      5.00      2.52      2.48   51% /oracle/CDB_FTSD/redo02
+/dev/mofftlv4    690.00    210.50    479.50   31% /oracle/CDB_FTSD/arch
+/dev/mofftlv5     50.00      5.30     44.70   11% /oracle/CDB_FTSD/temp
+/dev/mofftlv6    250.00    114.58    135.42   46% /oracle/CDB_FTSD/data01
+/dev/mofftlv7   1100.00     67.22   1032.78    7% /oracle/PDB_FTSD/data01
+/dev/mofftlv8    700.00     51.92    648.08    8% /oracle/PDB_FTSD/data02
+/dev/mofftlv9    500.00     87.00    413.00   18% /oracle/PDB_FTSD/data03
+/dev/mofftlv10    700.00     70.79    629.21   11% /oracle/PDB_FTSD/data04
+/dev/mofftlv11         -         -         -    - /oracle/FTSD/app/temp
+/dev/cmoffpmslv00     30.00     12.84     17.16   43% /oracle/CMOFFPMS/12.1.0.2
+/dev/cmoffpmslv01      5.00      2.02      2.98   41% /oracle/CMOFFPMS/redo01
+/dev/cmoffpmslv02      5.00      2.02      2.98   41% /oracle/CMOFFPMS/redo02
+/dev/cmoffpmslv03     60.00      7.95     52.05   14% /oracle/CMOFFPMS/temp
+/dev/cmoffpmslv04    250.00    114.60    135.40   46% /oracle/CMOFFPMS/data01
+/dev/cmoffpmslv05    700.00     67.22    632.78   10% /oracle/CMOFFPMS/arch
+/dev/cmoffpmslv06   2200.00   2068.49    131.51   95% /oracle/MOFFPMS/data01
+/dev/cmoffpmslv07   1500.00   1236.82    263.18   83% /oracle/MOFFPMS/data02
+/dev/cmoffpmslv08   1000.00    786.15    213.85   79% /oracle/MOFFPMS/data03
+/dev/cmoffpmslv09   1500.00   1291.73    208.27   87% /oracle/MOFFPMS/data04
+rs127a:/oracle/FTSD/app/fts          -         -         -    - /oracle/FTSD/app/fts
+rs127a:/oracle/MOFFB/app/moffice      30.00     13.54     16.46   46% /oracle/MOFFB/app/moffice
+rs127a:/oracle/FTSS/app/fts      30.00     12.43     17.57   42% /oracle/FTSS/app/fts
+/dev/FTSSlv01     15.00      0.16     14.84    2% /oracle/CDB_FTSS
+/dev/FTSSlv02     30.00     12.82     17.18   43% /oracle/CDB_FTSS/12.1.0.2
+/dev/FTSSlv03    250.00    114.56    135.44   46% /oracle/CDB_FTSS/data01
+/dev/FTSSlv04    800.00     66.88    733.12    9% /oracle/PDB_FTSS/data01
+/dev/FTSSlv05    500.00     51.70    448.30   11% /oracle/PDB_FTSS/data02
+/dev/FTSSlv06    500.00     87.00    413.00   18% /oracle/PDB_FTSS/data03
+/dev/FTSSlv07    500.00     70.58    429.42   15% /oracle/PDB_FTSS/data04
+/dev/FTSSlv08    400.00     40.56    359.44   11% /oracle/CDB_FTSS/arch
+/dev/FTSSlv09     60.00      0.25     59.75    1% /oracle/CDB_FTSS/temp
+/dev/FTSSlv10      5.00      2.02      2.98   41% /oracle/CDB_FTSS/redo01
+/dev/FTSSlv11      5.00      2.02      2.98   41% /oracle/CDB_FTSS/redo02
+/dev/FTSSlv12      5.00      0.02      4.98    1% /oracle/FTSS/app/temp
+/dev/oemlv00      15.00      0.06     14.94    1% /u01/OEM/oracle
+rs127a:/oracle/MOFFPMS/app/moffice      30.00     22.61      7.39   76% /oracle/MOFFPMS/app/moffice
+/dev/ftsdlv00     15.00      0.07     14.93    1% /oracle/FTSD
+/dev/ftsdlv01     30.00     14.36     15.64   48% /oracle/FTSD/12.1.0.2
+/dev/ftsdlv02      5.00      2.04      2.96   41% /oracle/FTSD/redo01
+/dev/ftsdlv03      5.00      2.04      2.96   41% /oracle/FTSD/redo02
+/dev/ftsdlv04    300.00      0.55    299.45    1% /oracle/FTSD/arch
+/dev/ftsdlv05     50.00     20.00     30.00   41% /oracle/FTSD/temp
+/dev/ftsdlv06    500.00    388.09    111.91   78% /oracle/FTSD/data01
+/dev/ftsslv00     15.00      0.06     14.94    1% /oracle/ftss
+/dev/ftsslv01     30.00      0.14     29.86    1% /oracle/ftss/12.1.0.2
+/dev/ftsslv02      5.00      0.02      4.98    1% /oracle/ftss/redo01
+/dev/ftsslv03      5.00      0.02      4.98    1% /oracle/ftss/redo02
+/dev/ftsslv04    300.00      0.55    299.45    1% /oracle/ftss/arch
+/dev/ftsslv05     50.00      0.20     49.80    1% /oracle/ftss/temp
+/dev/ftsslv06    400.00      0.56    399.44    1% /oracle/ftss/data01
+/dev/ftsqlv00     15.00      0.06     14.94    1% /oracle/FTSQ
+/dev/ftsqlv01     30.00      0.12     29.88    1% /oracle/FTSQ/12.1.0.2
+/dev/ftsqlv02      5.00      0.02      4.98    1% /oracle/FTSQ/redo01
+/dev/ftsqlv03      5.00      0.02      4.98    1% /oracle/FTSQ/redo02
+/dev/ftsqlv04    300.00      0.55    299.45    1% /oracle/FTSQ/arch
+/dev/ftsqlv05     50.00      0.20     49.80    1% /oracle/FTSQ/temp
+/dev/ftsqlv06    400.00      0.56    399.44    1% /oracle/FTSQ/data01
+oraftss.CDB_FTSS - cd /oracle/CDB_FTSS/12.1.0.2
+oraftss.CDB_FTSS - ls -ltr
+total 200
+-rw-r-----    1 oraftss  dba              56 18 Apr 2017  oraInst.loc
+drwxr-x---   14 oraftss  dba            4096 16 Apr 10:05 OPatch
+drwxrwxr-x    2 oraftss  dba             256 15 Jun 12:39 lost+found
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 R
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:12 crs
+drwxr-xr-x    9 oraftss  dba             256 15 Jun 15:12 assistants
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 demo
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:12 cv
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 diagnostics
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 dv
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 15:12 has
+drwxr-xr-x    8 oraftss  dba             256 15 Jun 15:12 javavm
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:12 md
+drwxr-xr-x    5 oraftss  dba             256 15 Jun 15:12 nls
+drwxr-xr-x    5 oraftss  dba             256 15 Jun 15:12 olap
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:12 odbc
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 15:12 oracore
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:12 ord
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 15:12 owm
+drwxr-xr-x    5 oraftss  dba             256 15 Jun 15:12 perl
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:12 precomp
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 slax
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 relnotes
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 15:12 scheduler
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 sqlj
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 wwg
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 15:12 usm
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 15:12 sysman
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:12 plsql
+drwxr-xr-x    2 oraftss  dba             256 15 Jun 15:13 utl
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:13 xdk
+drwxr-xr-x    2 oraftss  dba             256 15 Jun 15:13 instantclient
+drwxr-xr-x    8 oraftss  dba            4096 15 Jun 15:13 dmu
+drwxr-xr-x   19 oraftss  dba            4096 15 Jun 15:13 oc4j
+drwxr-xr-x    2 oraftss  dba             256 15 Jun 15:13 rest
+drwxr-xr-x   15 oraftss  dba            4096 15 Jun 15:14 sqldeveloper
+drwxr-xr-x    2 oraftss  dba             256 15 Jun 15:14 dc_ocm
+drwxr-xr-x    8 oraftss  dba            4096 15 Jun 15:14 jdk
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:15 jdbc
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:15 ucp
+drwxr-xr-x    7 oraftss  dba            4096 15 Jun 15:15 OPatch_old
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:15 ccr
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:15 mgw
+drwxr-xr-x    2 oraftss  dba             256 15 Jun 15:15 addnode
+drwxr-xr-x    5 oraftss  dba             256 15 Jun 15:15 clone
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:15 cdata
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:15 css
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:15 opmn
+drwxr-xr-x   12 oraftss  dba            4096 15 Jun 15:15 ldap
+drwxr-xr-x    9 oraftss  dba             256 15 Jun 15:15 srvm
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:15 racg
+drwxr-xr-x   11 oraftss  dba            4096 15 Jun 15:15 ctx
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:16 sqlplus
+drwxr-xr-x    8 oraftss  dba            4096 15 Jun 15:16 oui
+drwxr-xr-x   10 oraftss  dba             256 15 Jun 15:16 network
+drwxr-xr-x    5 oraftss  dba            4096 15 Jun 15:16 deinstall
+drwxr-xr-x    5 oraftss  dba             256 15 Jun 15:16 hs
+-rwxr-x---    1 oraftss  dba             384 15 Jun 15:16 root.sh
+drwxr-xr-x   14 oraftss  dba            4096 15 Jun 15:16 rdbms
+drwxr-xr-x    7 oraftss  dba            4096 15 Jun 15:22 install
+drwxr-xr-x    5 oraftss  dba             256 15 Jun 15:41 cfgtoollogs
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 16:59 suptools
+drwxr-x---   14 oraftss  dba            4096 15 Jun 16:59 inventory
+drwxr-xr-x    2 oraftss  dba            4096 15 Jun 17:00 jlib
+drwxr-xr-x   18 oraftss  dba            4096 15 Jun 17:08 sqlpatch
+drwxr-xr-x    2 oraftss  dba           12288 15 Jun 17:13 lib
+drwxr-xr-x    2 oraftss  dba           12288 15 Jun 17:32 bin
+drwxr-xr-x    4 oraftss  dba             256 17 Jun 17:52 log
+drwxr-xr-x    2 oraftss  dba             256 17 Jun 21:37 QOpatch
+drwxr-xr-x    8 oraftss  dba            4096 27 Jun 17:00 apex
+drwxr-xr-x    6 oraftss  dba             256 28 Jun 15:52 admin
+drwxr-xr-x    2 oraftss  dba            4096 12 Jul 09:48 dbs
+oraftss.CDB_FTSS - cp -Rp /oracle/CDB_FTSS/12.1.0.2/ /oracle/ftss/
+cp: /oracle/ftss/12.1.0.2/lost+found: Operation not permitted.
+cp: not all requested changes were made to /oracle/ftss/12.1.0.2/lost+found
+oraftss.CDB_FTSS - ls -ltr
+total 200
+-rw-r-----    1 oraftss  dba              56 18 Apr 2017  oraInst.loc
+drwxr-x---   14 oraftss  dba            4096 16 Apr 10:05 OPatch
+drwxrwxr-x    2 oraftss  dba             256 15 Jun 12:39 lost+found
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 R
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:12 crs
+drwxr-xr-x    9 oraftss  dba             256 15 Jun 15:12 assistants
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 demo
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:12 cv
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 diagnostics
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 dv
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 15:12 has
+drwxr-xr-x    8 oraftss  dba             256 15 Jun 15:12 javavm
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:12 md
+drwxr-xr-x    5 oraftss  dba             256 15 Jun 15:12 nls
+drwxr-xr-x    5 oraftss  dba             256 15 Jun 15:12 olap
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:12 odbc
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 15:12 oracore
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:12 ord
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 15:12 owm
+drwxr-xr-x    5 oraftss  dba             256 15 Jun 15:12 perl
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:12 precomp
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 slax
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 relnotes
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 15:12 scheduler
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 sqlj
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 wwg
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 15:12 usm
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 15:12 sysman
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:12 plsql
+drwxr-xr-x    2 oraftss  dba             256 15 Jun 15:13 utl
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:13 xdk
+drwxr-xr-x    2 oraftss  dba             256 15 Jun 15:13 instantclient
+drwxr-xr-x    8 oraftss  dba            4096 15 Jun 15:13 dmu
+drwxr-xr-x   19 oraftss  dba            4096 15 Jun 15:13 oc4j
+drwxr-xr-x    2 oraftss  dba             256 15 Jun 15:13 rest
+drwxr-xr-x   15 oraftss  dba            4096 15 Jun 15:14 sqldeveloper
+drwxr-xr-x    2 oraftss  dba             256 15 Jun 15:14 dc_ocm
+drwxr-xr-x    8 oraftss  dba            4096 15 Jun 15:14 jdk
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:15 jdbc
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:15 ucp
+drwxr-xr-x    7 oraftss  dba            4096 15 Jun 15:15 OPatch_old
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:15 ccr
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:15 mgw
+drwxr-xr-x    2 oraftss  dba             256 15 Jun 15:15 addnode
+drwxr-xr-x    5 oraftss  dba             256 15 Jun 15:15 clone
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:15 cdata
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:15 css
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:15 opmn
+drwxr-xr-x   12 oraftss  dba            4096 15 Jun 15:15 ldap
+drwxr-xr-x    9 oraftss  dba             256 15 Jun 15:15 srvm
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:15 racg
+drwxr-xr-x   11 oraftss  dba            4096 15 Jun 15:15 ctx
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:16 sqlplus
+drwxr-xr-x    8 oraftss  dba            4096 15 Jun 15:16 oui
+drwxr-xr-x   10 oraftss  dba             256 15 Jun 15:16 network
+drwxr-xr-x    5 oraftss  dba            4096 15 Jun 15:16 deinstall
+drwxr-xr-x    5 oraftss  dba             256 15 Jun 15:16 hs
+-rwxr-x---    1 oraftss  dba             384 15 Jun 15:16 root.sh
+drwxr-xr-x   14 oraftss  dba            4096 15 Jun 15:16 rdbms
+drwxr-xr-x    7 oraftss  dba            4096 15 Jun 15:22 install
+drwxr-xr-x    5 oraftss  dba             256 15 Jun 15:41 cfgtoollogs
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 16:59 suptools
+drwxr-x---   14 oraftss  dba            4096 15 Jun 16:59 inventory
+drwxr-xr-x    2 oraftss  dba            4096 15 Jun 17:00 jlib
+drwxr-xr-x   18 oraftss  dba            4096 15 Jun 17:08 sqlpatch
+drwxr-xr-x    2 oraftss  dba           12288 15 Jun 17:13 lib
+drwxr-xr-x    2 oraftss  dba           12288 15 Jun 17:32 bin
+drwxr-xr-x    4 oraftss  dba             256 17 Jun 17:52 log
+drwxr-xr-x    2 oraftss  dba             256 17 Jun 21:37 QOpatch
+drwxr-xr-x    8 oraftss  dba            4096 27 Jun 17:00 apex
+drwxr-xr-x    6 oraftss  dba             256 28 Jun 15:52 admin
+drwxr-xr-x    2 oraftss  dba            4096 12 Jul 09:48 dbs
+oraftss.CDB_FTSS - sqlplus
+
+SQL*Plus: Release 12.1.0.2.0 Production on Thu Jul 12 10:11:53 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter user-name:
+oraftss.CDB_FTSS - cd ~
+oraftss.CDB_FTSS - ls -ltr
+total 24
+-rw-r--r--    1 oraftss  dba              45 15 Jun 14:25 oraInst.loc
+-rw-r--r--    1 oraftss  dba             598 12 Jul 09:50 FTSS_new.env
+-rw-r--r--    1 oraftss  dba             594 12 Jul 09:52 FTSS.env
+oraftss.CDB_FTSS - . FTSS_new.env
+oraftss.CDB_FTSS - sqlplus
+
+SQL*Plus: Release 12.1.0.2.0 Production on Thu Jul 12 10:12:13 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter user-name: / as sysdba
+Connected to an idle instance.
+
+SQL> exit
+Disconnected
+oraftss.CDB_FTSS - . FTSS.env
+oraftss.CDB_FTSS - env | grep ORA
+ORACLE_SID=CDB_FTSS
+ORACLE_HOME=/oracle/ftss/12.1.0.2
+oraftss.CDB_FTSS - cd $ORACLE_HOME/clone/bin
+oraftss.CDB_FTSS - pwd
+/oracle/ftss/12.1.0.2/clone/bin
+oraftss.CDB_FTSS - df -gt
+Filesystem    GB blocks      Used      Free %Used Mounted on
+/dev/hd4           2.00      1.63      0.37   82% /
+/dev/hd2           7.00      3.95      3.05   57% /usr
+/dev/hd9var        3.00      1.37      1.63   46% /var
+/dev/hd3          11.00      0.98     10.02    9% /tmp
+/dev/hd1           2.00      0.38      1.62   20% /home
+/dev/hd11admin      1.00      0.00      1.00    1% /admin
+/proc                 -         -         -    - /proc
+/dev/hd10opt       2.00      0.91      1.09   46% /opt
+/dev/livedump      1.00      0.00      1.00    1% /var/adm/ras/livedump
+/dev/rootlv01      1.00      0.00      1.00    1% /rwe
+/dev/rootlv02      2.00      0.07      1.93    4% /rwe/log
+/dev/rootlv03      1.00      0.00      1.00    1% /rwe/core
+/dev/rootlv04      1.00      0.04      0.96    4% /UC4
+/dev/patrollv      2.00      1.36      0.64   69% /opt/patrol
+/dev/varnmonlv      3.00      0.17      2.83    6% /var/nmon
+/dev/moffblv1     30.00     14.33     15.67   48% /oracle/CDB_MOFFB/12.1.0.2
+/dev/moffblv2      5.00      2.02      2.98   41% /oracle/CDB_MOFFB/redo01
+/dev/moffblv3      5.00      2.02      2.98   41% /oracle/CDB_MOFFB/redo02
+/dev/moffblv4    690.00    287.59    402.41   42% /oracle/CDB_MOFFB/arch
+/dev/moffblv5     50.00      1.76     48.24    4% /oracle/CDB_MOFFB/temp
+/dev/moffblv6    350.00    114.58    235.42   33% /oracle/CDB_MOFFB/data01
+/dev/moffblv7   2200.00   2068.45    131.55   95% /oracle/PDB_MOFFB/data01
+/dev/moffblv8   1400.00   1236.69    163.31   89% /oracle/PDB_MOFFB/data02
+/dev/moffblv9   1000.00    786.13    213.87   79% /oracle/PDB_MOFFB/data03
+/dev/moffblv10   1400.00   1291.59    108.41   93% /oracle/PDB_MOFFB/data04
+/dev/moffblv11      5.00      0.02      4.98    1% /oracle/MOFFB/app/temp
+/dev/mofftlv1     30.00     15.39     14.61   52% /oracle/CDB_FTSD/12.1.0.2
+/dev/mofftlv2      5.00      2.02      2.98   41% /oracle/CDB_FTSD/redo01
+/dev/mofftlv3      5.00      2.52      2.48   51% /oracle/CDB_FTSD/redo02
+/dev/mofftlv4    690.00    210.50    479.50   31% /oracle/CDB_FTSD/arch
+/dev/mofftlv5     50.00      5.30     44.70   11% /oracle/CDB_FTSD/temp
+/dev/mofftlv6    250.00    114.58    135.42   46% /oracle/CDB_FTSD/data01
+/dev/mofftlv7   1100.00     67.22   1032.78    7% /oracle/PDB_FTSD/data01
+/dev/mofftlv8    700.00     51.92    648.08    8% /oracle/PDB_FTSD/data02
+/dev/mofftlv9    500.00     87.00    413.00   18% /oracle/PDB_FTSD/data03
+/dev/mofftlv10    700.00     70.79    629.21   11% /oracle/PDB_FTSD/data04
+/dev/mofftlv11         -         -         -    - /oracle/FTSD/app/temp
+/dev/cmoffpmslv00     30.00     12.84     17.16   43% /oracle/CMOFFPMS/12.1.0.2
+/dev/cmoffpmslv01      5.00      2.02      2.98   41% /oracle/CMOFFPMS/redo01
+/dev/cmoffpmslv02      5.00      2.02      2.98   41% /oracle/CMOFFPMS/redo02
+/dev/cmoffpmslv03     60.00      7.95     52.05   14% /oracle/CMOFFPMS/temp
+/dev/cmoffpmslv04    250.00    114.60    135.40   46% /oracle/CMOFFPMS/data01
+/dev/cmoffpmslv05    700.00     67.22    632.78   10% /oracle/CMOFFPMS/arch
+/dev/cmoffpmslv06   2200.00   2068.49    131.51   95% /oracle/MOFFPMS/data01
+/dev/cmoffpmslv07   1500.00   1236.82    263.18   83% /oracle/MOFFPMS/data02
+/dev/cmoffpmslv08   1000.00    786.15    213.85   79% /oracle/MOFFPMS/data03
+/dev/cmoffpmslv09   1500.00   1291.73    208.27   87% /oracle/MOFFPMS/data04
+rs127a:/oracle/FTSD/app/fts          -         -         -    - /oracle/FTSD/app/fts
+rs127a:/oracle/MOFFB/app/moffice      30.00     13.54     16.46   46% /oracle/MOFFB/app/moffice
+rs127a:/oracle/FTSS/app/fts      30.00     12.43     17.57   42% /oracle/FTSS/app/fts
+/dev/FTSSlv01     15.00      0.16     14.84    2% /oracle/CDB_FTSS
+/dev/FTSSlv02     30.00     12.82     17.18   43% /oracle/CDB_FTSS/12.1.0.2
+/dev/FTSSlv03    250.00    114.56    135.44   46% /oracle/CDB_FTSS/data01
+/dev/FTSSlv04    800.00     66.88    733.12    9% /oracle/PDB_FTSS/data01
+/dev/FTSSlv05    500.00     51.70    448.30   11% /oracle/PDB_FTSS/data02
+/dev/FTSSlv06    500.00     87.00    413.00   18% /oracle/PDB_FTSS/data03
+/dev/FTSSlv07    500.00     70.58    429.42   15% /oracle/PDB_FTSS/data04
+/dev/FTSSlv08    400.00     40.56    359.44   11% /oracle/CDB_FTSS/arch
+/dev/FTSSlv09     60.00      0.25     59.75    1% /oracle/CDB_FTSS/temp
+/dev/FTSSlv10      5.00      2.02      2.98   41% /oracle/CDB_FTSS/redo01
+/dev/FTSSlv11      5.00      2.02      2.98   41% /oracle/CDB_FTSS/redo02
+/dev/FTSSlv12      5.00      0.02      4.98    1% /oracle/FTSS/app/temp
+/dev/oemlv00      15.00      0.06     14.94    1% /u01/OEM/oracle
+rs127a:/oracle/MOFFPMS/app/moffice      30.00     22.61      7.39   76% /oracle/MOFFPMS/app/moffice
+/dev/ftsdlv00     15.00      0.07     14.93    1% /oracle/FTSD
+/dev/ftsdlv01     30.00     14.39     15.61   48% /oracle/FTSD/12.1.0.2
+/dev/ftsdlv02      5.00      2.04      2.96   41% /oracle/FTSD/redo01
+/dev/ftsdlv03      5.00      2.04      2.96   41% /oracle/FTSD/redo02
+/dev/ftsdlv04    300.00      0.55    299.45    1% /oracle/FTSD/arch
+/dev/ftsdlv05     50.00     20.00     30.00   41% /oracle/FTSD/temp
+/dev/ftsdlv06    500.00    388.09    111.91   78% /oracle/FTSD/data01
+/dev/ftsslv00     15.00      0.06     14.94    1% /oracle/ftss
+/dev/ftsslv01     30.00     13.39     16.61   45% /oracle/ftss/12.1.0.2
+/dev/ftsslv02      5.00      0.02      4.98    1% /oracle/ftss/redo01
+/dev/ftsslv03      5.00      0.02      4.98    1% /oracle/ftss/redo02
+/dev/ftsslv04    300.00      0.55    299.45    1% /oracle/ftss/arch
+/dev/ftsslv05     50.00      0.20     49.80    1% /oracle/ftss/temp
+/dev/ftsslv06    400.00      0.56    399.44    1% /oracle/ftss/data01
+/dev/ftsqlv00     15.00      0.06     14.94    1% /oracle/FTSQ
+/dev/ftsqlv01     30.00      0.12     29.88    1% /oracle/FTSQ/12.1.0.2
+/dev/ftsqlv02      5.00      0.02      4.98    1% /oracle/FTSQ/redo01
+/dev/ftsqlv03      5.00      0.02      4.98    1% /oracle/FTSQ/redo02
+/dev/ftsqlv04    300.00      0.55    299.45    1% /oracle/FTSQ/arch
+/dev/ftsqlv05     50.00      0.20     49.80    1% /oracle/FTSQ/temp
+/dev/ftsqlv06    400.00      0.56    399.44    1% /oracle/FTSQ/data01
+oraftss.CDB_FTSS - pwd
+/oracle/ftss/12.1.0.2/clone/bin
+oraftss.CDB_FTSS - _HOME_NAME="OraDB12HomeFTSS" ORACLE_BASE="/oracle/ftss" OSDBA_GROUP=dba OSOPER_GROUP=dba                        <
+
+Complete command
+cd $ORACLE_HOME/clone/bin
+perl clone.pl ORACLE_HOME="/oracle/FTSD/12.1.0.2/product" ORACLE_HOME_NAME="OraDB12HomeFTSD" ORACLE_BASE="/oracle/FTSD/12.1.0.2" OSDBA_GROUP=dba OSOPER_GROUP=dba
+
+********************************************************************************
+
+Your platform requires the root user to perform certain pre-clone
+OS preparation.  The root user should run the shell script 'rootpre.sh' before
+you proceed with cloning.  rootpre.sh can be found at
+/oracle/ftss/12.1.0.2/clone directory.
+Answer 'y' if the root user has run 'rootpre.sh' script.
+
+********************************************************************************
+
+Has 'rootpre.sh' been run by the root user? [y/n] (n)
+y
+./runInstaller -clone -waitForCompletion  "ORACLE_HOME=/oracle/ftss/12.1.0.2" "ORACLE_HOME_NAME=OraDB12HomeFTSS" "ORACLE_BASE=/oracle/ftss" "oracle_install_OSDBA=dba" "oracle_install_OSOPER=dba" -silent -paramFile /oracle/ftss/12.1.0.2/clone/clone_oraparam.ini
+Starting Oracle Universal Installer...
+
+Checking Temp space: must be greater than 500 MB.   Actual 10258 MB    Passed
+Checking swap space: must be greater than 500 MB.   Actual 18432 MB    Passed
+Preparing to launch Oracle Universal Installer from /tmp/OraInstall2018-07-12_10-15-00AM. Please wait ...You can find the log of this install session at:
+ /oracle/MOFFP/oraInventory/logs/cloneActions2018-07-12_10-15-00AM.log
+..................................................   5% Done.
+..................................................   10% Done.
+..................................................   15% Done.
+..................................................   20% Done.
+..................................................   25% Done.
+..................................................   30% Done.
+..................................................   35% Done.
+..................................................   40% Done.
+..................................................   45% Done.
+..................................................   50% Done.
+..................................................   55% Done.
+..................................................   60% Done.
+..................................................   65% Done.
+..................................................   70% Done.
+..................................................   75% Done.
+..................................................   80% Done.
+..................................................   85% Done.
+..........
+Copy files in progress.
+
+Copy files successful.
+
+Link binaries in progress.
+
+Link binaries successful.
+
+Setup files in progress.
+
+Setup files successful.
+
+Setup Inventory in progress.
+
+Setup Inventory successful.
+
+Finish Setup successful.
+The cloning of OraDB12HomeFTSS was successful.
+Please check '/oracle/MOFFP/oraInventory/logs/cloneActions2018-07-12_10-15-00AM.log' for more details.
+
+Setup Oracle Base in progress.
+
+Setup Oracle Base successful.
+..................................................   95% Done.
+
+As a root user, execute the following script(s):
+        1. /oracle/ftss/12.1.0.2/root.sh
+
+
+
+..................................................   100% Done.
+oraftss.CDB_FTSS - df -gt
+Filesystem    GB blocks      Used      Free %Used Mounted on
+/dev/hd4           2.00      1.63      0.37   82% /
+/dev/hd2           7.00      3.95      3.05   57% /usr
+/dev/hd9var        3.00      1.37      1.63   46% /var
+/dev/hd3          11.00      0.98     10.02    9% /tmp
+/dev/hd1           2.00      0.38      1.62   20% /home
+/dev/hd11admin      1.00      0.00      1.00    1% /admin
+/proc                 -         -         -    - /proc
+/dev/hd10opt       2.00      0.91      1.09   46% /opt
+/dev/livedump      1.00      0.00      1.00    1% /var/adm/ras/livedump
+/dev/rootlv01      1.00      0.00      1.00    1% /rwe
+/dev/rootlv02      2.00      0.07      1.93    4% /rwe/log
+/dev/rootlv03      1.00      0.00      1.00    1% /rwe/core
+/dev/rootlv04      1.00      0.04      0.96    4% /UC4
+/dev/patrollv      2.00      1.36      0.64   69% /opt/patrol
+/dev/varnmonlv      3.00      0.17      2.83    6% /var/nmon
+/dev/moffblv1     30.00     14.33     15.67   48% /oracle/CDB_MOFFB/12.1.0.2
+/dev/moffblv2      5.00      2.02      2.98   41% /oracle/CDB_MOFFB/redo01
+/dev/moffblv3      5.00      2.02      2.98   41% /oracle/CDB_MOFFB/redo02
+/dev/moffblv4    690.00    287.59    402.41   42% /oracle/CDB_MOFFB/arch
+/dev/moffblv5     50.00      1.76     48.24    4% /oracle/CDB_MOFFB/temp
+/dev/moffblv6    350.00    114.58    235.42   33% /oracle/CDB_MOFFB/data01
+/dev/moffblv7   2200.00   2068.45    131.55   95% /oracle/PDB_MOFFB/data01
+/dev/moffblv8   1400.00   1236.69    163.31   89% /oracle/PDB_MOFFB/data02
+/dev/moffblv9   1000.00    786.13    213.87   79% /oracle/PDB_MOFFB/data03
+/dev/moffblv10   1400.00   1291.59    108.41   93% /oracle/PDB_MOFFB/data04
+/dev/moffblv11      5.00      0.02      4.98    1% /oracle/MOFFB/app/temp
+/dev/mofftlv1     30.00     15.39     14.61   52% /oracle/CDB_FTSD/12.1.0.2
+/dev/mofftlv2      5.00      2.02      2.98   41% /oracle/CDB_FTSD/redo01
+/dev/mofftlv3      5.00      2.52      2.48   51% /oracle/CDB_FTSD/redo02
+/dev/mofftlv4    690.00    210.50    479.50   31% /oracle/CDB_FTSD/arch
+/dev/mofftlv5     50.00      5.30     44.70   11% /oracle/CDB_FTSD/temp
+/dev/mofftlv6    250.00    114.58    135.42   46% /oracle/CDB_FTSD/data01
+/dev/mofftlv7   1100.00     67.22   1032.78    7% /oracle/PDB_FTSD/data01
+/dev/mofftlv8    700.00     51.92    648.08    8% /oracle/PDB_FTSD/data02
+/dev/mofftlv9    500.00     87.00    413.00   18% /oracle/PDB_FTSD/data03
+/dev/mofftlv10    700.00     70.79    629.21   11% /oracle/PDB_FTSD/data04
+/dev/mofftlv11         -         -         -    - /oracle/FTSD/app/temp
+/dev/cmoffpmslv00     30.00     12.84     17.16   43% /oracle/CMOFFPMS/12.1.0.2
+/dev/cmoffpmslv01      5.00      2.02      2.98   41% /oracle/CMOFFPMS/redo01
+/dev/cmoffpmslv02      5.00      2.02      2.98   41% /oracle/CMOFFPMS/redo02
+/dev/cmoffpmslv03     60.00      7.95     52.05   14% /oracle/CMOFFPMS/temp
+/dev/cmoffpmslv04    250.00    114.60    135.40   46% /oracle/CMOFFPMS/data01
+/dev/cmoffpmslv05    700.00     67.22    632.78   10% /oracle/CMOFFPMS/arch
+/dev/cmoffpmslv06   2200.00   2068.49    131.51   95% /oracle/MOFFPMS/data01
+/dev/cmoffpmslv07   1500.00   1236.82    263.18   83% /oracle/MOFFPMS/data02
+/dev/cmoffpmslv08   1000.00    786.15    213.85   79% /oracle/MOFFPMS/data03
+/dev/cmoffpmslv09   1500.00   1291.73    208.27   87% /oracle/MOFFPMS/data04
+rs127a:/oracle/FTSD/app/fts          -         -         -    - /oracle/FTSD/app/fts
+rs127a:/oracle/MOFFB/app/moffice      30.00     13.54     16.46   46% /oracle/MOFFB/app/moffice
+rs127a:/oracle/FTSS/app/fts      30.00     12.43     17.57   42% /oracle/FTSS/app/fts
+/dev/FTSSlv01     15.00      0.16     14.84    2% /oracle/CDB_FTSS
+/dev/FTSSlv02     30.00     12.82     17.18   43% /oracle/CDB_FTSS/12.1.0.2
+/dev/FTSSlv03    250.00    114.56    135.44   46% /oracle/CDB_FTSS/data01
+/dev/FTSSlv04    800.00     66.88    733.12    9% /oracle/PDB_FTSS/data01
+/dev/FTSSlv05    500.00     51.70    448.30   11% /oracle/PDB_FTSS/data02
+/dev/FTSSlv06    500.00     87.00    413.00   18% /oracle/PDB_FTSS/data03
+/dev/FTSSlv07    500.00     70.58    429.42   15% /oracle/PDB_FTSS/data04
+/dev/FTSSlv08    400.00     40.56    359.44   11% /oracle/CDB_FTSS/arch
+/dev/FTSSlv09     60.00      0.25     59.75    1% /oracle/CDB_FTSS/temp
+/dev/FTSSlv10      5.00      2.02      2.98   41% /oracle/CDB_FTSS/redo01
+/dev/FTSSlv11      5.00      2.02      2.98   41% /oracle/CDB_FTSS/redo02
+/dev/FTSSlv12      5.00      0.02      4.98    1% /oracle/FTSS/app/temp
+/dev/oemlv00      15.00      0.06     14.94    1% /u01/OEM/oracle
+rs127a:/oracle/MOFFPMS/app/moffice      30.00     22.61      7.39   76% /oracle/MOFFPMS/app/moffice
+/dev/ftsdlv00     15.00      0.07     14.93    1% /oracle/FTSD
+/dev/ftsdlv01     30.00     14.39     15.61   48% /oracle/FTSD/12.1.0.2
+/dev/ftsdlv02      5.00      2.04      2.96   41% /oracle/FTSD/redo01
+/dev/ftsdlv03      5.00      2.04      2.96   41% /oracle/FTSD/redo02
+/dev/ftsdlv04    300.00      0.55    299.45    1% /oracle/FTSD/arch
+/dev/ftsdlv05     50.00     20.00     30.00   41% /oracle/FTSD/temp
+/dev/ftsdlv06    500.00    388.09    111.91   78% /oracle/FTSD/data01
+/dev/ftsslv00     15.00      0.06     14.94    1% /oracle/ftss
+/dev/ftsslv01     30.00     13.69     16.31   46% /oracle/ftss/12.1.0.2
+/dev/ftsslv02      5.00      0.02      4.98    1% /oracle/ftss/redo01
+/dev/ftsslv03      5.00      0.02      4.98    1% /oracle/ftss/redo02
+/dev/ftsslv04    300.00      0.55    299.45    1% /oracle/ftss/arch
+/dev/ftsslv05     50.00      0.20     49.80    1% /oracle/ftss/temp
+/dev/ftsslv06    400.00      0.56    399.44    1% /oracle/ftss/data01
+/dev/ftsqlv00     15.00      0.06     14.94    1% /oracle/FTSQ
+/dev/ftsqlv01     30.00      0.12     29.88    1% /oracle/FTSQ/12.1.0.2
+/dev/ftsqlv02      5.00      0.02      4.98    1% /oracle/FTSQ/redo01
+/dev/ftsqlv03      5.00      0.02      4.98    1% /oracle/FTSQ/redo02
+/dev/ftsqlv04    300.00      0.55    299.45    1% /oracle/FTSQ/arch
+/dev/ftsqlv05     50.00      0.20     49.80    1% /oracle/FTSQ/temp
+/dev/ftsqlv06    400.00      0.56    399.44    1% /oracle/FTSQ/data01
+oraftss.CDB_FTSS - cd /oracle/CDB_FTSS/data01
+oraftss.CDB_FTSS - ls -ltr
+total 239085752
+drwxrwxr-x    2 oraftss  dba             256 15 Jun 12:43 lost+found
+drwxr-xr-x    2 oraftss  dba             256 17 Jun 18:09 CDB_FTSS
+-rw-r-----    1 oraftss  dba      21474844672 12 Jul 09:47 undotbs01.dbf
+-rw-r-----    1 oraftss  dba      2147491840 12 Jul 09:47 system01.dbf
+-rw-r-----    1 oraftss  dba      8589942784 12 Jul 09:47 sysaux01.dbf
+-rw-r-----    1 oraftss  dba         5251072 12 Jul 09:47 users01.dbf
+-rw-r-----    1 oraftss  dba      21474844672 12 Jul 09:47 undotbs04.dbf
+-rw-r-----    1 oraftss  dba      21474844672 12 Jul 09:47 undotbs03.dbf
+-rw-r-----    1 oraftss  dba      21474844672 12 Jul 09:47 undotbs02.dbf
+-rw-r-----    1 oraftss  dba      4294975488 12 Jul 09:47 undotbs06.dbf
+-rw-r-----    1 oraftss  dba      21474844672 12 Jul 09:47 undotbs05.dbf
+oraftss.CDB_FTSS - cd CDB_FTSS
+oraftss.CDB_FTSS - ls -ltr
+total 37152
+-rw-r-----    1 oraftss  dba        19021824 12 Jul 09:47 control01.ctl
+oraftss.CDB_FTSS - cd ..
+oraftss.CDB_FTSS - df -gt
+Filesystem    GB blocks      Used      Free %Used Mounted on
+/dev/hd4           2.00      1.63      0.37   82% /
+/dev/hd2           7.00      3.95      3.05   57% /usr
+/dev/hd9var        3.00      1.37      1.63   46% /var
+/dev/hd3          11.00      0.98     10.02    9% /tmp
+/dev/hd1           2.00      0.38      1.62   20% /home
+/dev/hd11admin      1.00      0.00      1.00    1% /admin
+/proc                 -         -         -    - /proc
+/dev/hd10opt       2.00      0.91      1.09   46% /opt
+/dev/livedump      1.00      0.00      1.00    1% /var/adm/ras/livedump
+/dev/rootlv01      1.00      0.00      1.00    1% /rwe
+/dev/rootlv02      2.00      0.07      1.93    4% /rwe/log
+/dev/rootlv03      1.00      0.00      1.00    1% /rwe/core
+/dev/rootlv04      1.00      0.04      0.96    4% /UC4
+/dev/patrollv      2.00      1.36      0.64   69% /opt/patrol
+/dev/varnmonlv      3.00      0.17      2.83    6% /var/nmon
+/dev/moffblv1     30.00     14.33     15.67   48% /oracle/CDB_MOFFB/12.1.0.2
+/dev/moffblv2      5.00      2.02      2.98   41% /oracle/CDB_MOFFB/redo01
+/dev/moffblv3      5.00      2.02      2.98   41% /oracle/CDB_MOFFB/redo02
+/dev/moffblv4    690.00    287.59    402.41   42% /oracle/CDB_MOFFB/arch
+/dev/moffblv5     50.00      1.76     48.24    4% /oracle/CDB_MOFFB/temp
+/dev/moffblv6    350.00    114.58    235.42   33% /oracle/CDB_MOFFB/data01
+/dev/moffblv7   2200.00   2068.45    131.55   95% /oracle/PDB_MOFFB/data01
+/dev/moffblv8   1400.00   1236.69    163.31   89% /oracle/PDB_MOFFB/data02
+/dev/moffblv9   1000.00    786.13    213.87   79% /oracle/PDB_MOFFB/data03
+/dev/moffblv10   1400.00   1291.59    108.41   93% /oracle/PDB_MOFFB/data04
+/dev/moffblv11      5.00      0.02      4.98    1% /oracle/MOFFB/app/temp
+/dev/mofftlv1     30.00     15.39     14.61   52% /oracle/CDB_FTSD/12.1.0.2
+/dev/mofftlv2      5.00      2.02      2.98   41% /oracle/CDB_FTSD/redo01
+/dev/mofftlv3      5.00      2.52      2.48   51% /oracle/CDB_FTSD/redo02
+/dev/mofftlv4    690.00    210.50    479.50   31% /oracle/CDB_FTSD/arch
+/dev/mofftlv5     50.00      5.30     44.70   11% /oracle/CDB_FTSD/temp
+/dev/mofftlv6    250.00    114.58    135.42   46% /oracle/CDB_FTSD/data01
+/dev/mofftlv7   1100.00     67.22   1032.78    7% /oracle/PDB_FTSD/data01
+/dev/mofftlv8    700.00     51.92    648.08    8% /oracle/PDB_FTSD/data02
+/dev/mofftlv9    500.00     87.00    413.00   18% /oracle/PDB_FTSD/data03
+/dev/mofftlv10    700.00     70.79    629.21   11% /oracle/PDB_FTSD/data04
+/dev/mofftlv11         -         -         -    - /oracle/FTSD/app/temp
+/dev/cmoffpmslv00     30.00     12.84     17.16   43% /oracle/CMOFFPMS/12.1.0.2
+/dev/cmoffpmslv01      5.00      2.02      2.98   41% /oracle/CMOFFPMS/redo01
+/dev/cmoffpmslv02      5.00      2.02      2.98   41% /oracle/CMOFFPMS/redo02
+/dev/cmoffpmslv03     60.00      7.95     52.05   14% /oracle/CMOFFPMS/temp
+/dev/cmoffpmslv04    250.00    114.60    135.40   46% /oracle/CMOFFPMS/data01
+/dev/cmoffpmslv05    700.00     67.22    632.78   10% /oracle/CMOFFPMS/arch
+/dev/cmoffpmslv06   2200.00   2068.49    131.51   95% /oracle/MOFFPMS/data01
+/dev/cmoffpmslv07   1500.00   1236.82    263.18   83% /oracle/MOFFPMS/data02
+/dev/cmoffpmslv08   1000.00    786.15    213.85   79% /oracle/MOFFPMS/data03
+/dev/cmoffpmslv09   1500.00   1291.73    208.27   87% /oracle/MOFFPMS/data04
+rs127a:/oracle/FTSD/app/fts          -         -         -    - /oracle/FTSD/app/fts
+rs127a:/oracle/MOFFB/app/moffice      30.00     13.54     16.46   46% /oracle/MOFFB/app/moffice
+rs127a:/oracle/FTSS/app/fts      30.00     12.43     17.57   42% /oracle/FTSS/app/fts
+/dev/FTSSlv01     15.00      0.16     14.84    2% /oracle/CDB_FTSS
+/dev/FTSSlv02     30.00     12.82     17.18   43% /oracle/CDB_FTSS/12.1.0.2
+/dev/FTSSlv03    250.00    114.56    135.44   46% /oracle/CDB_FTSS/data01
+/dev/FTSSlv04    800.00     66.88    733.12    9% /oracle/PDB_FTSS/data01
+/dev/FTSSlv05    500.00     51.70    448.30   11% /oracle/PDB_FTSS/data02
+/dev/FTSSlv06    500.00     87.00    413.00   18% /oracle/PDB_FTSS/data03
+/dev/FTSSlv07    500.00     70.58    429.42   15% /oracle/PDB_FTSS/data04
+/dev/FTSSlv08    400.00     40.56    359.44   11% /oracle/CDB_FTSS/arch
+/dev/FTSSlv09     60.00      0.25     59.75    1% /oracle/CDB_FTSS/temp
+/dev/FTSSlv10      5.00      2.02      2.98   41% /oracle/CDB_FTSS/redo01
+/dev/FTSSlv11      5.00      2.02      2.98   41% /oracle/CDB_FTSS/redo02
+/dev/FTSSlv12      5.00      0.02      4.98    1% /oracle/FTSS/app/temp
+/dev/oemlv00      15.00      0.06     14.94    1% /u01/OEM/oracle
+rs127a:/oracle/MOFFPMS/app/moffice      30.00     22.61      7.39   76% /oracle/MOFFPMS/app/moffice
+/dev/ftsdlv00     15.00      0.07     14.93    1% /oracle/FTSD
+/dev/ftsdlv01     30.00     14.39     15.61   48% /oracle/FTSD/12.1.0.2
+/dev/ftsdlv02      5.00      2.04      2.96   41% /oracle/FTSD/redo01
+/dev/ftsdlv03      5.00      2.04      2.96   41% /oracle/FTSD/redo02
+/dev/ftsdlv04    300.00      0.55    299.45    1% /oracle/FTSD/arch
+/dev/ftsdlv05     50.00     20.00     30.00   41% /oracle/FTSD/temp
+/dev/ftsdlv06    500.00    388.09    111.91   78% /oracle/FTSD/data01
+/dev/ftsslv00     15.00      0.06     14.94    1% /oracle/ftss
+/dev/ftsslv01     30.00     13.69     16.31   46% /oracle/ftss/12.1.0.2
+/dev/ftsslv02      5.00      0.02      4.98    1% /oracle/ftss/redo01
+/dev/ftsslv03      5.00      0.02      4.98    1% /oracle/ftss/redo02
+/dev/ftsslv04    300.00      0.55    299.45    1% /oracle/ftss/arch
+/dev/ftsslv05     50.00      0.20     49.80    1% /oracle/ftss/temp
+/dev/ftsslv06    400.00      0.56    399.44    1% /oracle/ftss/data01
+/dev/ftsqlv00     15.00      0.06     14.94    1% /oracle/FTSQ
+/dev/ftsqlv01     30.00      0.12     29.88    1% /oracle/FTSQ/12.1.0.2
+/dev/ftsqlv02      5.00      0.02      4.98    1% /oracle/FTSQ/redo01
+/dev/ftsqlv03      5.00      0.02      4.98    1% /oracle/FTSQ/redo02
+/dev/ftsqlv04    300.00      0.55    299.45    1% /oracle/FTSQ/arch
+/dev/ftsqlv05     50.00      0.20     49.80    1% /oracle/FTSQ/temp
+/dev/ftsqlv06    400.00      0.56    399.44    1% /oracle/FTSQ/data01
+oraftss.CDB_FTSS - cd /oracle/PDB_FTSS/data01
+oraftss.CDB_FTSS - ls -ltr
+total 138356928
+drwxrwxr-x    2 oraftss  dba             256 15 Jun 12:44 lost+found
+-rw-r-----    1 oraftss  dba      1473257472 12 Jul 09:47 user_data01.dbf
+-rw-r-----    1 oraftss  dba      10737426432 12 Jul 09:47 REPORTING_DATA_TS_04.dbf
+-rw-r-----    1 oraftss  dba      10737426432 12 Jul 09:47 REPORTING_DATA_TS_03.dbf
+-rw-r-----    1 oraftss  dba      10737426432 12 Jul 09:47 REPORTING_DATA_TS_02.dbf
+-rw-r-----    1 oraftss  dba      10737426432 12 Jul 09:47 REPORTING_DATA_TS_01.dbf
+-rw-r-----    1 oraftss  dba       137371648 12 Jul 09:47 quest_data01.dbf
+-rw-r-----    1 oraftss  dba      2656051200 12 Jul 09:47 perfstat01.dbf
+-rw-r-----    1 oraftss  dba      10737426432 12 Jul 09:47 MOFFICE_IDX_02.dbf
+-rw-r-----    1 oraftss  dba      10737426432 12 Jul 09:47 MOFFICE_IDX_01.dbf
+-rw-r-----    1 oraftss  dba      2147491840 12 Jul 09:47 apex_data01.dbf
+oraftss.CDB_FTSS - cd /oracle/PDB_FTSS/data02
+oraftss.CDB_FTSS - ls -ltr
+total 105123968
+drwxrwxr-x    2 oraftss  dba             256 15 Jun 12:45 lost+found
+drwxr-xr-x    2 oraftss  dba             256 17 Jun 18:09 CDB_FTSS
+drwxr-xr-x    2 oraftss  dba             256 17 Jun 21:37 pdbseed
+-rw-r-----    1 oraftss  dba      10737426432 12 Jul 09:47 REPORTING_IDX_03.dbf
+-rw-r-----    1 oraftss  dba      10737426432 12 Jul 09:47 REPORTING_IDX_02.dbf
+-rw-r-----    1 oraftss  dba      10737426432 12 Jul 09:47 REPORTING_IDX_01.dbf
+-rw-r-----    1 oraftss  dba       136323072 12 Jul 09:47 quest_indexes01.dbf
+-rw-r-----    1 oraftss  dba      10737426432 12 Jul 09:47 MOFFICE_IDX_04.dbf
+-rw-r-----    1 oraftss  dba      10737426432 12 Jul 09:47 MOFFICE_IDX_03.dbf
+oraftss.CDB_FTSS - cd pdbseed
+oraftss.CDB_FTSS - ls -ltr
+total 2050080
+-rw-r-----    1 oraftss  dba       283123712 17 Jun 21:37 system01.dbf
+-rw-r-----    1 oraftss  dba       765468672 17 Jun 21:37 sysaux01.dbf
+-rw-r-----    1 oraftss  dba        20979712 17 Jun 21:37 pdbseed_temp012017-04-20_01-46-13-PM.dbf
+oraftss.CDB_FTSS - pwd
+/oracle/PDB_FTSS/data02/pdbseed
+oraftss.CDB_FTSS - ls -ltr
+total 2050080
+-rw-r-----    1 oraftss  dba       283123712 17 Jun 21:37 system01.dbf
+-rw-r-----    1 oraftss  dba       765468672 17 Jun 21:37 sysaux01.dbf
+-rw-r-----    1 oraftss  dba        20979712 17 Jun 21:37 pdbseed_temp012017-04-20_01-46-13-PM.dbf
+oraftss.CDB_FTSS - cd $ORACLE_HOME/dbs
+oraftss.CDB_FTSS - pwd
+/oracle/ftss/12.1.0.2/dbs
+oraftss.CDB_FTSS - ls -ltr
+total 111840
+-rw-r--r--    1 oraftss  dba            2992 03 Feb 2012  init.ora
+-rw-r-----    1 oraftss  dba            7680 17 Jun 18:02 orapwCDB_FTSS
+-rw-r-----    1 oraftss  dba              24 17 Jun 18:09 lkCDB_FTSS
+-rw-r--r--    1 oraftss  dba            2590 17 Jun 19:03 initCDB_FTSS.ora
+-rw-r-----    1 oraftss  dba        19103744 17 Jun 21:38 c-2842290229-20180617-00
+-rw-r-----    1 oraftss  dba            7680 18 Jun 04:32 spfileCDB_FTSS.ora
+-rw-r-----    1 oraftss  dba        19021824 18 Jun 12:04 snapcf_CDB_FTSS.f
+-rw-r-----    1 oraftss  dba        19103744 18 Jun 12:04 c-2842290229-20180618-00
+-rw-rw----    1 oraftss  dba            1544 12 Jul 09:48 hc_CDB_FTSS.dat
+oraftss.CDB_FTSS - vi initCDB_FTSS.ora
+oraftss.CDB_FTSS - cat initCDB_FTSS.ora
+*._connect_by_use_union_all='FALSE'
+*._fix_control='13836796:0'
+*._optimizer_aggr_groupby_elim=false
+*._optimizer_cost_based_transformation='OFF'
+*._optimizer_join_elimination_enabled=FALSE
+*._optimizer_reduce_groupby_key=false
+*._use_single_log_writer='true'
+*.audit_file_dest='/oracle/CDB_FTSS/admin/CDB_FTSS/adump'
+*.audit_trail='NONE'
+*.common_user_prefix='C##'
+*.compatible='12.1.0.2.0'
+*.control_files='/oracle/CDB_FTSS/data01/CDB_FTSS/control01.ctl','/oracle/PDB_FTSS/data02/CDB_FTSS/control02.ctl'#Restore Controlfile
+*.db_block_size=8192
+*.db_cache_size=1946157056
+*.db_domain=''
+*.db_file_multiblock_read_count=32
+*.db_file_name_convert='/oracle/CDB_FTSD/data01','/oracle/CDB_FTSS/data01','/oracle/PDB_FTSD/data01','/oracle/PDB_FTSS/data01','/oracle/PDB_FTSD/data02','/oracle/PDB_FTSS/data02','/oracle/PDB_FTSD/data03','/oracle/PDB_FTSS/data03','/oracle/PDB_FTSD/data04','/oracle/PDB_FTSS/data04','/oracle/CDB_FTSD/temp','/oracle/CDB_FTSS/temp'
+*.db_files=2000
+*.db_flashback_retention_target=7200
+*.db_keep_cache_size=134217728
+*.db_name='CDB_FTSS'#Reset to original value by RMAN
+*.db_recovery_file_dest_size=236223201280
+*.deferred_segment_creation=FALSE
+*.diagnostic_dest='/oracle/CDB_FTSS'
+*.dispatchers='(PROTOCOL=TCP) (SERVICE=CDB_FTSSXDB)'
+*.enable_pluggable_database=true
+*.hash_area_size=2097152
+*.java_pool_size=201326592
+*.job_queue_processes=10
+*.local_listener='LISTENER_FTSS'
+###*.lock_sga=TRUE
+*.log_archive_dest_1='location=/oracle/CDB_FTSS/arch'
+*.log_archive_format='MOFFCP_%t_%s_%r.arc'
+*.log_file_name_convert='/oracle/CDB_FTSD/redo01','/oracle/CDB_FTSS/redo01','/oracle/CDB_FTSD/redo02','/oracle/CDB_FTSS/redo02'
+*.nls_language='ENGLISH'
+*.nls_territory='UNITED KINGDOM'
+*.O7_DICTIONARY_ACCESSIBILITY=TRUE
+*.open_cursors=300,500
+*.open_links=8
+*.open_links_per_instance=8
+*.optimizer_adaptive_plans=FALSE
+*.optimizer_adaptive_statistics=FALSE
+*.optimizer_secure_view_merging=FALSE
+*.parallel_adaptive_multi_user=TRUE
+*.parallel_max_servers=400
+*.parallel_servers_target=200
+*.pga_aggregate_limit=8589934592
+*.pga_aggregate_target=3221225472
+*.processes=800
+*.query_rewrite_integrity='TRUSTED'
+*.recyclebin='OFF'
+*.remote_login_passwordfile='EXCLUSIVE'
+*.resource_manager_plan=''
+*.result_cache_max_result=50
+*.result_cache_max_size=52428800
+*.sec_case_sensitive_logon=FALSE
+*.session_cached_cursors=500
+*.sga_max_size=5368709120
+*.sga_target=5368709120
+*.shared_pool_size=2147483648
+*.sort_area_size=1048576
+*.standby_file_management='AUTO'
+*.star_transformation_enabled='TRUE'
+*.streams_pool_size=67108864
+*.undo_retention=3600
+*.undo_tablespace='UNDOTBS1'
+oraftss.CDB_FTSS - pwd
+/oracle/ftss/12.1.0.2/dbs
+oraftss.CDB_FTSS - cd /oracle/ftss
+oraftss.CDB_FTSS - ls -ltr
+total 16
+drwxr-xr-x    2 root     system          256 12 Jul 08:52 lost+found
+drwxr-xr-x    3 oraftss  dba             256 12 Jul 08:52 redo01
+drwxr-xr-x    3 oraftss  dba             256 12 Jul 08:52 redo02
+drwxr-xr-x    3 oraftss  dba             256 12 Jul 08:52 arch
+drwxr-xr-x    3 oraftss  dba             256 12 Jul 08:52 temp
+drwxrwxr-x   73 oraftss  dba            4096 12 Jul 10:15 12.1.0.2
+drwxrwxr-x   19 oraftss  dba            4096 12 Jul 10:17 diag
+drwxr-xr-x    2 oraftss  dba             256 12 Jul 10:17 checkpoints
+drwxr-xr-x    6 oraftss  dba             256 12 Jul 10:18 data01
+drwxr-xr-x    3 oraftss  dba             256 12 Jul 11:31 admin
+oraftss.CDB_FTSS - cd admin
+oraftss.CDB_FTSS - ls -ltr
+total 0
+drwxr-xr-x    3 oraftss  dba             256 12 Jul 11:31 ftss
+oraftss.CDB_FTSS - mv ftss adump
+oraftss.CDB_FTSS - cd adump
+oraftss.CDB_FTSS - ls -ltr
+total 0
+drwxr-xr-x    2 oraftss  dba             256 12 Jul 11:31 adump
+oraftss.CDB_FTSS - rm -rf adump
+oraftss.CDB_FTSS - pwd
+/oracle/ftss/admin/adump
+oraftss.CDB_FTSS - cd $ORACLE_HOME/dbs
+oraftss.CDB_FTSS - ls -ltr
+total 111840
+-rw-r--r--    1 oraftss  dba            2992 03 Feb 2012  init.ora
+-rw-r-----    1 oraftss  dba            7680 17 Jun 18:02 orapwCDB_FTSS
+-rw-r-----    1 oraftss  dba              24 17 Jun 18:09 lkCDB_FTSS
+-rw-r--r--    1 oraftss  dba            2590 17 Jun 19:03 initCDB_FTSS.ora
+-rw-r-----    1 oraftss  dba        19103744 17 Jun 21:38 c-2842290229-20180617-00
+-rw-r-----    1 oraftss  dba            7680 18 Jun 04:32 spfileCDB_FTSS.ora
+-rw-r-----    1 oraftss  dba        19021824 18 Jun 12:04 snapcf_CDB_FTSS.f
+-rw-r-----    1 oraftss  dba        19103744 18 Jun 12:04 c-2842290229-20180618-00
+-rw-rw----    1 oraftss  dba            1544 12 Jul 09:48 hc_CDB_FTSS.dat
+oraftss.CDB_FTSS - cp initCDB_FTSS.ora initCDB_FTSS.ora_1207
+oraftss.CDB_FTSS - vi initCDB_FTSS.ora
+oraftss.CDB_FTSS - >initCDB_FTSS.ora
+oraftss.CDB_FTSS - ls -ltr
+total 111840
+-rw-r--r--    1 oraftss  dba            2992 03 Feb 2012  init.ora
+-rw-r-----    1 oraftss  dba            7680 17 Jun 18:02 orapwCDB_FTSS
+-rw-r-----    1 oraftss  dba              24 17 Jun 18:09 lkCDB_FTSS
+-rw-r-----    1 oraftss  dba        19103744 17 Jun 21:38 c-2842290229-20180617-00
+-rw-r-----    1 oraftss  dba            7680 18 Jun 04:32 spfileCDB_FTSS.ora
+-rw-r-----    1 oraftss  dba        19021824 18 Jun 12:04 snapcf_CDB_FTSS.f
+-rw-r-----    1 oraftss  dba        19103744 18 Jun 12:04 c-2842290229-20180618-00
+-rw-rw----    1 oraftss  dba            1544 12 Jul 09:48 hc_CDB_FTSS.dat
+-rw-r--r--    1 oraftss  dba            2590 12 Jul 11:48 initCDB_FTSS.ora_1207
+-rw-r--r--    1 oraftss  dba               0 12 Jul 11:49 initCDB_FTSS.ora
+oraftss.CDB_FTSS - vi initCDB_FTSS.ora
+oraftss.CDB_FTSS - cd $ORACLE_HOME
+oraftss.CDB_FTSS - pwd
+/oracle/ftss/12.1.0.2
+oraftss.CDB_FTSS - sqlplus
+
+SQL*Plus: Release 12.1.0.2.0 Production on Thu Jul 12 11:50:30 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter user-name:
+oraftss.CDB_FTSS - ls -ltr
+total 240
+-rw-r-----    1 oraftss  dba              56 18 Apr 2017  oraInst.loc
+-rwxr-x---    1 oraftss  dba              10 15 Jun 15:12 root.sh.old.1
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 R
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:12 crs
+drwxr-xr-x    9 oraftss  dba             256 15 Jun 15:12 assistants
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 wwg
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 15:12 usm
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 15:12 sysman
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 sqlj
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 slax
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 15:12 scheduler
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 relnotes
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:12 precomp
+drwxr-xr-x    5 oraftss  dba             256 15 Jun 15:12 perl
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 15:12 owm
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:12 ord
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 15:12 oracore
+drwxr-xr-x    5 oraftss  dba             256 15 Jun 15:12 olap
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:12 odbc
+drwxr-xr-x    5 oraftss  dba             256 15 Jun 15:12 nls
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:12 md
+drwxr-xr-x    8 oraftss  dba             256 15 Jun 15:12 javavm
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 15:12 has
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 dv
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 diagnostics
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:12 demo
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:12 cv
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:12 plsql
+drwxr-xr-x    2 oraftss  dba             256 15 Jun 15:13 utl
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:13 xdk
+drwxr-xr-x    2 oraftss  dba             256 15 Jun 15:13 instantclient
+drwxr-xr-x    8 oraftss  dba            4096 15 Jun 15:13 dmu
+drwxr-xr-x   19 oraftss  dba            4096 15 Jun 15:13 oc4j
+drwxr-xr-x    2 oraftss  dba             256 15 Jun 15:13 rest
+drwxr-xr-x   15 oraftss  dba            4096 15 Jun 15:14 sqldeveloper
+drwxr-xr-x    2 oraftss  dba             256 15 Jun 15:14 dc_ocm
+drwxr-xr-x    8 oraftss  dba            4096 15 Jun 15:14 jdk
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:15 ucp
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:15 jdbc
+drwxr-xr-x    7 oraftss  dba            4096 15 Jun 15:15 OPatch_old
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:15 ccr
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:15 mgw
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:15 opmn
+drwxr-xr-x    6 oraftss  dba             256 15 Jun 15:15 css
+drwxr-xr-x    3 oraftss  dba             256 15 Jun 15:15 cdata
+drwxr-xr-x    9 oraftss  dba             256 15 Jun 15:15 srvm
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:15 racg
+drwxr-xr-x   12 oraftss  dba            4096 15 Jun 15:15 ldap
+drwxr-xr-x   11 oraftss  dba            4096 15 Jun 15:15 ctx
+drwxr-xr-x    7 oraftss  dba             256 15 Jun 15:16 sqlplus
+drwxr-xr-x   10 oraftss  dba             256 15 Jun 15:16 network
+-rwxr-x---    1 oraftss  dba             384 15 Jun 15:16 root.sh.old
+drwxr-xr-x   14 oraftss  dba            4096 15 Jun 15:16 rdbms
+drwxr-xr-x    5 oraftss  dba             256 15 Jun 15:16 hs
+drwxr-xr-x    5 oraftss  dba             256 15 Jun 15:41 cfgtoollogs
+drwxr-xr-x    4 oraftss  dba             256 15 Jun 16:59 suptools
+drwxr-x---   14 oraftss  dba            4096 15 Jun 16:59 inventory
+drwxr-xr-x    2 oraftss  dba            4096 15 Jun 17:00 jlib
+drwxr-xr-x   18 oraftss  dba            4096 15 Jun 17:08 sqlpatch
+drwxr-xr-x    4 oraftss  dba             256 17 Jun 17:52 log
+drwxr-xr-x    2 oraftss  dba             256 17 Jun 21:37 QOpatch
+drwxr-xr-x    8 oraftss  dba            4096 27 Jun 17:00 apex
+drwxr-xr-x    6 oraftss  dba             256 28 Jun 15:52 admin
+drwxr-xr-x    2 root     system          256 12 Jul 08:52 lost+found
+-rw-r--r--    1 oraftss  dba              10 12 Jul 10:15 root.sh.ouibak
+drwxr-xr-x    5 oraftss  dba             256 12 Jul 10:15 clone
+drwxr-x---   14 oraftss  dba            4096 12 Jul 10:15 OPatch
+drwxr-xr-x    8 oraftss  dba            4096 12 Jul 10:15 oui
+drwxr-xr-x    2 oraftss  dba             256 12 Jul 10:15 addnode
+drwxr-xr-x    2 oraftss  dba           16384 12 Jul 10:16 lib
+drwxr-xr-x    5 oraftss  dba            4096 12 Jul 10:17 deinstall
+drwxr-xr-x    2 oraftss  dba           16384 12 Jul 10:17 bin
+-rwxr-x---    1 oraftss  dba             364 12 Jul 10:17 root.sh
+drwxr-xr-x    7 oraftss  dba            4096 12 Jul 10:23 install
+drwxr-xr-x    2 oraftss  dba            4096 12 Jul 11:48 dbs
+oraftss.CDB_FTSS - cd dbs
+oraftss.CDB_FTSS - ls -ltr
+total 111848
+-rw-r--r--    1 oraftss  dba            2992 03 Feb 2012  init.ora
+-rw-r-----    1 oraftss  dba            7680 17 Jun 18:02 orapwCDB_FTSS
+-rw-r-----    1 oraftss  dba              24 17 Jun 18:09 lkCDB_FTSS
+-rw-r-----    1 oraftss  dba        19103744 17 Jun 21:38 c-2842290229-20180617-00
+-rw-r-----    1 oraftss  dba            7680 18 Jun 04:32 spfileCDB_FTSS.ora
+-rw-r-----    1 oraftss  dba        19021824 18 Jun 12:04 snapcf_CDB_FTSS.f
+-rw-r-----    1 oraftss  dba        19103744 18 Jun 12:04 c-2842290229-20180618-00
+-rw-rw----    1 oraftss  dba            1544 12 Jul 09:48 hc_CDB_FTSS.dat
+-rw-r--r--    1 oraftss  dba            2590 12 Jul 11:48 initCDB_FTSS.ora_1207
+-rw-r--r--    1 oraftss  dba            2577 12 Jul 11:49 initCDB_FTSS.ora
+oraftss.CDB_FTSS - mv spfileCDB_FTSS.ora spfileCDB_FTSS.ora_1207
+oraftss.CDB_FTSS - sqlplus
+
+SQL*Plus: Release 12.1.0.2.0 Production on Thu Jul 12 11:50:56 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter user-name: / as sysdba
+Connected to an idle instance.
+
+SQL> create spfile from pfile;
+
+File created.
+
+SQL> exit
+Disconnected
+oraftss.CDB_FTSS - cd /oracle/ftss/temp
+oraftss.CDB_FTSS - ls -ltr
+total 0
+drwxr-xr-x    2 root     system          256 12 Jul 08:52 lost+found
+oraftss.CDB_FTSS - vi copy_datafiles.sh
+oraftss.CDB_FTSS - cd /oracle/ftss/data01/pdbseed
+oraftss.CDB_FTSS - cat copy_datafiles.sh
+cat: 0652-050 Cannot open copy_datafiles.sh.
+oraftss.CDB_FTSS - df -gy
+df: Not a recognized flag: y
+Usage: df  [-P] | [-IMitv] [-gkm] [-s] [filesystem ...] [file ...]
+oraftss.CDB_FTSS - df -gt
+Filesystem    GB blocks      Used      Free %Used Mounted on
+/dev/hd4           2.00      1.63      0.37   82% /
+/dev/hd2           7.00      3.95      3.05   57% /usr
+/dev/hd9var        3.00      1.37      1.63   46% /var
+/dev/hd3          11.00      0.98     10.02    9% /tmp
+/dev/hd1           2.00      0.38      1.62   20% /home
+/dev/hd11admin      1.00      0.00      1.00    1% /admin
+/proc                 -         -         -    - /proc
+/dev/hd10opt       2.00      0.91      1.09   46% /opt
+/dev/livedump      1.00      0.00      1.00    1% /var/adm/ras/livedump
+/dev/rootlv01      1.00      0.00      1.00    1% /rwe
+/dev/rootlv02      2.00      0.07      1.93    4% /rwe/log
+/dev/rootlv03      1.00      0.00      1.00    1% /rwe/core
+/dev/rootlv04      1.00      0.04      0.96    4% /UC4
+/dev/patrollv      2.00      1.36      0.64   69% /opt/patrol
+/dev/varnmonlv      3.00      0.17      2.83    6% /var/nmon
+/dev/moffblv1     30.00     14.34     15.66   48% /oracle/CDB_MOFFB/12.1.0.2
+/dev/moffblv2      5.00      2.02      2.98   41% /oracle/CDB_MOFFB/redo01
+/dev/moffblv3      5.00      2.02      2.98   41% /oracle/CDB_MOFFB/redo02
+/dev/moffblv4    690.00    287.59    402.41   42% /oracle/CDB_MOFFB/arch
+/dev/moffblv5     50.00      1.76     48.24    4% /oracle/CDB_MOFFB/temp
+/dev/moffblv6    350.00    114.58    235.42   33% /oracle/CDB_MOFFB/data01
+/dev/moffblv7   2200.00   2068.45    131.55   95% /oracle/PDB_MOFFB/data01
+/dev/moffblv8   1400.00   1236.69    163.31   89% /oracle/PDB_MOFFB/data02
+/dev/moffblv9   1000.00    786.13    213.87   79% /oracle/PDB_MOFFB/data03
+/dev/moffblv10   1400.00   1291.59    108.41   93% /oracle/PDB_MOFFB/data04
+/dev/moffblv11      5.00      0.02      4.98    1% /oracle/MOFFB/app/temp
+/dev/cmoffpmslv00     30.00     12.85     17.15   43% /oracle/CMOFFPMS/12.1.0.2
+/dev/cmoffpmslv01      5.00      2.02      2.98   41% /oracle/CMOFFPMS/redo01
+/dev/cmoffpmslv02      5.00      2.02      2.98   41% /oracle/CMOFFPMS/redo02
+/dev/cmoffpmslv03     60.00      7.95     52.05   14% /oracle/CMOFFPMS/temp
+/dev/cmoffpmslv04    250.00    114.60    135.40   46% /oracle/CMOFFPMS/data01
+/dev/cmoffpmslv05    700.00     67.59    632.41   10% /oracle/CMOFFPMS/arch
+/dev/cmoffpmslv06   2200.00   2068.49    131.51   95% /oracle/MOFFPMS/data01
+/dev/cmoffpmslv07   1500.00   1236.82    263.18   83% /oracle/MOFFPMS/data02
+/dev/cmoffpmslv08   1000.00    786.15    213.85   79% /oracle/MOFFPMS/data03
+/dev/cmoffpmslv09   1500.00   1291.73    208.27   87% /oracle/MOFFPMS/data04
+rs127a:/oracle/FTSD/app/fts          -         -         -    - /oracle/FTSD/app/fts
+rs127a:/oracle/MOFFB/app/moffice      30.00     13.54     16.46   46% /oracle/MOFFB/app/moffice
+rs127a:/oracle/FTSS/app/fts      30.00     12.43     17.57   42% /oracle/FTSS/app/fts
+/dev/FTSSlv01     15.00      0.16     14.84    2% /oracle/CDB_FTSS
+/dev/FTSSlv02     30.00     12.82     17.18   43% /oracle/CDB_FTSS/12.1.0.2
+/dev/FTSSlv03    250.00    114.56    135.44   46% /oracle/CDB_FTSS/data01
+/dev/FTSSlv04    800.00     66.88    733.12    9% /oracle/PDB_FTSS/data01
+/dev/FTSSlv05    500.00     51.70    448.30   11% /oracle/PDB_FTSS/data02
+/dev/FTSSlv06    500.00     87.00    413.00   18% /oracle/PDB_FTSS/data03
+/dev/FTSSlv07    500.00     70.58    429.42   15% /oracle/PDB_FTSS/data04
+/dev/FTSSlv08    400.00     40.56    359.44   11% /oracle/CDB_FTSS/arch
+/dev/FTSSlv09     60.00      0.25     59.75    1% /oracle/CDB_FTSS/temp
+/dev/FTSSlv10      5.00      2.02      2.98   41% /oracle/CDB_FTSS/redo01
+/dev/FTSSlv11      5.00      2.02      2.98   41% /oracle/CDB_FTSS/redo02
+/dev/FTSSlv12      5.00      0.02      4.98    1% /oracle/FTSS/app/temp
+/dev/oemlv00      15.00      0.06     14.94    1% /u01/OEM/oracle
+rs127a:/oracle/MOFFPMS/app/moffice      30.00     22.61      7.39   76% /oracle/MOFFPMS/app/moffice
+/dev/ftsdlv00     15.00      0.07     14.93    1% /oracle/FTSD
+/dev/ftsdlv01     30.00     14.39     15.61   48% /oracle/FTSD/12.1.0.2
+/dev/ftsdlv02      5.00      2.04      2.96   41% /oracle/FTSD/redo01
+/dev/ftsdlv03      5.00      2.04      2.96   41% /oracle/FTSD/redo02
+/dev/ftsdlv04    300.00      0.55    299.45    1% /oracle/FTSD/arch
+/dev/ftsdlv05     50.00     10.21     39.79   21% /oracle/FTSD/temp
+/dev/ftsdlv06    500.00    388.09    111.91   78% /oracle/FTSD/data01
+/dev/ftsslv00     15.00      0.06     14.94    1% /oracle/ftss
+/dev/ftsslv01     30.00     13.69     16.31   46% /oracle/ftss/12.1.0.2
+/dev/ftsslv02      5.00      0.02      4.98    1% /oracle/ftss/redo01
+/dev/ftsslv03      5.00      0.02      4.98    1% /oracle/ftss/redo02
+/dev/ftsslv04    300.00      0.55    299.45    1% /oracle/ftss/arch
+/dev/ftsslv05     50.00      0.20     49.80    1% /oracle/ftss/temp
+/dev/ftsslv06    400.00      0.56    399.44    1% /oracle/ftss/data01
+/dev/ftsqlv00     15.00      0.06     14.94    1% /oracle/FTSQ
+/dev/ftsqlv01     30.00      0.12     29.88    1% /oracle/FTSQ/12.1.0.2
+/dev/ftsqlv02      5.00      0.02      4.98    1% /oracle/FTSQ/redo01
+/dev/ftsqlv03      5.00      0.02      4.98    1% /oracle/FTSQ/redo02
+/dev/ftsqlv04    300.00      0.55    299.45    1% /oracle/FTSQ/arch
+/dev/ftsqlv05     50.00      0.20     49.80    1% /oracle/FTSQ/temp
+/dev/ftsqlv06    400.00      0.56    399.44    1% /oracle/FTSQ/data01
+oraftss.CDB_FTSS - ls -ltr
+total 0
+oraftss.CDB_FTSS - cd /oracle/ftss/temp
+oraftss.CDB_FTSS - ls -ltr
+total 8
+drwxr-xr-x    2 root     system          256 12 Jul 08:52 lost+found
+-rw-r--r--    1 oraftss  dba            3150 12 Jul 11:59 copy_datafiles.sh
+oraftss.CDB_FTSS - chmod 777 copy_datafiles.sh
+oraftss.CDB_FTSS - ps -ef|grep pmon
+oramoffb 24838234        1   0   17 Jun      -  0:59 ora_pmon_CDB_MOFB
+  orapms 25493652        1   0 11:10:08      -  0:00 ora_pmon_CMOFFPMS
+ oraftsd 38338912        1   0 09:06:06      -  0:00 ora_pmon_CDB_FTSD
+oraftss.CDB_FTSS - ps -ef|grep tns
+oramoffb 18612462        1   0   26 Feb      -  2:37 /oracle/CDB_MOFFB/12.1.0.2/product/bin/tnslsnr EXTERNAL_MOFFB -inherit
+ oraftss 19202200 22282242   0 12:00:53  pts/4  0:00 grep tns
+ oraftsd 31260950        1   0 09:11:54  pts/1  0:00 /oracle/FTSD/12.1.0.2/product/bin/tnslsnr EXTERNAL_FTSD -inherit
+  orapms  6292130        1   0   25 Jun      -  0:23 /oracle/CMOFFPMS/12.1.0.2/product/bin/tnslsnr LISTENER_MOFFPMS -inherit
+ oraftsd 11928082        1   0 09:11:42  pts/1  0:00 /oracle/FTSD/12.1.0.2/product/bin/tnslsnr LISTENER_FTSD -inherit
+oramoffb 20972250        1   0   26 Feb      -  4:15 /oracle/CDB_MOFFB/12.1.0.2/product/bin/tnslsnr LISTENER_MOFFB -inherit
+oraftss.CDB_FTSS - ls -ltr
+total 8
+drwxr-xr-x    2 root     system          256 12 Jul 08:52 lost+found
+-rwxrwxrwx    1 oraftss  dba            3150 12 Jul 11:59 copy_datafiles.sh
+oraftss.CDB_FTSS - nohup ./copy_datafiles.sh &
+[1]     1638896
+oraftss.CDB_FTSS - Sending nohup output to nohup.out.
+
+oraftss.CDB_FTSS - jobs
+[1] +  Running                 nohup ./copy_datafiles.sh &
+oraftss.CDB_FTSS - ls -ltr
+total 8
+drwxr-xr-x    2 root     system          256 12 Jul 08:52 lost+found
+-rwxrwxrwx    1 oraftss  dba            3150 12 Jul 11:59 copy_datafiles.sh
+-rw-------    1 oraftss  dba               0 12 Jul 12:21 nohup.out
+oraftss.CDB_FTSS - jobs
+[1] +  Running                 nohup ./copy_datafiles.sh &
+oraftss.CDB_FTSS - jobs
+[1] +  Running                 nohup ./copy_datafiles.sh &
+oraftss.CDB_FTSS - jobs
+[1] +  Running                 nohup ./copy_datafiles.sh &
+oraftss.CDB_FTSS - ls -ltr
+total 8
+drwxr-xr-x    2 root     system          256 12 Jul 08:52 lost+found
+-rwxrwxrwx    1 oraftss  dba            3150 12 Jul 11:59 copy_datafiles.sh
+-rw-------    1 oraftss  dba               0 12 Jul 12:21 nohup.out
+oraftss.CDB_FTSS - jobs
+[1] +  Running                 nohup ./copy_datafiles.sh &
+oraftss.CDB_FTSS - jobs
+[1] +  Running                 nohup ./copy_datafiles.sh &
+oraftss.CDB_FTSS - ls -ltr
+total 8
+drwxr-xr-x    2 root     system          256 12 Jul 08:52 lost+found
+-rwxrwxrwx    1 oraftss  dba            3150 12 Jul 11:59 copy_datafiles.sh
+-rw-------    1 oraftss  dba               0 12 Jul 12:21 nohup.out
+oraftss.CDB_FTSS - vi copy_files.sh
+oraftss.CDB_FTSS - cat copy_files.sh
+cp  /oracle/CDB_FTSS/data01/CDB_FTSS/control01.ctl  /oracle/ftss/redo01
+cp  /oracle/PDB_FTSS/data02/CDB_FTSS/control02.ctl  /oracle/ftss/redo02
+cp  /oracle/CDB_FTSS/redo01/redo1a.rdo  /oracle/ftss/redo01
+cp  /oracle/CDB_FTSS/redo01/redo2a.rdo  /oracle/ftss/redo01
+cp  /oracle/CDB_FTSS/redo01/redo3a.rdo  /oracle/ftss/redo01
+cp  /oracle/CDB_FTSS/redo01/redo4a.rdo  /oracle/ftss/redo01
+cp  /oracle/CDB_FTSS/redo02/redo01b.rdo  /oracle/ftss/redo02
+cp  /oracle/CDB_FTSS/redo02/redo02b.rdo  /oracle/ftss/redo02
+cp  /oracle/CDB_FTSS/redo02/redo03b.rdo  /oracle/ftss/redo02
+cp  /oracle/CDB_FTSS/redo02/redo04b.rdo  /oracle/ftss/redo02
+cp  /oracle/CDB_FTSS/temp/CDB_FTSS/temp01.dbf  /oracle/ftss/temp/CDB_FTSS
+cp  /oracle/CDB_FTSS/temp/temporary_data01_01.dbf  /oracle/ftss/temp/PDB_FTSS
+cp  /oracle/CDB_FTSS/temp/temporary_data01_02.dbf  /oracle/ftss/temp/PDB_FTSS
+cp  /oracle/CDB_FTSS/temp/temporary_data01_03.dbf  /oracle/ftss/temp/PDB_FTSS
+cp  /oracle/CDB_FTSS/temp/temporary_data01_04.dbf  /oracle/ftss/temp/PDB_FTSS
+
+oraftss.CDB_FTSS - cd /oracle/CDB_FTSS/data01/CDB_FTSS/
+oraftss.CDB_FTSS - ls -ltr
+total 37152
+-rw-r-----    1 oraftss  dba        19021824 12 Jul 09:47 control01.ctl
+oraftss.CDB_FTSS - cd /oracle/PDB_FTSS/data02/CDB_FTSS/
+oraftss.CDB_FTSS - ls -ltr
+total 37152
+-rw-r-----    1 oraftss  dba        19021824 12 Jul 09:47 control02.ctl
+oraftss.CDB_FTSS - cd /oracle/CDB_FTSS/redo01/
+oraftss.CDB_FTSS - cd /oracle/CDB_FTSS/temp
+oraftss.CDB_FTSS - ls -ltr
+total 18992
+drwxrwxr-x    2 oraftss  dba             256 15 Jun 13:11 lost+found
+drwxr-xr-x    2 oraftss  dba             256 17 Jun 17:47 CDB_FTSS
+-rw-r-----    1 oraftss  dba      10737426432 18 Jun 00:00 temporary_data01_03.dbf
+-rw-r-----    1 oraftss  dba      10737426432 18 Jun 00:00 temporary_data01_02.dbf
+-rw-r-----    1 oraftss  dba      10737426432 18 Jun 00:00 temporary_data01_04.dbf
+-rw-r-----    1 oraftss  dba      10737426432 28 Jun 14:55 temporary_data01_01.dbf
+oraftss.CDB_FTSS - jobs
+[1] +  Running                 nohup ./copy_datafiles.sh &
+oraftss.CDB_FTSS - pwd
+/oracle/CDB_FTSS/temp
+oraftss.CDB_FTSS - ls -ltr
+total 18992
+drwxrwxr-x    2 oraftss  dba             256 15 Jun 13:11 lost+found
+drwxr-xr-x    2 oraftss  dba             256 17 Jun 17:47 CDB_FTSS
+-rw-r-----    1 oraftss  dba      10737426432 18 Jun 00:00 temporary_data01_03.dbf
+-rw-r-----    1 oraftss  dba      10737426432 18 Jun 00:00 temporary_data01_02.dbf
+-rw-r-----    1 oraftss  dba      10737426432 18 Jun 00:00 temporary_data01_04.dbf
+-rw-r-----    1 oraftss  dba      10737426432 28 Jun 14:55 temporary_data01_01.dbf
+oraftss.CDB_FTSS - df -gt
+Filesystem    GB blocks      Used      Free %Used Mounted on
+/dev/hd4           2.00      1.63      0.37   82% /
+/dev/hd2           7.00      3.95      3.05   57% /usr
+/dev/hd9var        3.00      1.37      1.63   46% /var
+/dev/hd3          11.00      0.98     10.02    9% /tmp
+/dev/hd1           2.00      0.38      1.62   20% /home
+/dev/hd11admin      1.00      0.00      1.00    1% /admin
+/proc                 -         -         -    - /proc
+/dev/hd10opt       2.00      0.91      1.09   46% /opt
+/dev/livedump      1.00      0.00      1.00    1% /var/adm/ras/livedump
+/dev/rootlv01      1.00      0.00      1.00    1% /rwe
+/dev/rootlv02      2.00      0.07      1.93    4% /rwe/log
+/dev/rootlv03      1.00      0.00      1.00    1% /rwe/core
+/dev/rootlv04      1.00      0.04      0.96    4% /UC4
+/dev/patrollv      2.00      1.36      0.64   69% /opt/patrol
+/dev/varnmonlv      3.00      0.17      2.83    6% /var/nmon
+/dev/moffblv1     30.00     14.34     15.66   48% /oracle/CDB_MOFFB/12.1.0.2
+/dev/moffblv2      5.00      2.02      2.98   41% /oracle/CDB_MOFFB/redo01
+/dev/moffblv3      5.00      2.02      2.98   41% /oracle/CDB_MOFFB/redo02
+/dev/moffblv4    690.00    287.59    402.41   42% /oracle/CDB_MOFFB/arch
+/dev/moffblv5     50.00      1.76     48.24    4% /oracle/CDB_MOFFB/temp
+/dev/moffblv6    350.00    114.58    235.42   33% /oracle/CDB_MOFFB/data01
+/dev/moffblv7   2200.00   2068.45    131.55   95% /oracle/PDB_MOFFB/data01
+/dev/moffblv8   1400.00   1236.69    163.31   89% /oracle/PDB_MOFFB/data02
+/dev/moffblv9   1000.00    786.13    213.87   79% /oracle/PDB_MOFFB/data03
+/dev/moffblv10   1400.00   1291.59    108.41   93% /oracle/PDB_MOFFB/data04
+/dev/moffblv11      5.00      0.02      4.98    1% /oracle/MOFFB/app/temp
+/dev/cmoffpmslv00     30.00     12.85     17.15   43% /oracle/CMOFFPMS/12.1.0.2
+/dev/cmoffpmslv01      5.00      2.02      2.98   41% /oracle/CMOFFPMS/redo01
+/dev/cmoffpmslv02      5.00      2.02      2.98   41% /oracle/CMOFFPMS/redo02
+/dev/cmoffpmslv03     60.00      7.95     52.05   14% /oracle/CMOFFPMS/temp
+/dev/cmoffpmslv04    250.00    114.60    135.40   46% /oracle/CMOFFPMS/data01
+/dev/cmoffpmslv05    700.00     67.59    632.41   10% /oracle/CMOFFPMS/arch
+/dev/cmoffpmslv06   2200.00   2068.49    131.51   95% /oracle/MOFFPMS/data01
+/dev/cmoffpmslv07   1500.00   1236.82    263.18   83% /oracle/MOFFPMS/data02
+/dev/cmoffpmslv08   1000.00    786.15    213.85   79% /oracle/MOFFPMS/data03
+/dev/cmoffpmslv09   1500.00   1291.73    208.27   87% /oracle/MOFFPMS/data04
+rs127a:/oracle/FTSD/app/fts          -         -         -    - /oracle/FTSD/app/fts
+rs127a:/oracle/MOFFB/app/moffice      30.00     13.54     16.46   46% /oracle/MOFFB/app/moffice
+rs127a:/oracle/FTSS/app/fts      30.00     12.43     17.57   42% /oracle/FTSS/app/fts
+/dev/FTSSlv01     15.00      0.16     14.84    2% /oracle/CDB_FTSS
+/dev/FTSSlv02     30.00     12.82     17.18   43% /oracle/CDB_FTSS/12.1.0.2
+/dev/FTSSlv03    250.00    114.56    135.44   46% /oracle/CDB_FTSS/data01
+/dev/FTSSlv04    800.00     66.88    733.12    9% /oracle/PDB_FTSS/data01
+/dev/FTSSlv05    500.00     51.70    448.30   11% /oracle/PDB_FTSS/data02
+/dev/FTSSlv06    500.00     87.00    413.00   18% /oracle/PDB_FTSS/data03
+/dev/FTSSlv07    500.00     70.58    429.42   15% /oracle/PDB_FTSS/data04
+/dev/FTSSlv08    400.00     40.56    359.44   11% /oracle/CDB_FTSS/arch
+/dev/FTSSlv09     60.00      0.25     59.75    1% /oracle/CDB_FTSS/temp
+/dev/FTSSlv10      5.00      2.02      2.98   41% /oracle/CDB_FTSS/redo01
+/dev/FTSSlv11      5.00      2.02      2.98   41% /oracle/CDB_FTSS/redo02
+/dev/FTSSlv12      5.00      0.02      4.98    1% /oracle/FTSS/app/temp
+/dev/oemlv00      15.00      0.06     14.94    1% /u01/OEM/oracle
+rs127a:/oracle/MOFFPMS/app/moffice      30.00     22.61      7.39   76% /oracle/MOFFPMS/app/moffice
+/dev/ftsdlv00     15.00      0.07     14.93    1% /oracle/FTSD
+/dev/ftsdlv01     30.00     14.39     15.61   48% /oracle/FTSD/12.1.0.2
+/dev/ftsdlv02      5.00      2.04      2.96   41% /oracle/FTSD/redo01
+/dev/ftsdlv03      5.00      2.04      2.96   41% /oracle/FTSD/redo02
+/dev/ftsdlv04    300.00      0.55    299.45    1% /oracle/FTSD/arch
+/dev/ftsdlv05     50.00     10.21     39.79   21% /oracle/FTSD/temp
+/dev/ftsdlv06    500.00    388.09    111.91   78% /oracle/FTSD/data01
+/dev/ftsslv00     15.00      0.06     14.94    1% /oracle/ftss
+/dev/ftsslv01     30.00     13.69     16.31   46% /oracle/ftss/12.1.0.2
+/dev/ftsslv02      5.00      0.02      4.98    1% /oracle/ftss/redo01
+/dev/ftsslv03      5.00      0.02      4.98    1% /oracle/ftss/redo02
+/dev/ftsslv04    300.00      0.55    299.45    1% /oracle/ftss/arch
+/dev/ftsslv05     50.00      0.20     49.80    1% /oracle/ftss/temp
+/dev/ftsslv06    500.00    134.62    365.38   27% /oracle/ftss/data01
+/dev/ftsqlv00     15.00      0.06     14.94    1% /oracle/FTSQ
+/dev/ftsqlv01     30.00      0.12     29.88    1% /oracle/FTSQ/12.1.0.2
+/dev/ftsqlv02      5.00      0.02      4.98    1% /oracle/FTSQ/redo01
+/dev/ftsqlv03      5.00      0.02      4.98    1% /oracle/FTSQ/redo02
+/dev/ftsqlv04    300.00      0.55    299.45    1% /oracle/FTSQ/arch
+/dev/ftsqlv05     50.00      0.20     49.80    1% /oracle/FTSQ/temp
+/dev/ftsqlv06    500.00      0.58    499.42    1% /oracle/FTSQ/data01
+oraftss.CDB_FTSS - cd /oracle/ftss/temp
+oraftss.CDB_FTSS - ls -ltr
+total 16
+drwxr-xr-x    2 root     system          256 12 Jul 08:52 lost+found
+-rwxrwxrwx    1 oraftss  dba            3150 12 Jul 11:59 copy_datafiles.sh
+-rw-------    1 oraftss  dba               0 12 Jul 12:21 nohup.out
+-rw-r--r--    1 oraftss  dba            1015 12 Jul 12:31 copy_files.sh
+oraftss.CDB_FTSS - chmod 777 copy_files.sh
+oraftss.CDB_FTSS - nohup ./copy_files.sh &
+[2]     11076026
+oraftss.CDB_FTSS - Sending nohup output to nohup.out.
+
+oraftss.CDB_FTSS - jobs
+[2] +  Running                 nohup ./copy_files.sh &
+[1] -  Running                 nohup ./copy_datafiles.sh &
+oraftss.CDB_FTSS - jobs
+[2] +  Running                 nohup ./copy_files.sh &
+[1] -  Running                 nohup ./copy_datafiles.sh &
+oraftss.CDB_FTSS - jobs
+[2] +  Running                 nohup ./copy_files.sh &
+[1] -  Running                 nohup ./copy_datafiles.sh &
+oraftss.CDB_FTSS - jobs
+[2] +  Done                    nohup ./copy_files.sh &
+[1] +  Running                 nohup ./copy_datafiles.sh &
+oraftss.CDB_FTSS - jobs
+[1] +  Running                 nohup ./copy_datafiles.sh &
+oraftss.CDB_FTSS - jobs
+[1] +  Running                 nohup ./copy_datafiles.sh &
+oraftss.CDB_FTSS - df -gt|grep ftss
+/dev/ftsslv00     15.00      0.06     14.94    1% /oracle/ftss
+/dev/ftsslv01     30.00     13.69     16.31   46% /oracle/ftss/12.1.0.2
+/dev/ftsslv02      5.00      2.04      2.96   41% /oracle/ftss/redo01
+/dev/ftsslv03      5.00      2.04      2.96   41% /oracle/ftss/redo02
+/dev/ftsslv04    300.00      0.55    299.45    1% /oracle/ftss/arch
+/dev/ftsslv05     50.00     10.20     39.80   21% /oracle/ftss/temp
+/dev/ftsslv06    500.00    301.68    198.32   61% /oracle/ftss/data01
+oraftss.CDB_FTSS - cd /oracle/ftss/temp
+oraftss.CDB_FTSS - ls -ltr
+total 20971560
+drwxr-xr-x    2 root     system          256 12 Jul 08:52 lost+found
+-rwxrwxrwx    1 oraftss  dba            3150 12 Jul 11:59 copy_datafiles.sh
+-rwxrwxrwx    1 oraftss  dba            1015 12 Jul 12:31 copy_files.sh
+-rw-------    1 oraftss  dba             100 12 Jul 12:35 nohup.out
+-rw-r-----    1 oraftss  dba      10737426432 12 Jul 12:40 PDB_FTSS
+oraftss.CDB_FTSS - rm -rf PDB_FTSS
+oraftss.CDB_FTSS - ls -ltr
+total 24
+drwxr-xr-x    2 root     system          256 12 Jul 08:52 lost+found
+-rwxrwxrwx    1 oraftss  dba            3150 12 Jul 11:59 copy_datafiles.sh
+-rwxrwxrwx    1 oraftss  dba            1015 12 Jul 12:31 copy_files.sh
+-rw-------    1 oraftss  dba             100 12 Jul 12:35 nohup.out
+oraftss.CDB_FTSS - cp  /oracle/CDB_FTSS/temp/temporary_data01_01.dbf  /oracle/ftss/temp/
+oraftss.CDB_FTSS - vi temp_files.sh
+oraftss.CDB_FTSS - ls -ltr
+total 20971568
+drwxr-xr-x    2 root     system          256 12 Jul 08:52 lost+found
+-rwxrwxrwx    1 oraftss  dba            3150 12 Jul 11:59 copy_datafiles.sh
+-rwxrwxrwx    1 oraftss  dba            1015 12 Jul 12:31 copy_files.sh
+-rw-------    1 oraftss  dba             100 12 Jul 12:35 nohup.out
+-rw-r-----    1 oraftss  dba      10737426432 12 Jul 12:54 temporary_data01_01.dbf
+-rw-r--r--    1 oraftss  dba             210 12 Jul 12:57 temp_files.sh
+oraftss.CDB_FTSS - chmod 777 temp_files.sh
+oraftss.CDB_FTSS - nohup ./temp_files.sh &
+[2]     30408994
+oraftss.CDB_FTSS - Sending nohup output to nohup.out.
+
+oraftss.CDB_FTSS - jobs
+[2] +  Running                 nohup ./temp_files.sh &
+[1] -  Running                 nohup ./copy_datafiles.sh &
+oraftss.CDB_FTSS - jobs
+[2] +  Done                    nohup ./temp_files.sh &
+[1] +  Done                    nohup ./copy_datafiles.sh &
+oraftss.CDB_FTSS - pwd
+/oracle/ftss/temp
+oraftss.CDB_FTSS - env|grep ORA
+ORACLE_SID=CDB_FTSS
+ORACLE_HOME=/oracle/ftss/12.1.0.2
+oraftss.CDB_FTSS - sqlplus
+
+SQL*Plus: Release 12.1.0.2.0 Production on Thu Jul 12 13:15:52 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter user-name: / as sysdba
+Connected to an idle instance.
+
+SQL> create spfile from pfile;
+
+File created.
+
+SQL> exit
+Disconnected
+oraftss.CDB_FTSS - ls -ltr
+total 83886176
+drwxr-xr-x    2 root     system          256 12 Jul 08:52 lost+found
+-rwxrwxrwx    1 oraftss  dba            3150 12 Jul 11:59 copy_datafiles.sh
+-rwxrwxrwx    1 oraftss  dba            1015 12 Jul 12:31 copy_files.sh
+-rw-------    1 oraftss  dba             100 12 Jul 12:35 nohup.out
+-rw-r-----    1 oraftss  dba      10737426432 12 Jul 12:54 temporary_data01_01.dbf
+-rwxrwxrwx    1 oraftss  dba             210 12 Jul 12:57 temp_files.sh
+-rw-r-----    1 oraftss  dba      10737426432 12 Jul 12:58 temporary_data01_02.dbf
+-rw-r-----    1 oraftss  dba      10737426432 12 Jul 12:59 temporary_data01_03.dbf
+-rw-r-----    1 oraftss  dba      10737426432 12 Jul 13:00 temporary_data01_04.dbf
+oraftss.CDB_FTSS - pwd
+/oracle/ftss/temp
+oraftss.CDB_FTSS - cd $ORACLE_HOME/dbs
+oraftss.CDB_FTSS - pwd
+/oracle/ftss/12.1.0.2/dbs
+oraftss.CDB_FTSS - sqlplus
+
+SQL*Plus: Release 12.1.0.2.0 Production on Thu Jul 12 13:24:51 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter user-name: / as sysdba
+Connected to an idle instance.
+
+SQL> startup nomount;
+ORA-32004: obsolete or deprecated parameter(s) specified for RDBMS instance
+ORACLE instance started.
+
+Total System Global Area 5368709120 bytes
+Fixed Size                  3795712 bytes
+Variable Size            2919236864 bytes
+Database Buffers         2432696320 bytes
+Redo Buffers               12980224 bytes
+SQL> show parameter control
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+_fix_control                         string      13836796:0
+control_file_record_keep_time        integer     7
+control_files                        string      /oracle/ftss/redo01/control01.
+                                                 ctl, /oracle/ftss/redo02/contr
+                                                 ol02.ctl
+control_management_pack_access       string      DIAGNOSTIC+TUNING
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+oraftss.CDB_FTSS - cd /oracle/ftss/redo01/
+oraftss.CDB_FTSS - ls -ltr
+total 4231488
+drwxr-xr-x    2 root     system          256 12 Jul 08:52 lost+found
+-rw-r-----    1 oraftss  dba        19021824 12 Jul 12:35 control01.ctl
+-rw-r-----    1 oraftss  dba       536871424 12 Jul 12:35 redo1a.rdo
+-rw-r-----    1 oraftss  dba       536871424 12 Jul 12:35 redo2a.rdo
+-rw-r-----    1 oraftss  dba       536871424 12 Jul 12:35 redo3a.rdo
+-rw-r-----    1 oraftss  dba       536871424 12 Jul 12:35 redo4a.rdo
+oraftss.CDB_FTSS - cd /oracle/ftss/redo02/
+oraftss.CDB_FTSS - ls -ltr
+total 4231488
+drwxr-xr-x    2 root     system          256 12 Jul 08:52 lost+found
+-rw-r-----    1 oraftss  dba        19021824 12 Jul 12:35 control02.ctl
+-rw-r-----    1 oraftss  dba       536871424 12 Jul 12:35 redo01b.rdo
+-rw-r-----    1 oraftss  dba       536871424 12 Jul 12:35 redo02b.rdo
+-rw-r-----    1 oraftss  dba       536871424 12 Jul 12:35 redo03b.rdo
+-rw-r-----    1 oraftss  dba       536871424 12 Jul 12:35 redo04b.rdo
+oraftss.CDB_FTSS - sqlplus
+
+SQL*Plus: Release 12.1.0.2.0 Production on Thu Jul 12 13:25:48 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter user-name: / as sysdba
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+
+SQL> alter database mount;
+
+Database altered.
+
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+oraftss.CDB_FTSS - cd $ORACLE_HOME/network/admin
+oraftss.CDB_FTSS - ls -ltr
+total 24
+-rw-r--r--    1 oraftss  dba             373 28 Dec 2013  shrept.lst
+drwxr-xr-x    2 oraftss  dba             256 15 Jun 15:13 samples
+-rw-r--r--    1 oraftss  dba            1114 17 Jun 17:56 listener.ora
+-rw-r--r--    1 oraftss  dba             961 17 Jun 18:00 tnsnames.ora
+oraftss.CDB_FTSS - vi tnsnames.ora
+oraftss.CDB_FTSS - ls -ltr
+total 24
+-rw-r--r--    1 oraftss  dba             373 28 Dec 2013  shrept.lst
+drwxr-xr-x    2 oraftss  dba             256 15 Jun 15:13 samples
+-rw-r--r--    1 oraftss  dba            1114 17 Jun 17:56 listener.ora
+-rw-r--r--    1 oraftss  dba             961 17 Jun 18:00 tnsnames.ora
+oraftss.CDB_FTSS - vi listener.ora
+oraftss.CDB_FTSS - cd /oracle/ftss/app/moffice/code/bin
+ksh: /oracle/ftss/app/moffice/code/bin:  not found.
+oraftss.CDB_FTSS - cd /oracle/ftss/app
+ksh: /oracle/ftss/app:  not found.
+oraftss.CDB_FTSS - ls -ltr
+total 24
+-rw-r--r--    1 oraftss  dba             373 28 Dec 2013  shrept.lst
+drwxr-xr-x    2 oraftss  dba             256 15 Jun 15:13 samples
+-rw-r--r--    1 oraftss  dba             961 17 Jun 18:00 tnsnames.ora
+-rw-r--r--    1 oraftss  dba            1102 12 Jul 13:39 listener.ora
+oraftss.CDB_FTSS - cat listener.ora
+# listener.ora Network Configuration File: /oracle/CDB_FTSS/12.1.0.2/network/admin/listener.ora
+# Generated by Oracle configuration tools.
+
+LISTENER_FTSS =
+  (DESCRIPTION_LIST =
+    (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = rs294a)(PORT = 1531))
+      (ADDRESS = (PROTOCOL = IPC)(KEY = EXTPROC1531))
+    )
+  )
+
+
+EXTERNAL_FTSS=
+  (ADDRESS_LIST =
+        (ADDRESS= (PROTOCOL= IPC)(KEY = extproc_FTSS))
+        (ADDRESS =
+          (COMMUNITY = tcpcom.world)
+          (PROTOCOL = TCP)
+          (HOST = rs294a)
+          (PORT = 1532)
+        )
+  )
+
+SID_LIST_EXTERNAL_FTSS =
+  (SID_LIST =
+    (SID_DESC =
+      (SID_NAME = CDB_FTSS)
+      (ORACLE_HOME = /oracle/ftss/12.1.0.2)
+    )
+    (SID_DESC =
+      (SID_NAME = FTSS)
+      (ORACLE_HOME = /oracle/ftss/12.1.0.2)
+    )
+    (SID_DESC=
+    (SID_NAME=extproc_FTSS)
+    (ENVS="EXTPROC_DLLS=ANY,LD_LIBRARY_PATH=/oracle/ftss/app/moffice/code/bin")
+    (ORACLE_HOME=/oracle/ftss/12.1.0.2)
+    (PROGRAM=extproc)
+    )
+  )
+LDR_CNTRL=DATAPSIZE=64K@TEXTPSIZE=64K@STACKPSIZE=64K oracle
+VMM_CNTRL=vmm_fork_policy=COR
+USE_SID_AS_SERVICE_listener=on
+
+oraftss.CDB_FTSS - lsnrctl start LISTENER_FTSS
+
+LSNRCTL for IBM/AIX RISC System/6000: Version 12.1.0.2.0 - Production on 12-JUL-2018 13:40:29
+
+Copyright (c) 1991, 2016, Oracle.  All rights reserved.
+
+Starting /oracle/ftss/12.1.0.2/bin/tnslsnr: please wait...
+
+TNSLSNR for IBM/AIX RISC System/6000: Version 12.1.0.2.0 - Production
+System parameter file is /oracle/ftss/12.1.0.2/network/admin/listener.ora
+Log messages written to /oracle/ftss/diag/tnslsnr/rs294a/listener_ftss/alert/log.xml
+Listening on: (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=rs294a)(PORT=1531)))
+Listening on: (DESCRIPTION=(ADDRESS=(PROTOCOL=ipc)(KEY=EXTPROC1531)))
+
+Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=rs294a)(PORT=1531)))
+STATUS of the LISTENER
+------------------------
+Alias                     LISTENER_FTSS
+Version                   TNSLSNR for IBM/AIX RISC System/6000: Version 12.1.0.2.0 - Production
+Start Date                12-JUL-2018 13:40:30
+Uptime                    0 days 0 hr. 0 min. 1 sec
+Trace Level               off
+Security                  ON: Local OS Authentication
+SNMP                      OFF
+Listener Parameter File   /oracle/ftss/12.1.0.2/network/admin/listener.ora
+Listener Log File         /oracle/ftss/diag/tnslsnr/rs294a/listener_ftss/alert/log.xml
+Listening Endpoints Summary...
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=rs294a)(PORT=1531)))
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=ipc)(KEY=EXTPROC1531)))
+The listener supports no services
+The command completed successfully
+oraftss.CDB_FTSS - ps -ef|grep tns
+oramoffb 18612462        1   0   26 Feb      -  2:37 /oracle/CDB_MOFFB/12.1.0.2/product/bin/tnslsnr EXTERNAL_MOFFB -inherit
+ oraftsd 31260950        1   0 09:11:54  pts/1  0:00 /oracle/FTSD/12.1.0.2/product/bin/tnslsnr EXTERNAL_FTSD -inherit
+  orapms  6292130        1   0   25 Jun      -  0:24 /oracle/CMOFFPMS/12.1.0.2/product/bin/tnslsnr LISTENER_MOFFPMS -inherit
+ oraftsd 11928082        1   0 09:11:42  pts/1  0:00 /oracle/FTSD/12.1.0.2/product/bin/tnslsnr LISTENER_FTSD -inherit
+ oraftss 17302214 22282242   0 13:43:32  pts/4  0:00 grep tns
+oramoffb 20972250        1   0   26 Feb      -  4:16 /oracle/CDB_MOFFB/12.1.0.2/product/bin/tnslsnr LISTENER_MOFFB -inherit
+ oraftss 30147184        1   0 13:40:29  pts/4  0:00 /oracle/ftss/12.1.0.2/bin/tnslsnr LISTENER_FTSS -inherit
+oraftss.CDB_FTSS - lsnrctl start EXTERNAL_FTSS
+
+LSNRCTL for IBM/AIX RISC System/6000: Version 12.1.0.2.0 - Production on 12-JUL-2018 13:43:45
+
+Copyright (c) 1991, 2016, Oracle.  All rights reserved.
+
+Starting /oracle/ftss/12.1.0.2/bin/tnslsnr: please wait...
+
+TNSLSNR for IBM/AIX RISC System/6000: Version 12.1.0.2.0 - Production
+System parameter file is /oracle/ftss/12.1.0.2/network/admin/listener.ora
+Log messages written to /oracle/ftss/diag/tnslsnr/rs294a/external_ftss/alert/log.xml
+Listening on: (DESCRIPTION=(ADDRESS=(PROTOCOL=ipc)(KEY=extproc_FTSS)))
+Listening on: (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=rs294a)(PORT=1532)))
+
+Connecting to (ADDRESS=(PROTOCOL=IPC)(KEY=extproc_FTSS))
+STATUS of the LISTENER
+------------------------
+Alias                     EXTERNAL_FTSS
+Version                   TNSLSNR for IBM/AIX RISC System/6000: Version 12.1.0.2.0 - Production
+Start Date                12-JUL-2018 13:43:45
+Uptime                    0 days 0 hr. 0 min. 0 sec
+Trace Level               off
+Security                  ON: Local OS Authentication
+SNMP                      OFF
+Listener Parameter File   /oracle/ftss/12.1.0.2/network/admin/listener.ora
+Listener Log File         /oracle/ftss/diag/tnslsnr/rs294a/external_ftss/alert/log.xml
+Listening Endpoints Summary...
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=ipc)(KEY=extproc_FTSS)))
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=rs294a)(PORT=1532)))
+Services Summary...
+Service "CDB_FTSS" has 1 instance(s).
+  Instance "CDB_FTSS", status UNKNOWN, has 1 handler(s) for this service...
+Service "FTSS" has 1 instance(s).
+  Instance "FTSS", status UNKNOWN, has 1 handler(s) for this service...
+Service "extproc_FTSS" has 1 instance(s).
+  Instance "extproc_FTSS", status UNKNOWN, has 1 handler(s) for this service...
+The command completed successfully
+oraftss.CDB_FTSS - ps -ef|grep tns
+oramoffb 18612462        1   0   26 Feb      -  2:37 /oracle/CDB_MOFFB/12.1.0.2/product/bin/tnslsnr EXTERNAL_MOFFB -inherit
+ oraftss  6488380 22282242   0 13:43:54  pts/4  0:00 grep tns
+ oraftsd 31260950        1   0 09:11:54  pts/1  0:00 /oracle/FTSD/12.1.0.2/product/bin/tnslsnr EXTERNAL_FTSD -inherit
+  orapms  6292130        1   0   25 Jun      -  0:24 /oracle/CMOFFPMS/12.1.0.2/product/bin/tnslsnr LISTENER_MOFFPMS -inherit
+ oraftss  7209650        1   0 13:43:45  pts/4  0:00 /oracle/ftss/12.1.0.2/bin/tnslsnr EXTERNAL_FTSS -inherit
+ oraftsd 11928082        1   0 09:11:42  pts/1  0:00 /oracle/FTSD/12.1.0.2/product/bin/tnslsnr LISTENER_FTSD -inherit
+oramoffb 20972250        1   0   26 Feb      -  4:16 /oracle/CDB_MOFFB/12.1.0.2/product/bin/tnslsnr LISTENER_MOFFB -inherit
+ oraftss 30147184        1   0 13:40:29  pts/4  0:00 /oracle/ftss/12.1.0.2/bin/tnslsnr LISTENER_FTSS -inherit
+oraftss.CDB_FTSS - ps -ef|grep pmon
+ oraftss 24772706        1   0 13:25:08      -  0:00 ora_pmon_CDB_FTSS
+oramoffb 24838234        1   0   17 Jun      -  0:59 ora_pmon_CDB_MOFB
+  orapms 25493652        1   0 11:10:08      -  0:00 ora_pmon_CMOFFPMS
+ oraftsd 38338912        1   0 09:06:06      -  0:00 ora_pmon_CDB_FTSD
+ oraftss  5309008 22282242   0 13:43:57  pts/4  0:00 grep pmon
+oraftss.CDB_FTSS - sqlplus
+
+SQL*Plus: Release 12.1.0.2.0 Production on Thu Jul 12 13:44:02 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter user-name: / as sysdba
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+
+SQL> !pwd
+/oracle/ftss/12.1.0.2/network/admin
+
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+oraftss.CDB_FTSS - cd /oracle/ftss/temp
+oraftss.CDB_FTSS - ls -ltr
+total 83886176
+drwxr-xr-x    2 root     system          256 12 Jul 08:52 lost+found
+-rwxrwxrwx    1 oraftss  dba            3150 12 Jul 11:59 copy_datafiles.sh
+-rwxrwxrwx    1 oraftss  dba            1015 12 Jul 12:31 copy_files.sh
+-rw-------    1 oraftss  dba             100 12 Jul 12:35 nohup.out
+-rw-r-----    1 oraftss  dba      10737426432 12 Jul 12:54 temporary_data01_01.dbf
+-rwxrwxrwx    1 oraftss  dba             210 12 Jul 12:57 temp_files.sh
+-rw-r-----    1 oraftss  dba      10737426432 12 Jul 12:58 temporary_data01_02.dbf
+-rw-r-----    1 oraftss  dba      10737426432 12 Jul 12:59 temporary_data01_03.dbf
+-rw-r-----    1 oraftss  dba      10737426432 12 Jul 13:00 temporary_data01_04.dbf
+oraftss.CDB_FTSS - sqlplus
+
+SQL*Plus: Release 12.1.0.2.0 Production on Thu Jul 12 13:52:41 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter user-name: / as sysda
+SP2-0306: Invalid option.
+Usage: CONN[ECT] [{logon|/|proxy} [AS {SYSDBA|SYSOPER|SYSASM|SYSBACKUP|SYSDG|SYSKM}] [edition=value]]
+where <logon> ::= <username>[/<password>][@<connect_identifier>]
+      <proxy> ::= <proxyuser>[<username>][/<password>][@<connect_identifier>]
+Enter user-name: / as sysdba
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+
+SQL> spool Rename_log.log
+SQL> alter database rename file   '/oracle/CDB_FTSS/data01/system01.dbf'  to   '/oracle/ftss/data01/CDB_FTSS/system01.dbf';
+alter database rename file   '/oracle/CDB_FTSS/data01/sysaux01.dbf'  to   '/oracle/ftss/data01/CDB_FTSS/sysaux01.dbf';
+alter database rename file   '/oracle/CDB_FTSS/data01/undotbs06.dbf'  to   '/oracle/ftss/data01/CDB_FTSS/undotbs06.dbf';
+alter database rename file   '/oracle/CDB_FTSS/data01/undotbs05.dbf'  to   '/oracle/ftss/data01/CDB_FTSS/undotbs05.dbf';
+alter database rename file   '/oracle/CDB_FTSS/data01/undotbs04.dbf'  to   '/oracle/ftss/data01/CDB_FTSS/undotbs04.dbf';
+alter database rename file   '/oracle/CDB_FTSS/data01/undotbs03.dbf'  to   '/oracle/ftss/data01/CDB_FTSS/undotbs03.dbf';
+alter database rename file   '/oracle/CDB_FTSS/data01/undotbs02.dbf'  to   '/oracle/ftss/data01/CDB_FTSS/undotbs02.dbf';
+alter database rename file   '/oracle/CDB_FTSS/data01/undotbs01.dbf'  to   '/oracle/ftss/data01/CDB_FTSS/undotbs01.dbf';
+alter database rename file   '/oracle/CDB_FTSS/data01/users01.dbf'  to   '/oracle/ftss/data01/CDB_FTSS/users01.dbf';
+
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+SQL>
+SQL> alter database rename file   '/oracle/PDB_FTSS/data03/system01.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/system01.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data03/sysaux01.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/sysaux01.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data01/user_data01.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/user_data01.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data01/quest_data01.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/quest_data01.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data02/quest_indexes01.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/quest_indexes01.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data01/perfstat01.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/perfstat01.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data01/apex_data01.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/apex_data01.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data03/genf_data_ts01.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/genf_data_ts01.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data03/genf_data_ts02.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/genf_data_ts02.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data03/genf_data_ts03.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/genf_data_ts03.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data03/genf_data_ts04.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/genf_data_ts04.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data04/genf_IDX_01.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/genf_IDX_01.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data04/genf_IDX_02.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/genf_IDX_02.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data04/genf_IDX_03.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/genf_IDX_03.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data01/REPORTING_DATA_TS_01.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/REPORTING_DATA_TS_01.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data01/REPORTING_DATA_TS_02.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/REPORTING_DATA_TS_02.dbf';
+
+Database altered.
+
+SQL> alter database rename file   '/oracle/PDB_FTSS/data01/REPORTING_DATA_TS_03.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/REPORTING_DATA_TS_03.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data01/REPORTING_DATA_TS_04.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/REPORTING_DATA_TS_04.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data02/REPORTING_IDX_01.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/REPORTING_IDX_01.dbf';
+
+Database altered.
+
+SQL> alter database rename file   '/oracle/PDB_FTSS/data02/REPORTING_IDX_02.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/REPORTING_IDX_02.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data02/REPORTING_IDX_03.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/REPORTING_IDX_03.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data03/MOFFICE_DATA_TS01.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/MOFFICE_DATA_TS01.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data03/MOFFICE_DATA_TS02.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/MOFFICE_DATA_TS02.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data04/MOFFICE_DATA_TS03.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/MOFFICE_DATA_TS03.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data04/MOFFICE_DATA_TS04.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/MOFFICE_DATA_TS04.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data01/MOFFICE_IDX_01.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/MOFFICE_IDX_01.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data01/MOFFICE_IDX_02.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/MOFFICE_IDX_02.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data02/MOFFICE_IDX_03.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/MOFFICE_IDX_03.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data02/MOFFICE_IDX_04.dbf'  to   '/oracle/ftss/data01/PDB_FTSS/MOFFICE_IDX_04.dbf';
+
+alter database rename file   '/oracle/PDB_FTSS/data02/pdbseed/system01.dbf'  to   '/oracle/ftss/data01/pdbseed/system01.dbf';
+Database altered.
+
+SQL> alter database rename file   '/oracle/PDB_FTSS/data02/pdbseed/sysaux01.dbf'  to   '/oracle/ftss/data01/pdbseed/sysaux01.dbf';
+alter database rename file   '/oracle/PDB_FTSS/data02/pdbseed/pdbseed_temp012017-04-20_01-46-13-PM.dbf'  to   '/oracle/ftss/data01/pdbseed/pdbseed_temp012017-04-20_01-46-13-PM.dbf';
+
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+Database altered.
+
+SQL>
+SQL>
+SQL>

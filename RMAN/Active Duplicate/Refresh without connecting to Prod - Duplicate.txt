@@ -1,0 +1,13 @@
+SPOOL LOG to '/oracle/rman/log/neacs1_restore_020518.txt';
+connect catalog RMANUKNEAP_NP/cateye@rmanp
+connect auxiliary /
+run
+{
+allocate auxiliary channel adsm_1 device type SBT parms 'ENV=(TDPO_OPTFILE=/opt/tivoli/tsm/client/oracle/bin64/tdpo_NEAP_dft.opt)';
+allocate auxiliary channel adsm_2 device type SBT parms 'ENV=(TDPO_OPTFILE=/opt/tivoli/tsm/client/oracle/bin64/tdpo_NEAP_dft.opt)';
+duplicate database NEAP dbid 3279854882 to neacs1
+ until time "to_date('29/04/2018 22:30:00','DD/MM/YYYY HH24:MI:SS')";
+release channel adsm_1;
+release channel adsm_2;
+}
+exit

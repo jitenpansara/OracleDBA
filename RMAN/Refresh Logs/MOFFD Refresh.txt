@@ -1,0 +1,104 @@
+STEP 1 :-Disable replication from production (MOFFCP-rs282a) to Standby (MOFFCDR-rs277a)
+alter system set log_archive_dest_state_2=DEFER;
+STEP 2 :- Disable the UC4 jobs/cron scripts for MOFFR standby conversiosn and Read Write conversion; These jobs we need to ask from UC4 Team to stop 
+30 5 * * * /oracle/MOFFCF/12.1.0.2/product/scripts/RW_conversion_MOFFR.sh 
+20 2 * * * /oracle/MOFFCF/12.1.0.2/product/scripts/stdby_conversion_MOFFR.sh 
+
+STEP 3 :- Shutdown and Drop the MOFFD database 
+
+SQL> select name,open_mode,database_Role , db_unique_name from v$database;
+
+NAME      OPEN_MODE            DATABASE_ROLE    DB_UNIQUE_NAME
+--------- -------------------- ---------------- -----------------------
+MOFFCT    READ WRITE           PRIMARY          MOFFCT
+
+SQL> show pdbs;
+
+    CON_ID CON_NAME                       OPEN MODE  RESTRICTED
+---------- ------------------------------ ---------- ----------
+         2 PDB$SEED                       READ ONLY  NO
+         3 MOFFQ                          READ WRITE NO
+         4 MOFFS                          READ WRITE NO
+         5 MOFFD                          READ WRITE NO
+
+SQL> alter pluggable database MOFFD close immediate; 
+SQL> drop pluggable database MOFFD including datafiles; 
+
+
+STEP 4:- Login MOFFCDR and pefrom below task 
+
+NAME      OPEN_MODE            DATABASE_ROLE    DB_UNIQUE_NAME
+--------- -------------------- ---------------- ---------------
+MOFFCP    MOUNTED              PHYSICAL STANDBY MOFFCDR
+
+SQL> show pdbs;
+    CON_ID CON_NAME                       OPEN MODE  RESTRICTED
+---------- ------------------------------ ---------- ----------
+         2 PDB$SEED                       MOUNTED
+         3 MOFFP                          MOUNTED
+
+SQL> recover managed standby database cancel; --> Cancel Managed Recovery 
+
+SQL> alter database open read only ;
+Database altered.
+
+Make sure PDB is in read only Mode
+SQL> show pdbs; 
+
+
+STEP - 5
+
+Create a Database Link on the Target Container Database : 
+
+SQL> select name,open_mode,database_Role , db_unique_name from v$database;
+
+NAME      OPEN_MODE            DATABASE_ROLE    DB_UNIQUE_NAME
+--------- -------------------- ---------------- -----------------------
+MOFFCT    READ WRITE           PRIMARY          MOFFCT
+
+SQL> show pdbs;
+
+    CON_ID CON_NAME                       OPEN MODE  RESTRICTED
+---------- ------------------------------ ---------- ----------
+         2 PDB$SEED                       READ ONLY  NO
+         4 MOFFS                          READ WRITE NO
+         5 MOFFD                          READ WRITE NO
+
+SQL> create database link DBLINK_TO_STCDB connect to system identified by notsys using MOFFCDR; --> this Link may already exists. 
+
+create pluggable database MOFFQ from MOFFP@DBLINK_TO_STCDB file_name_convert=('/oracle/MOFFDR/data01','/oracle/MOFFD/data01','/oracle/MOFFDR/data02','/oracle/MOFFD/data02','/oracle/MOFFDR/data03','/oracle/MOFFD/data03','/oracle/MOFFDR/data04','/oracle/MOFFD/data04','/oracle/MOFFDR/data02/MOFFCDR','/oracle/MOFFD/data02/MOFFCT','/oracle/MOFFDR/data04/MOFFCDR','/oracle/MOFFD/data04/MOFFCT','/oracle/MOFFDR/temp','/oracle/MOFFD/temp');
+
+Pluggable database created.
+
+
+Check and resolve in case of PDB Violations if any
+SQL> select name,cause,type,status, message from PDB_PLUG_IN_VIOLATIONS where name='MOFFQ’; 
+
+Disable the JOB queue process and start the database 
+
+SQL> alter session set container=MOFFD;
+SQL> alter system set job_queue_process=0 scope=spfile;
+SQL> alter pluggable database MOFFD open; 
+SQL> BEGIN 
+DBMS_SCHEDULER.DISABLE('GENF.GF_SUBMIT_JOBS');
+END;
+/
+
+Step 7 :- 
+
+Restart MOFFCDR and Enable replication (MOFFCDR)
+SQL> shut immediate
+SQL> startup mount
+SQL> ALTER DATABASE RECOVER MANAGED STANDBY DATABASE DISCONNECT FROM SESSION;
+
+Enable replication from Primary (rs282a)
+SQL> alter system set log_archive_dest_state_2=ENABLE;
+SQL> alter system switch logfile; 
+
+Check MRP & RFS process on Standby 
+SQL> select process,sequence# from v$managed_standby; 
+
+Resume MOFFR related UC4 JOBS. 
+Ensure DR sync. 
+
+

@@ -1,0 +1,35 @@
+
+1 take the backup of control file from source server below command.
+
+alter database backup controlfile to trace as '/tmp/control_spriq.sql';
+
+2 transfer to other server
+
+3 open note pad change it below command
+
+
+STARTUP NOMOUNT
+CREATE CONTROLFILE REUSE DATABASE "SPRIP" NORESETLOGS  NOARCHIVELOG
+
+CREATE CONTROLFILE SET DATABASE "SPRIM" RESETLOGS  NOARCHIVELOG
+
+REUSE - SET
+NORESETLOGS - RESETLOGS
+"SPRIP" - "SPRIM"
+
+@controlfile.sql
+
+in case you got the error (ORA-00059: maximum number of DB_FILES exceeded) is reached. 
+then change it parameter DB_FILES=1000 ini.ora file
+
+alter database open resetlogs;
+
+ALTER TABLESPACE TEMPORARY_DATA ADD TEMPFILE '/oracle/SPRIM/temp/temporary_data01.dbf' SIZE 10240M REUSE AUTOEXTEND OFF;
+
+create spfile from pfile;
+
+SQL> shut immediate
+
+SQL> startup
+
+select open_mode, log_mode from v$database;

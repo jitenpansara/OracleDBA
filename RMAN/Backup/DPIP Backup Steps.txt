@@ -1,0 +1,23 @@
+rman target /
+
+crosscheck archivelog all;
+
+delete obsolete;
+
+exit
+
+
+
+rman target /
+
+spool log to '/backup/backup_log/Backup_29092016/DPIP_full_backup_29092016.log'
+
+run
+{
+sql 'alter system switch logfile';
+allocate channel a1 device type disk;
+allocate channel a2 device type disk;
+backup as compressed backupset database include current controlfile format = '/backup/backup_log/Backup_29092016/DPIP_t%t_s%s_p%p';
+sql 'alter system archive log current';
+backup archivelog all filesperset 10 format = '/backup/backup_log/Backup_29092016/ARCH_%c_%d_%U_s%s_p%p' delete input;
+}

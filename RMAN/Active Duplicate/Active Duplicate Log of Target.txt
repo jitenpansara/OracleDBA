@@ -1,0 +1,1355 @@
+login as: oracle
+oracle@npvslxdc63's password:
+Last login: Mon Jun 25 18:26:40 2018 from 10.174.232.232
+
+*******************************************************************************
+*       This system is owned by Innogy                                        *
+*                                                                             *
+*       Access to it for any reason must be specifically authorised.          *
+*       Your continued access and further inquiry may expose you to           *
+*       criminal activities and/or civil proceedings.                         *
+*       Innogy reserves the right to access and disclose all information sent *
+*       through  or stored in this computer system, for any purposes.         *
+*                                                                             *
+*       Your activities are subject to full monitoring and logging.           *
+*                                                                             *
+*       OS Version  : Red Hat Enterprise Linux Server release 7.5 (Maipo)     *
+*       Kernel      : 3.10.0-862.3.2.el7.x86_64                              *
+*       SLA         : Medium                                                  *
+*       Application : RMANCAT Database                                        *
+*                                                                             *
+*******************************************************************************
+
+
+######
+#     #  #####    ####   #####   #    #   ####    #####     #     ####   #    #
+#     #  #    #  #    #  #    #  #    #  #    #     #       #    #    #  ##   #
+######   #    #  #    #  #    #  #    #  #          #       #    #    #  # #  #
+#        #####   #    #  #    #  #    #  #          #       #    #    #  #  # #
+#        #   #   #    #  #    #  #    #  #    #     #       #    #    #  #   ##
+#        #    #   ####   #####    ####    ####      #       #     ####   #    #
+
+ #####
+#     #   #   #   ####    #####  ######  #    #
+#          # #   #          #    #       ##  ##
+ #####      #     ####      #    #####   # ## #
+      #     #         #     #    #       #    #
+#     #     #    #    #     #    #       #    #
+ #####      #     ####      #    ######  #    #
+
+[oracle@npvslxdc63 ~]$ ps -ef|grep pmon
+oracle    6170  6119  0 05:24 pts/0    00:00:00 grep --color=auto pmon
+oracle    8519     1  0 Jun04 ?        00:03:51 ora_pmon_RMANP
+oracle   28515     1  0 Jun25 ?        00:00:04 ora_pmon_oratest2
+[oracle@npvslxdc63 ~]$ sqlplus
+
+SQL*Plus: Release 12.2.0.1.0 Production on Tue Jun 26 05:24:22 2018
+
+Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+
+Enter user-name: / as sysdba
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+[oracle@npvslxdc63 ~]$ export ORACLE_SID=oratest2
+[oracle@npvslxdc63 ~]$ sqlplus
+
+SQL*Plus: Release 12.2.0.1.0 Production on Tue Jun 26 05:25:50 2018
+
+Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+
+Enter user-name: / as sysdba
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SQL> select open_mode from v$database;
+select open_mode from v$database
+                      *
+ERROR at line 1:
+ORA-01507: database not mounted
+
+
+SQL> shutdown immediate;
+ORA-01507: database not mounted
+
+
+ORACLE instance shut down.
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+[oracle@npvslxdc63 ~]$ ps -ef|grep pmon
+oracle    6464  6119  0 05:27 pts/0    00:00:00 grep --color=auto pmon
+oracle    8519     1  0 Jun04 ?        00:03:51 ora_pmon_RMANP
+[oracle@npvslxdc63 ~]$ cd $ORACLE_HOME/dbs
+[oracle@npvslxdc63 dbs]$ ls -ltr
+total 92
+-rw-r--r--. 1 oracle dba  3079 May 15  2015 init.ora
+-rw-r-----. 1 oracle dba    24 Jun  4 11:18 lkRMANP
+-rw-r-----. 1 oracle dba  3584 Jun  4 11:21 orapwRMANP
+-rw-rw----. 1 oracle dba  1544 Jun  4 12:35 hc_RMANP.dat
+-rw-r-----. 1 oracle dba  3584 Jun 19 11:34 spfileRMANP.ora
+-rw-r-----. 1 oracle dba  2048 Jun 22 12:38 orapworatest2
+-rw-r-----. 1 oracle dba  2048 Jun 22 14:32 orapworatest
+-rw-r-----. 1 oracle dba    24 Jun 25 15:22 lkORATEST2
+-rw-r-----. 1 oracle dba 22016 Jun 25 15:28 spfileoratest2.ora_2506
+-rw-r--r--. 1 oracle dba  1560 Jun 25 18:52 _rm_dup_ORATEST2_oratest2.dat
+-rw-r--r--. 1 oracle dba  1522 Jun 25 19:05 initoratest2.ora
+-rw-r-----. 1 oracle dba 23040 Jun 25 19:37 spfileoratest2.ora
+-rw-rw----. 1 oracle dba  1544 Jun 26 05:26 hc_oratest2.dat
+[oracle@npvslxdc63 dbs]$ rm -rf spfileoratest2.ora
+[oracle@npvslxdc63 dbs]$ rm -rf spfileoratest2.ora_2506
+[oracle@npvslxdc63 dbs]$ vi initoratest2.ora
+[oracle@npvslxdc63 dbs]$ ls -ltr
+total 44
+-rw-r--r--. 1 oracle dba 3079 May 15  2015 init.ora
+-rw-r-----. 1 oracle dba   24 Jun  4 11:18 lkRMANP
+-rw-r-----. 1 oracle dba 3584 Jun  4 11:21 orapwRMANP
+-rw-rw----. 1 oracle dba 1544 Jun  4 12:35 hc_RMANP.dat
+-rw-r-----. 1 oracle dba 3584 Jun 19 11:34 spfileRMANP.ora
+-rw-r-----. 1 oracle dba 2048 Jun 22 12:38 orapworatest2
+-rw-r-----. 1 oracle dba 2048 Jun 22 14:32 orapworatest
+-rw-r-----. 1 oracle dba   24 Jun 25 15:22 lkORATEST2
+-rw-r--r--. 1 oracle dba 1560 Jun 25 18:52 _rm_dup_ORATEST2_oratest2.dat
+-rw-r--r--. 1 oracle dba 1522 Jun 25 19:05 initoratest2.ora
+-rw-rw----. 1 oracle dba 1544 Jun 26 05:26 hc_oratest2.dat
+[oracle@npvslxdc63 dbs]$ cp initoratest2.ora initoratest2.ora_2606
+[oracle@npvslxdc63 dbs]$ sqlplus sys/notsys@oratest2 as sysdba
+
+SQL*Plus: Release 12.2.0.1.0 Production on Tue Jun 26 05:37:02 2018
+
+Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+
+Connected to an idle instance.
+
+SQL> startup nomount;
+ORACLE instance started.
+
+Total System Global Area 1048576000 bytes
+Fixed Size                  8800712 bytes
+Variable Size             687867448 bytes
+Database Buffers          343932928 bytes
+Redo Buffers                7974912 bytes
+SQL> shutdown immediate;
+ORA-24324: service handle not initialized
+ORA-01041: internal error. hostdef extension doesn't exist
+SQL> shut immediate;
+ORA-24324: service handle not initialized
+ORA-01041: internal error. hostdef extension doesn't exist
+SQL> shut immediate;
+ORA-24324: service handle not initialized
+ORA-01041: internal error. hostdef extension doesn't exist
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+[oracle@npvslxdc63 dbs]$ sqlplus
+
+SQL*Plus: Release 12.2.0.1.0 Production on Tue Jun 26 05:45:57 2018
+
+Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+
+Enter user-name: / as sysdba
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SQL> shut immediate;
+ORA-01109: database not open
+
+
+Database dismounted.
+ORACLE instance shut down.
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+[oracle@npvslxdc63 dbs]$ cd $ORACLE_HOME/dbs
+[oracle@npvslxdc63 dbs]$ ls -ltr
+total 72
+-rw-r--r--. 1 oracle dba  3079 May 15  2015 init.ora
+-rw-r-----. 1 oracle dba    24 Jun  4 11:18 lkRMANP
+-rw-r-----. 1 oracle dba  3584 Jun  4 11:21 orapwRMANP
+-rw-rw----. 1 oracle dba  1544 Jun  4 12:35 hc_RMANP.dat
+-rw-r-----. 1 oracle dba  3584 Jun 19 11:34 spfileRMANP.ora
+-rw-r-----. 1 oracle dba  2048 Jun 22 12:38 orapworatest2
+-rw-r-----. 1 oracle dba  2048 Jun 22 14:32 orapworatest
+-rw-r-----. 1 oracle dba    24 Jun 25 15:22 lkORATEST2
+-rw-r--r--. 1 oracle dba  1560 Jun 25 18:52 _rm_dup_ORATEST2_oratest2.dat
+-rw-r--r--. 1 oracle dba  1522 Jun 25 19:05 initoratest2.ora
+-rw-r--r--. 1 oracle dba  1522 Jun 26 05:29 initoratest2.ora_2606
+-rw-r-----. 1 oracle dba 23040 Jun 26 05:45 spfileoratest2.ora
+-rw-rw----. 1 oracle dba  1544 Jun 26 05:46 hc_oratest2.dat
+[oracle@npvslxdc63 dbs]$ rm -rf spfileoratest2.ora
+[oracle@npvslxdc63 dbs]$ sqlplus
+
+SQL*Plus: Release 12.2.0.1.0 Production on Tue Jun 26 05:47:39 2018
+
+Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+
+Enter user-name: / as sysdba
+Connected to an idle instance.
+
+SQL> startup nomount;
+ORACLE instance started.
+
+Total System Global Area 1048576000 bytes
+Fixed Size                  8800712 bytes
+Variable Size             687867448 bytes
+Database Buffers          343932928 bytes
+Redo Buffers                7974912 bytes
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+[oracle@npvslxdc63 dbs]$ df -gt
+df: invalid option -- 'g'
+Try 'df --help' for more information.
+[oracle@npvslxdc63 dbs]$ df -h
+Filesystem                           Size  Used Avail Use% Mounted on
+/dev/mapper/vg_rootvg-root            16G  2.4G   14G  15% /
+devtmpfs                              12G     0   12G   0% /dev
+tmpfs                                 12G     0   12G   0% /dev/shm
+tmpfs                                 12G   66M   12G   1% /run
+tmpfs                                 12G     0   12G   0% /sys/fs/cgroup
+/dev/sda1                            509M  235M  275M  47% /boot
+/dev/mapper/vg_rootvg-var            5.0G  602M  4.5G  12% /var
+/dev/mapper/vg_rootvg-rwe            2.0G   33M  2.0G   2% /rwe
+/dev/mapper/vg_rootvg-test            19G   33M   19G   1% /test
+/dev/mapper/vg_rootvg-tmp            6.0G   42M  6.0G   1% /tmp
+/dev/mapper/vg_rootvg-opt_patrol     5.0G  838M  4.2G  17% /opt/patrol
+/dev/mapper/vg_rootvg-UC4            5.0G   56M  5.0G   2% /UC4
+/dev/mapper/vg_rootvg-home           5.0G   49M  5.0G   1% /home
+/dev/mapper/vg_rootvg-var_log        5.0G   99M  4.9G   2% /var/log
+/dev/mapper/dbvg-dblv01              9.8G  508M  8.8G   6% /oracle/RMANCAT
+/dev/mapper/dbvg-dblv05              4.8G  2.0G  2.6G  44% /oracle/RMANCAT/redo01
+/dev/mapper/dbvg-dblv07              9.8G  158M  9.1G   2% /oracle/RMANCAT/temp
+/dev/mapper/dbvg-dblv03               59G  2.4G   54G   5% /oracle/RMANCAT/data01
+/dev/mapper/dbvg-dblv08               49G   15G   31G  33% /oracle/RMANCAT/arch
+/dev/mapper/dbvg-dblv06              4.8G   31M  4.6G   1% /oracle/RMANCAT/redo02
+/dev/mapper/dbvg-dblv04               40G   49M   38G   1% /oracle/RMANCAT/data02
+/dev/mapper/dbvg-dblv02               25G  8.3G   15G  36% /oracle/RMANCAT/12.2.0.1
+/dev/mapper/vg_rootvg-var_log_audit  2.0G   59M  2.0G   3% /var/log/audit
+tmpfs                                2.4G     0  2.4G   0% /run/user/0
+tmpfs                                2.4G     0  2.4G   0% /run/user/99
+tmpfs                                2.4G     0  2.4G   0% /run/user/54321
+tmpfs                                2.4G     0  2.4G   0% /run/user/52105
+[oracle@npvslxdc63 dbs]$ cd /oracle/RMANCAT/data01
+[oracle@npvslxdc63 data01]$ ls -ltr
+total 2329772
+drwx------. 2 root   root      16384 May 23 12:28 lost+found
+drwxr-xr-x. 6 oracle dba        4096 Jun 25 19:21 CDB_TEST
+-rw-r-----. 1 oracle dba     5251072 Jun 26 02:05 users01.dbf
+-rw-r-----. 1 oracle dba   870326272 Jun 26 05:43 system01.dbf
+-rw-r-----. 1 oracle dba    73408512 Jun 26 05:45 undotbs01.dbf
+-rw-r-----. 1 oracle dba  1426071552 Jun 26 05:45 sysaux01.dbf
+-rw-r-----. 1 oracle dba    10600448 Jun 26 05:48 control01.ctl
+[oracle@npvslxdc63 data01]$ cd CDB_TEST
+[oracle@npvslxdc63 CDB_TEST]$ ls -ltr
+total 36656
+drwxr-xr-x. 2 oracle dba     4096 Jun 20 12:27 PDB_CLONE
+drwxr-x---. 2 oracle dba     4096 Jun 21 14:03 pdbclone
+drwxrwxrwx. 2 oracle dba     4096 Jun 25 19:01 PDB1
+drwxr-x---. 2 oracle dba     4096 Jun 25 19:02 PDBSEED
+-rw-r-----. 1 oracle dba 18759680 Jun 26 05:46 control02.ctl
+-rw-r-----. 1 oracle dba 18759680 Jun 26 05:46 control01.ctl
+[oracle@npvslxdc63 CDB_TEST]$ cd PDB1
+[oracle@npvslxdc63 PDB1]$ ls -ltr
+total 0
+[oracle@npvslxdc63 PDB1]$ cd ..
+[oracle@npvslxdc63 CDB_TEST]$ cd PDBSEED
+[oracle@npvslxdc63 PDBSEED]$ ls -ltr
+total 0
+[oracle@npvslxdc63 PDBSEED]$ cd ..
+[oracle@npvslxdc63 CDB_TEST]$ ls -ltr
+total 36656
+drwxr-xr-x. 2 oracle dba     4096 Jun 20 12:27 PDB_CLONE
+drwxr-x---. 2 oracle dba     4096 Jun 21 14:03 pdbclone
+drwxrwxrwx. 2 oracle dba     4096 Jun 25 19:01 PDB1
+drwxr-x---. 2 oracle dba     4096 Jun 25 19:02 PDBSEED
+-rw-r-----. 1 oracle dba 18759680 Jun 26 05:46 control02.ctl
+-rw-r-----. 1 oracle dba 18759680 Jun 26 05:46 control01.ctl
+[oracle@npvslxdc63 CDB_TEST]$ cd pdbclone
+[oracle@npvslxdc63 pdbclone]$ ls -ltr
+total 0
+[oracle@npvslxdc63 pdbclone]$ cd ..
+[oracle@npvslxdc63 CDB_TEST]$ ps -ef|grep pmon
+oracle    8174     1  0 05:47 ?        00:00:00 ora_pmon_oratest2
+oracle    8519     1  0 Jun04 ?        00:03:51 ora_pmon_RMANP
+oracle    8555  6119  0 05:51 pts/0    00:00:00 grep --color=auto pmon
+[oracle@npvslxdc63 CDB_TEST]$ sqlplus
+
+SQL*Plus: Release 12.2.0.1.0 Production on Tue Jun 26 05:51:45 2018
+
+Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+
+Enter user-name: / as sysdba
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+[oracle@npvslxdc63 CDB_TEST]$ sqlplus
+
+SQL*Plus: Release 12.2.0.1.0 Production on Tue Jun 26 05:57:32 2018
+
+Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+
+Enter user-name: / as sysdba
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SQL> shutdown immediate;
+ORA-01109: database not open
+
+
+Database dismounted.
+ORACLE instance shut down.
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+[oracle@npvslxdc63 CDB_TEST]$ sqlplus
+
+SQL*Plus: Release 12.2.0.1.0 Production on Tue Jun 26 05:58:04 2018
+
+Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+
+Enter user-name: ^C
+[oracle@npvslxdc63 CDB_TEST]$ cd $ORACLE_HOME/dbs
+[oracle@npvslxdc63 dbs]$ ls -ltr
+total 72
+-rw-r--r--. 1 oracle dba  3079 May 15  2015 init.ora
+-rw-r-----. 1 oracle dba    24 Jun  4 11:18 lkRMANP
+-rw-r-----. 1 oracle dba  3584 Jun  4 11:21 orapwRMANP
+-rw-rw----. 1 oracle dba  1544 Jun  4 12:35 hc_RMANP.dat
+-rw-r-----. 1 oracle dba  3584 Jun 19 11:34 spfileRMANP.ora
+-rw-r-----. 1 oracle dba  2048 Jun 22 12:38 orapworatest2
+-rw-r-----. 1 oracle dba  2048 Jun 22 14:32 orapworatest
+-rw-r-----. 1 oracle dba    24 Jun 25 15:22 lkORATEST2
+-rw-r--r--. 1 oracle dba  1560 Jun 25 18:52 _rm_dup_ORATEST2_oratest2.dat
+-rw-r--r--. 1 oracle dba  1522 Jun 25 19:05 initoratest2.ora
+-rw-r--r--. 1 oracle dba  1522 Jun 26 05:29 initoratest2.ora_2606
+-rw-r-----. 1 oracle dba 23040 Jun 26 05:54 spfileoratest2.ora
+-rw-rw----. 1 oracle dba  1544 Jun 26 05:57 hc_oratest2.dat
+[oracle@npvslxdc63 dbs]$ rm -rf spfileoratest2.ora
+[oracle@npvslxdc63 dbs]$ vi initoratest2.ora
+[oracle@npvslxdc63 dbs]$ rm -rf initoratest2.ora_2606
+[oracle@npvslxdc63 dbs]$ cp initoratest2.ora initoratest2.ora_2606
+[oracle@npvslxdc63 dbs]$ pwd
+/oracle/RMANCAT/12.2.0.1/dbs
+[oracle@npvslxdc63 dbs]$ pwd
+/oracle/RMANCAT/12.2.0.1/dbs
+[oracle@npvslxdc63 dbs]$ df -gt
+df: invalid option -- 'g'
+Try 'df --help' for more information.
+[oracle@npvslxdc63 dbs]$ df -h
+Filesystem                           Size  Used Avail Use% Mounted on
+/dev/mapper/vg_rootvg-root            16G  2.4G   14G  15% /
+devtmpfs                              12G     0   12G   0% /dev
+tmpfs                                 12G     0   12G   0% /dev/shm
+tmpfs                                 12G   66M   12G   1% /run
+tmpfs                                 12G     0   12G   0% /sys/fs/cgroup
+/dev/sda1                            509M  235M  275M  47% /boot
+/dev/mapper/vg_rootvg-var            5.0G  602M  4.5G  12% /var
+/dev/mapper/vg_rootvg-rwe            2.0G   33M  2.0G   2% /rwe
+/dev/mapper/vg_rootvg-test            19G   33M   19G   1% /test
+/dev/mapper/vg_rootvg-tmp            6.0G   42M  6.0G   1% /tmp
+/dev/mapper/vg_rootvg-opt_patrol     5.0G  838M  4.2G  17% /opt/patrol
+/dev/mapper/vg_rootvg-UC4            5.0G   56M  5.0G   2% /UC4
+/dev/mapper/vg_rootvg-home           5.0G   49M  5.0G   1% /home
+/dev/mapper/vg_rootvg-var_log        5.0G   99M  4.9G   2% /var/log
+/dev/mapper/dbvg-dblv01              9.8G  509M  8.8G   6% /oracle/RMANCAT
+/dev/mapper/dbvg-dblv05              4.8G  2.0G  2.6G  44% /oracle/RMANCAT/redo01
+/dev/mapper/dbvg-dblv07              9.8G  158M  9.1G   2% /oracle/RMANCAT/temp
+/dev/mapper/dbvg-dblv03               59G  2.4G   54G   5% /oracle/RMANCAT/data01
+/dev/mapper/dbvg-dblv08               49G   15G   31G  33% /oracle/RMANCAT/arch
+/dev/mapper/dbvg-dblv06              4.8G   31M  4.6G   1% /oracle/RMANCAT/redo02
+/dev/mapper/dbvg-dblv04               40G   49M   38G   1% /oracle/RMANCAT/data02
+/dev/mapper/dbvg-dblv02               25G  8.3G   15G  36% /oracle/RMANCAT/12.2.0.1
+/dev/mapper/vg_rootvg-var_log_audit  2.0G   59M  2.0G   3% /var/log/audit
+tmpfs                                2.4G     0  2.4G   0% /run/user/0
+tmpfs                                2.4G     0  2.4G   0% /run/user/99
+tmpfs                                2.4G     0  2.4G   0% /run/user/54321
+tmpfs                                2.4G     0  2.4G   0% /run/user/52105
+[oracle@npvslxdc63 dbs]$ cd /oracle/RMANCAT/data01
+[oracle@npvslxdc63 data01]$ ls -ltr
+total 2329772
+drwx------. 2 root   root      16384 May 23 12:28 lost+found
+drwxr-xr-x. 6 oracle dba        4096 Jun 25 19:21 CDB_TEST
+-rw-r-----. 1 oracle dba     5251072 Jun 26 02:05 users01.dbf
+-rw-r-----. 1 oracle dba    73408512 Jun 26 06:05 undotbs01.dbf
+-rw-r-----. 1 oracle dba   870326272 Jun 26 06:05 system01.dbf
+-rw-r-----. 1 oracle dba  1426071552 Jun 26 06:05 sysaux01.dbf
+-rw-r-----. 1 oracle dba    10600448 Jun 26 06:07 control01.ctl
+[oracle@npvslxdc63 data01]$ cd CDB_TEST
+[oracle@npvslxdc63 CDB_TEST]$ ls -ltr
+total 36656
+drwxr-xr-x. 2 oracle dba     4096 Jun 20 12:27 PDB_CLONE
+drwxr-x---. 2 oracle dba     4096 Jun 21 14:03 pdbclone
+drwxrwxrwx. 2 oracle dba     4096 Jun 25 19:01 PDB1
+drwxr-x---. 2 oracle dba     4096 Jun 25 19:02 PDBSEED
+-rw-r-----. 1 oracle dba 18759680 Jun 26 05:57 control01.ctl
+-rw-r-----. 1 oracle dba 18759680 Jun 26 05:57 control02.ctl
+[oracle@npvslxdc63 CDB_TEST]$ pwd
+/oracle/RMANCAT/data01/CDB_TEST
+[oracle@npvslxdc63 CDB_TEST]$ ps -ef|grep pmon
+oracle    8519     1  0 Jun04 ?        00:03:51 ora_pmon_RMANP
+oracle   10316  6119  0 06:12 pts/0    00:00:00 grep --color=auto pmon
+[oracle@npvslxdc63 CDB_TEST]$ sqlplus
+
+SQL*Plus: Release 12.2.0.1.0 Production on Tue Jun 26 06:12:19 2018
+
+Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+
+Enter user-name: / as sysdba
+Connected to an idle instance.
+
+SQL> startup nomount;
+ORACLE instance started.
+
+Total System Global Area 1048576000 bytes
+Fixed Size                  8800712 bytes
+Variable Size             687867448 bytes
+Database Buffers          343932928 bytes
+Redo Buffers                7974912 bytes
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+[oracle@npvslxdc63 CDB_TEST]$ cd $ORACLE_HOME/dbs
+[oracle@npvslxdc63 dbs]$ ls -ltr
+total 48
+-rw-r--r--. 1 oracle dba 3079 May 15  2015 init.ora
+-rw-r-----. 1 oracle dba   24 Jun  4 11:18 lkRMANP
+-rw-r-----. 1 oracle dba 3584 Jun  4 11:21 orapwRMANP
+-rw-rw----. 1 oracle dba 1544 Jun  4 12:35 hc_RMANP.dat
+-rw-r-----. 1 oracle dba 3584 Jun 19 11:34 spfileRMANP.ora
+-rw-r-----. 1 oracle dba 2048 Jun 22 12:38 orapworatest2
+-rw-r-----. 1 oracle dba 2048 Jun 22 14:32 orapworatest
+-rw-r-----. 1 oracle dba   24 Jun 25 15:22 lkORATEST2
+-rw-r--r--. 1 oracle dba 1560 Jun 25 18:52 _rm_dup_ORATEST2_oratest2.dat
+-rw-r--r--. 1 oracle dba 1527 Jun 26 05:59 initoratest2.ora
+-rw-r--r--. 1 oracle dba 1527 Jun 26 05:59 initoratest2.ora_2606
+-rw-rw----. 1 oracle dba 1544 Jun 26 06:12 hc_oratest2.dat
+[oracle@npvslxdc63 dbs]$ rman target sys/notsys@oratest auxiliary sys/notsys@oratest2
+
+Recovery Manager: Release 12.2.0.1.0 - Production on Tue Jun 26 06:12:56 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+connected to target database: ORATEST (DBID=3514191385)
+connected to auxiliary database: ORATEST2 (not mounted)
+
+RMAN> run
+{
+2> 3> allocate auxiliary channel ch1 device type disk;
+4> allocate auxiliary channel ch2 device type disk;
+5> allocate auxiliary channel ch3 device type disk;
+set newname for datafile '/oracle/RMANSTD/data01/CDB_TEST/CDB/system01.dbf' to '/oracle/RMANCAT/data01/CDB_TEST/system01.dbf';
+6> 7> set newname for datafile '/oracle/RMANSTD/data01/CDB_TEST/CDB/sysaux01.dbf' to '/oracle/RMANCAT/data01/CDB_TEST/sysaux01.dbf';
+8> set newname for datafile '/oracle/RMANSTD/data01/CDB_TEST/CDB/undotbs01.dbf' to '/oracle/RMANCAT/data01/CDB_TEST/undotbs01.dbf';
+9> set newname for datafile '/oracle/RMANSTD/data01/CDB_TEST/CDB/users01.dbf' to '/oracle/RMANCAT/data01/CDB_TEST/users01.dbf';
+set newname for datafile '/oracle/RMANSTD/data01/CDB_TEST/PDBSEED/system01.dbf' to '/oracle/RMANCAT/data01/CDB_TEST/PDBSEED/system01.dbf';
+10> 11> set newname for datafile '/oracle/RMANSTD/data01/CDB_TEST/PDBSEED/sysaux01.dbf' to '/oracle/RMANCAT/data01/CDB_TEST/PDBSEED/sysaux01.dbf';
+12> set newname for datafile '/oracle/RMANSTD/data01/CDB_TEST/PDB1/system01.dbf' to '/oracle/RMANCAT/data01/CDB_TEST/PDB1/system01.dbf';
+13> set newname for datafile '/oracle/RMANSTD/data01/CDB_TEST/PDB1/sysaux01.dbf' to '/oracle/RMANCAT/data01/CDB_TEST/PDB1/sysaux01.dbf';
+set newname for datafile '/oracle/RMANSTD/data01/CDB_TEST/PDB1/users01.dbf' to '/oracle/RMANCAT/data01/CDB_TEST/PDB1/users01.dbf';
+14> 15> set newname for datafile '/oracle/RMANSTD/data01/CDB_TEST/pdbclone/system01.dbf' to '/oracle/RMANCAT/data01/CDB_TEST/pdbclone/system01.dbf';
+16> set newname for datafile '/oracle/RMANSTD/data01/CDB_TEST/pdbclone/sysaux01.dbf' to '/oracle/RMANCAT/data01/CDB_TEST/pdbclone/sysaux01.dbf';
+17> set newname for datafile '/oracle/RMANSTD/data01/CDB_TEST/pdbclone/users01.dbf' to '/oracle/RMANCAT/data01/CDB_TEST/pdbclone/users01.dbf';
+18> duplicate target database to oratest2 from active database nofilenamecheck;
+19> }
+
+using target database control file instead of recovery catalog
+allocated channel: ch1
+channel ch1: SID=621 device type=DISK
+
+allocated channel: ch2
+channel ch2: SID=743 device type=DISK
+
+allocated channel: ch3
+channel ch3: SID=862 device type=DISK
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+Starting Duplicate Db at 26-JUN-18
+current log archived
+
+contents of Memory Script:
+{
+   sql clone "create spfile from memory";
+}
+executing Memory Script
+
+sql statement: create spfile from memory
+
+contents of Memory Script:
+{
+   shutdown clone immediate;
+   startup clone nomount;
+}
+executing Memory Script
+
+Oracle instance shut down
+
+connected to auxiliary database (not started)
+Oracle instance started
+
+Total System Global Area    1048576000 bytes
+
+Fixed Size                     8800712 bytes
+Variable Size                687867448 bytes
+Database Buffers             343932928 bytes
+Redo Buffers                   7974912 bytes
+allocated channel: ch1
+channel ch1: SID=621 device type=DISK
+allocated channel: ch2
+channel ch2: SID=743 device type=DISK
+allocated channel: ch3
+channel ch3: SID=862 device type=DISK
+
+contents of Memory Script:
+{
+   sql clone "alter system set  db_name =
+ ''ORATEST'' comment=
+ ''Modified by RMAN duplicate'' scope=spfile";
+   sql clone "alter system set  db_unique_name =
+ ''oratest2'' comment=
+ ''Modified by RMAN duplicate'' scope=spfile";
+   shutdown clone immediate;
+   startup clone force nomount
+   restore clone from service  'oratest' primary controlfile;
+   alter clone database mount;
+}
+executing Memory Script
+
+sql statement: alter system set  db_name =  ''ORATEST'' comment= ''Modified by RMAN duplicate'' scope=spfile
+
+sql statement: alter system set  db_unique_name =  ''oratest2'' comment= ''Modified by RMAN duplicate'' scope=spfile
+
+Oracle instance shut down
+
+Oracle instance started
+
+Total System Global Area    1048576000 bytes
+
+Fixed Size                     8800712 bytes
+Variable Size                687867448 bytes
+Database Buffers             343932928 bytes
+Redo Buffers                   7974912 bytes
+allocated channel: ch1
+channel ch1: SID=621 device type=DISK
+allocated channel: ch2
+channel ch2: SID=743 device type=DISK
+allocated channel: ch3
+channel ch3: SID=862 device type=DISK
+
+Starting restore at 26-JUN-18
+
+channel ch1: starting datafile backup set restore
+channel ch1: using network backup set from service oratest
+channel ch1: restoring control file
+channel ch1: restore complete, elapsed time: 00:00:01
+output file name=/oracle/RMANCAT/data01/CDB_TEST/control01.ctl
+output file name=/oracle/RMANCAT/data01/CDB_TEST/control02.ctl
+Finished restore at 26-JUN-18
+
+database mounted
+
+contents of Memory Script:
+{
+   set newname for datafile  1 to
+ "/oracle/RMANCAT/data01/CDB_TEST/system01.dbf";
+   set newname for datafile  3 to
+ "/oracle/RMANCAT/data01/CDB_TEST/sysaux01.dbf";
+   set newname for datafile  4 to
+ "/oracle/RMANCAT/data01/CDB_TEST/undotbs01.dbf";
+   set newname for datafile  5 to
+ "/oracle/RMANCAT/data01/CDB_TEST/PDBSEED/system01.dbf";
+   set newname for datafile  6 to
+ "/oracle/RMANCAT/data01/CDB_TEST/PDBSEED/sysaux01.dbf";
+   set newname for datafile  7 to
+ "/oracle/RMANCAT/data01/CDB_TEST/users01.dbf";
+   set newname for datafile  9 to
+ "/oracle/RMANCAT/data01/CDB_TEST/PDB1/system01.dbf";
+   set newname for datafile  10 to
+ "/oracle/RMANCAT/data01/CDB_TEST/PDB1/sysaux01.dbf";
+   set newname for datafile  11 to
+ "/oracle/RMANCAT/data01/CDB_TEST/PDB1/users01.dbf";
+   set newname for datafile  14 to
+ "/oracle/RMANCAT/data01/CDB_TEST/pdbclone/system01.dbf";
+   set newname for datafile  15 to
+ "/oracle/RMANCAT/data01/CDB_TEST/pdbclone/sysaux01.dbf";
+   set newname for datafile  16 to
+ "/oracle/RMANCAT/data01/CDB_TEST/pdbclone/users01.dbf";
+   restore
+   from  nonsparse   from service
+ 'oratest'   clone database
+   ;
+   sql 'alter system archive log current';
+}
+executing Memory Script
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+Starting restore at 26-JUN-18
+
+channel ch1: starting datafile backup set restore
+channel ch1: using network backup set from service oratest
+channel ch1: specifying datafile(s) to restore from backup set
+channel ch1: restoring datafile 00001 to /oracle/RMANCAT/data01/CDB_TEST/system01.dbf
+channel ch2: starting datafile backup set restore
+channel ch2: using network backup set from service oratest
+channel ch2: specifying datafile(s) to restore from backup set
+channel ch2: restoring datafile 00003 to /oracle/RMANCAT/data01/CDB_TEST/sysaux01.dbf
+channel ch3: starting datafile backup set restore
+channel ch3: using network backup set from service oratest
+channel ch3: specifying datafile(s) to restore from backup set
+channel ch3: restoring datafile 00004 to /oracle/RMANCAT/data01/CDB_TEST/undotbs01.dbf
+channel ch3: restore complete, elapsed time: 00:00:02
+channel ch3: starting datafile backup set restore
+channel ch3: using network backup set from service oratest
+channel ch3: specifying datafile(s) to restore from backup set
+channel ch3: restoring datafile 00005 to /oracle/RMANCAT/data01/CDB_TEST/PDBSEED/system01.dbf
+channel ch1: restore complete, elapsed time: 00:00:17
+channel ch1: starting datafile backup set restore
+channel ch1: using network backup set from service oratest
+channel ch1: specifying datafile(s) to restore from backup set
+channel ch1: restoring datafile 00006 to /oracle/RMANCAT/data01/CDB_TEST/PDBSEED/sysaux01.dbf
+channel ch2: restore complete, elapsed time: 00:00:17
+channel ch2: starting datafile backup set restore
+channel ch2: using network backup set from service oratest
+channel ch2: specifying datafile(s) to restore from backup set
+channel ch2: restoring datafile 00007 to /oracle/RMANCAT/data01/CDB_TEST/users01.dbf
+channel ch3: restore complete, elapsed time: 00:00:15
+channel ch3: starting datafile backup set restore
+channel ch3: using network backup set from service oratest
+channel ch3: specifying datafile(s) to restore from backup set
+channel ch3: restoring datafile 00009 to /oracle/RMANCAT/data01/CDB_TEST/PDB1/system01.dbf
+channel ch2: restore complete, elapsed time: 00:00:01
+channel ch2: starting datafile backup set restore
+channel ch2: using network backup set from service oratest
+channel ch2: specifying datafile(s) to restore from backup set
+channel ch2: restoring datafile 00010 to /oracle/RMANCAT/data01/CDB_TEST/PDB1/sysaux01.dbf
+channel ch1: restore complete, elapsed time: 00:00:08
+channel ch1: starting datafile backup set restore
+channel ch1: using network backup set from service oratest
+channel ch1: specifying datafile(s) to restore from backup set
+channel ch1: restoring datafile 00011 to /oracle/RMANCAT/data01/CDB_TEST/PDB1/users01.dbf
+channel ch3: restore complete, elapsed time: 00:00:08
+channel ch3: starting datafile backup set restore
+channel ch3: using network backup set from service oratest
+channel ch3: specifying datafile(s) to restore from backup set
+channel ch3: restoring datafile 00014 to /oracle/RMANCAT/data01/CDB_TEST/pdbclone/system01.dbf
+channel ch1: restore complete, elapsed time: 00:00:04
+channel ch1: starting datafile backup set restore
+channel ch1: using network backup set from service oratest
+channel ch1: specifying datafile(s) to restore from backup set
+channel ch1: restoring datafile 00015 to /oracle/RMANCAT/data01/CDB_TEST/pdbclone/sysaux01.dbf
+channel ch2: restore complete, elapsed time: 00:00:11
+channel ch2: starting datafile backup set restore
+channel ch2: using network backup set from service oratest
+channel ch2: specifying datafile(s) to restore from backup set
+channel ch2: restoring datafile 00016 to /oracle/RMANCAT/data01/CDB_TEST/pdbclone/users01.dbf
+channel ch2: restore complete, elapsed time: 00:00:01
+channel ch3: restore complete, elapsed time: 00:00:05
+channel ch1: restore complete, elapsed time: 00:00:15
+Finished restore at 26-JUN-18
+
+sql statement: alter system archive log current
+current log archived
+
+contents of Memory Script:
+{
+   restore clone force from service  'oratest'
+           archivelog from scn  11058823;
+   switch clone datafile all;
+}
+executing Memory Script
+
+Starting restore at 26-JUN-18
+
+channel ch1: starting archived log restore to default destination
+channel ch1: using network backup set from service oratest
+channel ch1: restoring archived log
+archived log thread=1 sequence=53
+channel ch2: starting archived log restore to default destination
+channel ch2: using network backup set from service oratest
+channel ch2: restoring archived log
+archived log thread=1 sequence=54
+channel ch1: restore complete, elapsed time: 00:00:02
+channel ch2: restore complete, elapsed time: 00:00:01
+Finished restore at 26-JUN-18
+
+datafile 1 switched to datafile copy
+input datafile copy RECID=16 STAMP=979798549 file name=/oracle/RMANCAT/data01/CDB_TEST/system01.dbf
+datafile 3 switched to datafile copy
+input datafile copy RECID=17 STAMP=979798549 file name=/oracle/RMANCAT/data01/CDB_TEST/sysaux01.dbf
+datafile 4 switched to datafile copy
+input datafile copy RECID=18 STAMP=979798549 file name=/oracle/RMANCAT/data01/CDB_TEST/undotbs01.dbf
+datafile 5 switched to datafile copy
+input datafile copy RECID=19 STAMP=979798549 file name=/oracle/RMANCAT/data01/CDB_TEST/PDBSEED/system01.dbf
+datafile 6 switched to datafile copy
+input datafile copy RECID=20 STAMP=979798549 file name=/oracle/RMANCAT/data01/CDB_TEST/PDBSEED/sysaux01.dbf
+datafile 7 switched to datafile copy
+input datafile copy RECID=21 STAMP=979798549 file name=/oracle/RMANCAT/data01/CDB_TEST/users01.dbf
+datafile 9 switched to datafile copy
+input datafile copy RECID=22 STAMP=979798549 file name=/oracle/RMANCAT/data01/CDB_TEST/PDB1/system01.dbf
+datafile 10 switched to datafile copy
+input datafile copy RECID=23 STAMP=979798549 file name=/oracle/RMANCAT/data01/CDB_TEST/PDB1/sysaux01.dbf
+datafile 11 switched to datafile copy
+input datafile copy RECID=24 STAMP=979798549 file name=/oracle/RMANCAT/data01/CDB_TEST/PDB1/users01.dbf
+datafile 14 switched to datafile copy
+input datafile copy RECID=25 STAMP=979798549 file name=/oracle/RMANCAT/data01/CDB_TEST/pdbclone/system01.dbf
+datafile 15 switched to datafile copy
+input datafile copy RECID=26 STAMP=979798549 file name=/oracle/RMANCAT/data01/CDB_TEST/pdbclone/sysaux01.dbf
+datafile 16 switched to datafile copy
+input datafile copy RECID=27 STAMP=979798549 file name=/oracle/RMANCAT/data01/CDB_TEST/pdbclone/users01.dbf
+
+contents of Memory Script:
+{
+   set until scn  11058961;
+   recover
+   clone database
+    delete archivelog
+   ;
+}
+executing Memory Script
+
+executing command: SET until clause
+
+Starting recover at 26-JUN-18
+
+starting media recovery
+
+archived log for thread 1 with sequence 53 is already on disk as file /oracle/RMANCAT/12.2.0.1/dbs/arch1_53_978812313.dbf
+archived log for thread 1 with sequence 54 is already on disk as file /oracle/RMANCAT/12.2.0.1/dbs/arch1_54_978812313.dbf
+archived log file name=/oracle/RMANCAT/12.2.0.1/dbs/arch1_53_978812313.dbf thread=1 sequence=53
+archived log file name=/oracle/RMANCAT/12.2.0.1/dbs/arch1_54_978812313.dbf thread=1 sequence=54
+media recovery complete, elapsed time: 00:00:01
+Finished recover at 26-JUN-18
+released channel: ch1
+released channel: ch2
+released channel: ch3
+Oracle instance started
+
+Total System Global Area    1048576000 bytes
+
+Fixed Size                     8800712 bytes
+Variable Size                587204152 bytes
+Database Buffers             444596224 bytes
+Redo Buffers                   7974912 bytes
+
+contents of Memory Script:
+{
+   sql clone "alter system set  db_name =
+ ''ORATEST2'' comment=
+ ''Reset to original value by RMAN'' scope=spfile";
+   sql clone "alter system reset  db_unique_name scope=spfile";
+}
+executing Memory Script
+
+sql statement: alter system set  db_name =  ''ORATEST2'' comment= ''Reset to original value by RMAN'' scope=spfile
+
+sql statement: alter system reset  db_unique_name scope=spfile
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-03002: failure of Duplicate Db command at 06/26/2018 06:16:04
+RMAN-05501: aborting duplication of target database
+RMAN-03015: error occurred in stored script Memory Script
+RMAN-03009: failure of sql command on clone_default channel at 06/26/2018 06:16:04
+RMAN-11003: failure during parse/execution of SQL statement: alter system reset  db_unique_name scope=spfile
+ORA-32010: cannot find entry to delete in SPFILE
+
+RMAN> sqlplus
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "identifier": expecting one of: "advise, allocate, alter, analyze, associate statistics, audit, backup, begin, @, call, catalog, change, comment, commit, configure, connect, convert, copy, create, create catalog, create global, create script, create virtual, crosscheck, declare, delete, delete from, describe, describe catalog, disassociate statistics, drop, drop catalog, drop database, duplicate, exit, explain plan, flashback, flashback table, grant, grant catalog, grant register, host, import, insert, list, lock, merge, mount, noaudit, open, print, purge, quit, recover, register, release, rename, repair, replace, report, "
+RMAN-01008: the bad identifier was: sqlplus
+RMAN-01007: at line 1 column 1 file: standard input
+
+RMAN> exit
+
+
+Recovery Manager complete.
+[oracle@npvslxdc63 dbs]$ sqlplus
+
+SQL*Plus: Release 12.2.0.1.0 Production on Tue Jun 26 06:19:02 2018
+
+Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+
+Enter user-name: / as sysdba
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SQL> select open_mode from v$database;
+select open_mode from v$database
+                      *
+ERROR at line 1:
+ORA-01507: database not mounted
+
+
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+[oracle@npvslxdc63 dbs]$ ps -ef|grep pmon
+oracle    8519     1  0 Jun04 ?        00:03:51 ora_pmon_RMANP
+oracle   10906     1  0 06:16 ?        00:00:00 ora_pmon_oratest2
+oracle   11234  6119  0 06:19 pts/0    00:00:00 grep --color=auto pmon
+[oracle@npvslxdc63 dbs]$ sqlplus
+
+SQL*Plus: Release 12.2.0.1.0 Production on Tue Jun 26 06:19:39 2018
+
+Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+
+Enter user-name: / as sysdba
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SQL> alter database open;
+alter database open
+*
+ERROR at line 1:
+ORA-01507: database not mounted
+
+
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+[oracle@npvslxdc63 dbs]$ cd $ORACLE_HOME/dbs
+[oracle@npvslxdc63 dbs]$ ls -ltr
+total 80
+-rw-r--r--. 1 oracle dba  3079 May 15  2015 init.ora
+-rw-r-----. 1 oracle dba    24 Jun  4 11:18 lkRMANP
+-rw-r-----. 1 oracle dba  3584 Jun  4 11:21 orapwRMANP
+-rw-rw----. 1 oracle dba  1544 Jun  4 12:35 hc_RMANP.dat
+-rw-r-----. 1 oracle dba  3584 Jun 19 11:34 spfileRMANP.ora
+-rw-r-----. 1 oracle dba  2048 Jun 22 12:38 orapworatest2
+-rw-r-----. 1 oracle dba  2048 Jun 22 14:32 orapworatest
+-rw-r-----. 1 oracle dba    24 Jun 25 15:22 lkORATEST2
+-rw-r--r--. 1 oracle dba  1527 Jun 26 05:59 initoratest2.ora
+-rw-r--r--. 1 oracle dba  1527 Jun 26 05:59 initoratest2.ora_2606
+-rw-r-----. 1 oracle dba  4608 Jun 26 06:15 arch1_53_978812313.dbf
+-rw-r-----. 1 oracle dba  1024 Jun 26 06:15 arch1_54_978812313.dbf
+-rw-rw----. 1 oracle dba  1544 Jun 26 06:16 hc_oratest2.dat
+-rw-r-----. 1 oracle dba 23040 Jun 26 06:16 spfileoratest2.ora
+[oracle@npvslxdc63 dbs]$ sqlplus
+
+SQL*Plus: Release 12.2.0.1.0 Production on Tue Jun 26 06:23:40 2018
+
+Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+
+Enter user-name: / as sysdba
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SQL> alter database mount;
+alter database mount
+*
+ERROR at line 1:
+ORA-19838: cannot use this control file to mount or open database
+
+
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+[oracle@npvslxdc63 dbs]$ cd /oracle/RMANCAT/data01/CDB_TEST/pdbclone/
+[oracle@npvslxdc63 pdbclone]$ ls -ltr
+total 844828
+-rw-r-----. 1 oracle dba 272637952 Jun 26 06:15 system01.dbf
+-rw-r-----. 1 oracle dba 587210752 Jun 26 06:15 sysaux01.dbf
+-rw-r-----. 1 oracle dba   5251072 Jun 26 06:15 users01.dbf
+[oracle@npvslxdc63 pdbclone]$ df -h
+Filesystem                           Size  Used Avail Use% Mounted on
+/dev/mapper/vg_rootvg-root            16G  2.4G   14G  15% /
+devtmpfs                              12G     0   12G   0% /dev
+tmpfs                                 12G     0   12G   0% /dev/shm
+tmpfs                                 12G   66M   12G   1% /run
+tmpfs                                 12G     0   12G   0% /sys/fs/cgroup
+/dev/sda1                            509M  235M  275M  47% /boot
+/dev/mapper/vg_rootvg-var            5.0G  602M  4.5G  12% /var
+/dev/mapper/vg_rootvg-rwe            2.0G   33M  2.0G   2% /rwe
+/dev/mapper/vg_rootvg-test            19G   33M   19G   1% /test
+/dev/mapper/vg_rootvg-tmp            6.0G   42M  6.0G   1% /tmp
+/dev/mapper/vg_rootvg-opt_patrol     5.0G  838M  4.2G  17% /opt/patrol
+/dev/mapper/vg_rootvg-UC4            5.0G   56M  5.0G   2% /UC4
+/dev/mapper/vg_rootvg-home           5.0G   49M  5.0G   1% /home
+/dev/mapper/vg_rootvg-var_log        5.0G   99M  4.9G   2% /var/log
+/dev/mapper/dbvg-dblv01              9.8G  520M  8.7G   6% /oracle/RMANCAT
+/dev/mapper/dbvg-dblv05              4.8G  2.0G  2.6G  44% /oracle/RMANCAT/redo01
+/dev/mapper/dbvg-dblv07              9.8G  158M  9.1G   2% /oracle/RMANCAT/temp
+/dev/mapper/dbvg-dblv03               59G  6.8G   50G  13% /oracle/RMANCAT/data01
+/dev/mapper/dbvg-dblv08               49G   15G   31G  33% /oracle/RMANCAT/arch
+/dev/mapper/dbvg-dblv06              4.8G   31M  4.6G   1% /oracle/RMANCAT/redo02
+/dev/mapper/dbvg-dblv04               40G   49M   38G   1% /oracle/RMANCAT/data02
+/dev/mapper/dbvg-dblv02               25G  8.3G   15G  36% /oracle/RMANCAT/12.2.0.1
+/dev/mapper/vg_rootvg-var_log_audit  2.0G   59M  2.0G   3% /var/log/audit
+tmpfs                                2.4G     0  2.4G   0% /run/user/0
+tmpfs                                2.4G     0  2.4G   0% /run/user/99
+tmpfs                                2.4G     0  2.4G   0% /run/user/54321
+tmpfs                                2.4G     0  2.4G   0% /run/user/52105
+[oracle@npvslxdc63 pdbclone]$ sqlplus
+
+SQL*Plus: Release 12.2.0.1.0 Production on Tue Jun 26 06:26:44 2018
+
+Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+
+Enter user-name: / as sysdba
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+[oracle@npvslxdc63 pdbclone]$ cd $ORACLE_HOME/dbs
+[oracle@npvslxdc63 dbs]$ ls -ltr
+total 80
+-rw-r--r--. 1 oracle dba  3079 May 15  2015 init.ora
+-rw-r-----. 1 oracle dba    24 Jun  4 11:18 lkRMANP
+-rw-r-----. 1 oracle dba  3584 Jun  4 11:21 orapwRMANP
+-rw-rw----. 1 oracle dba  1544 Jun  4 12:35 hc_RMANP.dat
+-rw-r-----. 1 oracle dba  3584 Jun 19 11:34 spfileRMANP.ora
+-rw-r-----. 1 oracle dba  2048 Jun 22 12:38 orapworatest2
+-rw-r-----. 1 oracle dba  2048 Jun 22 14:32 orapworatest
+-rw-r-----. 1 oracle dba    24 Jun 25 15:22 lkORATEST2
+-rw-r--r--. 1 oracle dba  1527 Jun 26 05:59 initoratest2.ora
+-rw-r--r--. 1 oracle dba  1527 Jun 26 05:59 initoratest2.ora_2606
+-rw-r-----. 1 oracle dba  4608 Jun 26 06:15 arch1_53_978812313.dbf
+-rw-r-----. 1 oracle dba  1024 Jun 26 06:15 arch1_54_978812313.dbf
+-rw-r-----. 1 oracle dba 23040 Jun 26 06:16 spfileoratest2.ora
+-rw-rw----. 1 oracle dba  1544 Jun 26 06:23 hc_oratest2.dat
+[oracle@npvslxdc63 dbs]$ mv spfileoratest2.ora spfileoratest2.ora_bkp
+[oracle@npvslxdc63 dbs]$ sqlplus
+
+SQL*Plus: Release 12.2.0.1.0 Production on Tue Jun 26 06:27:07 2018
+
+Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+
+Enter user-name: / as sysdba
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SQL> shutdown immediate;
+ORA-01507: database not mounted
+
+
+ORACLE instance shut down.
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+[oracle@npvslxdc63 dbs]$ vi initoratest2.ora
+[oracle@npvslxdc63 dbs]$ cd /oracle/RMANCAT/data01/CDB_TEST/
+[oracle@npvslxdc63 CDB_TEST]$ ls -ltr
+total 2258776
+drwxr-xr-x. 2 oracle dba       4096 Jun 20 12:27 PDB_CLONE
+drwxr-x---. 2 oracle dba       4096 Jun 26 06:15 PDBSEED
+drwxrwxrwx. 2 oracle dba       4096 Jun 26 06:15 PDB1
+drwxr-x---. 2 oracle dba       4096 Jun 26 06:15 pdbclone
+-rw-r-----. 1 oracle dba  870326272 Jun 26 06:15 system01.dbf
+-rw-r-----. 1 oracle dba 1279270912 Jun 26 06:15 sysaux01.dbf
+-rw-r-----. 1 oracle dba  120594432 Jun 26 06:15 undotbs01.dbf
+-rw-r-----. 1 oracle dba    5251072 Jun 26 06:15 users01.dbf
+-rw-r-----. 1 oracle dba   18759680 Jun 26 06:23 control01.ctl
+-rw-r-----. 1 oracle dba   18759680 Jun 26 06:23 control02.ctl
+[oracle@npvslxdc63 CDB_TEST]$ sqlplus
+
+SQL*Plus: Release 12.2.0.1.0 Production on Tue Jun 26 06:28:00 2018
+
+Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+
+Enter user-name: / as sysdba
+sConnected to an idle instance.
+
+SQL>
+SQL>
+SQL> startup;
+ORACLE instance started.
+
+Total System Global Area 1048576000 bytes
+Fixed Size                  8800712 bytes
+Variable Size             687867448 bytes
+Database Buffers          343932928 bytes
+Redo Buffers                7974912 bytes
+ORA-01103: database name 'ORATEST' in control file is not 'ORATEST2'
+
+
+SQL> shutdown immediate;
+ORA-01507: database not mounted
+
+
+ORACLE instance shut down.
+SQL> startup nomount;
+ORACLE instance started.
+
+Total System Global Area 1048576000 bytes
+Fixed Size                  8800712 bytes
+Variable Size             687867448 bytes
+Database Buffers          343932928 bytes
+Redo Buffers                7974912 bytes
+SQL> create spfile from pfile;
+
+File created.
+
+SQL> ALTER SYSTEM SET DB_NAME=oratest2 scope=spfile;
+ALTER SYSTEM SET DB_NAME=oratest2 scope=spfile
+*
+ERROR at line 1:
+ORA-32001: write to SPFILE requested but no SPFILE is in use
+
+
+SQL> shutdown immediate;
+ORA-01507: database not mounted
+
+
+ORACLE instance shut down.
+SQL> startup nomount;
+ORACLE instance started.
+
+Total System Global Area 1048576000 bytes
+Fixed Size                  8800712 bytes
+Variable Size             687867448 bytes
+Database Buffers          343932928 bytes
+Redo Buffers                7974912 bytes
+SQL> ALTER SYSTEM SET DB_NAME=oratest2 scope=spfile;
+
+System altered.
+
+SQL> shut immediate;
+ORA-01507: database not mounted
+
+
+ORACLE instance shut down.
+SQL> startup;
+ORACLE instance started.
+
+Total System Global Area 1048576000 bytes
+Fixed Size                  8800712 bytes
+Variable Size             687867448 bytes
+Database Buffers          343932928 bytes
+Redo Buffers                7974912 bytes
+ORA-01103: database name 'ORATEST' in control file is not 'ORATEST2'
+
+
+SQL> shutdown immediate;
+ORA-01507: database not mounted
+
+
+ORACLE instance shut down.
+SQL> startup nomount;
+ORACLE instance started.
+
+Total System Global Area 1048576000 bytes
+Fixed Size                  8800712 bytes
+Variable Size             687867448 bytes
+Database Buffers          343932928 bytes
+Redo Buffers                7974912 bytes
+SQL> ALTER SYSTEM SET DB_NAME=oratest2 scope=spfile;
+
+System altered.
+
+SQL> shut immediate;
+ORA-01507: database not mounted
+
+
+ORACLE instance shut down.
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+[oracle@npvslxdc63 CDB_TEST]$ sqlplus
+
+SQL*Plus: Release 12.2.0.1.0 Production on Tue Jun 26 06:35:25 2018
+
+Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+
+Enter user-name: / as sysdba
+Connected to an idle instance.
+
+SQL> startup nomount;
+ORACLE instance started.
+
+Total System Global Area 1048576000 bytes
+Fixed Size                  8800712 bytes
+Variable Size             687867448 bytes
+Database Buffers          343932928 bytes
+Redo Buffers                7974912 bytes
+SQL> alter database mount;
+alter database mount
+*
+ERROR at line 1:
+ORA-01103: database name 'ORATEST' in control file is not 'ORATEST2'
+
+
+SQL> shutdown immediate;
+ORA-01507: database not mounted
+
+
+ORACLE instance shut down.
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+[oracle@npvslxdc63 CDB_TEST]$ df -gt
+df: invalid option -- 'g'
+Try 'df --help' for more information.
+[oracle@npvslxdc63 CDB_TEST]$ df -h
+Filesystem                           Size  Used Avail Use% Mounted on
+/dev/mapper/vg_rootvg-root            16G  2.4G   14G  15% /
+devtmpfs                              12G     0   12G   0% /dev
+tmpfs                                 12G     0   12G   0% /dev/shm
+tmpfs                                 12G   66M   12G   1% /run
+tmpfs                                 12G     0   12G   0% /sys/fs/cgroup
+/dev/sda1                            509M  235M  275M  47% /boot
+/dev/mapper/vg_rootvg-var            5.0G  602M  4.5G  12% /var
+/dev/mapper/vg_rootvg-rwe            2.0G   33M  2.0G   2% /rwe
+/dev/mapper/vg_rootvg-test            19G   33M   19G   1% /test
+/dev/mapper/vg_rootvg-tmp            6.0G   42M  6.0G   1% /tmp
+/dev/mapper/vg_rootvg-opt_patrol     5.0G  838M  4.2G  17% /opt/patrol
+/dev/mapper/vg_rootvg-UC4            5.0G   56M  5.0G   2% /UC4
+/dev/mapper/vg_rootvg-home           5.0G   49M  5.0G   1% /home
+/dev/mapper/vg_rootvg-var_log        5.0G   99M  4.9G   2% /var/log
+/dev/mapper/dbvg-dblv01              9.8G  525M  8.7G   6% /oracle/RMANCAT
+/dev/mapper/dbvg-dblv05              4.8G  2.0G  2.6G  44% /oracle/RMANCAT/redo01
+/dev/mapper/dbvg-dblv07              9.8G  158M  9.1G   2% /oracle/RMANCAT/temp
+/dev/mapper/dbvg-dblv03               59G  6.8G   50G  13% /oracle/RMANCAT/data01
+/dev/mapper/dbvg-dblv08               49G   15G   31G  33% /oracle/RMANCAT/arch
+/dev/mapper/dbvg-dblv06              4.8G   31M  4.6G   1% /oracle/RMANCAT/redo02
+/dev/mapper/dbvg-dblv04               40G   49M   38G   1% /oracle/RMANCAT/data02
+/dev/mapper/dbvg-dblv02               25G  8.3G   15G  36% /oracle/RMANCAT/12.2.0.1
+/dev/mapper/vg_rootvg-var_log_audit  2.0G   59M  2.0G   3% /var/log/audit
+tmpfs                                2.4G     0  2.4G   0% /run/user/0
+tmpfs                                2.4G     0  2.4G   0% /run/user/99
+tmpfs                                2.4G     0  2.4G   0% /run/user/54321
+tmpfs                                2.4G     0  2.4G   0% /run/user/52105
+[oracle@npvslxdc63 CDB_TEST]$ cd /oracle/RMANCAT/data01
+[oracle@npvslxdc63 data01]$ ls -ltr
+total 2329772
+drwx------. 2 root   root      16384 May 23 12:28 lost+found
+-rw-r-----. 1 oracle dba     5251072 Jun 26 02:05 users01.dbf
+drwxr-xr-x. 6 oracle dba        4096 Jun 26 06:15 CDB_TEST
+-rw-r-----. 1 oracle dba    73408512 Jun 26 06:39 undotbs01.dbf
+-rw-r-----. 1 oracle dba   870326272 Jun 26 06:39 system01.dbf
+-rw-r-----. 1 oracle dba  1426071552 Jun 26 06:40 sysaux01.dbf
+-rw-r-----. 1 oracle dba    10600448 Jun 26 06:41 control01.ctl
+[oracle@npvslxdc63 data01]$ mv control01.ctl control01.ctl_bkp
+[oracle@npvslxdc63 data01]$ cd /oracle/RMANCAT/data02
+[oracle@npvslxdc63 data02]$ ls -ltr
+total 16
+drwx------. 2 root root 16384 May 23 12:28 lost+found
+[oracle@npvslxdc63 data02]$ pwd
+/oracle/RMANCAT/data02
+[oracle@npvslxdc63 data02]$ cd $ORACLE_HOME/dbs
+[oracle@npvslxdc63 dbs]$ ls -ltr
+total 88
+-rw-r--r--. 1 oracle dba  3079 May 15  2015 init.ora
+-rw-r-----. 1 oracle dba    24 Jun  4 11:18 lkRMANP
+-rw-r-----. 1 oracle dba  3584 Jun  4 11:21 orapwRMANP
+-rw-rw----. 1 oracle dba  1544 Jun  4 12:35 hc_RMANP.dat
+-rw-r-----. 1 oracle dba  3584 Jun 19 11:34 spfileRMANP.ora
+-rw-r-----. 1 oracle dba  2048 Jun 22 12:38 orapworatest2
+-rw-r-----. 1 oracle dba  2048 Jun 22 14:32 orapworatest
+-rw-r-----. 1 oracle dba    24 Jun 25 15:22 lkORATEST2
+-rw-r--r--. 1 oracle dba  1527 Jun 26 05:59 initoratest2.ora
+-rw-r--r--. 1 oracle dba  1527 Jun 26 05:59 initoratest2.ora_2606
+-rw-r-----. 1 oracle dba  4608 Jun 26 06:15 arch1_53_978812313.dbf
+-rw-r-----. 1 oracle dba  1024 Jun 26 06:15 arch1_54_978812313.dbf
+-rw-r-----. 1 oracle dba 23040 Jun 26 06:16 spfileoratest2.ora_bkp
+-rw-r-----. 1 oracle dba  4608 Jun 26 06:34 spfileoratest2.ora
+-rw-rw----. 1 oracle dba  1544 Jun 26 06:37 hc_oratest2.dat
+[oracle@npvslxdc63 dbs]$ cat initoratest2.ora
+oratest2.__inmemory_ext_rwarea=0
+oratest2.__java_pool_size=4194304
+oratest2.__large_pool_size=71303168
+oratest2.__oracle_base='/oracle/RMANCAT'#ORACLE_BASE set from environment
+oratest2.__pga_aggregate_target=524288000
+oratest2.__sga_target=1048576000
+oratest2.__shared_io_pool_size=29360128
+oratest2.__shared_pool_size=369098752
+oratest2.__streams_pool_size=0
+*.audit_file_dest='/oracle/RMANCAT/admin/oratest2/adump'
+*.audit_trail='db'
+*.compatible='12.2.0'
+*.control_files='/oracle/RMANCAT/data01/CDB_TEST/control01.ctl','/oracle/RMANCAT/data01/CDB_TEST/control02.ctl'
+*.db_block_size=8192
+*.db_name='oratest2'
+*.diagnostic_dest='/oracle/RMANCAT'
+*.dispatchers='(PROTOCOL=TCP) (SERVICE=oratest2XDB)'
+*.enable_pluggable_database=true
+*.local_listener='LISTENER_ORATEST2'
+*.nls_language='ENGLISH'
+*.nls_territory='UNITED KINGDOM'
+*.open_cursors=300
+*.pga_aggregate_target=500m
+*.processes=640
+*.remote_login_passwordfile='EXCLUSIVE'
+*.service_names='oratest2'
+*.sga_target=1000m
+*.undo_tablespace='UNDOTBS1'
+*.db_file_name_convert=('/oracle/RMANSTD/oradata/oratest/pdb1/','/oracle/RMANCAT/data01/CDB_TEST/PDB1',/oracle/RMANSTD/data01/CDB_TEST/CDB/','/oracle/RMANCAT/data01/CDB_TEST','/oracle/RMANSTD/data01/CDB_TEST/PDB1','/oracle/RMANCAT/data01/CDB_TEST/PDB1', '/oracle/RMANSTD/data01/CDB_TEST/PDBCLONE','/oracle/RMANCAT/data01/CDB_TEST/PDBCLONE','/oracle/RMANSTD/data01/CDB_TEST/PDBSEED','/oracle/RMANCAT/data01/CDB_TEST/PDBSEED')
+*.log_file_name_convert=('/oracle/RMANSTD/data01/CDB_TEST','/oracle/RMANCAT/data01/CDB_TEST')
+[oracle@npvslxdc63 dbs]$ cd /oracle/RMANCAT/data01/CDB_TEST/
+[oracle@npvslxdc63 CDB_TEST]$ ls -ltr
+total 2258776
+drwxr-xr-x. 2 oracle dba       4096 Jun 20 12:27 PDB_CLONE
+drwxr-x---. 2 oracle dba       4096 Jun 26 06:15 PDBSEED
+drwxrwxrwx. 2 oracle dba       4096 Jun 26 06:15 PDB1
+drwxr-x---. 2 oracle dba       4096 Jun 26 06:15 pdbclone
+-rw-r-----. 1 oracle dba  870326272 Jun 26 06:15 system01.dbf
+-rw-r-----. 1 oracle dba 1279270912 Jun 26 06:15 sysaux01.dbf
+-rw-r-----. 1 oracle dba  120594432 Jun 26 06:15 undotbs01.dbf
+-rw-r-----. 1 oracle dba    5251072 Jun 26 06:15 users01.dbf
+-rw-r-----. 1 oracle dba   18759680 Jun 26 06:35 control01.ctl
+-rw-r-----. 1 oracle dba   18759680 Jun 26 06:35 control02.ctl
+[oracle@npvslxdc63 CDB_TEST]$ cd ..
+[oracle@npvslxdc63 data01]$ ls -ltr
+total 2329772
+drwx------. 2 root   root      16384 May 23 12:28 lost+found
+-rw-r-----. 1 oracle dba     5251072 Jun 26 02:05 users01.dbf
+drwxr-xr-x. 6 oracle dba        4096 Jun 26 06:15 CDB_TEST
+-rw-r-----. 1 oracle dba  1426071552 Jun 26 06:40 sysaux01.dbf
+-rw-r-----. 1 oracle dba   870326272 Jun 26 06:42 system01.dbf
+-rw-r-----. 1 oracle dba    73408512 Jun 26 06:42 undotbs01.dbf
+-rw-r-----. 1 oracle dba    10600448 Jun 26 06:42 control01.ctl_bkp
+[oracle@npvslxdc63 data01]$ mv control01.ctl_bkp control01.ctl
+[oracle@npvslxdc63 data01]$ cd CDB_TEST
+[oracle@npvslxdc63 CDB_TEST]$ ls -ltr
+total 2258776
+drwxr-xr-x. 2 oracle dba       4096 Jun 20 12:27 PDB_CLONE
+drwxr-x---. 2 oracle dba       4096 Jun 26 06:15 PDBSEED
+drwxrwxrwx. 2 oracle dba       4096 Jun 26 06:15 PDB1
+drwxr-x---. 2 oracle dba       4096 Jun 26 06:15 pdbclone
+-rw-r-----. 1 oracle dba  870326272 Jun 26 06:15 system01.dbf
+-rw-r-----. 1 oracle dba 1279270912 Jun 26 06:15 sysaux01.dbf
+-rw-r-----. 1 oracle dba  120594432 Jun 26 06:15 undotbs01.dbf
+-rw-r-----. 1 oracle dba    5251072 Jun 26 06:15 users01.dbf
+-rw-r-----. 1 oracle dba   18759680 Jun 26 06:35 control01.ctl
+-rw-r-----. 1 oracle dba   18759680 Jun 26 06:35 control02.ctl
+[oracle@npvslxdc63 CDB_TEST]$ mv control01.ctl control01.ctl_bkp
+[oracle@npvslxdc63 CDB_TEST]$ mv control02.ctl control02.ctl_bkp
+[oracle@npvslxdc63 CDB_TEST]$ sqlplus
+
+SQL*Plus: Release 12.2.0.1.0 Production on Tue Jun 26 06:43:23 2018
+
+Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+
+Enter user-name: / as sysdba
+Connected to an idle instance.
+
+SQL> startup nomount;
+ORACLE instance started.
+
+Total System Global Area 1048576000 bytes
+Fixed Size                  8800712 bytes
+Variable Size             687867448 bytes
+Database Buffers          343932928 bytes
+Redo Buffers                7974912 bytes
+SQL> CREATE CONTROLFILE SET DATABASE "ORATEST2" RESETLOGS  ARCHIVELOG
+  2      MAXLOGFILES 16
+  3      MAXLOGMEMBERS 3
+    MAXDATAFILES 1024
+  4    5      MAXINSTANCES 8
+  6      MAXLOGHISTORY 292
+  7  LOGFILE
+  8    GROUP 1 '/oracle/RMANCAT/data01/CDB_TEST/redo01.log'  SIZE 200M BLOCKSIZE 512,
+  9    GROUP 2 '/oracle/RMANCAT/data01/CDB_TEST/redo02.log'  SIZE 200M BLOCKSIZE 512
+ 10  -- STANDBY LOGFILE
+ 11  DATAFILE
+ 12    '/oracle/RMANCAT/data01/CDB_TEST/system01.dbf',
+ 13    '/oracle/RMANCAT/data01/CDB_TEST/sysaux01.dbf',
+ 14    '/oracle/RMANCAT/data01/CDB_TEST/undotbs01.dbf',
+ 15    '/oracle/RMANCAT/data01/CDB_TEST/PDBSEED/system01.dbf',
+ 16    '/oracle/RMANCAT/data01/CDB_TEST/PDBSEED/sysaux01.dbf',
+ 17    '/oracle/RMANCAT/data01/CDB_TEST/users01.dbf',
+ 18    '/oracle/RMANCAT/data01/CDB_TEST/PDB1/system01.dbf',
+ 19    '/oracle/RMANCAT/data01/CDB_TEST/PDB1/sysaux01.dbf',
+  '/oracle/RMANCAT/data01/CDB_TEST/PDB1/users01.dbf',
+ 20   21    '/oracle/RMANCAT/data01/CDB_TEST/pdbclone/system01.dbf',
+ 22    '/oracle/RMANCAT/data01/CDB_TEST/pdbclone/sysaux01.dbf',
+ 23    '/oracle/RMANCAT/data01/CDB_TEST/pdbclone/users01.dbf'
+ 24  CHARACTER SET AL32UTF8
+ 25  ;
+
+Control file created.
+
+SQL> alter database open resetlogs;
+
+Database altered.
+
+SQL> alter pluggable database all open;
+
+Pluggable database altered.
+
+SQL> sho pdbs
+
+    CON_ID CON_NAME                       OPEN MODE  RESTRICTED
+---------- ------------------------------ ---------- ----------
+         2 PDB$SEED                       READ ONLY  NO
+         3 PDB1                           READ WRITE NO
+         5 PDBCLONE                       READ WRITE NO
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+[oracle@npvslxdc63 CDB_TEST]$ export ORACLE_SID=RMANP
+[oracle@npvslxdc63 CDB_TEST]$ sqlplus
+
+SQL*Plus: Release 12.2.0.1.0 Production on Tue Jun 26 06:44:54 2018
+
+Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+
+Enter user-name: / as sysdba
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SQL> select open_mode from v$database;
+
+OPEN_MODE
+--------------------
+READ WRITE
+
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+[oracle@npvslxdc63 CDB_TEST]$ ps -ef|grep tns
+root        49     2  0 May24 ?        00:00:00 [netns]
+oracle    9700     1  0 Jun04 ?        00:01:04 /oracle/RMANCAT/12.2.0.1/bin/tnslsnr LISTENER_RMANP -inherit
+oracle   11549     1  0 Jun22 ?        00:00:10 /oracle/RMANCAT/12.2.0.1/bin/tnslsnr LISTENER_ORATEST2 -inherit
+oracle   14387  6119  0 06:49 pts/0    00:00:00 grep --color=auto tns
+[oracle@npvslxdc63 CDB_TEST]$

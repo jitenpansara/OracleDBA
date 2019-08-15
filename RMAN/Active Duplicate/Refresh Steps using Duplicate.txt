@@ -1,0 +1,69 @@
+Source: PHOEP
+Target: OPHOEO
+
+Database Refresh Steps:
+
+-> Send mail to application team before starting the activity.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Source DB:
+
+1. Take Backup: nohup /oracle/rman/bin/rmanc.sh PHOEP backup_db_inc0.rcv &
+
+2. If the backup is successful, get the time from the end of the log file.
+
+3. If needed, change the password of the system/sys user.
+	
+	SQL> alter user system  identified by notsys;
+	
+4. Get catalog details.
+
+cat /oracle/$ORACLE_SID/admin/$ORACLE_SID/etc/rmanc.conf |grep -i CATALOG=
+CATALOG=rmanukPHOEP/manrman@rma0p_app.rwe.com
+
+5. In some cases, if you get TAPE error, verify TYPE of the backup in RCV file(/oracle/rman/log - db_inc0.log). If it is 'SBT_TAPE' in source than it should be same in target as well.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
+
+Target DB:
+
+1. For security purpose, you can take backup of DBLinks, directories using Toad.
+
+2. mv spfile_name to new name.
+
+3. In case the script don't contain "DB_FILE_NAME_CONVERT" parameter than add it in Pfile.
+
+4. shutdown immediate;
+
+5. Remove all datafiles using rm -rf.
+
+5. startup nomount;
+
+6. Go to /oracle/rman/rcv and open <SID>_rman_duplicate.rcv.
+
+7. Change the time which you have taken from Production's backup log.
+
+8. Create SH file for the RCV file.
+
+9. nohup /oracle/rman/bin/rmanc.sh ASDB <SID>_rman_duplicate.rcv &
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+In case there is need to run it manually(without rcv)
+1. rman
+2. connect target system/notsys@<db string>
+3. connect auxiliary /
+4. connect catalog RMANUKJUGP/manrman@rma0p_app.rwe.com 
+
+run
+{
+	block
+}
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+In case, you want to reset password of TSM password.
+
+Change the DB Name in Excel.
+./tdpoconf passw -tdpo_optfile=/opt/tivoli/tsm/client/oracle/bin64/tdpo_ASGP_dft.opt

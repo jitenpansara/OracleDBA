@@ -1,0 +1,23 @@
+CONFIGURE CONTROLFILE AUTOBACKUP ON;
+show all;
+
+#startup force;
+shutdown immediate;
+startup mount;
+
+run 
+{
+allocate channel t1 type DISK; 
+allocate channel t2 type DISK; 
+allocate channel t3 type DISK;
+allocate channel t4 type DISK; 
+set command id to 'Backup Database OFFLINE';
+backup current controlfile format 'D:\11g_11082017\control_%s_%p_%t';
+backup spfile format 'D:\11g_11082017\spfile_%d_%s_%T.bak';
+backup filesperset 10 
+database format 'D:\11g_11082017\DB_offline_%d_%U_s%s_p%p';
+release channel t1;
+release channel t2;
+release channel t3;
+release channel t4;
+}

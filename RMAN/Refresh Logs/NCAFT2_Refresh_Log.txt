@@ -1,0 +1,293 @@
+restoring datafile 00001 to /necafi/oradata/NCAFT2/system_01.dbf
+restoring datafile 00002 to /necafi/oradata/NCAFT2/undotbs_01.dbf
+restoring datafile 00004 to /necafi/oradata/NCAFT2/users_01.dbf
+restoring datafile 00011 to /necafi/oradata/NCAFT2/syncserver_02.dbf
+channel adsm_2: starting datafile backupset restore
+channel adsm_2: specifying datafile(s) to restore from backup set
+restoring datafile 00003 to /necafi/oradata/NCAFT2/tools_01.dbf
+restoring datafile 00005 to /necafi/oradata/NCAFT2/sdsdat01_01.dbf
+restoring datafile 00006 to /necafi/oradata/NCAFT2/sdsind01_01.dbf
+restoring datafile 00007 to /necafi/oradata/NCAFT2/syncserver_01.dbf
+restoring datafile 00008 to /necafi/oradata/NCAFT2/appsuppdat01_01.dbf
+released channel: adsm_1
+released channel: adsm_2
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-03002: failure of restore command at 10/17/2016 14:39:11
+ORA-19505: failed to identify file "/mnt/cafinep/Inc0_CAFINEP_klrij9tj_1_1_s78485_p1"
+ORA-27037: unable to obtain file status
+SVR4 Error: 2: No such file or directory
+Additional information: 3
+
+RMAN>
+RMAN>
+RMAN> **end-of-file**
+
+RMAN>
+
+Recovery Manager complete.
+[su10sb303:CAFINEP]cd /oracle/rman/rcv
+[su10sb303:CAFINEP]ls -ltr
+total 104
+-rwxrwxr-x   1 oracle   dba          194 Aug  4  2010 resync_cat.rcv
+-rwxrwxr-x   1 oracle   dba          188 Aug  4  2010 register_db.rcv
+-rwxrwxr-x   1 oracle   dba         1009 Aug  4  2010 recov_ts.rcv
+-rwxrwxr-x   1 oracle   dba         1019 Aug  4  2010 recov_df.rcv
+-rwxrwxr-x   1 oracle   dba         1127 Aug  4  2010 recov_db_pitr.rcv
+-rwxrwxr-x   1 oracle   dba         1122 Aug  4  2010 recov_db_cold.rcv
+-rwxrwxr-x   1 oracle   dba          763 Aug  4  2010 recov_db.rcv
+-rwxrwxr-x   1 oracle   dba          733 Aug  4  2010 recov_ctl.rcv
+-rwxrwxr-x   1 oracle   dba          342 Aug  4  2010 recov_blockrecover_beispiel.txt
+-rwxrwxr-x   1 oracle   dba         1391 Aug  4  2010 recov_blockrecover.rcv
+-rwxrwxr-x   1 oracle   dba          605 Aug  4  2010 recov_arc.rcv
+-rwxrwxr-x   1 oracle   dba          613 Aug  4  2010 delete_sysdate.rcv
+-rwxrwxr-x   1 oracle   dba          629 Aug  4  2010 delete_obsolete.rcv
+-rwxrwxr-x   1 oracle   dba          627 Aug  4  2010 backup_validate.rcv
+-rwxrwxr-x   1 oracle   dba         1058 Aug  4  2010 backup_db_standby.rcv
+-rwxrwxr-x   1 oracle   dba         1158 Aug  4  2010 backup_db_offsite.rcv
+-rwxrwxr-x   1 oracle   dba          728 Aug  4  2010 backup_db_offline.rcv
+-rwxrwxr-x   1 oracle   dba         1124 Aug  4  2010 backup_db_inc1.rcv
+-rwxrwxr-x   1 oracle   dba         1057 Aug  4  2010 backup_db_inc0.rcv
+-rwxrwxr-x   1 oracle   dba          984 Aug  4  2010 backup_db.rcv
+-rwxrwxr-x   1 oracle   dba          751 Aug  4  2010 backup_arch.rcv
+-rwxrwxr-x   1 oracle   dba          278 Aug  4  2010 arch_validate.rcv
+-rwxrwxr-x   1 oracle   dba          664 Feb  3  2012 rman_configure_param.rcv
+-rw-r--r--   1 oracle   dba         1630 Jun  8  2012 NCAFT2_rman_duplicate.rcv
+-rw-r--r--   1 oracle   dba         1060 Jun  8  2012 NASST2_rman_duplicate.rcv
+-rw-r--r--   1 oracle   dba         1033 Jun  8  2012 NMOPT2_rman_duplicate.rcv
+-rwxr-xr-x   1 oracle   dba          708 Feb  4  2013 backup_arch_noswitch.rcv
+-rw-r--r--   1 oracle   dba          740 Jun  8  2015 backup_arch_skip.rcv
+-rwxrwxrwx   1 oracle   dba          853 Oct 17 14:38 NCAFT2_restore_without_duplicate.rcv
+-rwxrwxrwx   1 oracle   dba           65 Oct 17 14:38 NCAFT2_restore_without_duplicate.sh
+-rw-------   1 oracle   dba         3073 Oct 17 14:39 nohup.out
+[su10sb303:CAFINEP]cat NCAFT2_restore_without_duplicate.rcv
+
+connect target /
+
+
+run
+{
+allocate channel adsm_1 type DISK;
+allocate channel adsm_2 type DISK;
+set newname for datafile 1 to '/necafi/oradata/NCAFT2/system_01.dbf';
+set newname for datafile 2 to '/necafi/oradata/NCAFT2/undotbs_01.dbf';
+set newname for datafile 3 to '/necafi/oradata/NCAFT2/tools_01.dbf';
+set newname for datafile 4 to '/necafi/oradata/NCAFT2/users_01.dbf';
+set newname for datafile 5 to '/necafi/oradata/NCAFT2/sdsdat01_01.dbf';
+set newname for datafile 6 to '/necafi/oradata/NCAFT2/sdsind01_01.dbf';
+set newname for datafile 7 to '/necafi/oradata/NCAFT2/syncserver_01.dbf';
+set newname for datafile 8 to '/necafi/oradata/NCAFT2/appsuppdat01_01.dbf';
+set newname for datafile 11 to '/necafi/oradata/NCAFT2/syncserver_02.dbf';
+restore database;
+switch datafile all;
+recover database;
+release channel adsm_1;
+release channel adsm_2;
+}
+
+
+[su10sb303:CAFINEP]cd /mnt/cafinep
+ksh: /mnt/cafinep:  not found
+[su10sb303:CAFINEP]df -h
+Filesystem             size   used  avail capacity  Mounted on
+/                      122G    17G   105G    14%    /
+/UC4                   250M    11M   239M     5%    /UC4
+/dev                   122G    17G   105G    14%    /dev
+/export/home           2.0G   776M   1.2G    38%    /export/home
+/lib                    35G   8.6G    26G    25%    /lib
+/lib/svc/method         35G   8.6G    26G    25%    /lib/svc/method
+/neassign/apps         108G   2.8G   105G     3%    /neassign/apps
+/neassign/archivelogs
+                        10G   2.3G   7.7G    23%    /neassign/archivelogs
+/neassign/opt           15G    12G   3.1G    80%    /neassign/opt
+/neassign/oradata       30G    24G   6.1G    80%    /neassign/oradata
+/necafi/apps           106G   692M   105G     1%    /necafi/apps
+/necafi/archivelogs    5.0G    22K   5.0G     1%    /necafi/archivelogs
+/necafi/opt             25G    11G    14G    44%    /necafi/opt
+/necafi/oradata         25G    12G    13G    49%    /necafi/oradata
+/nemop/apps            108G   2.7G   105G     3%    /nemop/apps
+/nemop/archivelogs     5.0G    31K   5.0G     1%    /nemop/archivelogs
+/nemop/opt              20G   4.0G    16G    20%    /nemop/opt
+/nemop/oradata         210G   157G    53G    75%    /nemop/oradata
+/opt/TAD4D             1.5G    44M   1.5G     3%    /opt/TAD4D
+/platform               35G   8.6G    26G    25%    /platform
+/rwe                   2.0G    12M   2.0G     1%    /rwe
+/sbin                   35G   8.6G    26G    25%    /sbin
+/usr                    35G   8.6G    26G    25%    /usr
+/usr/bin                35G   8.6G    26G    25%    /usr/bin
+/usr/local             8.0G  1016M   7.0G    13%    /usr/local
+proc                     0K     0K     0K     0%    /proc
+ctfs                     0K     0K     0K     0%    /system/contract
+mnttab                   0K     0K     0K     0%    /etc/mnttab
+objfs                    0K     0K     0K     0%    /system/object
+swap                   1.3G   352K   1.3G     1%    /etc/svc/volatile
+/platform/sun4v/lib/libc_psr/libc_psr_hwcap3.so.1
+                        35G   8.6G    26G    25%    /platform/sun4v/lib/libc_psr.so.1
+/platform/sun4v/lib/sparcv9/libc_psr/libc_psr_hwcap3.so.1
+                        35G   8.6G    26G    25%    /platform/sun4v/lib/sparcv9/libc_psr.so.1
+fd                       0K     0K     0K     0%    /dev/fd
+swap                   1.3G   120K   1.3G     1%    /tmp
+swap                   1.3G    56K   1.3G     1%    /var/run
+nppsorcledc08:/temp/mnt1
+                       147G    26G   121G    18%    /mnt2
+su14sl001:/rwe         2.0G   418M   1.6G    21%    /rwe_mnt
+[su10sb303:CAFINEP]cd /mnt2
+[su10sb303:CAFINEP]ls -ltr
+total 9
+drwxrwxrwx   2 oracle   dba            2 Oct 14 13:41 modb
+drwxrwxrwx   2 oracle   dba            8 Oct 17 12:49 asdb
+drwxrwxrwx   2 oracle   dba            8 Oct 17  2016 cafinep
+[su10sb303:CAFINEP]cd cafinep
+[su10sb303:CAFINEP]ls -ltr
+total 23292252
+-rw-r-----   1 oracle   dba      3789856768 Oct 17 13:23 Inc0_CAFINEP_klrij9tj_1_1_s78485_p1
+-rw-r-----   1 oracle   dba      8122966016 Oct 17 13:24 Inc0_CAFINEP_kmrij9tk_1_1_s78486_p1
+-rw-r-----   1 oracle   dba       198656 Oct 17 13:24 ARCH_1_CAFINEP_kqrija17_1_1_s78490_p1
+-rw-r-----   1 oracle   dba      3456000 Oct 17 13:24 ARCH_1_CAFINEP_kprija17_1_1_s78489_p1
+-rw-r-----   1 oracle   dba         4608 Oct 17 13:24 ARCH_1_CAFINEP_krrija17_1_1_s78491_p1
+-rw-------   1 oracle   dba         1408 Oct 17  2016 nohup.out
+[su10sb303:CAFINEP]ls -ltr
+total 23292252
+-rw-r-----   1 oracle   dba      3789856768 Oct 17 13:23 Inc0_CAFINEP_klrij9tj_1_1_s78485_p1
+-rw-r-----   1 oracle   dba      8122966016 Oct 17 13:24 Inc0_CAFINEP_kmrij9tk_1_1_s78486_p1
+-rw-r-----   1 oracle   dba       198656 Oct 17 13:24 ARCH_1_CAFINEP_kqrija17_1_1_s78490_p1
+-rw-r-----   1 oracle   dba      3456000 Oct 17 13:24 ARCH_1_CAFINEP_kprija17_1_1_s78489_p1
+-rw-r-----   1 oracle   dba         4608 Oct 17 13:24 ARCH_1_CAFINEP_krrija17_1_1_s78491_p1
+-rw-------   1 oracle   dba         1408 Oct 17  2016 nohup.out
+[su10sb303:CAFINEP]ls -ltr Inc0_CAFINEP_klrij9tj_1_1_s78485_p1
+-rw-r-----   1 oracle   dba      3789856768 Oct 17 13:23 Inc0_CAFINEP_klrij9tj_1_1_s78485_p1
+[su10sb303:CAFINEP]pwd
+/mnt2/cafinep
+[su10sb303:CAFINEP]ls -ltr
+total 23297321
+-rw-------   1 oracle   dba         1408 Oct 17 15:06 nohup.out
+-rw-r-----   1 oracle   dba      3789856768 Oct 17  2016 Inc0_CAFINEP_l1rijjt8_1_1_s78497_p1
+-rw-r-----   1 oracle   dba      8122966016 Oct 17  2016 Inc0_CAFINEP_l2rijjt8_1_1_s78498_p1
+-rw-r-----   1 oracle   dba      1380864 Oct 17  2016 ARCH_1_CAFINEP_l5rijk0q_1_1_s78501_p1
+-rw-r-----   1 oracle   dba      4786688 Oct 17  2016 ARCH_1_CAFINEP_l6rijk0q_1_1_s78502_p1
+-rw-r-----   1 oracle   dba       108544 Oct 17  2016 ARCH_1_CAFINEP_l7rijk0q_1_1_s78503_p1
+[su10sb303:CAFINEP]cd $ORACLE_HOME/dbs
+[su10sb303:CAFINEP]ls -ltr
+total 64646
+-rw-r--r--   1 oracle   dba         8385 Mar  9  2002 init.ora
+-rw-r--r--   1 oracle   dba        12920 Mar  9  2002 initdw.ora
+-rw-r--r--   1 oracle   dba         1201 Jun  7  2012 initNCAFT2.ora
+-rw-r-----   1 oracle   dba         3584 Jun  8  2012 spfileNCAFT2.ora_27072016
+-rw-r--r--   1 oracle   dba          148 Apr 29 02:00 dsierror.log
+-rwSr-----   1 oracle   dba         2048 Aug  3 13:46 orapwNCAFT2
+-rw-rw----   1 oracle   dba           24 Oct 15 13:45 lkNCAFT2
+-rw-r-----   1 oracle   dba      7839744 Oct 17 02:02 snapcf_NCAFT2.f
+-rw-r--r--   1 oracle   dba         1108 Oct 17 13:28 initCAFINEP.ora
+-rw-r-----   1 oracle   dba      12484608 Oct 17 13:38 c-921861388-20161017-0d
+-rw-r-----   1 oracle   dba      12484608 Oct 17 14:17 c-921861388-20161017-0c
+-rw-rw----   1 oracle   dba           24 Oct 17 14:21 lkCAFINEP
+-rwSr-----   1 oracle   dba         2048 Oct 17 14:24 orapwcafinep
+[su10sb303:CAFINEP]sqlplus
+
+SQL*Plus: Release 9.2.0.6.0 - Production on Mon Oct 17 15:53:07 2016
+
+Copyright (c) 1982, 2002, Oracle Corporation.  All rights reserved.
+
+Enter user-name: / as sysdba
+
+Connected to:
+Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+SQL> shutdown immediate;
+ORA-01109: database not open
+
+
+Database dismounted.
+ORACLE instance shut down.
+SQL> exit
+Disconnected from Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+[su10sb303:CAFINEP]cd $ORACLE_HOME/dbs
+[su10sb303:CAFINEP]ls -ltr
+total 113840
+-rw-r--r--   1 oracle   dba         8385 Mar  9  2002 init.ora
+-rw-r--r--   1 oracle   dba        12920 Mar  9  2002 initdw.ora
+-rw-r--r--   1 oracle   dba         1201 Jun  7  2012 initNCAFT2.ora
+-rw-r-----   1 oracle   dba         3584 Jun  8  2012 spfileNCAFT2.ora_27072016
+-rw-r--r--   1 oracle   dba          148 Apr 29 02:00 dsierror.log
+-rwSr-----   1 oracle   dba         2048 Aug  3 13:46 orapwNCAFT2
+-rw-rw----   1 oracle   dba           24 Oct 15 13:45 lkNCAFT2
+-rw-r-----   1 oracle   dba      7839744 Oct 17 02:02 snapcf_NCAFT2.f
+-rw-r--r--   1 oracle   dba         1108 Oct 17 13:28 initCAFINEP.ora
+-rw-r-----   1 oracle   dba      12484608 Oct 17 13:38 c-921861388-20161017-0d
+-rw-r-----   1 oracle   dba      12484608 Oct 17 14:17 c-921861388-20161017-0c
+-rw-rw----   1 oracle   dba           24 Oct 17 14:21 lkCAFINEP
+-rwSr-----   1 oracle   dba         2048 Oct 17 14:24 orapwcafinep
+-rw-r-----   1 oracle   dba      12484608 Oct 17 15:54 c-921861388-20161017-10
+-rw-r-----   1 oracle   dba      12484608 Oct 17 15:54 c-921861388-20161017-11
+[su10sb303:CAFINEP]sqlplus
+
+SQL*Plus: Release 9.2.0.6.0 - Production on Mon Oct 17 15:55:27 2016
+
+Copyright (c) 1982, 2002, Oracle Corporation.  All rights reserved.
+
+Enter user-name: / as sysdba
+Connected to an idle instance.
+
+SQL> startup nomount pfile='/necafi/opt/oracle/product/9.2.0/dbs/initCAFINEP.ora';
+ORACLE instance started.
+
+Total System Global Area  376408672 bytes
+Fixed Size                   731744 bytes
+Variable Size             251658240 bytes
+Database Buffers          117440512 bytes
+Redo Buffers                6578176 bytes
+SQL> exit
+Disconnected from Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+[su10sb303:CAFINEP]rman target /
+
+Recovery Manager: Release 9.2.0.6.0 - 64bit Production
+
+Copyright (c) 1995, 2002, Oracle Corporation.  All rights reserved.
+
+connected to target database: CAFINEP (not mounted)
+
+RMAN> restore controlfile from "/necafi/opt/oracle/product/9.2.0/dbs/c-921861388-20161017-10";
+
+Starting restore at 17-OCT-16
+
+using target database controlfile instead of recovery catalog
+allocated channel: ORA_DISK_1
+channel ORA_DISK_1: sid=16 devtype=DISK
+channel ORA_DISK_1: restoring controlfile
+channel ORA_DISK_1: restore complete
+replicating controlfile
+input filename=/necafi/oradata/CAFINEP_control01.ctl
+output filename=/necafi/oradata/CAFINEP_control02.ctl
+output filename=/necafi/oradata/CAFINEP_control03.ctl
+Finished restore at 17-OCT-16
+
+RMAN> exit
+
+
+Recovery Manager complete.
+[su10sb303:CAFINEP]sqlplus
+
+SQL*Plus: Release 9.2.0.6.0 - Production on Mon Oct 17 15:56:27 2016
+
+Copyright (c) 1982, 2002, Oracle Corporation.  All rights reserved.
+
+Enter user-name: / as sysdba
+
+Connected to:
+Oracle9i Enterprise Edition Release 9.2.0.6.0 - 64bit Production
+With the Partitioning, OLAP and Oracle Data Mining options
+JServer Release 9.2.0.6.0 - Production
+
+SQL> alter database mount;
+alter database mount
+*
+ERROR at line 1:
+ORA-01990: error opening password file
+'/necafi/opt/oracle/product/9.2.0/dbs/orapw'

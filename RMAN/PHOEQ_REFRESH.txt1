@@ -1,0 +1,2411 @@
+
+Spooling started in log file: /oracle/rman/log/PHOEQ_REFRESH.txt
+
+Recovery Manager12.1.0.2.0
+
+RMAN> connect target *
+connected to target database: UPHOEP (DBID=3390415586)
+
+RMAN> connect catalog *
+connected to recovery catalog database
+
+RMAN> connect auxiliary *
+connected to auxiliary database: PHOEQ (not mounted)
+
+RMAN> run
+2> {
+3> allocate clone channel adsm_1 device type SBT parms 'ENV=(TDPO_OPTFILE=/usr/tivoli/tsm/client/oracle/bin64/tdpo_PHOEQ_clone_dft.opt)';
+4> allocate clone channel adsm_2 device type SBT parms 'ENV=(TDPO_OPTFILE=/usr/tivoli/tsm/client/oracle/bin64/tdpo_PHOEQ_clone_dft.opt)';
+5> allocate clone channel adsm_3 device type SBT parms 'ENV=(TDPO_OPTFILE=/usr/tivoli/tsm/client/oracle/bin64/tdpo_PHOEQ_clone_dft.opt)';
+6> allocate clone channel adsm_4 device type SBT parms 'ENV=(TDPO_OPTFILE=/usr/tivoli/tsm/client/oracle/bin64/tdpo_PHOEQ_clone_dft.opt)';
+7> allocate clone channel adsm_5 device type SBT parms 'ENV=(TDPO_OPTFILE=/usr/tivoli/tsm/client/oracle/bin64/tdpo_PHOEQ_clone_dft.opt)';
+8> allocate clone channel adsm_6 device type SBT parms 'ENV=(TDPO_OPTFILE=/usr/tivoli/tsm/client/oracle/bin64/tdpo_PHOEQ_clone_dft.opt)';
+9> allocate clone channel adsm_7 device type SBT parms 'ENV=(TDPO_OPTFILE=/usr/tivoli/tsm/client/oracle/bin64/tdpo_PHOEQ_clone_dft.opt)';
+10> allocate clone channel adsm_8 device type SBT parms 'ENV=(TDPO_OPTFILE=/usr/tivoli/tsm/client/oracle/bin64/tdpo_PHOEQ_clone_dft.opt)';
+11> set until time "to_date('28/07/2018 06:38:12','DD/MM/YYYY HH24:MI:SS')";
+12> duplicate target database to PHOEQ ;
+13> release channel adsm_1;
+14> release channel adsm_2;
+15> release channel adsm_3;
+16> release channel adsm_4;
+17> release channel adsm_5;
+18> release channel adsm_6;
+19> release channel adsm_7;
+20> release channel adsm_8;
+21> }
+allocated channel: adsm_1
+channel adsm_1: SID=1889 device type=SBT_TAPE
+channel adsm_1: Data Protection for Oracle: version 6.3.0.0
+
+allocated channel: adsm_2
+channel adsm_2: SID=1 device type=SBT_TAPE
+channel adsm_2: Data Protection for Oracle: version 6.3.0.0
+
+allocated channel: adsm_3
+channel adsm_3: SID=120 device type=SBT_TAPE
+channel adsm_3: Data Protection for Oracle: version 6.3.0.0
+
+allocated channel: adsm_4
+channel adsm_4: SID=238 device type=SBT_TAPE
+channel adsm_4: Data Protection for Oracle: version 6.3.0.0
+
+allocated channel: adsm_5
+channel adsm_5: SID=356 device type=SBT_TAPE
+channel adsm_5: Data Protection for Oracle: version 6.3.0.0
+
+allocated channel: adsm_6
+channel adsm_6: SID=415 device type=SBT_TAPE
+channel adsm_6: Data Protection for Oracle: version 6.3.0.0
+
+allocated channel: adsm_7
+channel adsm_7: SID=533 device type=SBT_TAPE
+channel adsm_7: Data Protection for Oracle: version 6.3.0.0
+
+allocated channel: adsm_8
+channel adsm_8: SID=651 device type=SBT_TAPE
+channel adsm_8: Data Protection for Oracle: version 6.3.0.0
+
+executing command: SET until clause
+
+Starting Duplicate Db at 28-JUL-18
+
+contents of Memory Script:
+{
+   sql clone "create spfile from memory";
+}
+executing Memory Script
+
+sql statement: create spfile from memory
+
+contents of Memory Script:
+{
+   shutdown clone immediate;
+   startup clone nomount;
+}
+executing Memory Script
+
+Oracle instance shut down
+
+connected to auxiliary database (not started)
+Oracle instance started
+
+Total System Global Area   34359738368 bytes
+
+Fixed Size                     7737112 bytes
+Variable Size              20199768296 bytes
+Database Buffers           14092861440 bytes
+Redo Buffers                  59371520 bytes
+allocated channel: adsm_1
+channel adsm_1: SID=1771 device type=SBT_TAPE
+channel adsm_1: Data Protection for Oracle: version 6.3.0.0
+allocated channel: adsm_2
+channel adsm_2: SID=414 device type=SBT_TAPE
+channel adsm_2: Data Protection for Oracle: version 6.3.0.0
+allocated channel: adsm_3
+channel adsm_3: SID=1948 device type=SBT_TAPE
+channel adsm_3: Data Protection for Oracle: version 6.3.0.0
+allocated channel: adsm_4
+channel adsm_4: SID=2066 device type=SBT_TAPE
+channel adsm_4: Data Protection for Oracle: version 6.3.0.0
+allocated channel: adsm_5
+channel adsm_5: SID=60 device type=SBT_TAPE
+channel adsm_5: Data Protection for Oracle: version 6.3.0.0
+allocated channel: adsm_6
+channel adsm_6: SID=179 device type=SBT_TAPE
+channel adsm_6: Data Protection for Oracle: version 6.3.0.0
+allocated channel: adsm_7
+channel adsm_7: SID=297 device type=SBT_TAPE
+channel adsm_7: Data Protection for Oracle: version 6.3.0.0
+allocated channel: adsm_8
+channel adsm_8: SID=415 device type=SBT_TAPE
+channel adsm_8: Data Protection for Oracle: version 6.3.0.0
+
+contents of Memory Script:
+{
+   set until scn  9043113732937;
+   sql clone "alter system set  db_name = 
+ ''UPHOEP'' comment=
+ ''Modified by RMAN duplicate'' scope=spfile";
+   sql clone "alter system set  db_unique_name = 
+ ''PHOEQ'' comment=
+ ''Modified by RMAN duplicate'' scope=spfile";
+   shutdown clone immediate;
+   startup clone force nomount
+   restore clone primary controlfile;
+   alter clone database mount;
+}
+executing Memory Script
+
+executing command: SET until clause
+
+sql statement: alter system set  db_name =  ''UPHOEP'' comment= ''Modified by RMAN duplicate'' scope=spfile
+
+sql statement: alter system set  db_unique_name =  ''PHOEQ'' comment= ''Modified by RMAN duplicate'' scope=spfile
+
+Oracle instance shut down
+
+Oracle instance started
+
+Total System Global Area   34359738368 bytes
+
+Fixed Size                     7737112 bytes
+Variable Size              20199768296 bytes
+Database Buffers           14092861440 bytes
+Redo Buffers                  59371520 bytes
+allocated channel: adsm_1
+channel adsm_1: SID=1771 device type=SBT_TAPE
+channel adsm_1: Data Protection for Oracle: version 6.3.0.0
+allocated channel: adsm_2
+channel adsm_2: SID=414 device type=SBT_TAPE
+channel adsm_2: Data Protection for Oracle: version 6.3.0.0
+allocated channel: adsm_3
+channel adsm_3: SID=2007 device type=SBT_TAPE
+channel adsm_3: Data Protection for Oracle: version 6.3.0.0
+allocated channel: adsm_4
+channel adsm_4: SID=1 device type=SBT_TAPE
+channel adsm_4: Data Protection for Oracle: version 6.3.0.0
+allocated channel: adsm_5
+channel adsm_5: SID=120 device type=SBT_TAPE
+channel adsm_5: Data Protection for Oracle: version 6.3.0.0
+allocated channel: adsm_6
+channel adsm_6: SID=238 device type=SBT_TAPE
+channel adsm_6: Data Protection for Oracle: version 6.3.0.0
+allocated channel: adsm_7
+channel adsm_7: SID=356 device type=SBT_TAPE
+channel adsm_7: Data Protection for Oracle: version 6.3.0.0
+allocated channel: adsm_8
+channel adsm_8: SID=474 device type=SBT_TAPE
+channel adsm_8: Data Protection for Oracle: version 6.3.0.0
+
+Starting restore at 28-JUL-18
+
+channel adsm_1: starting datafile backup set restore
+channel adsm_1: restoring control file
+channel adsm_1: reading from backup piece c-3390415586-20180728-01
+channel adsm_1: piece handle=c-3390415586-20180728-01 tag=TAG20180728T063805
+channel adsm_1: restored backup piece 1
+channel adsm_1: restore complete, elapsed time: 00:00:03
+output file name=/oracle/PHOEQ/data01/control01.ctl
+output file name=/oracle/PHOEQ/redo01/control02.ctl
+output file name=/oracle/PHOEQ/redo02/control03.ctl
+Finished restore at 28-JUL-18
+
+database mounted
+
+contents of Memory Script:
+{
+   set until scn  9043113732937;
+   set newname for datafile  1 to 
+ "/oracle/PHOEQ/data01/system.001";
+   set newname for datafile  2 to 
+ "/oracle/PHOEQ/data01/sysaux.001";
+   set newname for datafile  3 to 
+ "/oracle/PHOEQ/data01/undotbs1.001";
+   set newname for datafile  4 to 
+ "/oracle/PHOEQ/data01/users.001";
+   set newname for datafile  5 to 
+ "/oracle/PHOEQ/data01/undotbs1.002";
+   set newname for datafile  6 to 
+ "/oracle/PHOEQ/data01/undotbs1.003";
+   set newname for datafile  7 to 
+ "/oracle/PHOEQ/data01/lstar_lob.114";
+   set newname for datafile  8 to 
+ "/oracle/PHOEQ/data01/lstar_data.001";
+   set newname for datafile  9 to 
+ "/oracle/PHOEQ/data01/lstar_index.001";
+   set newname for datafile  10 to 
+ "/oracle/PHOEQ/data01/lstar_lob.001";
+   set newname for datafile  11 to 
+ "/oracle/PHOEQ/data01/lstar_lob.002";
+   set newname for datafile  12 to 
+ "/oracle/PHOEQ/data01/lstar_lob.003";
+   set newname for datafile  13 to 
+ "/oracle/PHOEQ/data01/lstar_data.002";
+   set newname for datafile  14 to 
+ "/oracle/PHOEQ/data01/lstar_lob.004";
+   set newname for datafile  15 to 
+ "/oracle/PHOEQ/data01/lstar_index.002";
+   set newname for datafile  16 to 
+ "/oracle/PHOEQ/data01/lstar_lob.005";
+   set newname for datafile  17 to 
+ "/oracle/PHOEQ/data01/lstar_data.003";
+   set newname for datafile  18 to 
+ "/oracle/PHOEQ/data01/lstar_lob.006";
+   set newname for datafile  19 to 
+ "/oracle/PHOEQ/data01/lstar_lob.007";
+   set newname for datafile  20 to 
+ "/oracle/PHOEQ/data01/lstar_data.004";
+   set newname for datafile  21 to 
+ "/oracle/PHOEQ/data01/lstar_index.003";
+   set newname for datafile  22 to 
+ "/oracle/PHOEQ/data01/lstar_lob.008";
+   set newname for datafile  23 to 
+ "/oracle/PHOEQ/data01/lstar_lob.009";
+   set newname for datafile  24 to 
+ "/oracle/PHOEQ/data01/lstar_data.005";
+   set newname for datafile  25 to 
+ "/oracle/PHOEQ/data01/lstar_lob.010";
+   set newname for datafile  26 to 
+ "/oracle/PHOEQ/data01/lstar_index.004";
+   set newname for datafile  27 to 
+ "/oracle/PHOEQ/data01/lstar_lob.011";
+   set newname for datafile  28 to 
+ "/oracle/PHOEQ/data01/lstar_data.006";
+   set newname for datafile  29 to 
+ "/oracle/PHOEQ/data01/lstar_lob.012";
+   set newname for datafile  30 to 
+ "/oracle/PHOEQ/data01/lstar_lob.013";
+   set newname for datafile  31 to 
+ "/oracle/PHOEQ/data01/lstar_data.007";
+   set newname for datafile  32 to 
+ "/oracle/PHOEQ/data01/lstar_index.005";
+   set newname for datafile  33 to 
+ "/oracle/PHOEQ/data01/lstar_lob.014";
+   set newname for datafile  34 to 
+ "/oracle/PHOEQ/data01/lstar_lob.015";
+   set newname for datafile  35 to 
+ "/oracle/PHOEQ/data01/lstar_data.008";
+   set newname for datafile  36 to 
+ "/oracle/PHOEQ/data01/lstar_lob.016";
+   set newname for datafile  37 to 
+ "/oracle/PHOEQ/data01/lstar_index.006";
+   set newname for datafile  38 to 
+ "/oracle/PHOEQ/data01/lstar_lob.017";
+   set newname for datafile  39 to 
+ "/oracle/PHOEQ/data01/lstar_data.009";
+   set newname for datafile  40 to 
+ "/oracle/PHOEQ/data01/lstar_lob.018";
+   set newname for datafile  41 to 
+ "/oracle/PHOEQ/data01/lstar_lob.019";
+   set newname for datafile  42 to 
+ "/oracle/PHOEQ/data01/lstar_data.010";
+   set newname for datafile  43 to 
+ "/oracle/PHOEQ/data01/lstar_index.007";
+   set newname for datafile  44 to 
+ "/oracle/PHOEQ/data01/lstar_lob.020";
+   set newname for datafile  45 to 
+ "/oracle/PHOEQ/data01/lstar_lob.021";
+   set newname for datafile  46 to 
+ "/oracle/PHOEQ/data01/lstar_data.011";
+   set newname for datafile  47 to 
+ "/oracle/PHOEQ/data01/lstar_lob.022";
+   set newname for datafile  48 to 
+ "/oracle/PHOEQ/data01/lstar_index.008";
+   set newname for datafile  49 to 
+ "/oracle/PHOEQ/data01/lstar_lob.023";
+   set newname for datafile  50 to 
+ "/oracle/PHOEQ/data01/lstar_data.012";
+   set newname for datafile  51 to 
+ "/oracle/PHOEQ/data01/lstar_lob.024";
+   set newname for datafile  52 to 
+ "/oracle/PHOEQ/data01/lstar_lob.025";
+   set newname for datafile  53 to 
+ "/oracle/PHOEQ/data01/lstar_data.013";
+   set newname for datafile  54 to 
+ "/oracle/PHOEQ/data01/lstar_index.009";
+   set newname for datafile  55 to 
+ "/oracle/PHOEQ/data01/lstar_lob.026";
+   set newname for datafile  56 to 
+ "/oracle/PHOEQ/data01/lstar_lob.027";
+   set newname for datafile  57 to 
+ "/oracle/PHOEQ/data01/lstar_data.014";
+   set newname for datafile  58 to 
+ "/oracle/PHOEQ/data01/lstar_lob.028";
+   set newname for datafile  59 to 
+ "/oracle/PHOEQ/data01/lstar_index.010";
+   set newname for datafile  60 to 
+ "/oracle/PHOEQ/data01/lstar_lob.029";
+   set newname for datafile  61 to 
+ "/oracle/PHOEQ/data01/lstar_data.015";
+   set newname for datafile  62 to 
+ "/oracle/PHOEQ/data01/lstar_lob.030";
+   set newname for datafile  63 to 
+ "/oracle/PHOEQ/data01/lstar_lob.031";
+   set newname for datafile  64 to 
+ "/oracle/PHOEQ/data01/lstar_data.016";
+   set newname for datafile  65 to 
+ "/oracle/PHOEQ/data01/lstar_index.011";
+   set newname for datafile  66 to 
+ "/oracle/PHOEQ/data01/lstar_lob.032";
+   set newname for datafile  67 to 
+ "/oracle/PHOEQ/data01/lstar_lob.033";
+   set newname for datafile  68 to 
+ "/oracle/PHOEQ/data01/lstar_data.017";
+   set newname for datafile  69 to 
+ "/oracle/PHOEQ/data01/lstar_lob.034";
+   set newname for datafile  70 to 
+ "/oracle/PHOEQ/data01/lstar_index.012";
+   set newname for datafile  71 to 
+ "/oracle/PHOEQ/data01/lstar_lob.035";
+   set newname for datafile  72 to 
+ "/oracle/PHOEQ/data01/lstar_data.018";
+   set newname for datafile  73 to 
+ "/oracle/PHOEQ/data01/lstar_lob.036";
+   set newname for datafile  74 to 
+ "/oracle/PHOEQ/data01/lstar_lob.037";
+   set newname for datafile  75 to 
+ "/oracle/PHOEQ/data01/lstar_data.019";
+   set newname for datafile  76 to 
+ "/oracle/PHOEQ/data01/lstar_index.013";
+   set newname for datafile  77 to 
+ "/oracle/PHOEQ/data01/lstar_lob.038";
+   set newname for datafile  78 to 
+ "/oracle/PHOEQ/data01/lstar_lob.039";
+   set newname for datafile  79 to 
+ "/oracle/PHOEQ/data01/lstar_data.020";
+   set newname for datafile  80 to 
+ "/oracle/PHOEQ/data01/lstar_lob.040";
+   set newname for datafile  81 to 
+ "/oracle/PHOEQ/data01/lstar_index.014";
+   set newname for datafile  82 to 
+ "/oracle/PHOEQ/data01/lstar_lob.041";
+   set newname for datafile  83 to 
+ "/oracle/PHOEQ/data01/lstar_data.021";
+   set newname for datafile  84 to 
+ "/oracle/PHOEQ/data01/lstar_lob.042";
+   set newname for datafile  85 to 
+ "/oracle/PHOEQ/data01/lstar_lob.043";
+   set newname for datafile  86 to 
+ "/oracle/PHOEQ/data01/lstar_data.022";
+   set newname for datafile  87 to 
+ "/oracle/PHOEQ/data01/lstar_index.015";
+   set newname for datafile  88 to 
+ "/oracle/PHOEQ/data01/lstar_lob.044";
+   set newname for datafile  89 to 
+ "/oracle/PHOEQ/data01/lstar_lob.045";
+   set newname for datafile  90 to 
+ "/oracle/PHOEQ/data01/lstar_data.023";
+   set newname for datafile  91 to 
+ "/oracle/PHOEQ/data01/lstar_lob.046";
+   set newname for datafile  92 to 
+ "/oracle/PHOEQ/data01/lstar_index.016";
+   set newname for datafile  93 to 
+ "/oracle/PHOEQ/data01/lstar_lob.047";
+   set newname for datafile  94 to 
+ "/oracle/PHOEQ/data01/lstar_data.024";
+   set newname for datafile  95 to 
+ "/oracle/PHOEQ/data01/lstar_lob.048";
+   set newname for datafile  96 to 
+ "/oracle/PHOEQ/data01/lstar_lob.049";
+   set newname for datafile  97 to 
+ "/oracle/PHOEQ/data01/lstar_data.025";
+   set newname for datafile  98 to 
+ "/oracle/PHOEQ/data01/lstar_index.017";
+   set newname for datafile  99 to 
+ "/oracle/PHOEQ/data01/lstar_lob.050";
+   set newname for datafile  100 to 
+ "/oracle/PHOEQ/data01/lstar_lob.051";
+   set newname for datafile  101 to 
+ "/oracle/PHOEQ/data01/lstar_data.026";
+   set newname for datafile  102 to 
+ "/oracle/PHOEQ/data01/lstar_lob.052";
+   set newname for datafile  103 to 
+ "/oracle/PHOEQ/data01/lstar_index.018";
+   set newname for datafile  104 to 
+ "/oracle/PHOEQ/data01/lstar_lob.053";
+   set newname for datafile  105 to 
+ "/oracle/PHOEQ/data01/lstar_data.027";
+   set newname for datafile  106 to 
+ "/oracle/PHOEQ/data01/lstar_lob.054";
+   set newname for datafile  107 to 
+ "/oracle/PHOEQ/data01/lstar_lob.055";
+   set newname for datafile  108 to 
+ "/oracle/PHOEQ/data01/lstar_data.028";
+   set newname for datafile  109 to 
+ "/oracle/PHOEQ/data01/lstar_index.019";
+   set newname for datafile  110 to 
+ "/oracle/PHOEQ/data01/lstar_lob.056";
+   set newname for datafile  111 to 
+ "/oracle/PHOEQ/data01/lstar_lob.057";
+   set newname for datafile  112 to 
+ "/oracle/PHOEQ/data01/lstar_data.029";
+   set newname for datafile  113 to 
+ "/oracle/PHOEQ/data01/lstar_lob.058";
+   set newname for datafile  114 to 
+ "/oracle/PHOEQ/data01/lstar_index.020";
+   set newname for datafile  115 to 
+ "/oracle/PHOEQ/data01/lstar_lob.059";
+   set newname for datafile  116 to 
+ "/oracle/PHOEQ/data01/lstar_data.030";
+   set newname for datafile  117 to 
+ "/oracle/PHOEQ/data01/lstar_lob.060";
+   set newname for datafile  118 to 
+ "/oracle/PHOEQ/data01/lstar_lob.061";
+   set newname for datafile  119 to 
+ "/oracle/PHOEQ/data01/lstar_data.031";
+   set newname for datafile  120 to 
+ "/oracle/PHOEQ/data01/lstar_index.021";
+   set newname for datafile  121 to 
+ "/oracle/PHOEQ/data01/lstar_lob.062";
+   set newname for datafile  122 to 
+ "/oracle/PHOEQ/data01/lstar_lob.063";
+   set newname for datafile  123 to 
+ "/oracle/PHOEQ/data01/lstar_data.032";
+   set newname for datafile  124 to 
+ "/oracle/PHOEQ/data01/lstar_lob.064";
+   set newname for datafile  125 to 
+ "/oracle/PHOEQ/data01/lstar_index.022";
+   set newname for datafile  126 to 
+ "/oracle/PHOEQ/data01/lstar_lob.065";
+   set newname for datafile  127 to 
+ "/oracle/PHOEQ/data01/lstar_data.033";
+   set newname for datafile  128 to 
+ "/oracle/PHOEQ/data01/lstar_lob.066";
+   set newname for datafile  129 to 
+ "/oracle/PHOEQ/data01/lstar_lob.067";
+   set newname for datafile  130 to 
+ "/oracle/PHOEQ/data01/lstar_data.034";
+   set newname for datafile  131 to 
+ "/oracle/PHOEQ/data01/lstar_index.023";
+   set newname for datafile  132 to 
+ "/oracle/PHOEQ/data01/lstar_lob.068";
+   set newname for datafile  133 to 
+ "/oracle/PHOEQ/data01/lstar_lob.069";
+   set newname for datafile  134 to 
+ "/oracle/PHOEQ/data01/lstar_data.035";
+   set newname for datafile  135 to 
+ "/oracle/PHOEQ/data01/lstar_lob.070";
+   set newname for datafile  136 to 
+ "/oracle/PHOEQ/data01/lstar_index.024";
+   set newname for datafile  137 to 
+ "/oracle/PHOEQ/data01/lstar_lob.071";
+   set newname for datafile  138 to 
+ "/oracle/PHOEQ/data01/lstar_data.036";
+   set newname for datafile  139 to 
+ "/oracle/PHOEQ/data01/lstar_lob.072";
+   set newname for datafile  140 to 
+ "/oracle/PHOEQ/data01/lstar_lob.073";
+   set newname for datafile  141 to 
+ "/oracle/PHOEQ/data01/lstar_data.037";
+   set newname for datafile  142 to 
+ "/oracle/PHOEQ/data01/lstar_index.025";
+   set newname for datafile  143 to 
+ "/oracle/PHOEQ/data01/lstar_lob.074";
+   set newname for datafile  144 to 
+ "/oracle/PHOEQ/data01/lstar_lob.075";
+   set newname for datafile  145 to 
+ "/oracle/PHOEQ/data01/lstar_data.038";
+   set newname for datafile  146 to 
+ "/oracle/PHOEQ/data01/lstar_lob.076";
+   set newname for datafile  147 to 
+ "/oracle/PHOEQ/data01/lstar_index.026";
+   set newname for datafile  148 to 
+ "/oracle/PHOEQ/data01/lstar_lob.077";
+   set newname for datafile  149 to 
+ "/oracle/PHOEQ/data01/lstar_data.039";
+   set newname for datafile  150 to 
+ "/oracle/PHOEQ/data01/lstar_lob.078";
+   set newname for datafile  151 to 
+ "/oracle/PHOEQ/data01/lstar_lob.079";
+   set newname for datafile  152 to 
+ "/oracle/PHOEQ/data01/lstar_data.040";
+   set newname for datafile  153 to 
+ "/oracle/PHOEQ/data01/lstar_index.027";
+   set newname for datafile  154 to 
+ "/oracle/PHOEQ/data01/lstar_lob.080";
+   set newname for datafile  155 to 
+ "/oracle/PHOEQ/data01/lstar_lob.081";
+   set newname for datafile  156 to 
+ "/oracle/PHOEQ/data01/lstar_data.041";
+   set newname for datafile  157 to 
+ "/oracle/PHOEQ/data01/lstar_lob.082";
+   set newname for datafile  158 to 
+ "/oracle/PHOEQ/data01/lstar_index.028";
+   set newname for datafile  159 to 
+ "/oracle/PHOEQ/data01/lstar_lob.083";
+   set newname for datafile  160 to 
+ "/oracle/PHOEQ/data01/lstar_data.042";
+   set newname for datafile  161 to 
+ "/oracle/PHOEQ/data01/lstar_lob.084";
+   set newname for datafile  162 to 
+ "/oracle/PHOEQ/data01/lstar_lob.085";
+   set newname for datafile  163 to 
+ "/oracle/PHOEQ/data01/lstar_data.043";
+   set newname for datafile  164 to 
+ "/oracle/PHOEQ/data01/lstar_index.029";
+   set newname for datafile  165 to 
+ "/oracle/PHOEQ/data01/lstar_lob.086";
+   set newname for datafile  166 to 
+ "/oracle/PHOEQ/data01/lstar_lob.087";
+   set newname for datafile  167 to 
+ "/oracle/PHOEQ/data01/lstar_data.044";
+   set newname for datafile  168 to 
+ "/oracle/PHOEQ/data01/lstar_lob.088";
+   set newname for datafile  169 to 
+ "/oracle/PHOEQ/data01/lstar_index.030";
+   set newname for datafile  170 to 
+ "/oracle/PHOEQ/data01/lstar_lob.089";
+   set newname for datafile  171 to 
+ "/oracle/PHOEQ/data01/lstar_data.045";
+   set newname for datafile  172 to 
+ "/oracle/PHOEQ/data01/lstar_lob.090";
+   set newname for datafile  173 to 
+ "/oracle/PHOEQ/data01/lstar_lob.091";
+   set newname for datafile  174 to 
+ "/oracle/PHOEQ/data01/lstar_data.046";
+   set newname for datafile  175 to 
+ "/oracle/PHOEQ/data01/lstar_index.031";
+   set newname for datafile  176 to 
+ "/oracle/PHOEQ/data01/lstar_lob.092";
+   set newname for datafile  177 to 
+ "/oracle/PHOEQ/data01/lstar_lob.093";
+   set newname for datafile  178 to 
+ "/oracle/PHOEQ/data01/lstar_data.047";
+   set newname for datafile  179 to 
+ "/oracle/PHOEQ/data01/lstar_lob.094";
+   set newname for datafile  180 to 
+ "/oracle/PHOEQ/data01/lstar_index.032";
+   set newname for datafile  181 to 
+ "/oracle/PHOEQ/data01/lstar_lob.095";
+   set newname for datafile  182 to 
+ "/oracle/PHOEQ/data01/lstar_data.048";
+   set newname for datafile  183 to 
+ "/oracle/PHOEQ/data01/lstar_lob.096";
+   set newname for datafile  184 to 
+ "/oracle/PHOEQ/data01/lstar_lob.097";
+   set newname for datafile  185 to 
+ "/oracle/PHOEQ/data01/lstar_data.049";
+   set newname for datafile  186 to 
+ "/oracle/PHOEQ/data01/lstar_index.033";
+   set newname for datafile  187 to 
+ "/oracle/PHOEQ/data01/lstar_lob.098";
+   set newname for datafile  188 to 
+ "/oracle/PHOEQ/data01/lstar_lob.099";
+   set newname for datafile  189 to 
+ "/oracle/PHOEQ/data01/lstar_data.050";
+   set newname for datafile  190 to 
+ "/oracle/PHOEQ/data01/lstar_lob.100";
+   set newname for datafile  191 to 
+ "/oracle/PHOEQ/data01/lstar_lob.101";
+   set newname for datafile  192 to 
+ "/oracle/PHOEQ/data01/lstar_index.034";
+   set newname for datafile  193 to 
+ "/oracle/PHOEQ/data01/lstar_lob.102";
+   set newname for datafile  194 to 
+ "/oracle/PHOEQ/data01/lstar_lob.103";
+   set newname for datafile  195 to 
+ "/oracle/PHOEQ/data01/lstar_lob.104";
+   set newname for datafile  196 to 
+ "/oracle/PHOEQ/data01/lstar_lob.105";
+   set newname for datafile  197 to 
+ "/oracle/PHOEQ/data01/lstar_lob.106";
+   set newname for datafile  198 to 
+ "/oracle/PHOEQ/data01/lstar_lob.107";
+   set newname for datafile  199 to 
+ "/oracle/PHOEQ/data01/lstar_lob.108";
+   set newname for datafile  200 to 
+ "/oracle/PHOEQ/data01/lstar_lob.109";
+   set newname for datafile  201 to 
+ "/oracle/PHOEQ/data01/lstar_lob.110";
+   set newname for datafile  202 to 
+ "/oracle/PHOEQ/data01/lstar_lob.111";
+   set newname for datafile  203 to 
+ "/oracle/PHOEQ/data01/lstar_lob.112";
+   set newname for datafile  204 to 
+ "/oracle/PHOEQ/data01/lstar_lob.113";
+   set newname for datafile  205 to 
+ "/oracle/PHOEQ/data01/lstar_index.035";
+   set newname for datafile  206 to 
+ "/oracle/PHOEQ/data01/lstar_index.036";
+   set newname for datafile  207 to 
+ "/oracle/PHOEQ/data01/lstar_index.037";
+   set newname for datafile  208 to 
+ "/oracle/PHOEQ/data01/lstar_index.038";
+   set newname for datafile  209 to 
+ "/oracle/PHOEQ/data01/lstar_index.039";
+   set newname for datafile  210 to 
+ "/oracle/PHOEQ/data01/lstar_lob.115";
+   set newname for datafile  211 to 
+ "/oracle/PHOEQ/data01/lstar_lob.116";
+   set newname for datafile  212 to 
+ "/oracle/PHOEQ/data01/lstar_lob.117";
+   set newname for datafile  213 to 
+ "/oracle/PHOEQ/data01/lstar_lob.118";
+   set newname for datafile  214 to 
+ "/oracle/PHOEQ/data01/lstar_lob.119";
+   set newname for datafile  215 to 
+ "/oracle/PHOEQ/data01/lstar_lob.120";
+   set newname for datafile  216 to 
+ "/oracle/PHOEQ/data01/lstar_lob.121";
+   set newname for datafile  217 to 
+ "/oracle/PHOEQ/data01/lstar_lob.122";
+   set newname for datafile  218 to 
+ "/oracle/PHOEQ/data01/undotbs1.004";
+   set newname for datafile  219 to 
+ "/oracle/PHOEQ/data01/lstar_lob.123";
+   set newname for datafile  220 to 
+ "/oracle/PHOEQ/data01/lstar_lob.124";
+   set newname for datafile  221 to 
+ "/oracle/PHOEQ/data01/lstar_lob.125";
+   set newname for datafile  222 to 
+ "/oracle/PHOEQ/data01/lstar_lob.126";
+   set newname for datafile  223 to 
+ "/oracle/PHOEQ/data01/lstar_lob.127";
+   set newname for datafile  224 to 
+ "/oracle/PHOEQ/data01/lstar_lob.128";
+   set newname for datafile  225 to 
+ "/oracle/PHOEQ/data01/lstar_lob.129";
+   set newname for datafile  226 to 
+ "/oracle/PHOEQ/data01/lstar_lob.130";
+   set newname for datafile  227 to 
+ "/oracle/PHOEQ/data01/lstar_lob.131";
+   set newname for datafile  228 to 
+ "/oracle/PHOEQ/data01/lstar_lob.132";
+   set newname for datafile  229 to 
+ "/oracle/PHOEQ/data01/lstar_lob.133";
+   set newname for datafile  230 to 
+ "/oracle/PHOEQ/data01/lstar_lob.134";
+   set newname for datafile  231 to 
+ "/oracle/PHOEQ/data01/lstar_lob.135";
+   set newname for datafile  232 to 
+ "/oracle/PHOEQ/data01/lstar_lob.136";
+   set newname for datafile  233 to 
+ "/oracle/PHOEQ/data01/lstar_lob.137";
+   restore
+   clone database
+   ;
+}
+executing Memory Script
+
+executing command: SET until clause
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+Starting restore at 28-JUL-18
+
+channel adsm_1: starting datafile backup set restore
+channel adsm_1: specifying datafile(s) to restore from backup set
+channel adsm_1: restoring datafile 00007 to /oracle/PHOEQ/data01/lstar_lob.114
+channel adsm_1: restoring datafile 00066 to /oracle/PHOEQ/data01/lstar_lob.032
+channel adsm_1: restoring datafile 00125 to /oracle/PHOEQ/data01/lstar_index.022
+channel adsm_1: restoring datafile 00182 to /oracle/PHOEQ/data01/lstar_data.048
+channel adsm_1: reading from backup piece Inc0_UPHOEP_6st92rc0_1_1_s25820_p1
+channel adsm_2: starting datafile backup set restore
+channel adsm_2: specifying datafile(s) to restore from backup set
+channel adsm_2: restoring datafile 00005 to /oracle/PHOEQ/data01/undotbs1.002
+channel adsm_2: restoring datafile 00064 to /oracle/PHOEQ/data01/lstar_data.016
+channel adsm_2: restoring datafile 00123 to /oracle/PHOEQ/data01/lstar_data.032
+channel adsm_2: restoring datafile 00180 to /oracle/PHOEQ/data01/lstar_index.032
+channel adsm_2: reading from backup piece Inc0_UPHOEP_6qt92rc0_1_1_s25818_p1
+channel adsm_3: starting datafile backup set restore
+channel adsm_3: specifying datafile(s) to restore from backup set
+channel adsm_3: restoring datafile 00008 to /oracle/PHOEQ/data01/lstar_data.001
+channel adsm_3: restoring datafile 00067 to /oracle/PHOEQ/data01/lstar_lob.033
+channel adsm_3: restoring datafile 00126 to /oracle/PHOEQ/data01/lstar_lob.065
+channel adsm_3: restoring datafile 00183 to /oracle/PHOEQ/data01/lstar_lob.096
+channel adsm_3: reading from backup piece Inc0_UPHOEP_6tt92rc1_1_1_s25821_p1
+channel adsm_4: starting datafile backup set restore
+channel adsm_4: specifying datafile(s) to restore from backup set
+channel adsm_4: restoring datafile 00009 to /oracle/PHOEQ/data01/lstar_index.001
+channel adsm_4: restoring datafile 00068 to /oracle/PHOEQ/data01/lstar_data.017
+channel adsm_4: restoring datafile 00127 to /oracle/PHOEQ/data01/lstar_data.033
+channel adsm_4: restoring datafile 00184 to /oracle/PHOEQ/data01/lstar_lob.097
+channel adsm_4: reading from backup piece Inc0_UPHOEP_6ut92rc1_1_1_s25822_p1
+channel adsm_5: starting datafile backup set restore
+channel adsm_5: specifying datafile(s) to restore from backup set
+channel adsm_5: restoring datafile 00010 to /oracle/PHOEQ/data01/lstar_lob.001
+channel adsm_5: restoring datafile 00069 to /oracle/PHOEQ/data01/lstar_lob.034
+channel adsm_5: restoring datafile 00128 to /oracle/PHOEQ/data01/lstar_lob.066
+channel adsm_5: restoring datafile 00185 to /oracle/PHOEQ/data01/lstar_data.049
+channel adsm_5: reading from backup piece Inc0_UPHOEP_6vt92rc1_1_1_s25823_p1
+channel adsm_6: starting datafile backup set restore
+channel adsm_6: specifying datafile(s) to restore from backup set
+channel adsm_6: restoring datafile 00006 to /oracle/PHOEQ/data01/undotbs1.003
+channel adsm_6: restoring datafile 00065 to /oracle/PHOEQ/data01/lstar_index.011
+channel adsm_6: restoring datafile 00124 to /oracle/PHOEQ/data01/lstar_lob.064
+channel adsm_6: restoring datafile 00181 to /oracle/PHOEQ/data01/lstar_lob.095
+channel adsm_6: reading from backup piece Inc0_UPHOEP_6rt92rc0_1_1_s25819_p1
+channel adsm_7: starting datafile backup set restore
+channel adsm_7: specifying datafile(s) to restore from backup set
+channel adsm_7: restoring datafile 00013 to /oracle/PHOEQ/data01/lstar_data.002
+channel adsm_7: restoring datafile 00072 to /oracle/PHOEQ/data01/lstar_data.018
+channel adsm_7: restoring datafile 00131 to /oracle/PHOEQ/data01/lstar_index.023
+channel adsm_7: restoring datafile 00188 to /oracle/PHOEQ/data01/lstar_lob.099
+channel adsm_7: reading from backup piece Inc0_UPHOEP_72t92vkc_1_1_s25826_p1
+channel adsm_8: starting datafile backup set restore
+channel adsm_8: specifying datafile(s) to restore from backup set
+channel adsm_8: restoring datafile 00011 to /oracle/PHOEQ/data01/lstar_lob.002
+channel adsm_8: restoring datafile 00070 to /oracle/PHOEQ/data01/lstar_index.012
+channel adsm_8: restoring datafile 00129 to /oracle/PHOEQ/data01/lstar_lob.067
+channel adsm_8: restoring datafile 00186 to /oracle/PHOEQ/data01/lstar_index.033
+channel adsm_8: reading from backup piece Inc0_UPHOEP_70t92vji_1_1_s25824_p1
+channel adsm_7: piece handle=Inc0_UPHOEP_72t92vkc_1_1_s25826_p1 tag=TAG20180727T190116
+channel adsm_7: restored backup piece 1
+channel adsm_7: restore complete, elapsed time: 00:28:47
+channel adsm_7: starting datafile backup set restore
+channel adsm_7: specifying datafile(s) to restore from backup set
+channel adsm_7: restoring datafile 00014 to /oracle/PHOEQ/data01/lstar_lob.004
+channel adsm_7: restoring datafile 00073 to /oracle/PHOEQ/data01/lstar_lob.036
+channel adsm_7: restoring datafile 00132 to /oracle/PHOEQ/data01/lstar_lob.068
+channel adsm_7: restoring datafile 00189 to /oracle/PHOEQ/data01/lstar_data.050
+channel adsm_7: reading from backup piece Inc0_UPHOEP_73t92vkk_1_1_s25827_p1
+channel adsm_8: piece handle=Inc0_UPHOEP_70t92vji_1_1_s25824_p1 tag=TAG20180727T190116
+channel adsm_8: restored backup piece 1
+channel adsm_8: restore complete, elapsed time: 00:28:47
+channel adsm_8: starting datafile backup set restore
+channel adsm_8: specifying datafile(s) to restore from backup set
+channel adsm_8: restoring datafile 00012 to /oracle/PHOEQ/data01/lstar_lob.003
+channel adsm_8: restoring datafile 00071 to /oracle/PHOEQ/data01/lstar_lob.035
+channel adsm_8: restoring datafile 00130 to /oracle/PHOEQ/data01/lstar_data.034
+channel adsm_8: restoring datafile 00187 to /oracle/PHOEQ/data01/lstar_lob.098
+channel adsm_8: reading from backup piece Inc0_UPHOEP_71t92vkc_1_1_s25825_p1
+channel adsm_6: piece handle=Inc0_UPHOEP_6rt92rc0_1_1_s25819_p1 tag=TAG20180727T190116
+channel adsm_6: restored backup piece 1
+channel adsm_6: restore complete, elapsed time: 00:51:23
+channel adsm_6: starting datafile backup set restore
+channel adsm_6: specifying datafile(s) to restore from backup set
+channel adsm_6: restoring datafile 00016 to /oracle/PHOEQ/data01/lstar_lob.005
+channel adsm_6: restoring datafile 00075 to /oracle/PHOEQ/data01/lstar_data.019
+channel adsm_6: restoring datafile 00134 to /oracle/PHOEQ/data01/lstar_data.035
+channel adsm_6: restoring datafile 00191 to /oracle/PHOEQ/data01/lstar_lob.101
+channel adsm_6: reading from backup piece Inc0_UPHOEP_75t92vn0_1_1_s25829_p1
+channel adsm_5: piece handle=Inc0_UPHOEP_6vt92rc1_1_1_s25823_p1 tag=TAG20180727T190116
+channel adsm_5: restored backup piece 1
+channel adsm_5: restore complete, elapsed time: 00:51:26
+channel adsm_5: starting datafile backup set restore
+channel adsm_5: specifying datafile(s) to restore from backup set
+channel adsm_5: restoring datafile 00015 to /oracle/PHOEQ/data01/lstar_index.002
+channel adsm_5: restoring datafile 00074 to /oracle/PHOEQ/data01/lstar_lob.037
+channel adsm_5: restoring datafile 00133 to /oracle/PHOEQ/data01/lstar_lob.069
+channel adsm_5: restoring datafile 00190 to /oracle/PHOEQ/data01/lstar_lob.100
+channel adsm_5: reading from backup piece Inc0_UPHOEP_74t92vmv_1_1_s25828_p1
+channel adsm_8: piece handle=Inc0_UPHOEP_71t92vkc_1_1_s25825_p1 tag=TAG20180727T190116
+channel adsm_8: restored backup piece 1
+channel adsm_8: restore complete, elapsed time: 00:24:34
+channel adsm_8: starting datafile backup set restore
+channel adsm_8: specifying datafile(s) to restore from backup set
+channel adsm_8: restoring datafile 00017 to /oracle/PHOEQ/data01/lstar_data.003
+channel adsm_8: restoring datafile 00076 to /oracle/PHOEQ/data01/lstar_index.013
+channel adsm_8: restoring datafile 00135 to /oracle/PHOEQ/data01/lstar_lob.070
+channel adsm_8: restoring datafile 00192 to /oracle/PHOEQ/data01/lstar_index.034
+channel adsm_8: reading from backup piece Inc0_UPHOEP_76t9340n_1_1_s25830_p1
+channel adsm_7: piece handle=Inc0_UPHOEP_73t92vkk_1_1_s25827_p1 tag=TAG20180727T190116
+channel adsm_7: restored backup piece 1
+channel adsm_7: restore complete, elapsed time: 00:25:30
+channel adsm_7: starting datafile backup set restore
+channel adsm_7: specifying datafile(s) to restore from backup set
+channel adsm_7: restoring datafile 00019 to /oracle/PHOEQ/data01/lstar_lob.007
+channel adsm_7: restoring datafile 00078 to /oracle/PHOEQ/data01/lstar_lob.039
+channel adsm_7: restoring datafile 00137 to /oracle/PHOEQ/data01/lstar_lob.071
+channel adsm_7: restoring datafile 00194 to /oracle/PHOEQ/data01/lstar_lob.103
+channel adsm_7: reading from backup piece Inc0_UPHOEP_78t9342k_1_1_s25832_p1
+channel adsm_4: piece handle=Inc0_UPHOEP_6ut92rc1_1_1_s25822_p1 tag=TAG20180727T190116
+channel adsm_4: restored backup piece 1
+channel adsm_4: restore complete, elapsed time: 00:55:32
+channel adsm_4: starting datafile backup set restore
+channel adsm_4: specifying datafile(s) to restore from backup set
+channel adsm_4: restoring datafile 00018 to /oracle/PHOEQ/data01/lstar_lob.006
+channel adsm_4: restoring datafile 00077 to /oracle/PHOEQ/data01/lstar_lob.038
+channel adsm_4: restoring datafile 00136 to /oracle/PHOEQ/data01/lstar_index.024
+channel adsm_4: restoring datafile 00193 to /oracle/PHOEQ/data01/lstar_lob.102
+channel adsm_4: reading from backup piece Inc0_UPHOEP_77t9341q_1_1_s25831_p1
+channel adsm_1: piece handle=Inc0_UPHOEP_6st92rc0_1_1_s25820_p1 tag=TAG20180727T190116
+channel adsm_1: restored backup piece 1
+channel adsm_1: restore complete, elapsed time: 00:58:47
+channel adsm_1: starting datafile backup set restore
+channel adsm_1: specifying datafile(s) to restore from backup set
+channel adsm_1: restoring datafile 00020 to /oracle/PHOEQ/data01/lstar_data.004
+channel adsm_1: restoring datafile 00079 to /oracle/PHOEQ/data01/lstar_data.020
+channel adsm_1: restoring datafile 00138 to /oracle/PHOEQ/data01/lstar_data.036
+channel adsm_1: restoring datafile 00195 to /oracle/PHOEQ/data01/lstar_lob.104
+channel adsm_1: reading from backup piece Inc0_UPHOEP_79t9342k_1_1_s25833_p1
+channel adsm_3: piece handle=Inc0_UPHOEP_6tt92rc1_1_1_s25821_p1 tag=TAG20180727T190116
+channel adsm_3: restored backup piece 1
+channel adsm_3: restore complete, elapsed time: 00:59:02
+channel adsm_3: starting datafile backup set restore
+channel adsm_3: specifying datafile(s) to restore from backup set
+channel adsm_3: restoring datafile 00021 to /oracle/PHOEQ/data01/lstar_index.003
+channel adsm_3: restoring datafile 00080 to /oracle/PHOEQ/data01/lstar_lob.040
+channel adsm_3: restoring datafile 00139 to /oracle/PHOEQ/data01/lstar_lob.072
+channel adsm_3: restoring datafile 00196 to /oracle/PHOEQ/data01/lstar_lob.105
+channel adsm_3: reading from backup piece Inc0_UPHOEP_7at93476_1_1_s25834_p1
+channel adsm_2: piece handle=Inc0_UPHOEP_6qt92rc0_1_1_s25818_p1 tag=TAG20180727T190116
+channel adsm_2: restored backup piece 1
+channel adsm_2: restore complete, elapsed time: 00:59:37
+channel adsm_2: starting datafile backup set restore
+channel adsm_2: specifying datafile(s) to restore from backup set
+channel adsm_2: restoring datafile 00022 to /oracle/PHOEQ/data01/lstar_lob.008
+channel adsm_2: restoring datafile 00081 to /oracle/PHOEQ/data01/lstar_index.014
+channel adsm_2: restoring datafile 00140 to /oracle/PHOEQ/data01/lstar_lob.073
+channel adsm_2: restoring datafile 00197 to /oracle/PHOEQ/data01/lstar_lob.106
+channel adsm_2: reading from backup piece Inc0_UPHOEP_7bt93479_1_1_s25835_p1
+channel adsm_7: piece handle=Inc0_UPHOEP_78t9342k_1_1_s25832_p1 tag=TAG20180727T190116
+channel adsm_7: restored backup piece 1
+channel adsm_7: restore complete, elapsed time: 00:39:17
+channel adsm_7: starting datafile backup set restore
+channel adsm_7: specifying datafile(s) to restore from backup set
+channel adsm_7: restoring datafile 00023 to /oracle/PHOEQ/data01/lstar_lob.009
+channel adsm_7: restoring datafile 00082 to /oracle/PHOEQ/data01/lstar_lob.041
+channel adsm_7: restoring datafile 00141 to /oracle/PHOEQ/data01/lstar_data.037
+channel adsm_7: restoring datafile 00198 to /oracle/PHOEQ/data01/lstar_lob.107
+channel adsm_7: reading from backup piece Inc0_UPHOEP_7ct93804_1_1_s25836_p1
+channel adsm_5: piece handle=Inc0_UPHOEP_74t92vmv_1_1_s25828_p1 tag=TAG20180727T190116
+channel adsm_5: restored backup piece 1
+channel adsm_5: restore complete, elapsed time: 00:42:15
+channel adsm_5: starting datafile backup set restore
+channel adsm_5: specifying datafile(s) to restore from backup set
+channel adsm_5: restoring datafile 00026 to /oracle/PHOEQ/data01/lstar_index.004
+channel adsm_5: restoring datafile 00085 to /oracle/PHOEQ/data01/lstar_lob.043
+channel adsm_5: restoring datafile 00144 to /oracle/PHOEQ/data01/lstar_lob.075
+channel adsm_5: restoring datafile 00201 to /oracle/PHOEQ/data01/lstar_lob.110
+channel adsm_5: reading from backup piece Inc0_UPHOEP_7ft938qi_1_1_s25839_p1
+channel adsm_6: piece handle=Inc0_UPHOEP_75t92vn0_1_1_s25829_p1 tag=TAG20180727T190116
+channel adsm_6: restored backup piece 1
+channel adsm_6: restore complete, elapsed time: 00:42:33
+channel adsm_6: starting datafile backup set restore
+channel adsm_6: specifying datafile(s) to restore from backup set
+channel adsm_6: restoring datafile 00024 to /oracle/PHOEQ/data01/lstar_data.005
+channel adsm_6: restoring datafile 00083 to /oracle/PHOEQ/data01/lstar_data.021
+channel adsm_6: restoring datafile 00142 to /oracle/PHOEQ/data01/lstar_index.025
+channel adsm_6: restoring datafile 00199 to /oracle/PHOEQ/data01/lstar_lob.108
+channel adsm_6: reading from backup piece Inc0_UPHOEP_7dt938ol_1_1_s25837_p1
+channel adsm_8: piece handle=Inc0_UPHOEP_76t9340n_1_1_s25830_p1 tag=TAG20180727T190116
+channel adsm_8: restored backup piece 1
+channel adsm_8: restore complete, elapsed time: 00:45:31
+channel adsm_8: starting datafile backup set restore
+channel adsm_8: specifying datafile(s) to restore from backup set
+channel adsm_8: restoring datafile 00025 to /oracle/PHOEQ/data01/lstar_lob.010
+channel adsm_8: restoring datafile 00084 to /oracle/PHOEQ/data01/lstar_lob.042
+channel adsm_8: restoring datafile 00143 to /oracle/PHOEQ/data01/lstar_lob.074
+channel adsm_8: restoring datafile 00200 to /oracle/PHOEQ/data01/lstar_lob.109
+channel adsm_8: reading from backup piece Inc0_UPHOEP_7et938q3_1_1_s25838_p1
+channel adsm_4: piece handle=Inc0_UPHOEP_77t9341q_1_1_s25831_p1 tag=TAG20180727T190116
+channel adsm_4: restored backup piece 1
+channel adsm_4: restore complete, elapsed time: 00:52:35
+channel adsm_4: starting datafile backup set restore
+channel adsm_4: specifying datafile(s) to restore from backup set
+channel adsm_4: restoring datafile 00028 to /oracle/PHOEQ/data01/lstar_data.006
+channel adsm_4: restoring datafile 00087 to /oracle/PHOEQ/data01/lstar_index.015
+channel adsm_4: restoring datafile 00146 to /oracle/PHOEQ/data01/lstar_lob.076
+channel adsm_4: restoring datafile 00203 to /oracle/PHOEQ/data01/lstar_lob.112
+channel adsm_4: reading from backup piece Inc0_UPHOEP_7ht938vt_1_1_s25841_p1
+channel adsm_2: piece handle=Inc0_UPHOEP_7bt93479_1_1_s25835_p1 tag=TAG20180727T190116
+channel adsm_2: restored backup piece 1
+channel adsm_2: restore complete, elapsed time: 00:50:15
+channel adsm_2: starting datafile backup set restore
+channel adsm_2: specifying datafile(s) to restore from backup set
+channel adsm_2: restoring datafile 00027 to /oracle/PHOEQ/data01/lstar_lob.011
+channel adsm_2: restoring datafile 00086 to /oracle/PHOEQ/data01/lstar_data.022
+channel adsm_2: restoring datafile 00145 to /oracle/PHOEQ/data01/lstar_data.038
+channel adsm_2: restoring datafile 00202 to /oracle/PHOEQ/data01/lstar_lob.111
+channel adsm_2: reading from backup piece Inc0_UPHOEP_7gt938t8_1_1_s25840_p1
+channel adsm_1: piece handle=Inc0_UPHOEP_79t9342k_1_1_s25833_p1 tag=TAG20180727T190116
+channel adsm_1: restored backup piece 1
+channel adsm_1: restore complete, elapsed time: 00:56:41
+channel adsm_1: starting datafile backup set restore
+channel adsm_1: specifying datafile(s) to restore from backup set
+channel adsm_1: restoring datafile 00030 to /oracle/PHOEQ/data01/lstar_lob.013
+channel adsm_1: restoring datafile 00089 to /oracle/PHOEQ/data01/lstar_lob.045
+channel adsm_1: restoring datafile 00148 to /oracle/PHOEQ/data01/lstar_lob.077
+channel adsm_1: restoring datafile 00205 to /oracle/PHOEQ/data01/lstar_index.035
+channel adsm_1: reading from backup piece Inc0_UPHOEP_7jt93d37_1_1_s25843_p1
+channel adsm_3: piece handle=Inc0_UPHOEP_7at93476_1_1_s25834_p1 tag=TAG20180727T190116
+channel adsm_3: restored backup piece 1
+channel adsm_3: restore complete, elapsed time: 00:57:01
+channel adsm_3: starting datafile backup set restore
+channel adsm_3: specifying datafile(s) to restore from backup set
+channel adsm_3: restoring datafile 00031 to /oracle/PHOEQ/data01/lstar_data.007
+channel adsm_3: restoring datafile 00090 to /oracle/PHOEQ/data01/lstar_data.023
+channel adsm_3: restoring datafile 00149 to /oracle/PHOEQ/data01/lstar_data.039
+channel adsm_3: restoring datafile 00206 to /oracle/PHOEQ/data01/lstar_index.036
+channel adsm_3: reading from backup piece Inc0_UPHOEP_7kt93d4a_1_1_s25844_p1
+channel adsm_6: piece handle=Inc0_UPHOEP_7dt938ol_1_1_s25837_p1 tag=TAG20180727T190116
+channel adsm_6: restored backup piece 1
+channel adsm_6: restore complete, elapsed time: 00:35:42
+channel adsm_6: starting datafile backup set restore
+channel adsm_6: specifying datafile(s) to restore from backup set
+channel adsm_6: restoring datafile 00032 to /oracle/PHOEQ/data01/lstar_index.005
+channel adsm_6: restoring datafile 00091 to /oracle/PHOEQ/data01/lstar_lob.046
+channel adsm_6: restoring datafile 00150 to /oracle/PHOEQ/data01/lstar_lob.078
+channel adsm_6: restoring datafile 00207 to /oracle/PHOEQ/data01/lstar_index.037
+channel adsm_6: reading from backup piece Inc0_UPHOEP_7lt93d7u_1_1_s25845_p1
+channel adsm_5: piece handle=Inc0_UPHOEP_7ft938qi_1_1_s25839_p1 tag=TAG20180727T190116
+channel adsm_5: restored backup piece 1
+channel adsm_5: restore complete, elapsed time: 00:43:43
+channel adsm_5: starting datafile backup set restore
+channel adsm_5: specifying datafile(s) to restore from backup set
+channel adsm_5: restoring datafile 00029 to /oracle/PHOEQ/data01/lstar_lob.012
+channel adsm_5: restoring datafile 00088 to /oracle/PHOEQ/data01/lstar_lob.044
+channel adsm_5: restoring datafile 00147 to /oracle/PHOEQ/data01/lstar_index.026
+channel adsm_5: restoring datafile 00204 to /oracle/PHOEQ/data01/lstar_lob.113
+channel adsm_5: reading from backup piece Inc0_UPHOEP_7it93cgj_1_1_s25842_p1
+channel adsm_7: piece handle=Inc0_UPHOEP_7ct93804_1_1_s25836_p1 tag=TAG20180727T190116
+channel adsm_7: restored backup piece 1
+channel adsm_7: restore complete, elapsed time: 00:44:56
+channel adsm_7: starting datafile backup set restore
+channel adsm_7: specifying datafile(s) to restore from backup set
+channel adsm_7: restoring datafile 00033 to /oracle/PHOEQ/data01/lstar_lob.014
+channel adsm_7: restoring datafile 00092 to /oracle/PHOEQ/data01/lstar_index.016
+channel adsm_7: restoring datafile 00151 to /oracle/PHOEQ/data01/lstar_lob.079
+channel adsm_7: restoring datafile 00208 to /oracle/PHOEQ/data01/lstar_index.038
+channel adsm_7: reading from backup piece Inc0_UPHOEP_7mt93d9b_1_1_s25846_p1
+channel adsm_8: piece handle=Inc0_UPHOEP_7et938q3_1_1_s25838_p1 tag=TAG20180727T190116
+channel adsm_8: restored backup piece 1
+channel adsm_8: restore complete, elapsed time: 00:43:13
+channel adsm_8: starting datafile backup set restore
+channel adsm_8: specifying datafile(s) to restore from backup set
+channel adsm_8: restoring datafile 00034 to /oracle/PHOEQ/data01/lstar_lob.015
+channel adsm_8: restoring datafile 00093 to /oracle/PHOEQ/data01/lstar_lob.047
+channel adsm_8: restoring datafile 00152 to /oracle/PHOEQ/data01/lstar_data.040
+channel adsm_8: restoring datafile 00209 to /oracle/PHOEQ/data01/lstar_index.039
+channel adsm_8: reading from backup piece Inc0_UPHOEP_7nt93dc0_1_1_s25847_p1
+channel adsm_1: piece handle=Inc0_UPHOEP_7jt93d37_1_1_s25843_p1 tag=TAG20180727T190116
+channel adsm_1: restored backup piece 1
+channel adsm_1: restore complete, elapsed time: 00:31:32
+channel adsm_1: starting datafile backup set restore
+channel adsm_1: specifying datafile(s) to restore from backup set
+channel adsm_1: restoring datafile 00035 to /oracle/PHOEQ/data01/lstar_data.008
+channel adsm_1: restoring datafile 00094 to /oracle/PHOEQ/data01/lstar_data.024
+channel adsm_1: restoring datafile 00153 to /oracle/PHOEQ/data01/lstar_index.027
+channel adsm_1: restoring datafile 00210 to /oracle/PHOEQ/data01/lstar_lob.115
+channel adsm_1: reading from backup piece Inc0_UPHOEP_7ot93ggs_1_1_s25848_p1
+channel adsm_2: piece handle=Inc0_UPHOEP_7gt938t8_1_1_s25840_p1 tag=TAG20180727T190116
+channel adsm_2: restored backup piece 1
+channel adsm_2: restore complete, elapsed time: 00:42:03
+channel adsm_2: starting datafile backup set restore
+channel adsm_2: specifying datafile(s) to restore from backup set
+channel adsm_2: restoring datafile 00036 to /oracle/PHOEQ/data01/lstar_lob.016
+channel adsm_2: restoring datafile 00095 to /oracle/PHOEQ/data01/lstar_lob.048
+channel adsm_2: restoring datafile 00154 to /oracle/PHOEQ/data01/lstar_lob.080
+channel adsm_2: restoring datafile 00211 to /oracle/PHOEQ/data01/lstar_lob.116
+channel adsm_2: reading from backup piece Inc0_UPHOEP_7pt93gp5_1_1_s25849_p1
+channel adsm_4: piece handle=Inc0_UPHOEP_7ht938vt_1_1_s25841_p1 tag=TAG20180727T190116
+channel adsm_4: restored backup piece 1
+channel adsm_4: restore complete, elapsed time: 00:44:04
+channel adsm_4: starting datafile backup set restore
+channel adsm_4: specifying datafile(s) to restore from backup set
+channel adsm_4: restoring datafile 00037 to /oracle/PHOEQ/data01/lstar_index.006
+channel adsm_4: restoring datafile 00096 to /oracle/PHOEQ/data01/lstar_lob.049
+channel adsm_4: restoring datafile 00155 to /oracle/PHOEQ/data01/lstar_lob.081
+channel adsm_4: restoring datafile 00212 to /oracle/PHOEQ/data01/lstar_lob.117
+channel adsm_4: reading from backup piece Inc0_UPHOEP_7qt93gpc_1_1_s25850_p1
+channel adsm_3: piece handle=Inc0_UPHOEP_7kt93d4a_1_1_s25844_p1 tag=TAG20180727T190116
+channel adsm_3: restored backup piece 1
+channel adsm_3: restore complete, elapsed time: 00:36:11
+channel adsm_3: starting datafile backup set restore
+channel adsm_3: specifying datafile(s) to restore from backup set
+channel adsm_3: restoring datafile 00039 to /oracle/PHOEQ/data01/lstar_data.009
+channel adsm_3: restoring datafile 00098 to /oracle/PHOEQ/data01/lstar_index.017
+channel adsm_3: restoring datafile 00157 to /oracle/PHOEQ/data01/lstar_lob.082
+channel adsm_3: restoring datafile 00214 to /oracle/PHOEQ/data01/lstar_lob.119
+channel adsm_3: reading from backup piece Inc0_UPHOEP_7st93gud_1_1_s25852_p1
+channel adsm_6: piece handle=Inc0_UPHOEP_7lt93d7u_1_1_s25845_p1 tag=TAG20180727T190116
+channel adsm_6: restored backup piece 1
+channel adsm_6: restore complete, elapsed time: 00:29:30
+channel adsm_6: starting datafile backup set restore
+channel adsm_6: specifying datafile(s) to restore from backup set
+channel adsm_6: restoring datafile 00038 to /oracle/PHOEQ/data01/lstar_lob.017
+channel adsm_6: restoring datafile 00097 to /oracle/PHOEQ/data01/lstar_data.025
+channel adsm_6: restoring datafile 00156 to /oracle/PHOEQ/data01/lstar_data.041
+channel adsm_6: restoring datafile 00213 to /oracle/PHOEQ/data01/lstar_lob.118
+channel adsm_6: reading from backup piece Inc0_UPHOEP_7rt93gsm_1_1_s25851_p1
+channel adsm_7: piece handle=Inc0_UPHOEP_7mt93d9b_1_1_s25846_p1 tag=TAG20180727T190116
+channel adsm_7: restored backup piece 1
+channel adsm_7: restore complete, elapsed time: 00:27:05
+channel adsm_7: starting datafile backup set restore
+channel adsm_7: specifying datafile(s) to restore from backup set
+channel adsm_7: restoring datafile 00040 to /oracle/PHOEQ/data01/lstar_lob.018
+channel adsm_7: restoring datafile 00099 to /oracle/PHOEQ/data01/lstar_lob.050
+channel adsm_7: restoring datafile 00158 to /oracle/PHOEQ/data01/lstar_index.028
+channel adsm_7: restoring datafile 00215 to /oracle/PHOEQ/data01/lstar_lob.120
+channel adsm_7: reading from backup piece Inc0_UPHOEP_7tt93h2u_1_1_s25853_p1
+channel adsm_1: piece handle=Inc0_UPHOEP_7ot93ggs_1_1_s25848_p1 tag=TAG20180727T190116
+channel adsm_1: restored backup piece 1
+channel adsm_1: restore complete, elapsed time: 00:25:40
+channel adsm_1: starting datafile backup set restore
+channel adsm_1: specifying datafile(s) to restore from backup set
+channel adsm_1: restoring datafile 00045 to /oracle/PHOEQ/data01/lstar_lob.021
+channel adsm_1: restoring datafile 00104 to /oracle/PHOEQ/data01/lstar_lob.053
+channel adsm_1: restoring datafile 00163 to /oracle/PHOEQ/data01/lstar_data.043
+channel adsm_1: restoring datafile 00220 to /oracle/PHOEQ/data01/lstar_lob.124
+channel adsm_1: reading from backup piece Inc0_UPHOEP_82t93laj_1_1_s25858_p1
+channel adsm_5: piece handle=Inc0_UPHOEP_7it93cgj_1_1_s25842_p1 tag=TAG20180727T190116
+channel adsm_5: restored backup piece 1
+channel adsm_5: restore complete, elapsed time: 00:39:21
+channel adsm_5: starting datafile backup set restore
+channel adsm_5: specifying datafile(s) to restore from backup set
+channel adsm_5: restoring datafile 00044 to /oracle/PHOEQ/data01/lstar_lob.020
+channel adsm_5: restoring datafile 00103 to /oracle/PHOEQ/data01/lstar_index.018
+channel adsm_5: restoring datafile 00162 to /oracle/PHOEQ/data01/lstar_lob.085
+channel adsm_5: restoring datafile 00219 to /oracle/PHOEQ/data01/lstar_lob.123
+channel adsm_5: reading from backup piece Inc0_UPHOEP_81t93l8i_1_1_s25857_p1
+channel adsm_8: piece handle=Inc0_UPHOEP_7nt93dc0_1_1_s25847_p1 tag=TAG20180727T190116
+channel adsm_8: restored backup piece 1
+channel adsm_8: restore complete, elapsed time: 00:35:56
+channel adsm_8: starting datafile backup set restore
+channel adsm_8: specifying datafile(s) to restore from backup set
+channel adsm_8: restoring datafile 00042 to /oracle/PHOEQ/data01/lstar_data.010
+channel adsm_8: restoring datafile 00101 to /oracle/PHOEQ/data01/lstar_data.026
+channel adsm_8: restoring datafile 00160 to /oracle/PHOEQ/data01/lstar_data.042
+channel adsm_8: restoring datafile 00217 to /oracle/PHOEQ/data01/lstar_lob.122
+channel adsm_8: reading from backup piece Inc0_UPHOEP_7vt93l0n_1_1_s25855_p1
+channel adsm_3: piece handle=Inc0_UPHOEP_7st93gud_1_1_s25852_p1 tag=TAG20180727T190116
+channel adsm_3: restored backup piece 1
+channel adsm_3: restore complete, elapsed time: 00:29:52
+channel adsm_3: starting datafile backup set restore
+channel adsm_3: specifying datafile(s) to restore from backup set
+channel adsm_3: restoring datafile 00041 to /oracle/PHOEQ/data01/lstar_lob.019
+channel adsm_3: restoring datafile 00100 to /oracle/PHOEQ/data01/lstar_lob.051
+channel adsm_3: restoring datafile 00159 to /oracle/PHOEQ/data01/lstar_lob.083
+channel adsm_3: restoring datafile 00216 to /oracle/PHOEQ/data01/lstar_lob.121
+channel adsm_3: reading from backup piece Inc0_UPHOEP_7ut93ksq_1_1_s25854_p1
+channel adsm_6: piece handle=Inc0_UPHOEP_7rt93gsm_1_1_s25851_p1 tag=TAG20180727T190116
+channel adsm_6: restored backup piece 1
+channel adsm_6: restore complete, elapsed time: 00:35:52
+channel adsm_6: starting datafile backup set restore
+channel adsm_6: specifying datafile(s) to restore from backup set
+channel adsm_6: restoring datafile 00043 to /oracle/PHOEQ/data01/lstar_index.007
+channel adsm_6: restoring datafile 00102 to /oracle/PHOEQ/data01/lstar_lob.052
+channel adsm_6: restoring datafile 00161 to /oracle/PHOEQ/data01/lstar_lob.084
+channel adsm_6: restoring datafile 00218 to /oracle/PHOEQ/data01/undotbs1.004
+channel adsm_6: reading from backup piece Inc0_UPHOEP_80t93l59_1_1_s25856_p1
+channel adsm_2: piece handle=Inc0_UPHOEP_7pt93gp5_1_1_s25849_p1 tag=TAG20180727T190116
+channel adsm_2: restored backup piece 1
+channel adsm_2: restore complete, elapsed time: 00:45:11
+channel adsm_2: starting datafile backup set restore
+channel adsm_2: specifying datafile(s) to restore from backup set
+channel adsm_2: restoring datafile 00046 to /oracle/PHOEQ/data01/lstar_data.011
+channel adsm_2: restoring datafile 00105 to /oracle/PHOEQ/data01/lstar_data.027
+channel adsm_2: restoring datafile 00164 to /oracle/PHOEQ/data01/lstar_index.029
+channel adsm_2: restoring datafile 00221 to /oracle/PHOEQ/data01/lstar_lob.125
+channel adsm_2: reading from backup piece Inc0_UPHOEP_83t93lhl_1_1_s25859_p1
+channel adsm_7: piece handle=Inc0_UPHOEP_7tt93h2u_1_1_s25853_p1 tag=TAG20180727T190116
+channel adsm_7: restored backup piece 1
+channel adsm_7: restore complete, elapsed time: 00:31:32
+channel adsm_7: starting datafile backup set restore
+channel adsm_7: specifying datafile(s) to restore from backup set
+channel adsm_7: restoring datafile 00051 to /oracle/PHOEQ/data01/lstar_lob.024
+channel adsm_7: restoring datafile 00110 to /oracle/PHOEQ/data01/lstar_lob.056
+channel adsm_7: restoring datafile 00169 to /oracle/PHOEQ/data01/lstar_index.030
+channel adsm_7: restoring datafile 00226 to /oracle/PHOEQ/data01/lstar_lob.130
+channel adsm_7: reading from backup piece Inc0_UPHOEP_88t93pcm_1_1_s25864_p1
+channel adsm_4: piece handle=Inc0_UPHOEP_7qt93gpc_1_1_s25850_p1 tag=TAG20180727T190116
+channel adsm_4: restored backup piece 1
+channel adsm_4: restore complete, elapsed time: 00:45:12
+channel adsm_4: starting datafile backup set restore
+channel adsm_4: specifying datafile(s) to restore from backup set
+channel adsm_4: restoring datafile 00052 to /oracle/PHOEQ/data01/lstar_lob.025
+channel adsm_4: restoring datafile 00111 to /oracle/PHOEQ/data01/lstar_lob.057
+channel adsm_4: restoring datafile 00170 to /oracle/PHOEQ/data01/lstar_lob.089
+channel adsm_4: restoring datafile 00227 to /oracle/PHOEQ/data01/lstar_lob.131
+channel adsm_4: reading from backup piece Inc0_UPHOEP_89t93pfv_1_1_s25865_p1
+channel adsm_1: piece handle=Inc0_UPHOEP_82t93laj_1_1_s25858_p1 tag=TAG20180727T190116
+channel adsm_1: restored backup piece 1
+channel adsm_1: restore complete, elapsed time: 00:35:57
+channel adsm_1: starting datafile backup set restore
+channel adsm_1: specifying datafile(s) to restore from backup set
+channel adsm_1: restoring datafile 00050 to /oracle/PHOEQ/data01/lstar_data.012
+channel adsm_1: restoring datafile 00109 to /oracle/PHOEQ/data01/lstar_index.019
+channel adsm_1: restoring datafile 00168 to /oracle/PHOEQ/data01/lstar_lob.088
+channel adsm_1: restoring datafile 00225 to /oracle/PHOEQ/data01/lstar_lob.129
+channel adsm_1: reading from backup piece Inc0_UPHOEP_87t93pal_1_1_s25863_p1
+channel adsm_5: piece handle=Inc0_UPHOEP_81t93l8i_1_1_s25857_p1 tag=TAG20180727T190116
+channel adsm_5: restored backup piece 1
+channel adsm_5: restore complete, elapsed time: 00:38:38
+channel adsm_5: starting datafile backup set restore
+channel adsm_5: specifying datafile(s) to restore from backup set
+channel adsm_5: restoring datafile 00049 to /oracle/PHOEQ/data01/lstar_lob.023
+channel adsm_5: restoring datafile 00108 to /oracle/PHOEQ/data01/lstar_data.028
+channel adsm_5: restoring datafile 00167 to /oracle/PHOEQ/data01/lstar_data.044
+channel adsm_5: restoring datafile 00224 to /oracle/PHOEQ/data01/lstar_lob.128
+channel adsm_5: reading from backup piece Inc0_UPHOEP_86t93p89_1_1_s25862_p1
+channel adsm_3: piece handle=Inc0_UPHOEP_7ut93ksq_1_1_s25854_p1 tag=TAG20180727T190116
+channel adsm_3: restored backup piece 1
+channel adsm_3: restore complete, elapsed time: 00:35:13
+channel adsm_3: starting datafile backup set restore
+channel adsm_3: specifying datafile(s) to restore from backup set
+channel adsm_3: restoring datafile 00048 to /oracle/PHOEQ/data01/lstar_index.008
+channel adsm_3: restoring datafile 00107 to /oracle/PHOEQ/data01/lstar_lob.055
+channel adsm_3: restoring datafile 00166 to /oracle/PHOEQ/data01/lstar_lob.087
+channel adsm_3: restoring datafile 00223 to /oracle/PHOEQ/data01/lstar_lob.127
+channel adsm_3: reading from backup piece Inc0_UPHOEP_85t93p6i_1_1_s25861_p1
+channel adsm_8: piece handle=Inc0_UPHOEP_7vt93l0n_1_1_s25855_p1 tag=TAG20180727T190116
+channel adsm_8: restored backup piece 1
+channel adsm_8: restore complete, elapsed time: 00:40:43
+channel adsm_8: starting datafile backup set restore
+channel adsm_8: specifying datafile(s) to restore from backup set
+channel adsm_8: restoring datafile 00047 to /oracle/PHOEQ/data01/lstar_lob.022
+channel adsm_8: restoring datafile 00106 to /oracle/PHOEQ/data01/lstar_lob.054
+channel adsm_8: restoring datafile 00165 to /oracle/PHOEQ/data01/lstar_lob.086
+channel adsm_8: restoring datafile 00222 to /oracle/PHOEQ/data01/lstar_lob.126
+channel adsm_8: reading from backup piece Inc0_UPHOEP_84t93p63_1_1_s25860_p1
+channel adsm_4: piece handle=Inc0_UPHOEP_89t93pfv_1_1_s25865_p1 tag=TAG20180727T190116
+channel adsm_4: restored backup piece 1
+channel adsm_4: restore complete, elapsed time: 00:23:27
+channel adsm_4: starting datafile backup set restore
+channel adsm_4: specifying datafile(s) to restore from backup set
+channel adsm_4: restoring datafile 00057 to /oracle/PHOEQ/data01/lstar_data.014
+channel adsm_4: restoring datafile 00116 to /oracle/PHOEQ/data01/lstar_data.030
+channel adsm_4: restoring datafile 00175 to /oracle/PHOEQ/data01/lstar_index.031
+channel adsm_4: restoring datafile 00232 to /oracle/PHOEQ/data01/lstar_lob.136
+channel adsm_4: reading from backup piece Inc0_UPHOEP_8et93tls_1_1_s25870_p1
+channel adsm_2: piece handle=Inc0_UPHOEP_83t93lhl_1_1_s25859_p1 tag=TAG20180727T190116
+channel adsm_2: restored backup piece 1
+channel adsm_2: restore complete, elapsed time: 00:28:08
+channel adsm_2: starting datafile backup set restore
+channel adsm_2: specifying datafile(s) to restore from backup set
+channel adsm_2: restoring datafile 00056 to /oracle/PHOEQ/data01/lstar_lob.027
+channel adsm_2: restoring datafile 00115 to /oracle/PHOEQ/data01/lstar_lob.059
+channel adsm_2: restoring datafile 00174 to /oracle/PHOEQ/data01/lstar_data.046
+channel adsm_2: restoring datafile 00231 to /oracle/PHOEQ/data01/lstar_lob.135
+channel adsm_2: reading from backup piece Inc0_UPHOEP_8dt93tlr_1_1_s25869_p1
+channel adsm_7: piece handle=Inc0_UPHOEP_88t93pcm_1_1_s25864_p1 tag=TAG20180727T190116
+channel adsm_7: restored backup piece 1
+channel adsm_7: restore complete, elapsed time: 00:28:32
+channel adsm_7: starting datafile backup set restore
+channel adsm_7: specifying datafile(s) to restore from backup set
+channel adsm_7: restoring datafile 00054 to /oracle/PHOEQ/data01/lstar_index.009
+channel adsm_7: restoring datafile 00113 to /oracle/PHOEQ/data01/lstar_lob.058
+channel adsm_7: restoring datafile 00172 to /oracle/PHOEQ/data01/lstar_lob.090
+channel adsm_7: restoring datafile 00229 to /oracle/PHOEQ/data01/lstar_lob.133
+channel adsm_7: reading from backup piece Inc0_UPHOEP_8bt93tft_1_1_s25867_p1
+channel adsm_6: piece handle=Inc0_UPHOEP_80t93l59_1_1_s25856_p1 tag=TAG20180727T190116
+channel adsm_6: restored backup piece 1
+channel adsm_6: restore complete, elapsed time: 00:34:03
+channel adsm_6: starting datafile backup set restore
+channel adsm_6: specifying datafile(s) to restore from backup set
+channel adsm_6: restoring datafile 00058 to /oracle/PHOEQ/data01/lstar_lob.028
+channel adsm_6: restoring datafile 00117 to /oracle/PHOEQ/data01/lstar_lob.060
+channel adsm_6: restoring datafile 00176 to /oracle/PHOEQ/data01/lstar_lob.092
+channel adsm_6: restoring datafile 00233 to /oracle/PHOEQ/data01/lstar_lob.137
+channel adsm_6: reading from backup piece Inc0_UPHOEP_8ft93to7_1_1_s25871_p1
+channel adsm_1: piece handle=Inc0_UPHOEP_87t93pal_1_1_s25863_p1 tag=TAG20180727T190116
+channel adsm_1: restored backup piece 1
+channel adsm_1: restore complete, elapsed time: 00:22:13
+channel adsm_1: starting datafile backup set restore
+channel adsm_1: specifying datafile(s) to restore from backup set
+channel adsm_1: restoring datafile 00053 to /oracle/PHOEQ/data01/lstar_data.013
+channel adsm_1: restoring datafile 00112 to /oracle/PHOEQ/data01/lstar_data.029
+channel adsm_1: restoring datafile 00171 to /oracle/PHOEQ/data01/lstar_data.045
+channel adsm_1: restoring datafile 00228 to /oracle/PHOEQ/data01/lstar_lob.132
+channel adsm_1: reading from backup piece Inc0_UPHOEP_8at93te5_1_1_s25866_p1
+channel adsm_5: piece handle=Inc0_UPHOEP_86t93p89_1_1_s25862_p1 tag=TAG20180727T190116
+channel adsm_5: restored backup piece 1
+channel adsm_5: restore complete, elapsed time: 00:21:52
+channel adsm_5: starting datafile backup set restore
+channel adsm_5: specifying datafile(s) to restore from backup set
+channel adsm_5: restoring datafile 00055 to /oracle/PHOEQ/data01/lstar_lob.026
+channel adsm_5: restoring datafile 00114 to /oracle/PHOEQ/data01/lstar_index.020
+channel adsm_5: restoring datafile 00173 to /oracle/PHOEQ/data01/lstar_lob.091
+channel adsm_5: restoring datafile 00230 to /oracle/PHOEQ/data01/lstar_lob.134
+channel adsm_5: reading from backup piece Inc0_UPHOEP_8ct93tis_1_1_s25868_p1
+channel adsm_3: piece handle=Inc0_UPHOEP_85t93p6i_1_1_s25861_p1 tag=TAG20180727T190116
+channel adsm_3: restored backup piece 1
+channel adsm_3: restore complete, elapsed time: 00:27:32
+channel adsm_3: starting datafile backup set restore
+channel adsm_3: specifying datafile(s) to restore from backup set
+channel adsm_3: restoring datafile 00001 to /oracle/PHOEQ/data01/system.001
+channel adsm_3: restoring datafile 00004 to /oracle/PHOEQ/data01/users.001
+channel adsm_3: restoring datafile 00063 to /oracle/PHOEQ/data01/lstar_lob.031
+channel adsm_3: restoring datafile 00122 to /oracle/PHOEQ/data01/lstar_lob.063
+channel adsm_3: reading from backup piece Inc0_UPHOEP_8ht9416a_1_1_s25873_p1
+channel adsm_8: piece handle=Inc0_UPHOEP_84t93p63_1_1_s25860_p1 tag=TAG20180727T190116
+channel adsm_8: restored backup piece 1
+channel adsm_8: restore complete, elapsed time: 00:26:08
+channel adsm_8: starting datafile backup set restore
+channel adsm_8: specifying datafile(s) to restore from backup set
+channel adsm_8: restoring datafile 00060 to /oracle/PHOEQ/data01/lstar_lob.029
+channel adsm_8: restoring datafile 00119 to /oracle/PHOEQ/data01/lstar_data.031
+channel adsm_8: restoring datafile 00178 to /oracle/PHOEQ/data01/lstar_data.047
+channel adsm_8: reading from backup piece Inc0_UPHOEP_8jt9417d_1_1_s25875_p1
+channel adsm_4: piece handle=Inc0_UPHOEP_8et93tls_1_1_s25870_p1 tag=TAG20180727T190116
+channel adsm_4: restored backup piece 1
+channel adsm_4: restore complete, elapsed time: 00:39:57
+channel adsm_4: starting datafile backup set restore
+channel adsm_4: specifying datafile(s) to restore from backup set
+channel adsm_4: restoring datafile 00059 to /oracle/PHOEQ/data01/lstar_index.010
+channel adsm_4: restoring datafile 00118 to /oracle/PHOEQ/data01/lstar_lob.061
+channel adsm_4: restoring datafile 00177 to /oracle/PHOEQ/data01/lstar_lob.093
+channel adsm_4: reading from backup piece Inc0_UPHOEP_8it9417d_1_1_s25874_p1
+channel adsm_3: piece handle=Inc0_UPHOEP_8ht9416a_1_1_s25873_p1 tag=TAG20180727T190116
+channel adsm_3: restored backup piece 1
+channel adsm_3: restore complete, elapsed time: 00:25:01
+channel adsm_3: starting datafile backup set restore
+channel adsm_3: specifying datafile(s) to restore from backup set
+channel adsm_3: restoring datafile 00061 to /oracle/PHOEQ/data01/lstar_data.015
+channel adsm_3: restoring datafile 00120 to /oracle/PHOEQ/data01/lstar_index.021
+channel adsm_3: restoring datafile 00179 to /oracle/PHOEQ/data01/lstar_lob.094
+channel adsm_3: reading from backup piece Inc0_UPHOEP_8kt94187_1_1_s25876_p1
+channel adsm_6: piece handle=Inc0_UPHOEP_8ft93to7_1_1_s25871_p1 tag=TAG20180727T190116
+channel adsm_6: restored backup piece 1
+channel adsm_6: restore complete, elapsed time: 00:42:13
+channel adsm_6: starting datafile backup set restore
+channel adsm_6: specifying datafile(s) to restore from backup set
+channel adsm_6: restoring datafile 00002 to /oracle/PHOEQ/data01/sysaux.001
+channel adsm_6: restoring datafile 00003 to /oracle/PHOEQ/data01/undotbs1.001
+channel adsm_6: restoring datafile 00062 to /oracle/PHOEQ/data01/lstar_lob.030
+channel adsm_6: restoring datafile 00121 to /oracle/PHOEQ/data01/lstar_lob.062
+channel adsm_6: reading from backup piece Inc0_UPHOEP_8gt9413k_1_1_s25872_p1
+channel adsm_8: piece handle=Inc0_UPHOEP_8jt9417d_1_1_s25875_p1 tag=TAG20180727T190116
+channel adsm_8: restored backup piece 1
+channel adsm_8: restore complete, elapsed time: 00:27:02
+channel adsm_7: piece handle=Inc0_UPHOEP_8bt93tft_1_1_s25867_p1 tag=TAG20180727T190116
+channel adsm_7: restored backup piece 1
+channel adsm_7: restore complete, elapsed time: 00:49:44
+channel adsm_2: piece handle=Inc0_UPHOEP_8dt93tlr_1_1_s25869_p1 tag=TAG20180727T190116
+channel adsm_2: restored backup piece 1
+channel adsm_2: restore complete, elapsed time: 00:51:29
+channel adsm_4: piece handle=Inc0_UPHOEP_8it9417d_1_1_s25874_p1 tag=TAG20180727T190116
+channel adsm_4: restored backup piece 1
+channel adsm_4: restore complete, elapsed time: 00:19:26
+channel adsm_1: piece handle=Inc0_UPHOEP_8at93te5_1_1_s25866_p1 tag=TAG20180727T190116
+channel adsm_1: restored backup piece 1
+channel adsm_1: restore complete, elapsed time: 00:50:33
+channel adsm_5: piece handle=Inc0_UPHOEP_8ct93tis_1_1_s25868_p1 tag=TAG20180727T190116
+channel adsm_5: restored backup piece 1
+channel adsm_5: restore complete, elapsed time: 00:44:28
+channel adsm_3: piece handle=Inc0_UPHOEP_8kt94187_1_1_s25876_p1 tag=TAG20180727T190116
+channel adsm_3: restored backup piece 1
+channel adsm_3: restore complete, elapsed time: 00:22:51
+channel adsm_6: piece handle=Inc0_UPHOEP_8gt9413k_1_1_s25872_p1 tag=TAG20180727T190116
+channel adsm_6: restored backup piece 1
+channel adsm_6: restore complete, elapsed time: 00:22:16
+Finished restore at 28-JUL-18
+
+contents of Memory Script:
+{
+   switch clone datafile all;
+}
+executing Memory Script
+
+datafile 1 switched to datafile copy
+input datafile copy RECID=234 STAMP=982677133 file name=/oracle/PHOEQ/data01/system.001
+datafile 2 switched to datafile copy
+input datafile copy RECID=235 STAMP=982677133 file name=/oracle/PHOEQ/data01/sysaux.001
+datafile 3 switched to datafile copy
+input datafile copy RECID=236 STAMP=982677133 file name=/oracle/PHOEQ/data01/undotbs1.001
+datafile 4 switched to datafile copy
+input datafile copy RECID=237 STAMP=982677133 file name=/oracle/PHOEQ/data01/users.001
+datafile 5 switched to datafile copy
+input datafile copy RECID=238 STAMP=982677133 file name=/oracle/PHOEQ/data01/undotbs1.002
+datafile 6 switched to datafile copy
+input datafile copy RECID=239 STAMP=982677133 file name=/oracle/PHOEQ/data01/undotbs1.003
+datafile 7 switched to datafile copy
+input datafile copy RECID=240 STAMP=982677133 file name=/oracle/PHOEQ/data01/lstar_lob.114
+datafile 8 switched to datafile copy
+input datafile copy RECID=241 STAMP=982677133 file name=/oracle/PHOEQ/data01/lstar_data.001
+datafile 9 switched to datafile copy
+input datafile copy RECID=242 STAMP=982677133 file name=/oracle/PHOEQ/data01/lstar_index.001
+datafile 10 switched to datafile copy
+input datafile copy RECID=243 STAMP=982677133 file name=/oracle/PHOEQ/data01/lstar_lob.001
+datafile 11 switched to datafile copy
+input datafile copy RECID=244 STAMP=982677133 file name=/oracle/PHOEQ/data01/lstar_lob.002
+datafile 12 switched to datafile copy
+input datafile copy RECID=245 STAMP=982677133 file name=/oracle/PHOEQ/data01/lstar_lob.003
+datafile 13 switched to datafile copy
+input datafile copy RECID=246 STAMP=982677133 file name=/oracle/PHOEQ/data01/lstar_data.002
+datafile 14 switched to datafile copy
+input datafile copy RECID=247 STAMP=982677133 file name=/oracle/PHOEQ/data01/lstar_lob.004
+datafile 15 switched to datafile copy
+input datafile copy RECID=248 STAMP=982677134 file name=/oracle/PHOEQ/data01/lstar_index.002
+datafile 16 switched to datafile copy
+input datafile copy RECID=249 STAMP=982677134 file name=/oracle/PHOEQ/data01/lstar_lob.005
+datafile 17 switched to datafile copy
+input datafile copy RECID=250 STAMP=982677134 file name=/oracle/PHOEQ/data01/lstar_data.003
+datafile 18 switched to datafile copy
+input datafile copy RECID=251 STAMP=982677134 file name=/oracle/PHOEQ/data01/lstar_lob.006
+datafile 19 switched to datafile copy
+input datafile copy RECID=252 STAMP=982677134 file name=/oracle/PHOEQ/data01/lstar_lob.007
+datafile 20 switched to datafile copy
+input datafile copy RECID=253 STAMP=982677134 file name=/oracle/PHOEQ/data01/lstar_data.004
+datafile 21 switched to datafile copy
+input datafile copy RECID=254 STAMP=982677134 file name=/oracle/PHOEQ/data01/lstar_index.003
+datafile 22 switched to datafile copy
+input datafile copy RECID=255 STAMP=982677134 file name=/oracle/PHOEQ/data01/lstar_lob.008
+datafile 23 switched to datafile copy
+input datafile copy RECID=256 STAMP=982677134 file name=/oracle/PHOEQ/data01/lstar_lob.009
+datafile 24 switched to datafile copy
+input datafile copy RECID=257 STAMP=982677134 file name=/oracle/PHOEQ/data01/lstar_data.005
+datafile 25 switched to datafile copy
+input datafile copy RECID=258 STAMP=982677134 file name=/oracle/PHOEQ/data01/lstar_lob.010
+datafile 26 switched to datafile copy
+input datafile copy RECID=259 STAMP=982677134 file name=/oracle/PHOEQ/data01/lstar_index.004
+datafile 27 switched to datafile copy
+input datafile copy RECID=260 STAMP=982677134 file name=/oracle/PHOEQ/data01/lstar_lob.011
+datafile 28 switched to datafile copy
+input datafile copy RECID=261 STAMP=982677134 file name=/oracle/PHOEQ/data01/lstar_data.006
+datafile 29 switched to datafile copy
+input datafile copy RECID=262 STAMP=982677134 file name=/oracle/PHOEQ/data01/lstar_lob.012
+datafile 30 switched to datafile copy
+input datafile copy RECID=263 STAMP=982677134 file name=/oracle/PHOEQ/data01/lstar_lob.013
+datafile 31 switched to datafile copy
+input datafile copy RECID=264 STAMP=982677135 file name=/oracle/PHOEQ/data01/lstar_data.007
+datafile 32 switched to datafile copy
+input datafile copy RECID=265 STAMP=982677135 file name=/oracle/PHOEQ/data01/lstar_index.005
+datafile 33 switched to datafile copy
+input datafile copy RECID=266 STAMP=982677135 file name=/oracle/PHOEQ/data01/lstar_lob.014
+datafile 34 switched to datafile copy
+input datafile copy RECID=267 STAMP=982677135 file name=/oracle/PHOEQ/data01/lstar_lob.015
+datafile 35 switched to datafile copy
+input datafile copy RECID=268 STAMP=982677135 file name=/oracle/PHOEQ/data01/lstar_data.008
+datafile 36 switched to datafile copy
+input datafile copy RECID=269 STAMP=982677135 file name=/oracle/PHOEQ/data01/lstar_lob.016
+datafile 37 switched to datafile copy
+input datafile copy RECID=270 STAMP=982677135 file name=/oracle/PHOEQ/data01/lstar_index.006
+datafile 38 switched to datafile copy
+input datafile copy RECID=271 STAMP=982677135 file name=/oracle/PHOEQ/data01/lstar_lob.017
+datafile 39 switched to datafile copy
+input datafile copy RECID=272 STAMP=982677135 file name=/oracle/PHOEQ/data01/lstar_data.009
+datafile 40 switched to datafile copy
+input datafile copy RECID=273 STAMP=982677135 file name=/oracle/PHOEQ/data01/lstar_lob.018
+datafile 41 switched to datafile copy
+input datafile copy RECID=274 STAMP=982677135 file name=/oracle/PHOEQ/data01/lstar_lob.019
+datafile 42 switched to datafile copy
+input datafile copy RECID=275 STAMP=982677135 file name=/oracle/PHOEQ/data01/lstar_data.010
+datafile 43 switched to datafile copy
+input datafile copy RECID=276 STAMP=982677135 file name=/oracle/PHOEQ/data01/lstar_index.007
+datafile 44 switched to datafile copy
+input datafile copy RECID=277 STAMP=982677135 file name=/oracle/PHOEQ/data01/lstar_lob.020
+datafile 45 switched to datafile copy
+input datafile copy RECID=278 STAMP=982677135 file name=/oracle/PHOEQ/data01/lstar_lob.021
+datafile 46 switched to datafile copy
+input datafile copy RECID=279 STAMP=982677135 file name=/oracle/PHOEQ/data01/lstar_data.011
+datafile 47 switched to datafile copy
+input datafile copy RECID=280 STAMP=982677136 file name=/oracle/PHOEQ/data01/lstar_lob.022
+datafile 48 switched to datafile copy
+input datafile copy RECID=281 STAMP=982677136 file name=/oracle/PHOEQ/data01/lstar_index.008
+datafile 49 switched to datafile copy
+input datafile copy RECID=282 STAMP=982677136 file name=/oracle/PHOEQ/data01/lstar_lob.023
+datafile 50 switched to datafile copy
+input datafile copy RECID=283 STAMP=982677136 file name=/oracle/PHOEQ/data01/lstar_data.012
+datafile 51 switched to datafile copy
+input datafile copy RECID=284 STAMP=982677136 file name=/oracle/PHOEQ/data01/lstar_lob.024
+datafile 52 switched to datafile copy
+input datafile copy RECID=285 STAMP=982677136 file name=/oracle/PHOEQ/data01/lstar_lob.025
+datafile 53 switched to datafile copy
+input datafile copy RECID=286 STAMP=982677136 file name=/oracle/PHOEQ/data01/lstar_data.013
+datafile 54 switched to datafile copy
+input datafile copy RECID=287 STAMP=982677136 file name=/oracle/PHOEQ/data01/lstar_index.009
+datafile 55 switched to datafile copy
+input datafile copy RECID=288 STAMP=982677136 file name=/oracle/PHOEQ/data01/lstar_lob.026
+datafile 56 switched to datafile copy
+input datafile copy RECID=289 STAMP=982677136 file name=/oracle/PHOEQ/data01/lstar_lob.027
+datafile 57 switched to datafile copy
+input datafile copy RECID=290 STAMP=982677136 file name=/oracle/PHOEQ/data01/lstar_data.014
+datafile 58 switched to datafile copy
+input datafile copy RECID=291 STAMP=982677136 file name=/oracle/PHOEQ/data01/lstar_lob.028
+datafile 59 switched to datafile copy
+input datafile copy RECID=292 STAMP=982677136 file name=/oracle/PHOEQ/data01/lstar_index.010
+datafile 60 switched to datafile copy
+input datafile copy RECID=293 STAMP=982677136 file name=/oracle/PHOEQ/data01/lstar_lob.029
+datafile 61 switched to datafile copy
+input datafile copy RECID=294 STAMP=982677136 file name=/oracle/PHOEQ/data01/lstar_data.015
+datafile 62 switched to datafile copy
+input datafile copy RECID=295 STAMP=982677136 file name=/oracle/PHOEQ/data01/lstar_lob.030
+datafile 63 switched to datafile copy
+input datafile copy RECID=296 STAMP=982677136 file name=/oracle/PHOEQ/data01/lstar_lob.031
+datafile 64 switched to datafile copy
+input datafile copy RECID=297 STAMP=982677136 file name=/oracle/PHOEQ/data01/lstar_data.016
+datafile 65 switched to datafile copy
+input datafile copy RECID=298 STAMP=982677136 file name=/oracle/PHOEQ/data01/lstar_index.011
+datafile 66 switched to datafile copy
+input datafile copy RECID=299 STAMP=982677137 file name=/oracle/PHOEQ/data01/lstar_lob.032
+datafile 67 switched to datafile copy
+input datafile copy RECID=300 STAMP=982677137 file name=/oracle/PHOEQ/data01/lstar_lob.033
+datafile 68 switched to datafile copy
+input datafile copy RECID=301 STAMP=982677137 file name=/oracle/PHOEQ/data01/lstar_data.017
+datafile 69 switched to datafile copy
+input datafile copy RECID=302 STAMP=982677137 file name=/oracle/PHOEQ/data01/lstar_lob.034
+datafile 70 switched to datafile copy
+input datafile copy RECID=303 STAMP=982677137 file name=/oracle/PHOEQ/data01/lstar_index.012
+datafile 71 switched to datafile copy
+input datafile copy RECID=304 STAMP=982677137 file name=/oracle/PHOEQ/data01/lstar_lob.035
+datafile 72 switched to datafile copy
+input datafile copy RECID=305 STAMP=982677137 file name=/oracle/PHOEQ/data01/lstar_data.018
+datafile 73 switched to datafile copy
+input datafile copy RECID=306 STAMP=982677137 file name=/oracle/PHOEQ/data01/lstar_lob.036
+datafile 74 switched to datafile copy
+input datafile copy RECID=307 STAMP=982677137 file name=/oracle/PHOEQ/data01/lstar_lob.037
+datafile 75 switched to datafile copy
+input datafile copy RECID=308 STAMP=982677137 file name=/oracle/PHOEQ/data01/lstar_data.019
+datafile 76 switched to datafile copy
+input datafile copy RECID=309 STAMP=982677137 file name=/oracle/PHOEQ/data01/lstar_index.013
+datafile 77 switched to datafile copy
+input datafile copy RECID=310 STAMP=982677137 file name=/oracle/PHOEQ/data01/lstar_lob.038
+datafile 78 switched to datafile copy
+input datafile copy RECID=311 STAMP=982677137 file name=/oracle/PHOEQ/data01/lstar_lob.039
+datafile 79 switched to datafile copy
+input datafile copy RECID=312 STAMP=982677137 file name=/oracle/PHOEQ/data01/lstar_data.020
+datafile 80 switched to datafile copy
+input datafile copy RECID=313 STAMP=982677137 file name=/oracle/PHOEQ/data01/lstar_lob.040
+datafile 81 switched to datafile copy
+input datafile copy RECID=314 STAMP=982677137 file name=/oracle/PHOEQ/data01/lstar_index.014
+datafile 82 switched to datafile copy
+input datafile copy RECID=315 STAMP=982677138 file name=/oracle/PHOEQ/data01/lstar_lob.041
+datafile 83 switched to datafile copy
+input datafile copy RECID=316 STAMP=982677138 file name=/oracle/PHOEQ/data01/lstar_data.021
+datafile 84 switched to datafile copy
+input datafile copy RECID=317 STAMP=982677138 file name=/oracle/PHOEQ/data01/lstar_lob.042
+datafile 85 switched to datafile copy
+input datafile copy RECID=318 STAMP=982677138 file name=/oracle/PHOEQ/data01/lstar_lob.043
+datafile 86 switched to datafile copy
+input datafile copy RECID=319 STAMP=982677138 file name=/oracle/PHOEQ/data01/lstar_data.022
+datafile 87 switched to datafile copy
+input datafile copy RECID=320 STAMP=982677138 file name=/oracle/PHOEQ/data01/lstar_index.015
+datafile 88 switched to datafile copy
+input datafile copy RECID=321 STAMP=982677138 file name=/oracle/PHOEQ/data01/lstar_lob.044
+datafile 89 switched to datafile copy
+input datafile copy RECID=322 STAMP=982677138 file name=/oracle/PHOEQ/data01/lstar_lob.045
+datafile 90 switched to datafile copy
+input datafile copy RECID=323 STAMP=982677138 file name=/oracle/PHOEQ/data01/lstar_data.023
+datafile 91 switched to datafile copy
+input datafile copy RECID=324 STAMP=982677138 file name=/oracle/PHOEQ/data01/lstar_lob.046
+datafile 92 switched to datafile copy
+input datafile copy RECID=325 STAMP=982677138 file name=/oracle/PHOEQ/data01/lstar_index.016
+datafile 93 switched to datafile copy
+input datafile copy RECID=326 STAMP=982677138 file name=/oracle/PHOEQ/data01/lstar_lob.047
+datafile 94 switched to datafile copy
+input datafile copy RECID=327 STAMP=982677138 file name=/oracle/PHOEQ/data01/lstar_data.024
+datafile 95 switched to datafile copy
+input datafile copy RECID=328 STAMP=982677138 file name=/oracle/PHOEQ/data01/lstar_lob.048
+datafile 96 switched to datafile copy
+input datafile copy RECID=329 STAMP=982677138 file name=/oracle/PHOEQ/data01/lstar_lob.049
+datafile 97 switched to datafile copy
+input datafile copy RECID=330 STAMP=982677138 file name=/oracle/PHOEQ/data01/lstar_data.025
+datafile 98 switched to datafile copy
+input datafile copy RECID=331 STAMP=982677139 file name=/oracle/PHOEQ/data01/lstar_index.017
+datafile 99 switched to datafile copy
+input datafile copy RECID=332 STAMP=982677139 file name=/oracle/PHOEQ/data01/lstar_lob.050
+datafile 100 switched to datafile copy
+input datafile copy RECID=333 STAMP=982677139 file name=/oracle/PHOEQ/data01/lstar_lob.051
+datafile 101 switched to datafile copy
+input datafile copy RECID=334 STAMP=982677139 file name=/oracle/PHOEQ/data01/lstar_data.026
+datafile 102 switched to datafile copy
+input datafile copy RECID=335 STAMP=982677139 file name=/oracle/PHOEQ/data01/lstar_lob.052
+datafile 103 switched to datafile copy
+input datafile copy RECID=336 STAMP=982677139 file name=/oracle/PHOEQ/data01/lstar_index.018
+datafile 104 switched to datafile copy
+input datafile copy RECID=337 STAMP=982677139 file name=/oracle/PHOEQ/data01/lstar_lob.053
+datafile 105 switched to datafile copy
+input datafile copy RECID=338 STAMP=982677139 file name=/oracle/PHOEQ/data01/lstar_data.027
+datafile 106 switched to datafile copy
+input datafile copy RECID=339 STAMP=982677139 file name=/oracle/PHOEQ/data01/lstar_lob.054
+datafile 107 switched to datafile copy
+input datafile copy RECID=340 STAMP=982677139 file name=/oracle/PHOEQ/data01/lstar_lob.055
+datafile 108 switched to datafile copy
+input datafile copy RECID=341 STAMP=982677139 file name=/oracle/PHOEQ/data01/lstar_data.028
+datafile 109 switched to datafile copy
+input datafile copy RECID=342 STAMP=982677139 file name=/oracle/PHOEQ/data01/lstar_index.019
+datafile 110 switched to datafile copy
+input datafile copy RECID=343 STAMP=982677139 file name=/oracle/PHOEQ/data01/lstar_lob.056
+datafile 111 switched to datafile copy
+input datafile copy RECID=344 STAMP=982677139 file name=/oracle/PHOEQ/data01/lstar_lob.057
+datafile 112 switched to datafile copy
+input datafile copy RECID=345 STAMP=982677139 file name=/oracle/PHOEQ/data01/lstar_data.029
+datafile 113 switched to datafile copy
+input datafile copy RECID=346 STAMP=982677139 file name=/oracle/PHOEQ/data01/lstar_lob.058
+datafile 114 switched to datafile copy
+input datafile copy RECID=347 STAMP=982677139 file name=/oracle/PHOEQ/data01/lstar_index.020
+datafile 115 switched to datafile copy
+input datafile copy RECID=348 STAMP=982677140 file name=/oracle/PHOEQ/data01/lstar_lob.059
+datafile 116 switched to datafile copy
+input datafile copy RECID=349 STAMP=982677140 file name=/oracle/PHOEQ/data01/lstar_data.030
+datafile 117 switched to datafile copy
+input datafile copy RECID=350 STAMP=982677140 file name=/oracle/PHOEQ/data01/lstar_lob.060
+datafile 118 switched to datafile copy
+input datafile copy RECID=351 STAMP=982677140 file name=/oracle/PHOEQ/data01/lstar_lob.061
+datafile 119 switched to datafile copy
+input datafile copy RECID=352 STAMP=982677140 file name=/oracle/PHOEQ/data01/lstar_data.031
+datafile 120 switched to datafile copy
+input datafile copy RECID=353 STAMP=982677140 file name=/oracle/PHOEQ/data01/lstar_index.021
+datafile 121 switched to datafile copy
+input datafile copy RECID=354 STAMP=982677140 file name=/oracle/PHOEQ/data01/lstar_lob.062
+datafile 122 switched to datafile copy
+input datafile copy RECID=355 STAMP=982677140 file name=/oracle/PHOEQ/data01/lstar_lob.063
+datafile 123 switched to datafile copy
+input datafile copy RECID=356 STAMP=982677140 file name=/oracle/PHOEQ/data01/lstar_data.032
+datafile 124 switched to datafile copy
+input datafile copy RECID=357 STAMP=982677140 file name=/oracle/PHOEQ/data01/lstar_lob.064
+datafile 125 switched to datafile copy
+input datafile copy RECID=358 STAMP=982677140 file name=/oracle/PHOEQ/data01/lstar_index.022
+datafile 126 switched to datafile copy
+input datafile copy RECID=359 STAMP=982677140 file name=/oracle/PHOEQ/data01/lstar_lob.065
+datafile 127 switched to datafile copy
+input datafile copy RECID=360 STAMP=982677140 file name=/oracle/PHOEQ/data01/lstar_data.033
+datafile 128 switched to datafile copy
+input datafile copy RECID=361 STAMP=982677140 file name=/oracle/PHOEQ/data01/lstar_lob.066
+datafile 129 switched to datafile copy
+input datafile copy RECID=362 STAMP=982677140 file name=/oracle/PHOEQ/data01/lstar_lob.067
+datafile 130 switched to datafile copy
+input datafile copy RECID=363 STAMP=982677140 file name=/oracle/PHOEQ/data01/lstar_data.034
+datafile 131 switched to datafile copy
+input datafile copy RECID=364 STAMP=982677140 file name=/oracle/PHOEQ/data01/lstar_index.023
+datafile 132 switched to datafile copy
+input datafile copy RECID=365 STAMP=982677141 file name=/oracle/PHOEQ/data01/lstar_lob.068
+datafile 133 switched to datafile copy
+input datafile copy RECID=366 STAMP=982677141 file name=/oracle/PHOEQ/data01/lstar_lob.069
+datafile 134 switched to datafile copy
+input datafile copy RECID=367 STAMP=982677141 file name=/oracle/PHOEQ/data01/lstar_data.035
+datafile 135 switched to datafile copy
+input datafile copy RECID=368 STAMP=982677141 file name=/oracle/PHOEQ/data01/lstar_lob.070
+datafile 136 switched to datafile copy
+input datafile copy RECID=369 STAMP=982677141 file name=/oracle/PHOEQ/data01/lstar_index.024
+datafile 137 switched to datafile copy
+input datafile copy RECID=370 STAMP=982677141 file name=/oracle/PHOEQ/data01/lstar_lob.071
+datafile 138 switched to datafile copy
+input datafile copy RECID=371 STAMP=982677141 file name=/oracle/PHOEQ/data01/lstar_data.036
+datafile 139 switched to datafile copy
+input datafile copy RECID=372 STAMP=982677141 file name=/oracle/PHOEQ/data01/lstar_lob.072
+datafile 140 switched to datafile copy
+input datafile copy RECID=373 STAMP=982677141 file name=/oracle/PHOEQ/data01/lstar_lob.073
+datafile 141 switched to datafile copy
+input datafile copy RECID=374 STAMP=982677141 file name=/oracle/PHOEQ/data01/lstar_data.037
+datafile 142 switched to datafile copy
+input datafile copy RECID=375 STAMP=982677141 file name=/oracle/PHOEQ/data01/lstar_index.025
+datafile 143 switched to datafile copy
+input datafile copy RECID=376 STAMP=982677141 file name=/oracle/PHOEQ/data01/lstar_lob.074
+datafile 144 switched to datafile copy
+input datafile copy RECID=377 STAMP=982677141 file name=/oracle/PHOEQ/data01/lstar_lob.075
+datafile 145 switched to datafile copy
+input datafile copy RECID=378 STAMP=982677141 file name=/oracle/PHOEQ/data01/lstar_data.038
+datafile 146 switched to datafile copy
+input datafile copy RECID=379 STAMP=982677141 file name=/oracle/PHOEQ/data01/lstar_lob.076
+datafile 147 switched to datafile copy
+input datafile copy RECID=380 STAMP=982677141 file name=/oracle/PHOEQ/data01/lstar_index.026
+datafile 148 switched to datafile copy
+input datafile copy RECID=381 STAMP=982677141 file name=/oracle/PHOEQ/data01/lstar_lob.077
+datafile 149 switched to datafile copy
+input datafile copy RECID=382 STAMP=982677142 file name=/oracle/PHOEQ/data01/lstar_data.039
+datafile 150 switched to datafile copy
+input datafile copy RECID=383 STAMP=982677142 file name=/oracle/PHOEQ/data01/lstar_lob.078
+datafile 151 switched to datafile copy
+input datafile copy RECID=384 STAMP=982677142 file name=/oracle/PHOEQ/data01/lstar_lob.079
+datafile 152 switched to datafile copy
+input datafile copy RECID=385 STAMP=982677142 file name=/oracle/PHOEQ/data01/lstar_data.040
+datafile 153 switched to datafile copy
+input datafile copy RECID=386 STAMP=982677142 file name=/oracle/PHOEQ/data01/lstar_index.027
+datafile 154 switched to datafile copy
+input datafile copy RECID=387 STAMP=982677142 file name=/oracle/PHOEQ/data01/lstar_lob.080
+datafile 155 switched to datafile copy
+input datafile copy RECID=388 STAMP=982677142 file name=/oracle/PHOEQ/data01/lstar_lob.081
+datafile 156 switched to datafile copy
+input datafile copy RECID=389 STAMP=982677142 file name=/oracle/PHOEQ/data01/lstar_data.041
+datafile 157 switched to datafile copy
+input datafile copy RECID=390 STAMP=982677142 file name=/oracle/PHOEQ/data01/lstar_lob.082
+datafile 158 switched to datafile copy
+input datafile copy RECID=391 STAMP=982677142 file name=/oracle/PHOEQ/data01/lstar_index.028
+datafile 159 switched to datafile copy
+input datafile copy RECID=392 STAMP=982677142 file name=/oracle/PHOEQ/data01/lstar_lob.083
+datafile 160 switched to datafile copy
+input datafile copy RECID=393 STAMP=982677142 file name=/oracle/PHOEQ/data01/lstar_data.042
+datafile 161 switched to datafile copy
+input datafile copy RECID=394 STAMP=982677142 file name=/oracle/PHOEQ/data01/lstar_lob.084
+datafile 162 switched to datafile copy
+input datafile copy RECID=395 STAMP=982677142 file name=/oracle/PHOEQ/data01/lstar_lob.085
+datafile 163 switched to datafile copy
+input datafile copy RECID=396 STAMP=982677142 file name=/oracle/PHOEQ/data01/lstar_data.043
+datafile 164 switched to datafile copy
+input datafile copy RECID=397 STAMP=982677142 file name=/oracle/PHOEQ/data01/lstar_index.029
+datafile 165 switched to datafile copy
+input datafile copy RECID=398 STAMP=982677142 file name=/oracle/PHOEQ/data01/lstar_lob.086
+datafile 166 switched to datafile copy
+input datafile copy RECID=399 STAMP=982677143 file name=/oracle/PHOEQ/data01/lstar_lob.087
+datafile 167 switched to datafile copy
+input datafile copy RECID=400 STAMP=982677143 file name=/oracle/PHOEQ/data01/lstar_data.044
+datafile 168 switched to datafile copy
+input datafile copy RECID=401 STAMP=982677143 file name=/oracle/PHOEQ/data01/lstar_lob.088
+datafile 169 switched to datafile copy
+input datafile copy RECID=402 STAMP=982677143 file name=/oracle/PHOEQ/data01/lstar_index.030
+datafile 170 switched to datafile copy
+input datafile copy RECID=403 STAMP=982677143 file name=/oracle/PHOEQ/data01/lstar_lob.089
+datafile 171 switched to datafile copy
+input datafile copy RECID=404 STAMP=982677143 file name=/oracle/PHOEQ/data01/lstar_data.045
+datafile 172 switched to datafile copy
+input datafile copy RECID=405 STAMP=982677143 file name=/oracle/PHOEQ/data01/lstar_lob.090
+datafile 173 switched to datafile copy
+input datafile copy RECID=406 STAMP=982677143 file name=/oracle/PHOEQ/data01/lstar_lob.091
+datafile 174 switched to datafile copy
+input datafile copy RECID=407 STAMP=982677143 file name=/oracle/PHOEQ/data01/lstar_data.046
+datafile 175 switched to datafile copy
+input datafile copy RECID=408 STAMP=982677143 file name=/oracle/PHOEQ/data01/lstar_index.031
+datafile 176 switched to datafile copy
+input datafile copy RECID=409 STAMP=982677143 file name=/oracle/PHOEQ/data01/lstar_lob.092
+datafile 177 switched to datafile copy
+input datafile copy RECID=410 STAMP=982677143 file name=/oracle/PHOEQ/data01/lstar_lob.093
+datafile 178 switched to datafile copy
+input datafile copy RECID=411 STAMP=982677143 file name=/oracle/PHOEQ/data01/lstar_data.047
+datafile 179 switched to datafile copy
+input datafile copy RECID=412 STAMP=982677143 file name=/oracle/PHOEQ/data01/lstar_lob.094
+datafile 180 switched to datafile copy
+input datafile copy RECID=413 STAMP=982677143 file name=/oracle/PHOEQ/data01/lstar_index.032
+datafile 181 switched to datafile copy
+input datafile copy RECID=414 STAMP=982677143 file name=/oracle/PHOEQ/data01/lstar_lob.095
+datafile 182 switched to datafile copy
+input datafile copy RECID=415 STAMP=982677143 file name=/oracle/PHOEQ/data01/lstar_data.048
+datafile 183 switched to datafile copy
+input datafile copy RECID=416 STAMP=982677143 file name=/oracle/PHOEQ/data01/lstar_lob.096
+datafile 184 switched to datafile copy
+input datafile copy RECID=417 STAMP=982677143 file name=/oracle/PHOEQ/data01/lstar_lob.097
+datafile 185 switched to datafile copy
+input datafile copy RECID=418 STAMP=982677144 file name=/oracle/PHOEQ/data01/lstar_data.049
+datafile 186 switched to datafile copy
+input datafile copy RECID=419 STAMP=982677144 file name=/oracle/PHOEQ/data01/lstar_index.033
+datafile 187 switched to datafile copy
+input datafile copy RECID=420 STAMP=982677144 file name=/oracle/PHOEQ/data01/lstar_lob.098
+datafile 188 switched to datafile copy
+input datafile copy RECID=421 STAMP=982677144 file name=/oracle/PHOEQ/data01/lstar_lob.099
+datafile 189 switched to datafile copy
+input datafile copy RECID=422 STAMP=982677144 file name=/oracle/PHOEQ/data01/lstar_data.050
+datafile 190 switched to datafile copy
+input datafile copy RECID=423 STAMP=982677144 file name=/oracle/PHOEQ/data01/lstar_lob.100
+datafile 191 switched to datafile copy
+input datafile copy RECID=424 STAMP=982677144 file name=/oracle/PHOEQ/data01/lstar_lob.101
+datafile 192 switched to datafile copy
+input datafile copy RECID=425 STAMP=982677144 file name=/oracle/PHOEQ/data01/lstar_index.034
+datafile 193 switched to datafile copy
+input datafile copy RECID=426 STAMP=982677144 file name=/oracle/PHOEQ/data01/lstar_lob.102
+datafile 194 switched to datafile copy
+input datafile copy RECID=427 STAMP=982677144 file name=/oracle/PHOEQ/data01/lstar_lob.103
+datafile 195 switched to datafile copy
+input datafile copy RECID=428 STAMP=982677144 file name=/oracle/PHOEQ/data01/lstar_lob.104
+datafile 196 switched to datafile copy
+input datafile copy RECID=429 STAMP=982677144 file name=/oracle/PHOEQ/data01/lstar_lob.105
+datafile 197 switched to datafile copy
+input datafile copy RECID=430 STAMP=982677144 file name=/oracle/PHOEQ/data01/lstar_lob.106
+datafile 198 switched to datafile copy
+input datafile copy RECID=431 STAMP=982677144 file name=/oracle/PHOEQ/data01/lstar_lob.107
+datafile 199 switched to datafile copy
+input datafile copy RECID=432 STAMP=982677144 file name=/oracle/PHOEQ/data01/lstar_lob.108
+datafile 200 switched to datafile copy
+input datafile copy RECID=433 STAMP=982677145 file name=/oracle/PHOEQ/data01/lstar_lob.109
+datafile 201 switched to datafile copy
+input datafile copy RECID=434 STAMP=982677145 file name=/oracle/PHOEQ/data01/lstar_lob.110
+datafile 202 switched to datafile copy
+input datafile copy RECID=435 STAMP=982677145 file name=/oracle/PHOEQ/data01/lstar_lob.111
+datafile 203 switched to datafile copy
+input datafile copy RECID=436 STAMP=982677145 file name=/oracle/PHOEQ/data01/lstar_lob.112
+datafile 204 switched to datafile copy
+input datafile copy RECID=437 STAMP=982677145 file name=/oracle/PHOEQ/data01/lstar_lob.113
+datafile 205 switched to datafile copy
+input datafile copy RECID=438 STAMP=982677145 file name=/oracle/PHOEQ/data01/lstar_index.035
+datafile 206 switched to datafile copy
+input datafile copy RECID=439 STAMP=982677145 file name=/oracle/PHOEQ/data01/lstar_index.036
+datafile 207 switched to datafile copy
+input datafile copy RECID=440 STAMP=982677145 file name=/oracle/PHOEQ/data01/lstar_index.037
+datafile 208 switched to datafile copy
+input datafile copy RECID=441 STAMP=982677145 file name=/oracle/PHOEQ/data01/lstar_index.038
+datafile 209 switched to datafile copy
+input datafile copy RECID=442 STAMP=982677145 file name=/oracle/PHOEQ/data01/lstar_index.039
+datafile 210 switched to datafile copy
+input datafile copy RECID=443 STAMP=982677145 file name=/oracle/PHOEQ/data01/lstar_lob.115
+datafile 211 switched to datafile copy
+input datafile copy RECID=444 STAMP=982677145 file name=/oracle/PHOEQ/data01/lstar_lob.116
+datafile 212 switched to datafile copy
+input datafile copy RECID=445 STAMP=982677145 file name=/oracle/PHOEQ/data01/lstar_lob.117
+datafile 213 switched to datafile copy
+input datafile copy RECID=446 STAMP=982677145 file name=/oracle/PHOEQ/data01/lstar_lob.118
+datafile 214 switched to datafile copy
+input datafile copy RECID=447 STAMP=982677145 file name=/oracle/PHOEQ/data01/lstar_lob.119
+datafile 215 switched to datafile copy
+input datafile copy RECID=448 STAMP=982677145 file name=/oracle/PHOEQ/data01/lstar_lob.120
+datafile 216 switched to datafile copy
+input datafile copy RECID=449 STAMP=982677145 file name=/oracle/PHOEQ/data01/lstar_lob.121
+datafile 217 switched to datafile copy
+input datafile copy RECID=450 STAMP=982677146 file name=/oracle/PHOEQ/data01/lstar_lob.122
+datafile 218 switched to datafile copy
+input datafile copy RECID=451 STAMP=982677146 file name=/oracle/PHOEQ/data01/undotbs1.004
+datafile 219 switched to datafile copy
+input datafile copy RECID=452 STAMP=982677146 file name=/oracle/PHOEQ/data01/lstar_lob.123
+datafile 220 switched to datafile copy
+input datafile copy RECID=453 STAMP=982677146 file name=/oracle/PHOEQ/data01/lstar_lob.124
+datafile 221 switched to datafile copy
+input datafile copy RECID=454 STAMP=982677146 file name=/oracle/PHOEQ/data01/lstar_lob.125
+datafile 222 switched to datafile copy
+input datafile copy RECID=455 STAMP=982677146 file name=/oracle/PHOEQ/data01/lstar_lob.126
+datafile 223 switched to datafile copy
+input datafile copy RECID=456 STAMP=982677146 file name=/oracle/PHOEQ/data01/lstar_lob.127
+datafile 224 switched to datafile copy
+input datafile copy RECID=457 STAMP=982677146 file name=/oracle/PHOEQ/data01/lstar_lob.128
+datafile 225 switched to datafile copy
+input datafile copy RECID=458 STAMP=982677146 file name=/oracle/PHOEQ/data01/lstar_lob.129
+datafile 226 switched to datafile copy
+input datafile copy RECID=459 STAMP=982677146 file name=/oracle/PHOEQ/data01/lstar_lob.130
+datafile 227 switched to datafile copy
+input datafile copy RECID=460 STAMP=982677146 file name=/oracle/PHOEQ/data01/lstar_lob.131
+datafile 228 switched to datafile copy
+input datafile copy RECID=461 STAMP=982677146 file name=/oracle/PHOEQ/data01/lstar_lob.132
+datafile 229 switched to datafile copy
+input datafile copy RECID=462 STAMP=982677146 file name=/oracle/PHOEQ/data01/lstar_lob.133
+datafile 230 switched to datafile copy
+input datafile copy RECID=463 STAMP=982677146 file name=/oracle/PHOEQ/data01/lstar_lob.134
+datafile 231 switched to datafile copy
+input datafile copy RECID=464 STAMP=982677146 file name=/oracle/PHOEQ/data01/lstar_lob.135
+datafile 232 switched to datafile copy
+input datafile copy RECID=465 STAMP=982677146 file name=/oracle/PHOEQ/data01/lstar_lob.136
+datafile 233 switched to datafile copy
+input datafile copy RECID=466 STAMP=982677146 file name=/oracle/PHOEQ/data01/lstar_lob.137
+
+contents of Memory Script:
+{
+   set until time  "to_date('JUL 28 2018 06:38:12', 'MON DD YYYY HH24:MI:SS')";
+   recover
+   clone database
+    delete archivelog
+   ;
+}
+executing Memory Script
+
+executing command: SET until clause
+
+Starting recover at 28-JUL-18
+
+starting media recovery
+
+channel adsm_1: starting archived log restore to default destination
+channel adsm_1: restoring archived log
+archived log thread=1 sequence=58448
+channel adsm_1: restoring archived log
+archived log thread=1 sequence=58449
+channel adsm_1: restoring archived log
+archived log thread=1 sequence=58450
+channel adsm_1: restoring archived log
+archived log thread=1 sequence=58451
+channel adsm_1: restoring archived log
+archived log thread=1 sequence=58452
+channel adsm_1: reading from backup piece ARCH_1_UPHOEP_8vt944b4_1_1_s25887_p1
+channel adsm_2: starting archived log restore to default destination
+channel adsm_2: restoring archived log
+archived log thread=1 sequence=58453
+channel adsm_2: restoring archived log
+archived log thread=1 sequence=58454
+channel adsm_2: restoring archived log
+archived log thread=1 sequence=58455
+channel adsm_2: restoring archived log
+archived log thread=1 sequence=58456
+channel adsm_2: restoring archived log
+archived log thread=1 sequence=58457
+channel adsm_2: reading from backup piece ARCH_1_UPHOEP_8tt9447q_1_1_s25885_p1
+channel adsm_3: starting archived log restore to default destination
+channel adsm_3: restoring archived log
+archived log thread=1 sequence=58458
+channel adsm_3: restoring archived log
+archived log thread=1 sequence=58459
+channel adsm_3: restoring archived log
+archived log thread=1 sequence=58460
+channel adsm_3: restoring archived log
+archived log thread=1 sequence=58461
+channel adsm_3: reading from backup piece ARCH_1_UPHOEP_92t944ef_1_1_s25890_p1
+channel adsm_4: starting archived log restore to default destination
+channel adsm_4: restoring archived log
+archived log thread=1 sequence=58462
+channel adsm_4: restoring archived log
+archived log thread=1 sequence=58463
+channel adsm_4: restoring archived log
+archived log thread=1 sequence=58464
+channel adsm_4: restoring archived log
+archived log thread=1 sequence=58465
+channel adsm_4: restoring archived log
+archived log thread=1 sequence=58466
+channel adsm_4: reading from backup piece ARCH_1_UPHOEP_90t944b8_1_1_s25888_p1
+channel adsm_5: starting archived log restore to default destination
+channel adsm_5: restoring archived log
+archived log thread=1 sequence=58467
+channel adsm_5: restoring archived log
+archived log thread=1 sequence=58468
+channel adsm_5: restoring archived log
+archived log thread=1 sequence=58469
+channel adsm_5: restoring archived log
+archived log thread=1 sequence=58470
+channel adsm_5: restoring archived log
+archived log thread=1 sequence=58471
+channel adsm_5: reading from backup piece ARCH_1_UPHOEP_91t944e7_1_1_s25889_p1
+channel adsm_6: starting archived log restore to default destination
+channel adsm_6: restoring archived log
+archived log thread=1 sequence=58472
+channel adsm_6: restoring archived log
+archived log thread=1 sequence=58473
+channel adsm_6: restoring archived log
+archived log thread=1 sequence=58474
+channel adsm_6: restoring archived log
+archived log thread=1 sequence=58475
+channel adsm_6: restoring archived log
+archived log thread=1 sequence=58476
+channel adsm_6: reading from backup piece ARCH_1_UPHOEP_8ut9447q_1_1_s25886_p1
+channel adsm_7: starting archived log restore to default destination
+channel adsm_7: restoring archived log
+archived log thread=1 sequence=58477
+channel adsm_7: restoring archived log
+archived log thread=1 sequence=58478
+channel adsm_7: reading from backup piece ARCH_1_UPHOEP_93t944h5_1_1_s25891_p1
+channel adsm_7: piece handle=ARCH_1_UPHOEP_93t944h5_1_1_s25891_p1 tag=TAG20180728T063849
+channel adsm_7: restored backup piece 1
+channel adsm_7: restore complete, elapsed time: 00:00:15
+channel adsm_2: piece handle=ARCH_1_UPHOEP_8tt9447q_1_1_s25885_p1 tag=TAG20180728T063849
+channel adsm_2: restored backup piece 1
+channel adsm_2: restore complete, elapsed time: 00:00:45
+channel adsm_3: piece handle=ARCH_1_UPHOEP_92t944ef_1_1_s25890_p1 tag=TAG20180728T063849
+channel adsm_3: restored backup piece 1
+channel adsm_3: restore complete, elapsed time: 00:01:05
+channel adsm_4: piece handle=ARCH_1_UPHOEP_90t944b8_1_1_s25888_p1 tag=TAG20180728T063849
+channel adsm_4: restored backup piece 1
+channel adsm_4: restore complete, elapsed time: 00:01:05
+channel adsm_5: piece handle=ARCH_1_UPHOEP_91t944e7_1_1_s25889_p1 tag=TAG20180728T063849
+channel adsm_5: restored backup piece 1
+channel adsm_5: restore complete, elapsed time: 00:01:05
+channel adsm_1: piece handle=ARCH_1_UPHOEP_8vt944b4_1_1_s25887_p1 tag=TAG20180728T063849
+channel adsm_1: restored backup piece 1
+channel adsm_1: restore complete, elapsed time: 00:01:15
+archived log file name=/oracle/PHOEQ/data01/arch/1_58448_931163746.arc thread=1 sequence=58448
+channel clone_default: deleting archived log(s)
+archived log file name=/oracle/PHOEQ/data01/arch/1_58448_931163746.arc RECID=53217 STAMP=982677415
+archived log file name=/oracle/PHOEQ/data01/arch/1_58449_931163746.arc thread=1 sequence=58449
+channel clone_default: deleting archived log(s)
+archived log file name=/oracle/PHOEQ/data01/arch/1_58449_931163746.arc RECID=53216 STAMP=982677415
+archived log file name=/oracle/PHOEQ/data01/arch/1_58450_931163746.arc thread=1 sequence=58450
+channel clone_default: deleting archived log(s)
+archived log file name=/oracle/PHOEQ/data01/arch/1_58450_931163746.arc RECID=53218 STAMP=982677415
+archived log file name=/oracle/PHOEQ/data01/arch/1_58451_931163746.arc thread=1 sequence=58451
+channel clone_default: deleting archived log(s)
+archived log file name=/oracle/PHOEQ/data01/arch/1_58451_931163746.arc RECID=53219 STAMP=982677415
+archived log file name=/oracle/PHOEQ/data01/arch/1_58452_931163746.arc thread=1 sequence=58452
+channel clone_default: deleting archived log(s)
+archived log file name=/oracle/PHOEQ/data01/arch/1_58452_931163746.arc RECID=53220 STAMP=982677416
+archived log file name=/oracle/PHOEQ/data01/arch/1_58453_931163746.arc thread=1 sequence=58453
+channel clone_default: deleting archived log(s)
+archived log file name=/oracle/PHOEQ/data01/arch/1_58453_931163746.arc RECID=53196 STAMP=982677384
+archived log file name=/oracle/PHOEQ/data01/arch/1_58454_931163746.arc thread=1 sequence=58454
+channel clone_default: deleting archived log(s)
+archived log file name=/oracle/PHOEQ/data01/arch/1_58454_931163746.arc RECID=53195 STAMP=982677384
+archived log file name=/oracle/PHOEQ/data01/arch/1_58455_931163746.arc thread=1 sequence=58455
+channel clone_default: deleting archived log(s)
+archived log file name=/oracle/PHOEQ/data01/arch/1_58455_931163746.arc RECID=53194 STAMP=982677384
+archived log file name=/oracle/PHOEQ/data01/arch/1_58456_931163746.arc thread=1 sequence=58456
+channel clone_default: deleting archived log(s)
+archived log file name=/oracle/PHOEQ/data01/arch/1_58456_931163746.arc RECID=53197 STAMP=982677384
+archived log file name=/oracle/PHOEQ/data01/arch/1_58457_931163746.arc thread=1 sequence=58457
+channel clone_default: deleting archived log(s)
+archived log file name=/oracle/PHOEQ/data01/arch/1_58457_931163746.arc RECID=53193 STAMP=982677384
+archived log file name=/oracle/PHOEQ/data01/arch/1_58458_931163746.arc thread=1 sequence=58458
+channel clone_default: deleting archived log(s)
+archived log file name=/oracle/PHOEQ/data01/arch/1_58458_931163746.arc RECID=53200 STAMP=982677410
+archived log file name=/oracle/PHOEQ/data01/arch/1_58459_931163746.arc thread=1 sequence=58459
+channel clone_default: deleting archived log(s)
+archived log file name=/oracle/PHOEQ/data01/arch/1_58459_931163746.arc RECID=53208 STAMP=982677412
+archived log file name=/oracle/PHOEQ/data01/arch/1_58460_931163746.arc thread=1 sequence=58460
+channel clone_default: deleting archived log(s)
+archived log file name=/oracle/PHOEQ/data01/arch/1_58460_931163746.arc RECID=53199 STAMP=982677409
+archived log file name=/oracle/PHOEQ/data01/arch/1_58461_931163746.arc thread=1 sequence=58461
+channel clone_default: deleting archived log(s)
+archived log file name=/oracle/PHOEQ/data01/arch/1_58461_931163746.arc RECID=53210 STAMP=982677412
+archived log file name=/oracle/PHOEQ/data01/arch/1_58462_931163746.arc thread=1 sequence=58462
+channel clone_default: deleting archived log(s)
+archived log file name=/oracle/PHOEQ/data01/arch/1_58462_931163746.arc RECID=53209 STAMP=982677412
+archived log file name=/oracle/PHOEQ/data01/arch/1_58463_931163746.arc thread=1 sequence=58463
+channel clone_default: deleting archived log(s)
+archived log file name=/oracle/PHOEQ/data01/arch/1_58463_931163746.arc RECID=53198 STAMP=982677387
+archived log file name=/oracle/PHOEQ/data01/arch/1_58464_931163746.arc thread=1 sequence=58464
+channel clone_default: deleting archived log(s)
+archived log file name=/oracle/PHOEQ/data01/arch/1_58464_931163746.arc RECID=53207 STAMP=982677411
+archived log file name=/oracle/PHOEQ/data01/arch/1_58465_931163746.arc thread=1 sequence=58465
+channel clone_default: deleting archived log(s)
+archived log file name=/oracle/PHOEQ/data01/arch/1_58465_931163746.arc RECID=53206 STAMP=982677411
+archived log file name=/oracle/PHOEQ/data01/arch/1_58466_931163746.arc thread=1 sequence=58466
+channel clone_default: deleting archived log(s)
+archived log file name=/oracle/PHOEQ/data01/arch/1_58466_931163746.arc RECID=53205 STAMP=982677411
+archived log file name=/oracle/PHOEQ/data01/arch/1_58467_931163746.arc thread=1 sequence=58467
+channel clone_default: deleting archived log(s)
+archived log file name=/oracle/PHOEQ/data01/arch/1_58467_931163746.arc RECID=53201 STAMP=982677410
+archived log file name=/oracle/PHOEQ/data01/arch/1_58468_931163746.arc thread=1 sequence=58468
+channel clone_default: deleting archived log(s)
+archived log file name=/oracle/PHOEQ/data01/arch/1_58468_931163746.arc RECID=53203 STAMP=982677410
+archived log file name=/oracle/PHOEQ/data01/arch/1_58469_931163746.arc thread=1 sequence=58469
+channel clone_default: deleting archived log(s)
+archived log file name=/oracle/PHOEQ/data01/arch/1_58469_931163746.arc RECID=53204 STAMP=982677411
+archived log file name=/oracle/PHOEQ/data01/arch/1_58470_931163746.arc thread=1 sequence=58470
+channel clone_default: deleting archived log(s)
+archived log file name=/oracle/PHOEQ/data01/arch/1_58470_931163746.arc RECID=53202 STAMP=982677410
+archived log file name=/oracle/PHOEQ/data01/arch/1_58471_931163746.arc thread=1 sequence=58471
+channel clone_default: deleting archived log(s)
+archived log file name=/oracle/PHOEQ/data01/arch/1_58471_931163746.arc RECID=53192 STAMP=982677367
+channel adsm_6: piece handle=ARCH_1_UPHOEP_8ut9447q_1_1_s25886_p1 tag=TAG20180728T063849
+channel adsm_6: restored backup piece 1
+channel adsm_6: restore complete, elapsed time: 00:07:22
+archived log file name=/oracle/PHOEQ/data01/arch/1_58472_931163746.arc thread=1 sequence=58472
+released channel: adsm_1
+released channel: adsm_2
+released channel: adsm_3
+released channel: adsm_4
+released channel: adsm_5
+released channel: adsm_6
+released channel: adsm_7
+released channel: adsm_8
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-03002: failure of Duplicate Db command at 07/28/2018 14:03:43
+RMAN-05501: aborting duplication of target database
+RMAN-03015: error occurred in stored script Memory Script
+RMAN-11003: failure during parse/execution of SQL statement: alter database recover logfile '/oracle/PHOEQ/data01/arch/1_58472_931163746.arc'
+ORA-00600: internal error code, arguments: [3020], [36], [2228], [150997172], [], [], [], [], [], [], [], []
+ORA-10567: Redo is inconsistent with data block (file# 36, block# 2228, file offset is 18251776 bytes)
+ORA-10564: tablespace LSTAR_LOB
+ORA-01110: data file 36: '/oracle/PHOEQ/data01/lstar_lob.016'
+ORA-10560: block type 'NGLOB: Hash Bucket'
+
+RMAN> exit
+
+Recovery Manager complete.

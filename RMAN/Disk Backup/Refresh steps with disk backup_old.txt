@@ -1,0 +1,14 @@
+rman target sys/notsys@nenhhdc_ndcp auxiliary sys/notsys@NDCT1
+
+run
+{
+
+allocate channel c1 device type disk;
+allocate channel c2 device type disk;
+
+DUPLICATE TARGET DATABASE TO NDCT1 BACKUP LOCATION '/mnt/backup/' NOFILENAMECHECK;
+
+release channel c1;
+release channel c2;
+
+}

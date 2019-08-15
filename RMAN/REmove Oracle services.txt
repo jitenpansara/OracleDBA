@@ -1,0 +1,84 @@
+Microsoft Windows [Version 6.1.7601]
+Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
+
+Y:\>
+Y:\>oradim -delete -sid OracleServiceCDIEDP
+Unable to stop service, OS Error = 1060
+DIM-00011: The specified service does not exist.
+O/S-Error: (OS 1060) The specified service does not exist as an installed service.
+
+Y:\>oradim -delete OracleServiceCDIEDP
+DIM-00003: An argument is missing for the parameter.
+
+Y:\>oradim -delete -sid OracleServiceCDIEDP
+Unable to stop service, OS Error = 1060
+DIM-00011: The specified service does not exist.
+O/S-Error: (OS 1060) The specified service does not exist as an installed service.
+
+Y:\>oradim -delete -sid OracleOraDB12Home1TNSListenerLISTENER_12CDIEDP
+Unable to stop service, OS Error = 1060
+^C
+Y:\>
+Y:\>
+Y:\>oradim -delete -service OracleServiceCIEDP
+DIM-00042: Invalid option for the -DELETE command.
+
+Y:\>oradim -delete -sid OracleServiceCDIEDP
+Unable to stop service, OS Error = 1060
+DIM-00011: The specified service does not exist.
+O/S-Error: (OS 1060) The specified service does not exist as an installed service.
+
+Y:\>oradim -delete -service OracleServiceCIEDP
+DIM-00042: Invalid option for the -DELETE command.
+
+Y:\>cd P:\Oracle12c\product\12.1.0\BIN
+
+Y:\>p:
+
+P:\Oracle12c\product\12.1.0\BIN>oradim -delete -sid OracleServiceCDIEDP
+Unable to stop service, OS Error = 1060
+DIM-00011: The specified service does not exist.
+O/S-Error: (OS 1060) The specified service does not exist as an installed service.
+
+P:\Oracle12c\product\12.1.0\BIN>oradim
+ORADIM: <command> [options].  Refer to manual.
+Enter one of the following commands:
+Create an instance by specifying the following options:
+     -NEW -SID sid | -ASMSID sid | -MGMTDBSID sid | -IOSSID sid | -APXSID sid|
+ -SRVC srvc | -ASMSRVC srvc | -MGMTDBSRVC srvc | -IOSSRVC srvc |
+ -APXSRVC srvc  [-SYSPWD pass] [-STARTMODE auto|manual]
+ [-SRVCSTART system|demand] [-PFILE file | -SPFILE] [-MAXUSERS maxusers]
+ [-SHUTMODE normal|immediate|abort] [-TIMEOUT secs] [-RUNAS osusr/ospass]
+Edit an instance by specifying the following options:
+     -EDIT -SID sid | -ASMSID sid | -MGMTDBSID sid | -IOSSID sid | -APXSID sid
+ [-SYSPWD pass]  [-STARTMODE auto|manual] [-SRVCSTART system|demand]
+ [-PFILE file | -SPFILE] [-SHUTMODE normal|immediate|abort]
+ [-SHUTTYPE srvc|inst] [-MAXUSERS maxusers] [-RUNAS osusr/ospass]
+Delete instances by specifying the following options:
+     -DELETE -SID sid | -ASMSID sid | -MGMTDBSID sid | -IOSSID sid |
+ -APXSID sid| -SRVC srvc | -ASMSRVC srvc | -MGMTDBSRVC srvc |
+ -IOSSRVC srvc | -APXSRVC srvc
+Start up services and instance by specifying the following options:
+     -STARTUP -SID sid | -ASMSID sid | -MGMTDBSID sid | -IOSSID sid
+ | -APXSID sid [-SYSPWD pass] [-STARTTYPE srvc|inst|srvc,inst]
+ [-PFILE filename | -SPFILE]
+Shut down service and instance by specifying the following options:
+     -SHUTDOWN -SID sid | -ASMSID sid | -MGMTDBSID sid | -IOSSID sid |
+ -APXSID sid [-SYSPWD pass] [-SHUTTYPE srvc|inst|srvc,inst]
+ [-SHUTMODE normal|immediate|abort]
+Manipulate ACLs by specifying the following options:
+     -ACL -setperm|-addperm|-removeperm  dbfiles|diag|registry
+ -USER username  -OBJTYPE file|dir|registry  -OBJPATH object-path
+ -RECURSE true|false [-HOST hostname]
+Manipulate FAMILY settings by specifying the following options:
+     -FAMILY -set|-delete value [-SID sid | -ASMSID sid |
+ -MGMTDBSID sid | -IOSSID sid | -APXSID sid ]
+ Query for help by specifying the following parameters: -? | -h | -help
+
+P:\Oracle12c\product\12.1.0\BIN>oradim -delete -sid CDIEDP
+Instance deleted.
+
+P:\Oracle12c\product\12.1.0\BIN>sc delete OracleOraDB12Home1TNSListenerLISTENER_12CDIEDP
+[SC] DeleteService SUCCESS
+
+P:\Oracle12c\product\12.1.0\BIN>

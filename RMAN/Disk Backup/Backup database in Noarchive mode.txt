@@ -1,0 +1,18 @@
+shutdown immediate;
+startup mount;
+
+rman target /
+ 
+run {
+   allocate channel c1 type DISK;
+   allocate channel c2 type DISK;
+   set command id to 'Backup Database';
+   backup database include current controlfile format '/backup/PROD/MOPARCH/Inc0_MOPARCH_%d_%U_s%s_p%p';
+   release channel c1;
+   release channel c2;
+   allocate channel c3 type DISK;
+   allocate channel c4 type DISK;
+   backup current controlfile format '/backup/PROD/MOPARCH/control.ctl'; 
+   release channel c3;
+   release channel c4;
+}

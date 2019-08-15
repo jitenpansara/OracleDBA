@@ -1,0 +1,24 @@
+Restore database from Disk:
+1. Move the backup pieces from Tape to disk by help of Windows team.
+2. Put it in any drive, for ex: We kept it in D:\Restore.
+3. Shutdown immediate;
+4. Startup the db using Pfile.
+5. connect to rman target /
+6. Run the below block.
+
+run
+{
+allocate channel c1 device type disk;
+allocate channel c2 device type disk;
+allocate channel c3 device type disk;
+set until time "TO_DATE ('15-08-2017 00:00:00', 'DD-MM-YY HH24:MI:SS')";
+restore controlfile from 'N:\Restore';
+alter database mount;
+catalog start with 'N:\Restore';
+restore database;
+recover database;
+alter database open resetlogs;
+release channel c1;
+release channel c2;
+release channel c3;
+}

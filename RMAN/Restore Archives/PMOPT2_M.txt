@@ -1,0 +1,3176 @@
+login as: ui181614
+Using GSSAPI service principal name "host/SU11SB304".
+ui181614@SU11SB304's password:
+Last login: Thu Aug  4 09:28:03 2016 from c089a9958.group
+********************************************************************************                                                                                        ***************
+                                  Welcome to RWE IT GmbH
+  System Software Information:
+  OS-Version:                     Oracle Solaris 10 9/10 s10s_u9wos_14a SPARC                                                                                           
+  Hostname:                       su11sb304
+  Country:                        United Kingdom
+  LastSystemBackup:
+
+  Hardware Information:
+  System Configuration:
+  Number of CPUs:                 32
+  CPU Speed:                      2530 MHz
+
+  Memory size:
+
+  External Disk Type:             None
+
+  SUN Cluster:                    not installed
+
+********************************************************************************                                                                                        **************
+$
+$
+$ ps -ef|grep pmon
+  oracle 16353  1612   0 09:15:27 ?           0:00 ora_pmon_PMOPP
+ui181614  4259  4076   0 09:28:38 pts/5       0:00 grep pmon
+  oracle  3185  1612   0   Aug 02 ?           0:31 ora_pmon_PMOPT2
+  oracle  2977  1612   0   Jul 29 ?           3:36 ora_pmon_PASST2
+$
+$
+$ sudo su - oracle
+[su11sb304:PASST2]
+[su11sb304:PASST2]
+[su11sb304:PASST2]. oraenv
+ORACLE_SID = [PASST2] ? PMOPT2
+[su11sb304:PMOPT2]
+[su11sb304:PMOPT2]
+[su11sb304:PMOPT2]
+[su11sb304:PMOPT2]sqlplus / as sysdba
+
+SQL*Plus: Release 10.2.0.5.0 - Production on Thu Aug 4 09:32:31 2016
+
+Copyright (c) 1982, 2010, Oracle.  All Rights Reserved.
+
+
+Connected to:
+Oracle Database 10g Enterprise Edition Release 10.2.0.5.0 - 64bit Production
+With the Partitioning, Oracle Label Security, OLAP, Data Mining Scoring Engine
+and Real Application Testing options
+
+SQL> shut immediate;
+ORA-00210: cannot open the specified control file
+ORA-00202: control file: '/natpmop/oradata/PMOPT2/control_01.ctl'
+ORA-27041: unable to open file
+SVR4 Error: 2: No such file or directory
+Additional information: 3
+SQL> exit
+Disconnected from Oracle Database 10g Enterprise Edition Release 10.2.0.5.0 - 64bit Production
+With the Partitioning, Oracle Label Security, OLAP, Data Mining Scoring Engine
+and Real Application Testing options
+[su11sb304:PMOPT2]
+[su11sb304:PMOPT2]kill -9 3185
+[su11sb304:PMOPT2]
+[su11sb304:PMOPT2]
+[su11sb304:PMOPT2]ps -ef|grep pmon
+  oracle 16353  1612   0 09:15:27 ?           0:00 ora_pmon_PMOPP
+  oracle 11627  4286   0 09:33:08 pts/5       0:00 grep pmon
+  oracle  2977  1612   0   Jul 29 ?           3:36 ora_pmon_PASST2
+[su11sb304:PMOPT2]
+[su11sb304:PMOPT2]
+[su11sb304:PMOPT2]
+[su11sb304:PMOPT2]
+[su11sb304:PMOPT2]
+[su11sb304:PMOPT2]. ORAENV
+ksh: ORAENV:  not found
+[su11sb304:PMOPT2]. oraenv
+ORACLE_SID = [PMOPT2] ? PMOPP
+ORACLE_HOME = [/export/home/oracle] ? ^C
+[su11sb304:PMOPP]
+[su11sb304:PMOPP]
+[su11sb304:PMOPP]export ORACLE_SID=PMOPP
+[su11sb304:PMOPP]rman target /
+
+Recovery Manager: Release 10.2.0.5.0 - Production on Thu Aug 4 09:33:51 2016
+
+Copyright (c) 1982, 2007, Oracle.  All rights reserved.
+
+connected to target database: PMOPP (DBID=2447042963, not open)
+
+RMAN> run
+2> {
+3> allocate channel adsm_1 type DISK;
+4> allocate channel adsm_2 type DISK;
+5> set newname for datafile 1 to '/natpmop/oradata/PMOPT2/MOPP_system_01.dbf';
+6> set newname for datafile 2 to '/natpmop/oradata/PMOPT2/MOPP_user_data_01.dbf';
+7> set newname for datafile 3 to '/natpmop/oradata/PMOPT2/MOPP_tools_data_01.dbf';
+8> set newname for datafile 4 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_01.dbf';
+9> set newname for datafile 5 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_02.dbf';
+10> set newname for datafile 6 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_03.dbf';
+11> set newname for datafile 7 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_04.dbf';
+12> set newname for datafile 8 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_05.dbf';
+13> set newname for datafile 9 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_06.dbf';
+14> set newname for datafile 10 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_07.dbf';
+15> set newname for datafile 11 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_08.dbf';
+16> set newname for datafile 12 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_09.dbf';
+17> set newname for datafile 13 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_10.dbf';
+18> set newname for datafile 14 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_11.dbf';
+19> set newname for datafile 15 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_12.dbf';
+20> set newname for datafile 16 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_13.dbf';
+21> set newname for datafile 17 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_14.dbf';
+22> set newname for datafile 18 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_15.dbf';
+23> set newname for datafile 19 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_16.dbf';
+24> set newname for datafile 20 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_17.dbf';
+25> set newname for datafile 21 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_18.dbf';
+26> set newname for datafile 22 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_19.dbf';
+27> set newname for datafile 23 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_20.dbf';
+set newname for datafile 24 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_21.dbf';
+28> 29> set newname for datafile 25 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_22.dbf';
+30> set newname for datafile 26 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_23.dbf';
+31> set newname for datafile 27 to '/natpmop/oradata/PMOPT2/MOPP_natnet_data_01.dbf';
+32> set newname for datafile 28 to '/natpmop/oradata/PMOPT2/MOPP_natnet_data_02.dbf';
+33> set newname for datafile 29 to '/natpmop/oradata/PMOPT2/MOPP_natnet_data_03.dbf';
+34> set newname for datafile 30 to '/natpmop/oradata/PMOPT2/MOPP_natnet_data_05.dbf';
+35> set newname for datafile 31 to '/natpmop/oradata/PMOPT2/MOPP_natnet_data_06.dbf';
+36> set newname for datafile 32 to '/natpmop/oradata/PMOPT2/MOPP_natnet_index_01.dbf';
+37> set newname for datafile 33 to '/natpmop/oradata/PMOPT2/MOPP_natnet_index_02.dbf';
+38> set newname for datafile 34 to '/natpmop/oradata/PMOPT2/MOPP_natnet_index_03.dbf';
+39> set newname for datafile 35 to '/natpmop/oradata/PMOPT2/MOPP_natnet_index_04.dbf';
+set newname for datafile 36 to '/natpmop/oradata/PMOPT2/MOPP_natnet_index_05.dbf';
+40> set newname for datafile 37 to '/natpmop/oradata/PMOPT2/MOPP_natnet_data_04.dbf';
+41> 42> set newname for datafile 38 to '/natpmop/oradata/PMOPT2/MOPP_index_data_01.dbf';
+43> set newname for datafile 39 to '/natpmop/oradata/PMOPT2/MOPP_index_data_02.dbf';
+44> set newname for datafile 40 to '/natpmop/oradata/PMOPT2/MOPP_index_data_03.dbf';
+45> set newname for datafile 41 to '/natpmop/oradata/PMOPT2/MOPP_index_data_04.dbf';
+46> set newname for datafile 42 to '/natpmop/oradata/PMOPT2/MOPP_index_data_05.dbf';
+47> set newname for datafile 43 to '/natpmop/oradata/PMOPT2/MOPP_index_data_06.dbf';
+48> set newname for datafile 44 to '/natpmop/oradata/PMOPT2/MOPP_index_data_07.dbf';
+49> set newname for datafile 45 to '/natpmop/oradata/PMOPT2/MOPP_index_data_08.dbf';
+50> set newname for datafile 46 to '/natpmop/oradata/PMOPT2/MOPP_index_data_09.dbf';
+51> set newname for datafile 47 to '/natpmop/oradata/PMOPT2/MOPP_index_data_10.dbf';
+52> set newname for datafile 48 to '/natpmop/oradata/PMOPT2/MOPP_index_data_11.dbf';
+53> set newname for datafile 49 to '/natpmop/oradata/PMOPT2/MOPP_index_data_12.dbf';
+set newname for datafile 50 to '/natpmop/oradata/PMOPT2/MOPP_index_data_13.dbf';
+54> 55> set newname for datafile 51 to '/natpmop/oradata/PMOPT2/MOPP_index_data_14.dbf';
+56> set newname for datafile 52 to '/natpmop/oradata/PMOPT2/MOPP_index_data_15.dbf';
+57> set newname for datafile 53 to '/natpmop/oradata/PMOPT2/MOPP_remote_data_01.dbf';
+58> set newname for datafile 54 to '/natpmop/oradata/PMOPT2/MOPP_remote_data_02.dbf';
+59> set newname for datafile 55 to '/natpmop/oradata/PMOPT2/MOPP_remote_data_03.dbf';
+60> set newname for datafile 56 to '/natpmop/oradata/PMOPT2/MOPP_remote_data_04.dbf';
+61> set newname for datafile 57 to '/natpmop/oradata/PMOPT2/MOPP_remote_data_05.dbf';
+62> set newname for datafile 58 to '/natpmop/oradata/PMOPT2/MOPP_natnet_index_06.dbf';
+63> set newname for datafile 59 to '/natpmop/oradata/PMOPT2/MOPP_natnet_index_07.dbf';
+64> set newname for datafile 60 to '/natpmop/oradata/PMOPT2/MOPP_yelg_index_03.dbf';
+65> set newname for datafile 61 to '/natpmop/oradata/PMOPT2/MOPP_natnet_index_08.dbf';
+66> set newname for datafile 62 to '/natpmop/oradata/PMOPT2/MOPP_index_data_16.dbf';
+67> set newname for datafile 63 to '/natpmop/oradata/PMOPT2/MOPP_natnet_index_09.dbf';
+68> set newname for datafile 64 to '/natpmop/oradata/PMOPT2/MOPP_yelg_index_04.dbf';
+69> set newname for datafile 65 to '/natpmop/oradata/PMOPT2/MOPP_natnet_index_10.dbf';
+70> set newname for datafile 66 to '/natpmop/oradata/PMOPT2/MOPP_natnet_index_11.dbf';
+71> set newname for datafile 67 to '/natpmop/oradata/PMOPT2/MOPP_interlect_data01.dbf';
+72> set newname for datafile 68 to '/natpmop/oradata/PMOPT2/MOPP_interlect_index01.dbf';
+73> set newname for datafile 69 to '/natpmop/oradata/PMOPT2/fieldcommsdata01.dbf';
+74> set newname for datafile 70 to '/natpmop/oradata/PMOPT2/fieldcommsindex01.dbf';
+75> set newname for datafile 71 to '/natpmop/oradata/PMOPT2/snapshotlog_data01.dbf';
+76> set newname for datafile 72 to '/natpmop/oradata/PMOPT2/bgelecdata01.dbf';
+77> set newname for datafile 73 to '/natpmop/oradata/PMOPT2/MOPP_remote_index_01.dbf';
+78> set newname for datafile 74 to '/natpmop/oradata/PMOPT2/MOPP_ers_data_01.dbf';
+79> set newname for datafile 75 to '/natpmop/oradata/PMOPT2/MOPP_jiss_data_01.dbf';
+80> set newname for datafile 76 to '/natpmop/oradata/PMOPT2/MOPP_jiss_index_01.dbf';
+81> set newname for datafile 77 to '/natpmop/oradata/PMOPT2/MOPP_ers_index_01.dbf';
+82> set newname for datafile 78 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_25';
+set newname for datafile 79 to '/natpmop/oradata/PMOPT2/xdb_data01.dbf';
+83> 84> set newname for datafile 80 to '/natpmop/oradata/PMOPT2/assign_data01.dbf';
+85> set newname for datafile 81 to '/natpmop/oradata/PMOPT2/assign_index01.dbf';
+86> set newname for datafile 82 to '/natpmop/oradata/PMOPT2/wamint_data01.dbf';
+87> set newname for datafile 83 to '/natpmop/oradata/PMOPT2/wamint_index01.dbf';
+88> set newname for datafile 84 to '/natpmop/oradata/PMOPT2/bgelecindex01.dbf';
+set newname for datafile 85 to '/natpmop/oradata/PMOPT2/MOPP_yelg_data_01.dbf';
+89> 90> set newname for datafile 86 to '/natpmop/oradata/PMOPT2/mapdata01.dbf';
+91> set newname for datafile 87 to '/natpmop/oradata/PMOPT2/mapindex01.dbf';
+92> set newname for datafile 88 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_24.dbf';
+set newname for datafile 89 to '/natpmop/oradata/PMOPT2/MOPP_batch_data_01.dbf';
+93> 94> set newname for datafile 90 to '/natpmop/oradata/PMOPT2/MOPP_batch_index_1.dbf';
+95> set newname for datafile 91 to '/natpmop/oradata/PMOPT2/MOPP_mars_data_01.dbf';
+96> set newname for datafile 92 to '/natpmop/oradata/PMOPT2/MOPP_mars_index_01.dbf';
+set newname for datafile 93 to '/natpmop/oradata/PMOPT2/MOPP_remote_index_02.dbf';
+97> 98> set newname for datafile 94 to '/natpmop/oradata/PMOPT2/MOPP_yelg_index_01.dbf';
+99> set newname for datafile 95 to '/natpmop/oradata/PMOPT2/amethyst_data01.dbf';
+set newname for datafile 96 to '/natpmop/oradata/PMOPT2/amethyst_index01.dbf';
+100> 101> set newname for datafile 97 to '/natpmop/oradata/PMOPT2/MOPP_bus_obj_data_01.dbf';
+102> set newname for datafile 98 to '/natpmop/oradata/PMOPT2/MOPP_bus_obj_index_01.dbf';
+set newname for datafile 99 to '/natpmop/oradata/PMOPT2/MOPP_tools_data_02.dbf';
+103> 104> set newname for datafile 100 to '/natpmop/oradata/PMOPT2/MOP_INDEX _01.dbf';
+105> set newname for datafile 101 to '/natpmop/oradata/PMOPT2/MOPP_jumbo_data01.dbf';
+106> set newname for datafile 102 to '/natpmop/oradata/PMOPT2/MOPP_jumbo_index01.dbf';
+set newname for datafile 103 to '/natpmop/oradata/PMOPT2/MOPP_rgma_data01.dbf';
+107> 108> set newname for datafile 104 to '/natpmop/oradata/PMOPT2/MOPP_rgma_index01.dbf';
+109> set newname for datafile 109 to '/natpmop/oradata/PMOPT2/MOPP_gas_data01.dbf';
+110> set newname for datafile 112 to '/natpmop/oradata/PMOPT2/MOPP_gas_index01.dbf';
+111> set newname for datafile 113 to '/natpmop/oradata/PMOPT2/MOPP_scan_data01.dbf';
+112> set newname for datafile 114 to '/natpmop/oradata/PMOPT2/MOPP_scan_index01.dbf';
+113> set newname for datafile 115 to '/natpmop/oradata/PMOPT2/fc_data01.dbf';
+114> set newname for datafile 116 to '/natpmop/oradata/PMOPT2/MOPP_dtn_data_01.dbf';
+115> set newname for datafile 117 to '/natpmop/oradata/PMOPT2/MOPP_dtn_index_01.dbf';
+116> set newname for datafile 118 to '/natpmop/oradata/PMOPT2/fc_index01.dbf';
+117> set newname for datafile 119 to '/natpmop/oradata/PMOPT2/sysaux_01.dbf';
+118> set newname for datafile 120 to '/natpmop/oradata/PMOPT2/MOPP_ers2prs_data_01.dbf';
+119> set newname for datafile 121 to '/natpmop/oradata/PMOPT2/MOPP_ers2prs_index_01.dbf';
+120> set newname for datafile 122 to '/natpmop/oradata/PMOPT2/undotbs1_01.dbf';
+121> set newname for datafile 128 to '/natpmop/oradata/PMOPT2/MOPP_yelg_index_02.dbf';
+122> set newname for datafile 129 to '/natpmop/oradata/PMOPT2/MOPP_mts_data_01.dbf';
+123> set newname for datafile 130 to '/natpmop/oradata/PMOPT2/MOPP_mts_index_01.dbf';
+124> restore database;
+125> switch datafile all;
+126> recover database;
+127> release channel adsm_1;
+128> release channel adsm_2;
+129> }
+
+using target database control file instead of recovery catalog
+allocated channel: adsm_1
+channel adsm_1: sid=593 devtype=DISK
+
+allocated channel: adsm_2
+channel adsm_2: sid=592 devtype=DISK
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+Starting restore at 04-AUG-16
+
+channel adsm_1: starting datafile backupset restore
+channel adsm_1: specifying datafile(s) to restore from backup set
+restoring datafile 00005 to /natpmop/oradata/PMOPT2/MOPP_mop_data_02.dbf
+restoring datafile 00006 to /natpmop/oradata/PMOPT2/MOPP_mop_data_03.dbf
+restoring datafile 00009 to /natpmop/oradata/PMOPT2/MOPP_mop_data_06.dbf
+restoring datafile 00010 to /natpmop/oradata/PMOPT2/MOPP_mop_data_07.dbf
+restoring datafile 00011 to /natpmop/oradata/PMOPT2/MOPP_mop_data_08.dbf
+restoring datafile 00012 to /natpmop/oradata/PMOPT2/MOPP_mop_data_09.dbf
+restoring datafile 00013 to /natpmop/oradata/PMOPT2/MOPP_mop_data_10.dbf
+restoring datafile 00014 to /natpmop/oradata/PMOPT2/MOPP_mop_data_11.dbf
+restoring datafile 00016 to /natpmop/oradata/PMOPT2/MOPP_mop_data_13.dbf
+restoring datafile 00018 to /natpmop/oradata/PMOPT2/MOPP_mop_data_15.dbf
+restoring datafile 00020 to /natpmop/oradata/PMOPT2/MOPP_mop_data_17.dbf
+restoring datafile 00022 to /natpmop/oradata/PMOPT2/MOPP_mop_data_19.dbf
+restoring datafile 00025 to /natpmop/oradata/PMOPT2/MOPP_mop_data_22.dbf
+restoring datafile 00026 to /natpmop/oradata/PMOPT2/MOPP_mop_data_23.dbf
+restoring datafile 00028 to /natpmop/oradata/PMOPT2/MOPP_natnet_data_02.dbf
+restoring datafile 00033 to /natpmop/oradata/PMOPT2/MOPP_natnet_index_02.dbf
+restoring datafile 00037 to /natpmop/oradata/PMOPT2/MOPP_natnet_data_04.dbf
+restoring datafile 00039 to /natpmop/oradata/PMOPT2/MOPP_index_data_02.dbf
+restoring datafile 00040 to /natpmop/oradata/PMOPT2/MOPP_index_data_03.dbf
+restoring datafile 00041 to /natpmop/oradata/PMOPT2/MOPP_index_data_04.dbf
+restoring datafile 00044 to /natpmop/oradata/PMOPT2/MOPP_index_data_07.dbf
+restoring datafile 00046 to /natpmop/oradata/PMOPT2/MOPP_index_data_09.dbf
+restoring datafile 00048 to /natpmop/oradata/PMOPT2/MOPP_index_data_11.dbf
+restoring datafile 00050 to /natpmop/oradata/PMOPT2/MOPP_index_data_13.dbf
+restoring datafile 00051 to /natpmop/oradata/PMOPT2/MOPP_index_data_14.dbf
+restoring datafile 00052 to /natpmop/oradata/PMOPT2/MOPP_index_data_15.dbf
+restoring datafile 00056 to /natpmop/oradata/PMOPT2/MOPP_remote_data_04.dbf
+restoring datafile 00058 to /natpmop/oradata/PMOPT2/MOPP_natnet_index_06.dbf
+restoring datafile 00059 to /natpmop/oradata/PMOPT2/MOPP_natnet_index_07.dbf
+restoring datafile 00060 to /natpmop/oradata/PMOPT2/MOPP_yelg_index_03.dbf
+restoring datafile 00061 to /natpmop/oradata/PMOPT2/MOPP_natnet_index_08.dbf
+restoring datafile 00062 to /natpmop/oradata/PMOPT2/MOPP_index_data_16.dbf
+restoring datafile 00066 to /natpmop/oradata/PMOPT2/MOPP_natnet_index_11.dbf
+restoring datafile 00068 to /natpmop/oradata/PMOPT2/MOPP_interlect_index01.dbf
+restoring datafile 00072 to /natpmop/oradata/PMOPT2/bgelecdata01.dbf
+restoring datafile 00073 to /natpmop/oradata/PMOPT2/MOPP_remote_index_01.dbf
+restoring datafile 00076 to /natpmop/oradata/PMOPT2/MOPP_jiss_index_01.dbf
+restoring datafile 00077 to /natpmop/oradata/PMOPT2/MOPP_ers_index_01.dbf
+restoring datafile 00078 to /natpmop/oradata/PMOPT2/MOPP_mop_data_25
+restoring datafile 00079 to /natpmop/oradata/PMOPT2/xdb_data01.dbf
+restoring datafile 00080 to /natpmop/oradata/PMOPT2/assign_data01.dbf
+restoring datafile 00086 to /natpmop/oradata/PMOPT2/mapdata01.dbf
+restoring datafile 00089 to /natpmop/oradata/PMOPT2/MOPP_batch_data_01.dbf
+restoring datafile 00092 to /natpmop/oradata/PMOPT2/MOPP_mars_index_01.dbf
+restoring datafile 00094 to /natpmop/oradata/PMOPT2/MOPP_yelg_index_01.dbf
+restoring datafile 00095 to /natpmop/oradata/PMOPT2/amethyst_data01.dbf
+restoring datafile 00096 to /natpmop/oradata/PMOPT2/amethyst_index01.dbf
+restoring datafile 00097 to /natpmop/oradata/PMOPT2/MOPP_bus_obj_data_01.dbf
+restoring datafile 00098 to /natpmop/oradata/PMOPT2/MOPP_bus_obj_index_01.dbf
+restoring datafile 00099 to /natpmop/oradata/PMOPT2/MOPP_tools_data_02.dbf
+restoring datafile 00100 to /natpmop/oradata/PMOPT2/MOP_INDEX _01.dbf
+restoring datafile 00102 to /natpmop/oradata/PMOPT2/MOPP_jumbo_index01.dbf
+restoring datafile 00104 to /natpmop/oradata/PMOPT2/MOPP_rgma_index01.dbf
+restoring datafile 00114 to /natpmop/oradata/PMOPT2/MOPP_scan_index01.dbf
+restoring datafile 00116 to /natpmop/oradata/PMOPT2/MOPP_dtn_data_01.dbf
+restoring datafile 00118 to /natpmop/oradata/PMOPT2/fc_index01.dbf
+restoring datafile 00121 to /natpmop/oradata/PMOPT2/MOPP_ers2prs_index_01.dbf
+restoring datafile 00122 to /natpmop/oradata/PMOPT2/undotbs1_01.dbf
+restoring datafile 00128 to /natpmop/oradata/PMOPT2/MOPP_yelg_index_02.dbf
+restoring datafile 00130 to /natpmop/oradata/PMOPT2/MOPP_mts_index_01.dbf
+channel adsm_1: reading from backup piece /mnt/su11sa004/dump/Inc0_PMOPP_d1rcb9ho_1_1_s81313_p1
+channel adsm_2: starting datafile backupset restore
+channel adsm_2: specifying datafile(s) to restore from backup set
+restoring datafile 00001 to /natpmop/oradata/PMOPT2/MOPP_system_01.dbf
+restoring datafile 00002 to /natpmop/oradata/PMOPT2/MOPP_user_data_01.dbf
+restoring datafile 00003 to /natpmop/oradata/PMOPT2/MOPP_tools_data_01.dbf
+restoring datafile 00004 to /natpmop/oradata/PMOPT2/MOPP_mop_data_01.dbf
+restoring datafile 00007 to /natpmop/oradata/PMOPT2/MOPP_mop_data_04.dbf
+restoring datafile 00008 to /natpmop/oradata/PMOPT2/MOPP_mop_data_05.dbf
+restoring datafile 00015 to /natpmop/oradata/PMOPT2/MOPP_mop_data_12.dbf
+restoring datafile 00017 to /natpmop/oradata/PMOPT2/MOPP_mop_data_14.dbf
+restoring datafile 00019 to /natpmop/oradata/PMOPT2/MOPP_mop_data_16.dbf
+restoring datafile 00021 to /natpmop/oradata/PMOPT2/MOPP_mop_data_18.dbf
+restoring datafile 00023 to /natpmop/oradata/PMOPT2/MOPP_mop_data_20.dbf
+restoring datafile 00024 to /natpmop/oradata/PMOPT2/MOPP_mop_data_21.dbf
+restoring datafile 00027 to /natpmop/oradata/PMOPT2/MOPP_natnet_data_01.dbf
+restoring datafile 00029 to /natpmop/oradata/PMOPT2/MOPP_natnet_data_03.dbf
+restoring datafile 00030 to /natpmop/oradata/PMOPT2/MOPP_natnet_data_05.dbf
+restoring datafile 00031 to /natpmop/oradata/PMOPT2/MOPP_natnet_data_06.dbf
+restoring datafile 00032 to /natpmop/oradata/PMOPT2/MOPP_natnet_index_01.dbf
+restoring datafile 00034 to /natpmop/oradata/PMOPT2/MOPP_natnet_index_03.dbf
+restoring datafile 00035 to /natpmop/oradata/PMOPT2/MOPP_natnet_index_04.dbf
+restoring datafile 00036 to /natpmop/oradata/PMOPT2/MOPP_natnet_index_05.dbf
+restoring datafile 00038 to /natpmop/oradata/PMOPT2/MOPP_index_data_01.dbf
+restoring datafile 00042 to /natpmop/oradata/PMOPT2/MOPP_index_data_05.dbf
+restoring datafile 00043 to /natpmop/oradata/PMOPT2/MOPP_index_data_06.dbf
+restoring datafile 00045 to /natpmop/oradata/PMOPT2/MOPP_index_data_08.dbf
+restoring datafile 00047 to /natpmop/oradata/PMOPT2/MOPP_index_data_10.dbf
+restoring datafile 00049 to /natpmop/oradata/PMOPT2/MOPP_index_data_12.dbf
+restoring datafile 00053 to /natpmop/oradata/PMOPT2/MOPP_remote_data_01.dbf
+restoring datafile 00054 to /natpmop/oradata/PMOPT2/MOPP_remote_data_02.dbf
+restoring datafile 00055 to /natpmop/oradata/PMOPT2/MOPP_remote_data_03.dbf
+restoring datafile 00057 to /natpmop/oradata/PMOPT2/MOPP_remote_data_05.dbf
+restoring datafile 00063 to /natpmop/oradata/PMOPT2/MOPP_natnet_index_09.dbf
+restoring datafile 00064 to /natpmop/oradata/PMOPT2/MOPP_yelg_index_04.dbf
+restoring datafile 00065 to /natpmop/oradata/PMOPT2/MOPP_natnet_index_10.dbf
+restoring datafile 00067 to /natpmop/oradata/PMOPT2/MOPP_interlect_data01.dbf
+restoring datafile 00069 to /natpmop/oradata/PMOPT2/fieldcommsdata01.dbf
+restoring datafile 00070 to /natpmop/oradata/PMOPT2/fieldcommsindex01.dbf
+restoring datafile 00071 to /natpmop/oradata/PMOPT2/snapshotlog_data01.dbf
+restoring datafile 00074 to /natpmop/oradata/PMOPT2/MOPP_ers_data_01.dbf
+restoring datafile 00075 to /natpmop/oradata/PMOPT2/MOPP_jiss_data_01.dbf
+restoring datafile 00081 to /natpmop/oradata/PMOPT2/assign_index01.dbf
+restoring datafile 00082 to /natpmop/oradata/PMOPT2/wamint_data01.dbf
+restoring datafile 00083 to /natpmop/oradata/PMOPT2/wamint_index01.dbf
+restoring datafile 00084 to /natpmop/oradata/PMOPT2/bgelecindex01.dbf
+restoring datafile 00085 to /natpmop/oradata/PMOPT2/MOPP_yelg_data_01.dbf
+restoring datafile 00087 to /natpmop/oradata/PMOPT2/mapindex01.dbf
+restoring datafile 00088 to /natpmop/oradata/PMOPT2/MOPP_mop_data_24.dbf
+restoring datafile 00090 to /natpmop/oradata/PMOPT2/MOPP_batch_index_1.dbf
+restoring datafile 00091 to /natpmop/oradata/PMOPT2/MOPP_mars_data_01.dbf
+restoring datafile 00093 to /natpmop/oradata/PMOPT2/MOPP_remote_index_02.dbf
+restoring datafile 00101 to /natpmop/oradata/PMOPT2/MOPP_jumbo_data01.dbf
+restoring datafile 00103 to /natpmop/oradata/PMOPT2/MOPP_rgma_data01.dbf
+restoring datafile 00109 to /natpmop/oradata/PMOPT2/MOPP_gas_data01.dbf
+restoring datafile 00112 to /natpmop/oradata/PMOPT2/MOPP_gas_index01.dbf
+restoring datafile 00113 to /natpmop/oradata/PMOPT2/MOPP_scan_data01.dbf
+restoring datafile 00115 to /natpmop/oradata/PMOPT2/fc_data01.dbf
+restoring datafile 00117 to /natpmop/oradata/PMOPT2/MOPP_dtn_index_01.dbf
+restoring datafile 00119 to /natpmop/oradata/PMOPT2/sysaux_01.dbf
+restoring datafile 00120 to /natpmop/oradata/PMOPT2/MOPP_ers2prs_data_01.dbf
+restoring datafile 00129 to /natpmop/oradata/PMOPT2/MOPP_mts_data_01.dbf
+channel adsm_2: reading from backup piece /mnt/su11sa004/dump/Inc0_PMOPP_d2rcb9ho_1_1_s81314_p1
+channel adsm_1: restored backup piece 1
+piece handle=/mnt/su11sa004/dump/Inc0_PMOPP_d1rcb9ho_1_1_s81313_p1 tag=TAG20160803T162006
+channel adsm_1: restore complete, elapsed time: 00:07:05
+channel adsm_2: restored backup piece 1
+piece handle=/mnt/su11sa004/dump/Inc0_PMOPP_d2rcb9ho_1_1_s81314_p1 tag=TAG20160803T162006
+channel adsm_2: restore complete, elapsed time: 00:07:51
+Finished restore at 04-AUG-16
+
+datafile 1 switched to datafile copy
+input datafile copy recid=120 stamp=918985334 filename=/natpmop/oradata/PMOPT2/MOPP_system_01.dbf
+datafile 2 switched to datafile copy
+input datafile copy recid=121 stamp=918985334 filename=/natpmop/oradata/PMOPT2/MOPP_user_data_01.dbf
+datafile 3 switched to datafile copy
+input datafile copy recid=122 stamp=918985334 filename=/natpmop/oradata/PMOPT2/MOPP_tools_data_01.dbf
+datafile 4 switched to datafile copy
+input datafile copy recid=123 stamp=918985334 filename=/natpmop/oradata/PMOPT2/MOPP_mop_data_01.dbf
+datafile 5 switched to datafile copy
+input datafile copy recid=124 stamp=918985334 filename=/natpmop/oradata/PMOPT2/MOPP_mop_data_02.dbf
+datafile 6 switched to datafile copy
+input datafile copy recid=125 stamp=918985334 filename=/natpmop/oradata/PMOPT2/MOPP_mop_data_03.dbf
+datafile 7 switched to datafile copy
+input datafile copy recid=126 stamp=918985334 filename=/natpmop/oradata/PMOPT2/MOPP_mop_data_04.dbf
+datafile 8 switched to datafile copy
+input datafile copy recid=127 stamp=918985334 filename=/natpmop/oradata/PMOPT2/MOPP_mop_data_05.dbf
+datafile 9 switched to datafile copy
+input datafile copy recid=128 stamp=918985334 filename=/natpmop/oradata/PMOPT2/MOPP_mop_data_06.dbf
+datafile 10 switched to datafile copy
+input datafile copy recid=129 stamp=918985334 filename=/natpmop/oradata/PMOPT2/MOPP_mop_data_07.dbf
+datafile 11 switched to datafile copy
+input datafile copy recid=130 stamp=918985334 filename=/natpmop/oradata/PMOPT2/MOPP_mop_data_08.dbf
+datafile 12 switched to datafile copy
+input datafile copy recid=131 stamp=918985335 filename=/natpmop/oradata/PMOPT2/MOPP_mop_data_09.dbf
+datafile 13 switched to datafile copy
+input datafile copy recid=132 stamp=918985335 filename=/natpmop/oradata/PMOPT2/MOPP_mop_data_10.dbf
+datafile 14 switched to datafile copy
+input datafile copy recid=133 stamp=918985335 filename=/natpmop/oradata/PMOPT2/MOPP_mop_data_11.dbf
+datafile 15 switched to datafile copy
+input datafile copy recid=134 stamp=918985335 filename=/natpmop/oradata/PMOPT2/MOPP_mop_data_12.dbf
+datafile 16 switched to datafile copy
+input datafile copy recid=135 stamp=918985335 filename=/natpmop/oradata/PMOPT2/MOPP_mop_data_13.dbf
+datafile 17 switched to datafile copy
+input datafile copy recid=136 stamp=918985335 filename=/natpmop/oradata/PMOPT2/MOPP_mop_data_14.dbf
+datafile 18 switched to datafile copy
+input datafile copy recid=137 stamp=918985335 filename=/natpmop/oradata/PMOPT2/MOPP_mop_data_15.dbf
+datafile 19 switched to datafile copy
+input datafile copy recid=138 stamp=918985335 filename=/natpmop/oradata/PMOPT2/MOPP_mop_data_16.dbf
+datafile 20 switched to datafile copy
+input datafile copy recid=139 stamp=918985335 filename=/natpmop/oradata/PMOPT2/MOPP_mop_data_17.dbf
+datafile 21 switched to datafile copy
+input datafile copy recid=140 stamp=918985335 filename=/natpmop/oradata/PMOPT2/MOPP_mop_data_18.dbf
+datafile 22 switched to datafile copy
+input datafile copy recid=141 stamp=918985335 filename=/natpmop/oradata/PMOPT2/MOPP_mop_data_19.dbf
+datafile 23 switched to datafile copy
+input datafile copy recid=142 stamp=918985335 filename=/natpmop/oradata/PMOPT2/MOPP_mop_data_20.dbf
+datafile 24 switched to datafile copy
+input datafile copy recid=143 stamp=918985335 filename=/natpmop/oradata/PMOPT2/MOPP_mop_data_21.dbf
+datafile 25 switched to datafile copy
+input datafile copy recid=144 stamp=918985335 filename=/natpmop/oradata/PMOPT2/MOPP_mop_data_22.dbf
+datafile 26 switched to datafile copy
+input datafile copy recid=145 stamp=918985335 filename=/natpmop/oradata/PMOPT2/MOPP_mop_data_23.dbf
+datafile 27 switched to datafile copy
+input datafile copy recid=146 stamp=918985335 filename=/natpmop/oradata/PMOPT2/MOPP_natnet_data_01.dbf
+datafile 28 switched to datafile copy
+input datafile copy recid=147 stamp=918985335 filename=/natpmop/oradata/PMOPT2/MOPP_natnet_data_02.dbf
+datafile 29 switched to datafile copy
+input datafile copy recid=148 stamp=918985335 filename=/natpmop/oradata/PMOPT2/MOPP_natnet_data_03.dbf
+datafile 30 switched to datafile copy
+input datafile copy recid=149 stamp=918985336 filename=/natpmop/oradata/PMOPT2/MOPP_natnet_data_05.dbf
+datafile 31 switched to datafile copy
+input datafile copy recid=150 stamp=918985336 filename=/natpmop/oradata/PMOPT2/MOPP_natnet_data_06.dbf
+datafile 32 switched to datafile copy
+input datafile copy recid=151 stamp=918985336 filename=/natpmop/oradata/PMOPT2/MOPP_natnet_index_01.dbf
+datafile 33 switched to datafile copy
+input datafile copy recid=152 stamp=918985336 filename=/natpmop/oradata/PMOPT2/MOPP_natnet_index_02.dbf
+datafile 34 switched to datafile copy
+input datafile copy recid=153 stamp=918985336 filename=/natpmop/oradata/PMOPT2/MOPP_natnet_index_03.dbf
+datafile 35 switched to datafile copy
+input datafile copy recid=154 stamp=918985336 filename=/natpmop/oradata/PMOPT2/MOPP_natnet_index_04.dbf
+datafile 36 switched to datafile copy
+input datafile copy recid=155 stamp=918985336 filename=/natpmop/oradata/PMOPT2/MOPP_natnet_index_05.dbf
+datafile 37 switched to datafile copy
+input datafile copy recid=156 stamp=918985336 filename=/natpmop/oradata/PMOPT2/MOPP_natnet_data_04.dbf
+datafile 38 switched to datafile copy
+input datafile copy recid=157 stamp=918985336 filename=/natpmop/oradata/PMOPT2/MOPP_index_data_01.dbf
+datafile 39 switched to datafile copy
+input datafile copy recid=158 stamp=918985336 filename=/natpmop/oradata/PMOPT2/MOPP_index_data_02.dbf
+datafile 40 switched to datafile copy
+input datafile copy recid=159 stamp=918985336 filename=/natpmop/oradata/PMOPT2/MOPP_index_data_03.dbf
+datafile 41 switched to datafile copy
+input datafile copy recid=160 stamp=918985336 filename=/natpmop/oradata/PMOPT2/MOPP_index_data_04.dbf
+datafile 42 switched to datafile copy
+input datafile copy recid=161 stamp=918985336 filename=/natpmop/oradata/PMOPT2/MOPP_index_data_05.dbf
+datafile 43 switched to datafile copy
+input datafile copy recid=162 stamp=918985336 filename=/natpmop/oradata/PMOPT2/MOPP_index_data_06.dbf
+datafile 44 switched to datafile copy
+input datafile copy recid=163 stamp=918985337 filename=/natpmop/oradata/PMOPT2/MOPP_index_data_07.dbf
+datafile 45 switched to datafile copy
+input datafile copy recid=164 stamp=918985337 filename=/natpmop/oradata/PMOPT2/MOPP_index_data_08.dbf
+datafile 46 switched to datafile copy
+input datafile copy recid=165 stamp=918985337 filename=/natpmop/oradata/PMOPT2/MOPP_index_data_09.dbf
+datafile 47 switched to datafile copy
+input datafile copy recid=166 stamp=918985337 filename=/natpmop/oradata/PMOPT2/MOPP_index_data_10.dbf
+datafile 48 switched to datafile copy
+input datafile copy recid=167 stamp=918985337 filename=/natpmop/oradata/PMOPT2/MOPP_index_data_11.dbf
+datafile 49 switched to datafile copy
+input datafile copy recid=168 stamp=918985337 filename=/natpmop/oradata/PMOPT2/MOPP_index_data_12.dbf
+datafile 50 switched to datafile copy
+input datafile copy recid=169 stamp=918985337 filename=/natpmop/oradata/PMOPT2/MOPP_index_data_13.dbf
+datafile 51 switched to datafile copy
+input datafile copy recid=170 stamp=918985337 filename=/natpmop/oradata/PMOPT2/MOPP_index_data_14.dbf
+datafile 52 switched to datafile copy
+input datafile copy recid=171 stamp=918985337 filename=/natpmop/oradata/PMOPT2/MOPP_index_data_15.dbf
+datafile 53 switched to datafile copy
+input datafile copy recid=172 stamp=918985337 filename=/natpmop/oradata/PMOPT2/MOPP_remote_data_01.dbf
+datafile 54 switched to datafile copy
+input datafile copy recid=173 stamp=918985337 filename=/natpmop/oradata/PMOPT2/MOPP_remote_data_02.dbf
+datafile 55 switched to datafile copy
+input datafile copy recid=174 stamp=918985337 filename=/natpmop/oradata/PMOPT2/MOPP_remote_data_03.dbf
+datafile 56 switched to datafile copy
+input datafile copy recid=175 stamp=918985337 filename=/natpmop/oradata/PMOPT2/MOPP_remote_data_04.dbf
+datafile 57 switched to datafile copy
+input datafile copy recid=176 stamp=918985337 filename=/natpmop/oradata/PMOPT2/MOPP_remote_data_05.dbf
+datafile 58 switched to datafile copy
+input datafile copy recid=177 stamp=918985337 filename=/natpmop/oradata/PMOPT2/MOPP_natnet_index_06.dbf
+datafile 59 switched to datafile copy
+input datafile copy recid=178 stamp=918985337 filename=/natpmop/oradata/PMOPT2/MOPP_natnet_index_07.dbf
+datafile 60 switched to datafile copy
+input datafile copy recid=179 stamp=918985337 filename=/natpmop/oradata/PMOPT2/MOPP_yelg_index_03.dbf
+datafile 61 switched to datafile copy
+input datafile copy recid=180 stamp=918985337 filename=/natpmop/oradata/PMOPT2/MOPP_natnet_index_08.dbf
+datafile 62 switched to datafile copy
+input datafile copy recid=181 stamp=918985337 filename=/natpmop/oradata/PMOPT2/MOPP_index_data_16.dbf
+datafile 63 switched to datafile copy
+input datafile copy recid=182 stamp=918985337 filename=/natpmop/oradata/PMOPT2/MOPP_natnet_index_09.dbf
+datafile 64 switched to datafile copy
+input datafile copy recid=183 stamp=918985337 filename=/natpmop/oradata/PMOPT2/MOPP_yelg_index_04.dbf
+datafile 65 switched to datafile copy
+input datafile copy recid=184 stamp=918985338 filename=/natpmop/oradata/PMOPT2/MOPP_natnet_index_10.dbf
+datafile 66 switched to datafile copy
+input datafile copy recid=185 stamp=918985338 filename=/natpmop/oradata/PMOPT2/MOPP_natnet_index_11.dbf
+datafile 67 switched to datafile copy
+input datafile copy recid=186 stamp=918985338 filename=/natpmop/oradata/PMOPT2/MOPP_interlect_data01.dbf
+datafile 68 switched to datafile copy
+input datafile copy recid=187 stamp=918985338 filename=/natpmop/oradata/PMOPT2/MOPP_interlect_index01.dbf
+datafile 69 switched to datafile copy
+input datafile copy recid=188 stamp=918985338 filename=/natpmop/oradata/PMOPT2/fieldcommsdata01.dbf
+datafile 70 switched to datafile copy
+input datafile copy recid=189 stamp=918985338 filename=/natpmop/oradata/PMOPT2/fieldcommsindex01.dbf
+datafile 71 switched to datafile copy
+input datafile copy recid=190 stamp=918985338 filename=/natpmop/oradata/PMOPT2/snapshotlog_data01.dbf
+datafile 72 switched to datafile copy
+input datafile copy recid=191 stamp=918985338 filename=/natpmop/oradata/PMOPT2/bgelecdata01.dbf
+datafile 73 switched to datafile copy
+input datafile copy recid=192 stamp=918985338 filename=/natpmop/oradata/PMOPT2/MOPP_remote_index_01.dbf
+datafile 74 switched to datafile copy
+input datafile copy recid=193 stamp=918985338 filename=/natpmop/oradata/PMOPT2/MOPP_ers_data_01.dbf
+datafile 75 switched to datafile copy
+input datafile copy recid=194 stamp=918985338 filename=/natpmop/oradata/PMOPT2/MOPP_jiss_data_01.dbf
+datafile 76 switched to datafile copy
+input datafile copy recid=195 stamp=918985338 filename=/natpmop/oradata/PMOPT2/MOPP_jiss_index_01.dbf
+datafile 77 switched to datafile copy
+input datafile copy recid=196 stamp=918985338 filename=/natpmop/oradata/PMOPT2/MOPP_ers_index_01.dbf
+datafile 78 switched to datafile copy
+input datafile copy recid=197 stamp=918985338 filename=/natpmop/oradata/PMOPT2/MOPP_mop_data_25
+datafile 79 switched to datafile copy
+input datafile copy recid=198 stamp=918985338 filename=/natpmop/oradata/PMOPT2/xdb_data01.dbf
+datafile 80 switched to datafile copy
+input datafile copy recid=199 stamp=918985338 filename=/natpmop/oradata/PMOPT2/assign_data01.dbf
+datafile 81 switched to datafile copy
+input datafile copy recid=200 stamp=918985338 filename=/natpmop/oradata/PMOPT2/assign_index01.dbf
+datafile 82 switched to datafile copy
+input datafile copy recid=201 stamp=918985338 filename=/natpmop/oradata/PMOPT2/wamint_data01.dbf
+datafile 83 switched to datafile copy
+input datafile copy recid=202 stamp=918985338 filename=/natpmop/oradata/PMOPT2/wamint_index01.dbf
+datafile 84 switched to datafile copy
+input datafile copy recid=203 stamp=918985338 filename=/natpmop/oradata/PMOPT2/bgelecindex01.dbf
+datafile 85 switched to datafile copy
+input datafile copy recid=204 stamp=918985338 filename=/natpmop/oradata/PMOPT2/MOPP_yelg_data_01.dbf
+datafile 86 switched to datafile copy
+input datafile copy recid=205 stamp=918985339 filename=/natpmop/oradata/PMOPT2/mapdata01.dbf
+datafile 87 switched to datafile copy
+input datafile copy recid=206 stamp=918985339 filename=/natpmop/oradata/PMOPT2/mapindex01.dbf
+datafile 88 switched to datafile copy
+input datafile copy recid=207 stamp=918985339 filename=/natpmop/oradata/PMOPT2/MOPP_mop_data_24.dbf
+datafile 89 switched to datafile copy
+input datafile copy recid=208 stamp=918985339 filename=/natpmop/oradata/PMOPT2/MOPP_batch_data_01.dbf
+datafile 90 switched to datafile copy
+input datafile copy recid=209 stamp=918985339 filename=/natpmop/oradata/PMOPT2/MOPP_batch_index_1.dbf
+datafile 91 switched to datafile copy
+input datafile copy recid=210 stamp=918985339 filename=/natpmop/oradata/PMOPT2/MOPP_mars_data_01.dbf
+datafile 92 switched to datafile copy
+input datafile copy recid=211 stamp=918985339 filename=/natpmop/oradata/PMOPT2/MOPP_mars_index_01.dbf
+datafile 93 switched to datafile copy
+input datafile copy recid=212 stamp=918985339 filename=/natpmop/oradata/PMOPT2/MOPP_remote_index_02.dbf
+datafile 94 switched to datafile copy
+input datafile copy recid=213 stamp=918985339 filename=/natpmop/oradata/PMOPT2/MOPP_yelg_index_01.dbf
+datafile 95 switched to datafile copy
+input datafile copy recid=214 stamp=918985339 filename=/natpmop/oradata/PMOPT2/amethyst_data01.dbf
+datafile 96 switched to datafile copy
+input datafile copy recid=215 stamp=918985339 filename=/natpmop/oradata/PMOPT2/amethyst_index01.dbf
+datafile 97 switched to datafile copy
+input datafile copy recid=216 stamp=918985339 filename=/natpmop/oradata/PMOPT2/MOPP_bus_obj_data_01.dbf
+datafile 98 switched to datafile copy
+input datafile copy recid=217 stamp=918985339 filename=/natpmop/oradata/PMOPT2/MOPP_bus_obj_index_01.dbf
+datafile 99 switched to datafile copy
+input datafile copy recid=218 stamp=918985339 filename=/natpmop/oradata/PMOPT2/MOPP_tools_data_02.dbf
+datafile 100 switched to datafile copy
+input datafile copy recid=219 stamp=918985339 filename=/natpmop/oradata/PMOPT2/MOP_INDEX _01.dbf
+datafile 101 switched to datafile copy
+input datafile copy recid=220 stamp=918985339 filename=/natpmop/oradata/PMOPT2/MOPP_jumbo_data01.dbf
+datafile 102 switched to datafile copy
+input datafile copy recid=221 stamp=918985339 filename=/natpmop/oradata/PMOPT2/MOPP_jumbo_index01.dbf
+datafile 103 switched to datafile copy
+input datafile copy recid=222 stamp=918985339 filename=/natpmop/oradata/PMOPT2/MOPP_rgma_data01.dbf
+datafile 104 switched to datafile copy
+input datafile copy recid=223 stamp=918985339 filename=/natpmop/oradata/PMOPT2/MOPP_rgma_index01.dbf
+datafile 109 switched to datafile copy
+input datafile copy recid=224 stamp=918985339 filename=/natpmop/oradata/PMOPT2/MOPP_gas_data01.dbf
+datafile 112 switched to datafile copy
+input datafile copy recid=225 stamp=918985339 filename=/natpmop/oradata/PMOPT2/MOPP_gas_index01.dbf
+datafile 113 switched to datafile copy
+input datafile copy recid=226 stamp=918985339 filename=/natpmop/oradata/PMOPT2/MOPP_scan_data01.dbf
+datafile 114 switched to datafile copy
+input datafile copy recid=227 stamp=918985339 filename=/natpmop/oradata/PMOPT2/MOPP_scan_index01.dbf
+datafile 115 switched to datafile copy
+input datafile copy recid=228 stamp=918985339 filename=/natpmop/oradata/PMOPT2/fc_data01.dbf
+datafile 116 switched to datafile copy
+input datafile copy recid=229 stamp=918985340 filename=/natpmop/oradata/PMOPT2/MOPP_dtn_data_01.dbf
+datafile 117 switched to datafile copy
+input datafile copy recid=230 stamp=918985340 filename=/natpmop/oradata/PMOPT2/MOPP_dtn_index_01.dbf
+datafile 118 switched to datafile copy
+input datafile copy recid=231 stamp=918985340 filename=/natpmop/oradata/PMOPT2/fc_index01.dbf
+datafile 119 switched to datafile copy
+input datafile copy recid=232 stamp=918985340 filename=/natpmop/oradata/PMOPT2/sysaux_01.dbf
+datafile 120 switched to datafile copy
+input datafile copy recid=233 stamp=918985340 filename=/natpmop/oradata/PMOPT2/MOPP_ers2prs_data_01.dbf
+datafile 121 switched to datafile copy
+input datafile copy recid=234 stamp=918985340 filename=/natpmop/oradata/PMOPT2/MOPP_ers2prs_index_01.dbf
+datafile 122 switched to datafile copy
+input datafile copy recid=235 stamp=918985340 filename=/natpmop/oradata/PMOPT2/undotbs1_01.dbf
+datafile 128 switched to datafile copy
+input datafile copy recid=236 stamp=918985340 filename=/natpmop/oradata/PMOPT2/MOPP_yelg_index_02.dbf
+datafile 129 switched to datafile copy
+input datafile copy recid=237 stamp=918985340 filename=/natpmop/oradata/PMOPT2/MOPP_mts_data_01.dbf
+datafile 130 switched to datafile copy
+input datafile copy recid=238 stamp=918985340 filename=/natpmop/oradata/PMOPT2/MOPP_mts_index_01.dbf
+
+Starting recover at 04-AUG-16
+
+starting media recovery
+
+channel adsm_2: starting archive log restore to default destination
+channel adsm_1: starting archive log restore to default destination
+channel adsm_2: restoring archive log
+archive log thread=1 sequence=215762
+channel adsm_2: reading from backup piece /mnt/su11sa004/dump/ARCH_1_PMOPP_d6rcba0l_1_1_s81318_p1
+channel adsm_1: restoring archive log
+archive log thread=1 sequence=215761
+channel adsm_1: reading from backup piece /mnt/su11sa004/dump/ARCH_1_PMOPP_d4rcba0i_1_1_s81316_p1
+channel adsm_1: restored backup piece 1
+piece handle=/mnt/su11sa004/dump/ARCH_1_PMOPP_d4rcba0i_1_1_s81316_p1 tag=TAG20160803T162802
+channel adsm_1: restore complete, elapsed time: 00:00:01
+archive log filename=/natpmop/archivelogs/PMOPP_0000215761_0001_694012487.arc thread=1 sequence=215761
+channel adsm_2: restored backup piece 1
+piece handle=/mnt/su11sa004/dump/ARCH_1_PMOPP_d6rcba0l_1_1_s81318_p1 tag=TAG20160803T162802
+channel adsm_2: restore complete, elapsed time: 00:00:02
+archive log filename=/natpmop/archivelogs/PMOPP_0000215762_0001_694012487.arc thread=1 sequence=215762
+unable to find archive log
+archive log thread=1 sequence=215763
+released channel: adsm_1
+released channel: adsm_2
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-03002: failure of recover command at 08/04/2016 09:42:30
+RMAN-06054: media recovery requesting unknown log: thread 1 seq 215763 lowscn 8930186205340
+
+RMAN>
+
+RMAN>
+
+RMAN>
+
+RMAN>
+
+RMAN>
+
+RMAN> catalog start with '/mnt/su11sa004/dump/';
+
+searching for all files that match the pattern /mnt/su11sa004/dump/
+
+List of Files Unknown to the Database
+=====================================
+File Name: /mnt/su11sa004/dump/PMOPP_0000215763_0001_694012487.arc
+File Name: /mnt/su11sa004/dump/PMOPP_0000215764_0001_694012487.arc
+
+Do you really want to catalog the above files (enter YES or NO)? yes
+cataloging files...
+cataloging done
+
+List of Cataloged Files
+=======================
+File Name: /mnt/su11sa004/dump/PMOPP_0000215763_0001_694012487.arc
+File Name: /mnt/su11sa004/dump/PMOPP_0000215764_0001_694012487.arc
+
+RMAN>
+
+RMAN>
+
+RMAN> recover database until cancel;
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "cancel": expecting one of: "logseq, restore, scn, sequence, time"
+RMAN-01007: at line 1 column 24 file: standard input
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found ";": expecting one of: "allocate, alter, backup, beginline, blockrecover, catalog, change, connect, copy, convert, create, crosscheck, configure, duplicate, debug, delete, drop, exit, endinline, flashback, host, {, library, list, mount, open, print, quit, recover, register, release, replace, report, renormalize, reset, restore, resync, rman, run, rpctest, set, setlimit, sql, switch, spool, startup, shutdown, send, show, test, transport, upgrade, unregister, validate"
+RMAN-01007: at line 1 column 30 file: standard input
+
+RMAN> recover database;
+
+Starting recover at 04-AUG-16
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-03002: failure of recover command at 08/04/2016 10:13:32
+ORA-19554: error allocating device, device type: SBT_TAPE, device name:
+ORA-27000: skgfqsbi: failed to initialize storage subsystem (SBT) layer
+SVR4 Error: 2534: Unknown system error
+Additional information: 7011
+ORA-19511: Error received from media manager layer, error text:
+   SBT error = 7011, errno = 2534, sbtopen: system error
+
+RMAN> run
+{
+allocate channel adsm_1 type DISK;
+allocate channel adsm_2 type DISK;
+recover database until cancel;
+release channel adsm_1;
+release channel adsm_2;
+}2> 3> 4> 5>
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "cancel": expecting one of: "logseq, restore, scn, sequence, time"
+RMAN-01007: at line 5 column 24 file: standard input
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found ";": expecting one of: "allocate, alter, backup, beginline, blockrecover, catalog, change, connect, copy, convert, create, crosscheck, configure, duplicate, debug, delete, drop, exit, endinline, flashback, host, {, library, list, mount, open, print, quit, recover, register, release, replace, report, renormalize, reset, restore, resync, rman, run, rpctest, set, setlimit, sql, switch, spool, startup, shutdown, send, show, test, transport, upgrade, unregister, validate"
+RMAN-01007: at line 5 column 30 file: standard input
+
+RMAN>
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "identifier": expecting one of: ";"
+RMAN-01008: the bad identifier was: adsm_1
+RMAN-01007: at line 1 column 17 file: standard input
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found ";": expecting one of: "allocate, alter, backup, beginline, blockrecover, catalog, change, connect, copy, convert, create, crosscheck, configure, duplicate, debug, delete, drop, exit, endinline, flashback, host, {, library, list, mount, open, print, quit, recover, register, release, replace, report, renormalize, reset, restore, resync, rman, run, rpctest, set, setlimit, sql, switch, spool, startup, shutdown, send, show, test, transport, upgrade, unregister, validate"
+RMAN-01007: at line 1 column 23 file: standard input
+
+RMAN>
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "identifier": expecting one of: ";"
+RMAN-01008: the bad identifier was: adsm_2
+RMAN-01007: at line 1 column 17 file: standard input
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found ";": expecting one of: "allocate, alter, backup, beginline, blockrecover, catalog, change, connect, copy, convert, create, crosscheck, configure, duplicate, debug, delete, drop, exit, endinline, flashback, host, {, library, list, mount, open, print, quit, recover, register, release, replace, report, renormalize, reset, restore, resync, rman, run, rpctest, set, setlimit, sql, switch, spool, startup, shutdown, send, show, test, transport, upgrade, unregister, validate"
+RMAN-01007: at line 1 column 23 file: standard input
+
+RMAN>
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "}": expecting one of: "allocate, alter, backup, beginline, blockrecover, catalog, change, connect, copy, convert, create, crosscheck, configure, duplicate, debug, delete, drop, exit, endinline, flashback, host, {, library, list, mount, open, print, quit, recover, register, release, replace, report, renormalize, reset, restore, resync, rman, run, rpctest, set, setlimit, sql, switch, spool, startup, shutdown, send, show, test, transport, upgrade, unregister, validate"
+RMAN-01007: at line 1 column 1 file: standard input
+
+RMAN>
+
+RMAN>
+
+RMAN> run
+{
+allocate channel adsm_1 type DISK;
+allocate channel adsm_2 type DISK;
+recover database until from logseq 215763 until logseq 215764;
+release channel adsm_1;
+release channel adsm_2;
+}2> 3> 4> 5>
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "from": expecting one of: "logseq, restore, scn, sequence, time"
+RMAN-01007: at line 5 column 24 file: standard input
+
+RMAN>
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "identifier": expecting one of: ";"
+RMAN-01008: the bad identifier was: adsm_1
+RMAN-01007: at line 1 column 17 file: standard input
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found ";": expecting one of: "allocate, alter, backup, beginline, blockrecover, catalog, change, connect, copy, convert, create, crosscheck, configure, duplicate, debug, delete, drop, exit, endinline, flashback, host, {, library, list, mount, open, print, quit, recover, register, release, replace, report, renormalize, reset, restore, resync, rman, run, rpctest, set, setlimit, sql, switch, spool, startup, shutdown, send, show, test, transport, upgrade, unregister, validate"
+RMAN-01007: at line 1 column 23 file: standard input
+
+RMAN>
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "identifier": expecting one of: ";"
+RMAN-01008: the bad identifier was: adsm_2
+RMAN-01007: at line 1 column 17 file: standard input
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found ";": expecting one of: "allocate, alter, backup, beginline, blockrecover, catalog, change, connect, copy, convert, create, crosscheck, configure, duplicate, debug, delete, drop, exit, endinline, flashback, host, {, library, list, mount, open, print, quit, recover, register, release, replace, report, renormalize, reset, restore, resync, rman, run, rpctest, set, setlimit, sql, switch, spool, startup, shutdown, send, show, test, transport, upgrade, unregister, validate"
+RMAN-01007: at line 1 column 23 file: standard input
+
+RMAN>
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "}": expecting one of: "allocate, alter, backup, beginline, blockrecover, catalog, change, connect, copy, convert, create, crosscheck, configure, duplicate, debug, delete, drop, exit, endinline, flashback, host, {, library, list, mount, open, print, quit, recover, register, release, replace, report, renormalize, reset, restore, resync, rman, run, rpctest, set, setlimit, sql, switch, spool, startup, shutdown, send, show, test, transport, upgrade, unregister, validate"
+RMAN-01007: at line 1 column 1 file: standard input
+
+RMAN>
+
+RMAN>
+
+RMAN> run
+{
+allocate channel adsm_1 type DISK;
+allocate channel adsm_2 type DISK;
+recover database from logseq 215763 until logseq 215764;
+release channel adsm_1;
+release channel adsm_2;
+}
+2> 3> 4> 5>
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "logseq": expecting one of: "tag"
+RMAN-01007: at line 5 column 23 file: standard input
+
+RMAN>
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "identifier": expecting one of: ";"
+RMAN-01008: the bad identifier was: adsm_1
+RMAN-01007: at line 1 column 17 file: standard input
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found ";": expecting one of: "allocate, alter, backup, beginline, blockrecover, catalog, change, connect, copy, convert, create, crosscheck, configure, duplicate, debug, delete, drop, exit, endinline, flashback, host, {, library, list, mount, open, print, quit, recover, register, release, replace, report, renormalize, reset, restore, resync, rman, run, rpctest, set, setlimit, sql, switch, spool, startup, shutdown, send, show, test, transport, upgrade, unregister, validate"
+RMAN-01007: at line 1 column 23 file: standard input
+
+RMAN>
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "identifier": expecting one of: ";"
+RMAN-01008: the bad identifier was: adsm_2
+RMAN-01007: at line 1 column 17 file: standard input
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found ";": expecting one of: "allocate, alter, backup, beginline, blockrecover, catalog, change, connect, copy, convert, create, crosscheck, configure, duplicate, debug, delete, drop, exit, endinline, flashback, host, {, library, list, mount, open, print, quit, recover, register, release, replace, report, renormalize, reset, restore, resync, rman, run, rpctest, set, setlimit, sql, switch, spool, startup, shutdown, send, show, test, transport, upgrade, unregister, validate"
+RMAN-01007: at line 1 column 23 file: standard input
+
+RMAN>
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "}": expecting one of: "allocate, alter, backup, beginline, blockrecover, catalog, change, connect, copy, convert, create, crosscheck, configure, duplicate, debug, delete, drop, exit, endinline, flashback, host, {, library, list, mount, open, print, quit, recover, register, release, replace, report, renormalize, reset, restore, resync, rman, run, rpctest, set, setlimit, sql, switch, spool, startup, shutdown, send, show, test, transport, upgrade, unregister, validate"
+RMAN-01007: at line 1 column 1 file: standard input
+
+RMAN> run
+{
+allocate channel adsm_1 type DISK;
+allocate channel adsm_2 type DISK;
+recover archivelog from sequence 215763 until sequence 215764;
+release channel adsm_1;
+release channel adsm_2;
+}2> 3> 4> 5>
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "archivelog": expecting one of: "copy, clone, database, datafile, datafilecopy, device, standby, tablespace"
+RMAN-01007: at line 5 column 9 file: standard input
+
+RMAN>
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "identifier": expecting one of: ";"
+RMAN-01008: the bad identifier was: adsm_1
+RMAN-01007: at line 1 column 17 file: standard input
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found ";": expecting one of: "allocate, alter, backup, beginline, blockrecover, catalog, change, connect, copy, convert, create, crosscheck, configure, duplicate, debug, delete, drop, exit, endinline, flashback, host, {, library, list, mount, open, print, quit, recover, register, release, replace, report, renormalize, reset, restore, resync, rman, run, rpctest, set, setlimit, sql, switch, spool, startup, shutdown, send, show, test, transport, upgrade, unregister, validate"
+RMAN-01007: at line 1 column 23 file: standard input
+
+RMAN>
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "identifier": expecting one of: ";"
+RMAN-01008: the bad identifier was: adsm_2
+RMAN-01007: at line 1 column 17 file: standard input
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found ";": expecting one of: "allocate, alter, backup, beginline, blockrecover, catalog, change, connect, copy, convert, create, crosscheck, configure, duplicate, debug, delete, drop, exit, endinline, flashback, host, {, library, list, mount, open, print, quit, recover, register, release, replace, report, renormalize, reset, restore, resync, rman, run, rpctest, set, setlimit, sql, switch, spool, startup, shutdown, send, show, test, transport, upgrade, unregister, validate"
+RMAN-01007: at line 1 column 23 file: standard input
+
+RMAN>
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "}": expecting one of: "allocate, alter, backup, beginline, blockrecover, catalog, change, connect, copy, convert, create, crosscheck, configure, duplicate, debug, delete, drop, exit, endinline, flashback, host, {, library, list, mount, open, print, quit, recover, register, release, replace, report, renormalize, reset, restore, resync, rman, run, rpctest, set, setlimit, sql, switch, spool, startup, shutdown, send, show, test, transport, upgrade, unregister, validate"
+RMAN-01007: at line 1 column 1 file: standard input
+
+RMAN>
+
+RMAN>
+
+RMAN>
+
+RMAN>
+
+RMAN>
+
+RMAN>
+
+RMAN> run
+{
+allocate channel adsm_1 type DISK;
+allocate channel adsm_2 type DISK;
+recover database until sequence 215764;
+release channel adsm_1;
+release channel adsm_2;
+}2> 3> 4> 5> 6> 7> 8>
+
+allocated channel: adsm_1
+channel adsm_1: sid=593 devtype=DISK
+
+allocated channel: adsm_2
+channel adsm_2: sid=592 devtype=DISK
+
+Starting recover at 04-AUG-16
+
+starting media recovery
+
+archive log thread 1 sequence 215763 is already on disk as file /mnt/su11sa004/dump/PMOPP_0000215763_0001_694012487.arc
+archive log filename=/mnt/su11sa004/dump/PMOPP_0000215763_0001_694012487.arc thread=1 sequence=215763
+media recovery complete, elapsed time: 00:00:06
+Finished recover at 04-AUG-16
+
+released channel: adsm_1
+
+released channel: adsm_2
+
+RMAN> exit
+
+
+Recovery Manager complete.
+[su11sb304:PMOPP]
+[su11sb304:PMOPP]
+[su11sb304:PMOPP]sqlplus / as sysdba
+
+SQL*Plus: Release 10.2.0.5.0 - Production on Thu Aug 4 10:19:30 2016
+
+Copyright (c) 1982, 2010, Oracle.  All Rights Reserved.
+
+
+Connected to:
+Oracle Database 10g Enterprise Edition Release 10.2.0.5.0 - 64bit Production
+With the Partitioning, Oracle Label Security, OLAP, Data Mining Scoring Engine
+and Real Application Testing options
+
+SQL> alter database open resetlogs;
+alter database open resetlogs
+*
+ERROR at line 1:
+ORA-00344: unable to re-create online log
+'/natpmop/oradata/PMOPP/MOPP_redo_1_1.log'
+ORA-27040: file create error, unable to create file
+SVR4 Error: 2: No such file or directory
+
+
+SQL> run
+{
+allocate channel adsm_1 type DISK;
+allocate channel adsm_2 type DISK;
+recover database until sequence 215764;
+release channel adsm_1;
+release channel adsm_2;
+}  1* alter database open resetlogs
+alter database open resetlogs
+*
+ERROR at line 1:
+ORA-00344: unable to re-create online log
+'/natpmop/oradata/PMOPP/MOPP_redo_1_1.log'
+ORA-27040: file create error, unable to create file
+SVR4 Error: 2: No such file or directory
+
+
+SQL> SP2-0042: unknown command "{" - rest of line ignored.
+SQL> SP2-0734: unknown command beginning "allocate c..." - rest of line ignored.
+SQL> SP2-0734: unknown command beginning "allocate c..." - rest of line ignored.
+SQL> ORA-00277: illegal option to the UNTIL recovery flag SEQUENCE
+
+
+SQL> SP2-0734: unknown command beginning "release ch..." - rest of line ignored.
+SQL> SP2-0734: unknown command beginning "release ch..." - rest of line ignored.
+SQL>
+SP2-0042: unknown command "}" - rest of line ignored.
+SQL>
+SQL> exit
+Disconnected from Oracle Database 10g Enterprise Edition Release 10.2.0.5.0 - 64bit Production
+With the Partitioning, Oracle Label Security, OLAP, Data Mining Scoring Engine
+and Real Application Testing options
+[su11sb304:PMOPP]sqlplus
+
+SQL*Plus: Release 10.2.0.5.0 - Production on Thu Aug 4 10:21:19 2016
+
+Copyright (c) 1982, 2010, Oracle.  All Rights Reserved.
+
+Enter user-name: / as sysdba
+
+Connected to:
+Oracle Database 10g Enterprise Edition Release 10.2.0.5.0 - 64bit Production
+With the Partitioning, Oracle Label Security, OLAP, Data Mining Scoring Engine
+and Real Application Testing options
+
+SQL> select * from v$log;
+
+    GROUP#    THREAD#  SEQUENCE#      BYTES    MEMBERS ARC STATUS
+---------- ---------- ---------- ---------- ---------- --- ----------------
+FIRST_CHANGE# FIRST_TIM
+------------- ---------
+         1          1     215763  102400000          2 NO  CURRENT
+   8.9302E+12 03-AUG-16
+
+         4          1     215761  102400000          2 YES ACTIVE
+   8.9302E+12 03-AUG-16
+
+         3          1     215760  102400000          2 YES INACTIVE
+   8.9302E+12 03-AUG-16
+
+
+    GROUP#    THREAD#  SEQUENCE#      BYTES    MEMBERS ARC STATUS
+---------- ---------- ---------- ---------- ---------- --- ----------------
+FIRST_CHANGE# FIRST_TIM
+------------- ---------
+         2          1     215762  102400000          2 YES ACTIVE
+   8.9302E+12 03-AUG-16
+
+
+SQL> exit
+Disconnected from Oracle Database 10g Enterprise Edition Release 10.2.0.5.0 - 64bit Production
+With the Partitioning, Oracle Label Security, OLAP, Data Mining Scoring Engine
+and Real Application Testing options
+[su11sb304:PMOPP]df -gt
+/                  (/                 ):       131072 block size           512 frag size
+213605603 total blocks  201765355 free blocks 201765355 available       201809599 total files
+201765355 free files     67174465 filesys id
+     zfs fstype       0x00000004 flag             255 filename length
+
+/UC4               (/UC4              ):       131072 block size           512 frag size
+  512000 total blocks     489074 free blocks   489074 available         489142 total files
+  489074 free files     67174467 filesys id
+     zfs fstype       0x00000004 flag             255 filename length
+
+/dev               (/dev              ):       131072 block size           512 frag size
+213605603 total blocks  201765355 free blocks 201765355 available       201809599 total files
+201765355 free files     67174465 filesys id
+     zfs fstype       0x00000004 flag             255 filename length
+
+/export/home       (/export/home      ):       131072 block size           512 frag size
+ 4194304 total blocks    4017744 free blocks  4017744 available        4019053 total files
+ 4017744 free files     67174468 filesys id
+     zfs fstype       0x00000004 flag             255 filename length
+
+/lib               (/lib              ):       131072 block size           512 frag size
+138796179 total blocks  126420075 free blocks 126420075 available       126638660 total files
+126420075 free files     67174402 filesys id
+     zfs fstype       0x00000004 flag             255 filename length
+
+/lib/svc/method    (/lib/svc/method   ):       131072 block size           512 frag size
+138796179 total blocks  126420075 free blocks 126420075 available       126638660 total files
+126420075 free files     67174402 filesys id
+     zfs fstype       0x00000004 flag             255 filename length
+
+/natpassign/apps   (/natpassign/apps  ):       131072 block size           512 frag size
+ 2097152 total blocks    2084920 free blocks  2084920 available        2085341 total files
+ 2084920 free files     67174470 filesys id
+     zfs fstype       0x00000004 flag             255 filename length
+
+/natpassign/archivelogs(/natpassign/archivelogs):   131072 block size           512 frag size
+10485760 total blocks   10411138 free blocks 10411138 available       10411143 total files
+10411138 free files     67174471 filesys id
+     zfs fstype       0x00000004 flag             255 filename length
+
+/natpassign/opt    (/natpassign/opt   ):       131072 block size           512 frag size
+31457280 total blocks   25524079 free blocks 25524079 available       25577127 total files
+25524079 free files     67174472 filesys id
+     zfs fstype       0x00000004 flag             255 filename length
+
+/natpassign/oradata(/natpassign/oradata):      131072 block size           512 frag size
+41943040 total blocks   23525226 free blocks 23525226 available       23525259 total files
+23525226 free files     67174473 filesys id
+     zfs fstype       0x00000004 flag             255 filename length
+
+/natpcafi/apps     (/natpcafi/apps    ):       131072 block size           512 frag size
+ 2097152 total blocks    1966267 free blocks  1966267 available        1967045 total files
+ 1966267 free files     67174474 filesys id
+     zfs fstype       0x00000004 flag             255 filename length
+
+/natpmop/apps      (/natpmop/apps     ):       131072 block size           512 frag size
+10485760 total blocks    7640509 free blocks  7640509 available        8139079 total files
+ 7640509 free files     67174475 filesys id
+     zfs fstype       0x00000004 flag             255 filename length
+
+/natpmop/archivelogs(/natpmop/archivelogs):    131072 block size           512 frag size
+10485760 total blocks    2429597 free blocks  2429597 available        2429722 total files
+ 2429597 free files     67174476 filesys id
+     zfs fstype       0x00000004 flag             255 filename length
+
+/natpmop/opt       (/natpmop/opt      ):       131072 block size           512 frag size
+31457280 total blocks   23332571 free blocks 23332571 available       23398923 total files
+23332571 free files     67174477 filesys id
+     zfs fstype       0x00000004 flag             255 filename length
+
+/natpmop/oradata   (/natpmop/oradata  ):       131072 block size           512 frag size
+209715200 total blocks   63240716 free blocks 63240716 available       63241047 total files
+63240716 free files     67174478 filesys id
+     zfs fstype       0x00000004 flag             255 filename length
+
+/opt/TAD4D         (/opt/TAD4D        ):       131072 block size           512 frag size
+ 1024000 total blocks     853842 free blocks   853842 available         854194 total files
+  853842 free files     67174466 filesys id
+     zfs fstype       0x00000004 flag             255 filename length
+
+/platform          (/platform         ):       131072 block size           512 frag size
+138796179 total blocks  126420075 free blocks 126420075 available       126638660 total files
+126420075 free files     67174402 filesys id
+     zfs fstype       0x00000004 flag             255 filename length
+
+/rwe               (/rwe              ):       131072 block size           512 frag size
+ 4194262 total blocks    4170496 free blocks  4170496 available        4170737 total files
+ 4170496 free files     67174410 filesys id
+     zfs fstype       0x00000004 flag             255 filename length
+
+/sbin              (/sbin             ):       131072 block size           512 frag size
+138796179 total blocks  126420075 free blocks 126420075 available       126638660 total files
+126420075 free files     67174402 filesys id
+     zfs fstype       0x00000004 flag             255 filename length
+
+/usr               (/usr              ):       131072 block size           512 frag size
+138796179 total blocks  126420075 free blocks 126420075 available       126638660 total files
+126420075 free files     67174402 filesys id
+     zfs fstype       0x00000004 flag             255 filename length
+
+/usr/bin           (/usr/bin          ):       131072 block size           512 frag size
+138796179 total blocks  126420075 free blocks 126420075 available       126638660 total files
+126420075 free files     67174402 filesys id
+     zfs fstype       0x00000004 flag             255 filename length
+
+/usr/local         (/usr/local        ):       131072 block size           512 frag size
+16777216 total blocks   14696263 free blocks 14696263 available       14703209 total files
+14696263 free files     67174469 filesys id
+     zfs fstype       0x00000004 flag             255 filename length
+
+/proc              (proc              ):          512 block size           512 frag size
+       0 total blocks          0 free blocks        0 available          30002 total files
+   29194 free files     94896131 filesys id  /proc
+    proc fstype         00000000 flag              64 filename length
+
+/system/contract   (ctfs              ):          512 block size           512 frag size
+       0 total blocks          0 free blocks        0 available            205 total files
+2147483442 free files     95158276 filesys id  contract
+    ctfs fstype         00000000 flag              32 filename length
+
+/etc/mnttab        (mnttab            ):          512 block size           512 frag size
+       0 total blocks          0 free blocks        0 available              1 total files
+       0 free files     95420420 filesys id  /mnttab
+   mntfs fstype         00000000 flag              64 filename length
+
+/system/object     (objfs             ):          512 block size           512 frag size
+       0 total blocks          0 free blocks        0 available            206 total files
+2147483441 free files     95944708 filesys id  object
+   objfs fstype         00000000 flag             256 filename length
+
+/etc/svc/volatile  (swap              ):         8192 block size          8192 frag size
+ 5741920 total blocks    5741248 free blocks  5741248 available       11853235 total files
+11851887 free files     95682567 filesys id  /etc/svc/volatile
+   tmpfs fstype       0x00000004 flag             255 filename length
+
+/platform/sun4v/lib/libc_psr.so.1(/platform/sun4v/lib/libc_psr/libc_psr_hwcap3.so.1):   131072 block size           512 frag size
+138796179 total blocks  126420075 free blocks 126420075 available       126638660 total files
+126420075 free files     67174402 filesys id
+     zfs fstype       0x00000004 flag             255 filename length
+
+/platform/sun4v/lib/sparcv9/libc_psr.so.1(/platform/sun4v/lib/sparcv9/libc_psr/libc_psr_hwcap3.so.1):   131072 block size           512 frag size
+138796179 total blocks  126420075 free blocks 126420075 available       126638660 total files
+126420075 free files     67174402 filesys id
+     zfs fstype       0x00000004 flag             255 filename length
+
+/dev/fd            (fd                ):         1024 block size          1024 frag size
+       0 total blocks          0 free blocks        0 available            127 total files
+       0 free files     97779715 filesys id  /dev/fd
+      fd fstype         00000000 flag              10 filename length
+
+/tmp               (swap              ):         8192 block size          8192 frag size
+ 5741328 total blocks    5741248 free blocks  5741248 available       11853235 total files
+11851887 free files     95682571 filesys id  /tmp
+   tmpfs fstype       0x00000004 flag             255 filename length
+
+/var/run           (swap              ):         8192 block size          8192 frag size
+ 5741360 total blocks    5741248 free blocks  5741248 available       11853235 total files
+11851887 free files     95682572 filesys id  /var/run
+   tmpfs fstype       0x00000004 flag             255 filename length
+
+/mnt               (js-server:/Migration):       8192 block size           512 frag size
+195106485 total blocks   23762602 free blocks 23762602 available       23803979 total files
+23762602 free files     98322755 filesys id
+     nfs fstype         00000000 flag        4294967295 filename length
+
+/rwe_mnt           (su14sl001:/rwe    ):         8192 block size           512 frag size
+ 4194262 total blocks    3382910 free blocks  3382910 available        3569509 total files
+ 3382910 free files     98322978 filesys id
+     nfs fstype         00000000 flag        4294967295 filename length
+
+[su11sb304:PMOPP]df -h
+Filesystem             size   used  avail capacity  Mounted on
+/                      102G   5.6G    96G     6%    /
+/UC4                   250M    11M   239M     5%    /UC4
+/dev                   102G   5.6G    96G     6%    /dev
+/export/home           2.0G    86M   1.9G     5%    /export/home
+/lib                    66G   5.9G    60G     9%    /lib
+/lib/svc/method         66G   5.9G    60G     9%    /lib/svc/method
+/natpassign/apps       1.0G   6.0M  1018M     1%    /natpassign/apps
+/natpassign/archivelogs
+                       5.0G    36M   5.0G     1%    /natpassign/archivelogs
+/natpassign/opt         15G   2.8G    12G    19%    /natpassign/opt
+/natpassign/oradata     20G   8.8G    11G    44%    /natpassign/oradata
+/natpcafi/apps         1.0G    64M   960M     7%    /natpcafi/apps
+/natpmop/apps          5.0G   1.4G   3.6G    28%    /natpmop/apps
+/natpmop/archivelogs   5.0G   3.8G   1.2G    77%    /natpmop/archivelogs
+/natpmop/opt            15G   3.9G    11G    26%    /natpmop/opt
+/natpmop/oradata       100G    70G    30G    70%    /natpmop/oradata
+/opt/TAD4D             500M    83M   417M    17%    /opt/TAD4D
+/platform               66G   5.9G    60G     9%    /platform
+/rwe                   2.0G    12M   2.0G     1%    /rwe
+/sbin                   66G   5.9G    60G     9%    /sbin
+/usr                    66G   5.9G    60G     9%    /usr
+/usr/bin                66G   5.9G    60G     9%    /usr/bin
+/usr/local             8.0G  1016M   7.0G    13%    /usr/local
+proc                     0K     0K     0K     0%    /proc
+ctfs                     0K     0K     0K     0%    /system/contract
+mnttab                   0K     0K     0K     0%    /etc/mnttab
+objfs                    0K     0K     0K     0%    /system/object
+swap                   2.7G   336K   2.7G     1%    /etc/svc/volatile
+/platform/sun4v/lib/libc_psr/libc_psr_hwcap3.so.1
+                        66G   5.9G    60G     9%    /platform/sun4v/lib/libc_psr.so.1
+/platform/sun4v/lib/sparcv9/libc_psr/libc_psr_hwcap3.so.1
+                        66G   5.9G    60G     9%    /platform/sun4v/lib/sparcv9/libc_psr.so.1
+fd                       0K     0K     0K     0%    /dev/fd
+swap                   2.7G    40K   2.7G     1%    /tmp
+swap                   2.7G    56K   2.7G     1%    /var/run
+js-server:/Migration    93G    82G    11G    88%    /mnt
+su14sl001:/rwe         2.0G   396M   1.6G    20%    /rwe_mnt
+[su11sb304:PMOPP]cd /natpmop/oradata
+[su11sb304:PMOPP]
+[su11sb304:PMOPP]ls -ltr
+total 18
+drwxr-xr-x   2 oracle   dba          191 Aug  1 12:37 arc
+drwxr-xr-x   2 oracle   dba          135 Aug  4 09:42 PMOPT2
+[su11sb304:PMOPP]cd PMOPT2
+[su11sb304:PMOPP]
+[su11sb304:PMOPP]ls -ltr
+total 133177039
+-rw-r-----   1 oracle   dba      52429312 Aug  3 01:00 redo_02_01.log
+-rw-r-----   1 oracle   dba      52429312 Aug  3 01:00 redo_02_02.log
+-rw-r-----   1 oracle   dba      4718596096 Aug  3 22:00 temporary_data_01.dbf
+-rw-r-----   1 oracle   dba      52429312 Aug  4 06:00 redo_03_01.log
+-rw-r-----   1 oracle   dba      52429312 Aug  4 06:00 redo_03_02.log
+-rw-r-----   1 oracle   dba      52429312 Aug  4 09:30 redo_01_01.log
+-rw-r-----   1 oracle   dba      52429312 Aug  4 09:30 redo_01_02.log
+-rw-r-----   1 oracle   dba      32571904 Aug  4 09:32 change_tracking_01.dbf
+-rw-r-----   1 oracle   dba      14106624 Aug  4 09:33 control_02.ctl_old
+-rw-r-----   1 oracle   dba      14106624 Aug  4 09:33 control_01.ctl_old
+-rw-r-----   1 oracle   dba      14106624 Aug  4 09:33 control_03.ctl_old
+-rw-r-----   1 oracle   dba      629149696 Aug  4 10:19 MOPP_system_01.dbf
+-rw-r-----   1 oracle   dba      2097156096 Aug  4 10:19 MOPP_user_data_01.dbf
+-rw-r-----   1 oracle   dba      943722496 Aug  4 10:19 MOPP_tools_data_01.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_mop_data_01.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_mop_data_02.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_mop_data_03.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_mop_data_04.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_mop_data_05.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_mop_data_06.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_mop_data_07.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_mop_data_08.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_09.dbf
+-rw-r-----   1 oracle   dba      503320576 Aug  4 10:19 MOPP_mop_data_10.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_11.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_12.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_13.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_14.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_15.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_16.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_17.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_18.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_19.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_20.dbf
+-rw-r-----   1 oracle   dba      503320576 Aug  4 10:19 MOPP_mop_data_21.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_22.dbf
+-rw-r-----   1 oracle   dba      734007296 Aug  4 10:19 MOPP_mop_data_23.dbf
+-rw-r-----   1 oracle   dba      1258295296 Aug  4 10:19 MOPP_natnet_data_01.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_natnet_data_02.dbf
+-rw-r-----   1 oracle   dba      734007296 Aug  4 10:19 MOPP_natnet_data_03.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_natnet_data_05.dbf
+-rw-r-----   1 oracle   dba      2147487744 Aug  4 10:19 MOPP_natnet_data_06.dbf
+-rw-r-----   1 oracle   dba      1048580096 Aug  4 10:19 MOPP_natnet_index_01.dbf
+-rw-r-----   1 oracle   dba      1048580096 Aug  4 10:19 MOPP_natnet_index_02.dbf
+-rw-r-----   1 oracle   dba      1048580096 Aug  4 10:19 MOPP_natnet_index_03.dbf
+-rw-r-----   1 oracle   dba      838864896 Aug  4 10:19 MOPP_natnet_index_05.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_natnet_index_04.dbf
+-rw-r-----   1 oracle   dba      1761611776 Aug  4 10:19 MOPP_natnet_data_04.dbf
+-rw-r-----   1 oracle   dba      1159729152 Aug  4 10:19 MOPP_index_data_06.dbf
+-rw-r-----   1 oracle   dba      4294971392 Aug  4 10:19 MOPP_index_data_01.dbf
+-rw-r-----   1 oracle   dba      1363152896 Aug  4 10:19 MOPP_index_data_02.dbf
+-rw-r-----   1 oracle   dba      314576896 Aug  4 10:19 MOPP_index_data_09.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_index_data_07.dbf
+-rw-r-----   1 oracle   dba      1258295296 Aug  4 10:19 MOPP_index_data_03.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_index_data_08.dbf
+-rw-r-----   1 oracle   dba      1258295296 Aug  4 10:19 MOPP_index_data_05.dbf
+-rw-r-----   1 oracle   dba      1159729152 Aug  4 10:19 MOPP_index_data_04.dbf
+-rw-r-----   1 oracle   dba      209719296 Aug  4 10:19 MOPP_index_data_10.dbf
+-rw-r-----   1 oracle   dba      2147487744 Aug  4 10:19 MOPP_index_data_15.dbf
+-rw-r-----   1 oracle   dba      20975616 Aug  4 10:19 MOPP_remote_data_01.dbf
+-rw-r-----   1 oracle   dba      5246976 Aug  4 10:19 MOPP_remote_data_02.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_remote_data_03.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_remote_data_04.dbf
+-rw-r-----   1 oracle   dba      104861696 Aug  4 10:19 MOPP_index_data_14.dbf
+-rw-r-----   1 oracle   dba      314576896 Aug  4 10:19 MOPP_index_data_13.dbf
+-rw-r-----   1 oracle   dba      314576896 Aug  4 10:19 MOPP_index_data_12.dbf
+-rw-r-----   1 oracle   dba      209719296 Aug  4 10:19 MOPP_index_data_11.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_remote_data_05.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_natnet_index_06.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_natnet_index_07.dbf
+-rw-r-----   1 oracle   dba      419434496 Aug  4 10:19 MOPP_natnet_index_08.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_natnet_index_09.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_yelg_index_03.dbf
+-rw-r-----   1 oracle   dba      838864896 Aug  4 10:19 MOPP_natnet_index_10.dbf
+-rw-r-----   1 oracle   dba      838864896 Aug  4 10:19 MOPP_index_data_16.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_yelg_index_04.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_interlect_data01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_interlect_index01.dbf
+-rw-r-----   1 oracle   dba      419434496 Aug  4 10:19 fieldcommsdata01.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 fieldcommsindex01.dbf
+-rw-r-----   1 oracle   dba      2831159296 Aug  4 10:19 MOPP_natnet_index_11.dbf
+-rw-r-----   1 oracle   dba      52432896 Aug  4 10:19 MOPP_ers_data_01.dbf
+-rw-r-----   1 oracle   dba      2101248 Aug  4 10:19 MOPP_jiss_data_01.dbf
+-rw-r-----   1 oracle   dba      1717571584 Aug  4 10:19 snapshotlog_data01.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 bgelecdata01.dbf
+-rw-r-----   1 oracle   dba      52432896 Aug  4 10:19 MOPP_remote_index_01.dbf
+-rw-r-----   1 oracle   dba      1048580096 Aug  4 10:19 MOPP_mop_data_25
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_jiss_index_01.dbf
+-rw-r-----   1 oracle   dba      734007296 Aug  4 10:19 assign_data01.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 xdb_data01.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 bgelecindex01.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 assign_index01.dbf
+-rw-r-----   1 oracle   dba      209719296 Aug  4 10:19 wamint_index01.dbf
+-rw-r-----   1 oracle   dba      52432896 Aug  4 10:19 MOPP_ers_index_01.dbf
+-rw-r-----   1 oracle   dba      314576896 Aug  4 10:19 wamint_data01.dbf
+-rw-r-----   1 oracle   dba      83890176 Aug  4 10:19 mapindex01.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_yelg_data_01.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_mop_data_24.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_batch_data_01.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_batch_index_1.dbf
+-rw-r-----   1 oracle   dba      73404416 Aug  4 10:19 MOPP_mars_data_01.dbf
+-rw-r-----   1 oracle   dba      73404416 Aug  4 10:19 mapdata01.dbf
+-rw-r-----   1 oracle   dba      41947136 Aug  4 10:19 MOPP_mars_index_01.dbf
+-rw-r-----   1 oracle   dba      36704256 Aug  4 10:19 MOPP_remote_index_02.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_yelg_index_01.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 amethyst_data01.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 amethyst_index01.dbf
+-rw-r-----   1 oracle   dba      83890176 Aug  4 10:19 MOPP_bus_obj_data_01.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_bus_obj_index_01.dbf
+-rw-r-----   1 oracle   dba      262148096 Aug  4 10:19 MOPP_tools_data_02.dbf
+-rw-r-----   1 oracle   dba      2524975104 Aug  4 10:19 MOP_INDEX _01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_jumbo_data01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_jumbo_index01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_rgma_data01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_rgma_index01.dbf
+-rw-r-----   1 oracle   dba      52432896 Aug  4 10:19 MOPP_gas_data01.dbf
+-rw-r-----   1 oracle   dba      78647296 Aug  4 10:19 MOPP_gas_index01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_scan_data01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_scan_index01.dbf
+-rw-r-----   1 oracle   dba      26218496 Aug  4 10:19 fc_data01.dbf
+-rw-r-----   1 oracle   dba      178262016 Aug  4 10:19 MOPP_dtn_data_01.dbf
+-rw-r-----   1 oracle   dba      157290496 Aug  4 10:19 MOPP_dtn_index_01.dbf
+-rw-r-----   1 oracle   dba      26218496 Aug  4 10:19 fc_index01.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 sysaux_01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_ers2prs_data_01.dbf
+-rw-r-----   1 oracle   dba      20975616 Aug  4 10:19 MOPP_ers2prs_index_01.dbf
+-rw-r-----   1 oracle   dba      891293696 Aug  4 10:19 undotbs1_01.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_yelg_index_02.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_mts_data_01.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_mts_index_01.dbf
+-rw-r-----   1 oracle   dba      24514560 Aug  4 10:25 control_1.ctl
+-rw-r-----   1 oracle   dba      24514560 Aug  4 10:25 control_3.ctl
+-rw-r-----   1 oracle   dba      24514560 Aug  4 10:25 control_2.ctl
+[su11sb304:PMOPP]
+[su11sb304:PMOPP]pwd
+/natpmop/oradata/PMOPT2
+[su11sb304:PMOPP]sqlplus
+
+SQL*Plus: Release 10.2.0.5.0 - Production on Thu Aug 4 10:30:15 2016
+
+Copyright (c) 1982, 2010, Oracle.  All Rights Reserved.
+
+Enter user-name: / as sysdba
+
+Connected to:
+Oracle Database 10g Enterprise Edition Release 10.2.0.5.0 - 64bit Production
+With the Partitioning, Oracle Label Security, OLAP, Data Mining Scoring Engine
+and Real Application Testing options
+
+SQL> ALTER DATABASE ADD LOGFILE
+  2  GROUP 5 ('/natpmop/oradata/PMOPT2/redo_05_01.log','/natpmop/oradata/PMOPT2/redo_05_02.log') size 1024M,
+  3  GROUP 5 ('/natpmop/oradata/PMOPT2/redo_06_01.log','/natpmop/oradata/PMOPT2/redo_06_02.log') size 1024M,
+  4  GROUP 5 ('/natpmop/oradata/PMOPT2/redo_07_01.log','/natpmop/oradata/PMOPT2/redo_07_02.log') size 1024M,
+  5  GROUP 5 ('/natpmop/oradata/PMOPT2/redo_08_01.log','/natpmop/oradata/PMOPT2/redo_08_02.log') size 1024M;
+ALTER DATABASE ADD LOGFILE
+*
+ERROR at line 1:
+ORA-01505: error in adding log files
+ORA-01184: logfile group 5 already exists
+
+
+SQL> exit
+Disconnected from Oracle Database 10g Enterprise Edition Release 10.2.0.5.0 - 64bit Production
+With the Partitioning, Oracle Label Security, OLAP, Data Mining Scoring Engine
+and Real Application Testing options
+[su11sb304:PMOPP]ls -ltr
+total 137373965
+-rw-r-----   1 oracle   dba      52429312 Aug  3 01:00 redo_02_01.log
+-rw-r-----   1 oracle   dba      52429312 Aug  3 01:00 redo_02_02.log
+-rw-r-----   1 oracle   dba      4718596096 Aug  3 22:00 temporary_data_01.dbf
+-rw-r-----   1 oracle   dba      52429312 Aug  4 06:00 redo_03_01.log
+-rw-r-----   1 oracle   dba      52429312 Aug  4 06:00 redo_03_02.log
+-rw-r-----   1 oracle   dba      52429312 Aug  4 09:30 redo_01_01.log
+-rw-r-----   1 oracle   dba      52429312 Aug  4 09:30 redo_01_02.log
+-rw-r-----   1 oracle   dba      32571904 Aug  4 09:32 change_tracking_01.dbf
+-rw-r-----   1 oracle   dba      14106624 Aug  4 09:33 control_02.ctl_old
+-rw-r-----   1 oracle   dba      14106624 Aug  4 09:33 control_01.ctl_old
+-rw-r-----   1 oracle   dba      14106624 Aug  4 09:33 control_03.ctl_old
+-rw-r-----   1 oracle   dba      629149696 Aug  4 10:19 MOPP_system_01.dbf
+-rw-r-----   1 oracle   dba      2097156096 Aug  4 10:19 MOPP_user_data_01.dbf
+-rw-r-----   1 oracle   dba      943722496 Aug  4 10:19 MOPP_tools_data_01.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_mop_data_01.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_mop_data_02.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_mop_data_03.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_mop_data_04.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_mop_data_05.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_mop_data_06.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_mop_data_07.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_mop_data_08.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_09.dbf
+-rw-r-----   1 oracle   dba      503320576 Aug  4 10:19 MOPP_mop_data_10.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_11.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_12.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_13.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_14.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_15.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_16.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_17.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_18.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_19.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_20.dbf
+-rw-r-----   1 oracle   dba      503320576 Aug  4 10:19 MOPP_mop_data_21.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_22.dbf
+-rw-r-----   1 oracle   dba      734007296 Aug  4 10:19 MOPP_mop_data_23.dbf
+-rw-r-----   1 oracle   dba      1258295296 Aug  4 10:19 MOPP_natnet_data_01.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_natnet_data_02.dbf
+-rw-r-----   1 oracle   dba      734007296 Aug  4 10:19 MOPP_natnet_data_03.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_natnet_data_05.dbf
+-rw-r-----   1 oracle   dba      2147487744 Aug  4 10:19 MOPP_natnet_data_06.dbf
+-rw-r-----   1 oracle   dba      1048580096 Aug  4 10:19 MOPP_natnet_index_01.dbf
+-rw-r-----   1 oracle   dba      1048580096 Aug  4 10:19 MOPP_natnet_index_02.dbf
+-rw-r-----   1 oracle   dba      1048580096 Aug  4 10:19 MOPP_natnet_index_03.dbf
+-rw-r-----   1 oracle   dba      838864896 Aug  4 10:19 MOPP_natnet_index_05.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_natnet_index_04.dbf
+-rw-r-----   1 oracle   dba      1761611776 Aug  4 10:19 MOPP_natnet_data_04.dbf
+-rw-r-----   1 oracle   dba      1159729152 Aug  4 10:19 MOPP_index_data_06.dbf
+-rw-r-----   1 oracle   dba      4294971392 Aug  4 10:19 MOPP_index_data_01.dbf
+-rw-r-----   1 oracle   dba      1363152896 Aug  4 10:19 MOPP_index_data_02.dbf
+-rw-r-----   1 oracle   dba      314576896 Aug  4 10:19 MOPP_index_data_09.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_index_data_07.dbf
+-rw-r-----   1 oracle   dba      1258295296 Aug  4 10:19 MOPP_index_data_03.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_index_data_08.dbf
+-rw-r-----   1 oracle   dba      1258295296 Aug  4 10:19 MOPP_index_data_05.dbf
+-rw-r-----   1 oracle   dba      1159729152 Aug  4 10:19 MOPP_index_data_04.dbf
+-rw-r-----   1 oracle   dba      209719296 Aug  4 10:19 MOPP_index_data_10.dbf
+-rw-r-----   1 oracle   dba      2147487744 Aug  4 10:19 MOPP_index_data_15.dbf
+-rw-r-----   1 oracle   dba      20975616 Aug  4 10:19 MOPP_remote_data_01.dbf
+-rw-r-----   1 oracle   dba      5246976 Aug  4 10:19 MOPP_remote_data_02.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_remote_data_03.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_remote_data_04.dbf
+-rw-r-----   1 oracle   dba      104861696 Aug  4 10:19 MOPP_index_data_14.dbf
+-rw-r-----   1 oracle   dba      314576896 Aug  4 10:19 MOPP_index_data_13.dbf
+-rw-r-----   1 oracle   dba      314576896 Aug  4 10:19 MOPP_index_data_12.dbf
+-rw-r-----   1 oracle   dba      209719296 Aug  4 10:19 MOPP_index_data_11.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_remote_data_05.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_natnet_index_06.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_natnet_index_07.dbf
+-rw-r-----   1 oracle   dba      419434496 Aug  4 10:19 MOPP_natnet_index_08.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_natnet_index_09.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_yelg_index_03.dbf
+-rw-r-----   1 oracle   dba      838864896 Aug  4 10:19 MOPP_natnet_index_10.dbf
+-rw-r-----   1 oracle   dba      838864896 Aug  4 10:19 MOPP_index_data_16.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_yelg_index_04.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_interlect_data01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_interlect_index01.dbf
+-rw-r-----   1 oracle   dba      419434496 Aug  4 10:19 fieldcommsdata01.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 fieldcommsindex01.dbf
+-rw-r-----   1 oracle   dba      2831159296 Aug  4 10:19 MOPP_natnet_index_11.dbf
+-rw-r-----   1 oracle   dba      52432896 Aug  4 10:19 MOPP_ers_data_01.dbf
+-rw-r-----   1 oracle   dba      2101248 Aug  4 10:19 MOPP_jiss_data_01.dbf
+-rw-r-----   1 oracle   dba      1717571584 Aug  4 10:19 snapshotlog_data01.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 bgelecdata01.dbf
+-rw-r-----   1 oracle   dba      52432896 Aug  4 10:19 MOPP_remote_index_01.dbf
+-rw-r-----   1 oracle   dba      1048580096 Aug  4 10:19 MOPP_mop_data_25
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_jiss_index_01.dbf
+-rw-r-----   1 oracle   dba      734007296 Aug  4 10:19 assign_data01.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 xdb_data01.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 bgelecindex01.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 assign_index01.dbf
+-rw-r-----   1 oracle   dba      209719296 Aug  4 10:19 wamint_index01.dbf
+-rw-r-----   1 oracle   dba      52432896 Aug  4 10:19 MOPP_ers_index_01.dbf
+-rw-r-----   1 oracle   dba      314576896 Aug  4 10:19 wamint_data01.dbf
+-rw-r-----   1 oracle   dba      83890176 Aug  4 10:19 mapindex01.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_yelg_data_01.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_mop_data_24.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_batch_data_01.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_batch_index_1.dbf
+-rw-r-----   1 oracle   dba      73404416 Aug  4 10:19 MOPP_mars_data_01.dbf
+-rw-r-----   1 oracle   dba      73404416 Aug  4 10:19 mapdata01.dbf
+-rw-r-----   1 oracle   dba      41947136 Aug  4 10:19 MOPP_mars_index_01.dbf
+-rw-r-----   1 oracle   dba      36704256 Aug  4 10:19 MOPP_remote_index_02.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_yelg_index_01.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 amethyst_data01.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 amethyst_index01.dbf
+-rw-r-----   1 oracle   dba      83890176 Aug  4 10:19 MOPP_bus_obj_data_01.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_bus_obj_index_01.dbf
+-rw-r-----   1 oracle   dba      262148096 Aug  4 10:19 MOPP_tools_data_02.dbf
+-rw-r-----   1 oracle   dba      2524975104 Aug  4 10:19 MOP_INDEX _01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_jumbo_data01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_jumbo_index01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_rgma_data01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_rgma_index01.dbf
+-rw-r-----   1 oracle   dba      52432896 Aug  4 10:19 MOPP_gas_data01.dbf
+-rw-r-----   1 oracle   dba      78647296 Aug  4 10:19 MOPP_gas_index01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_scan_data01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_scan_index01.dbf
+-rw-r-----   1 oracle   dba      26218496 Aug  4 10:19 fc_data01.dbf
+-rw-r-----   1 oracle   dba      178262016 Aug  4 10:19 MOPP_dtn_data_01.dbf
+-rw-r-----   1 oracle   dba      157290496 Aug  4 10:19 MOPP_dtn_index_01.dbf
+-rw-r-----   1 oracle   dba      26218496 Aug  4 10:19 fc_index01.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 sysaux_01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_ers2prs_data_01.dbf
+-rw-r-----   1 oracle   dba      20975616 Aug  4 10:19 MOPP_ers2prs_index_01.dbf
+-rw-r-----   1 oracle   dba      891293696 Aug  4 10:19 undotbs1_01.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_yelg_index_02.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_mts_data_01.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_mts_index_01.dbf
+-rw-r-----   1 oracle   dba      1073742336 Aug  4 10:30 redo_05_01.log
+-rw-r-----   1 oracle   dba      1073742336 Aug  4 10:30 redo_05_02.log
+-rw-r-----   1 oracle   dba      24514560 Aug  4 10:31 control_3.ctl
+-rw-r-----   1 oracle   dba      24514560 Aug  4 10:31 control_1.ctl
+-rw-r-----   1 oracle   dba      24514560 Aug  4 10:31 control_2.ctl
+[su11sb304:PMOPP]sqlplus
+
+SQL*Plus: Release 10.2.0.5.0 - Production on Thu Aug 4 10:31:57 2016
+
+Copyright (c) 1982, 2010, Oracle.  All Rights Reserved.
+
+Enter user-name: / as sysdba
+
+Connected to:
+Oracle Database 10g Enterprise Edition Release 10.2.0.5.0 - 64bit Production
+With the Partitioning, Oracle Label Security, OLAP, Data Mining Scoring Engine
+and Real Application Testing options
+
+SQL> ALTER DATABASE ADD LOGFILE
+  2  GROUP 6 ('/natpmop/oradata/PMOPT2/redo_06_01.log','/natpmop/oradata/PMOPT2/redo_06_02.log') size 1024M,
+  3  GROUP 7 ('/natpmop/oradata/PMOPT2/redo_07_01.log','/natpmop/oradata/PMOPT2/redo_07_02.log') size 1024M,
+  4  GROUP 8 ('/natpmop/oradata/PMOPT2/redo_08_01.log','/natpmop/oradata/PMOPT2/redo_08_02.log') size 1024M;
+
+Database altered.
+
+SQL> alter database open resetlogs;
+alter database open resetlogs
+*
+ERROR at line 1:
+ORA-00344: unable to re-create online log
+'/natpmop/oradata/PMOPP/MOPP_redo_1_1.log'
+ORA-27040: file create error, unable to create file
+SVR4 Error: 2: No such file or directory
+
+
+SQL> alter system switch logfile;
+alter system switch logfile
+*
+ERROR at line 1:
+ORA-01109: database not open
+
+
+SQL> exit
+Disconnected from Oracle Database 10g Enterprise Edition Release 10.2.0.5.0 - 64bit Production
+With the Partitioning, Oracle Label Security, OLAP, Data Mining Scoring Engine
+and Real Application Testing options
+[su11sb304:PMOPP]cd $ORACLE_HOME/dbs
+[su11sb304:PMOPP]ls -ltr
+total 1109191
+-rw-r-----   1 oracle   dba         8385 Sep 11  1998 init.ora
+-rw-r--r--   1 oracle   dba        12920 May  3  2001 initdw.ora
+-rw-r--r--   1 oracle   dba         1884 Jun 11  2012 initPMOPT2.ora_bkp
+-rw-rw----   1 oracle   dba           24 Jun 11  2012 lkPMOPT2
+-rw-------   1 oracle   dba      29405509 May 23  2015 core
+-rw-r-----   1 oracle   dba         4608 Jul 27 22:31 spfilePMOPT2.ora_28072016
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:44 c-2114484738-20160801-01
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-02
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-03
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-04
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-05
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-06
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-07
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-08
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-09
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-0a
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-0b
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-0c
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-0d
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-0e
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-0f
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-10
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-11
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-12
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-13
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-14
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-15
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-16
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-17
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:47 c-2114484738-20160801-18
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:47 c-2114484738-20160801-19
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:47 c-2114484738-20160801-1a
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:47 c-2114484738-20160801-1b
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:47 c-2114484738-20160801-1c
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:47 c-2114484738-20160801-1d
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:47 c-2114484738-20160801-1e
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:47 c-2114484738-20160801-1f
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:47 c-2114484738-20160801-20
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:47 c-2114484738-20160801-21
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:47 c-2114484738-20160801-22
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:47 c-2114484738-20160801-23
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:47 c-2114484738-20160801-24
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:53 c-2114484738-20160801-25
+-rw-r-----   1 oracle   dba         3584 Aug  1 15:03 orapwPMOPT2
+-rw-r-----   1 oracle   dba      14106624 Aug  1 20:00 snapcf_PMOPT2.f
+-rw-r--r--   1 oracle   dba         1883 Aug  2 12:17 initPMOPT2.ora
+-rw-r-----   1 oracle   dba         5614 Aug  2 12:24 alert_PMOPT2.log
+-rw-r--r--   1 oracle   dba         1581 Aug  3 16:43 initPASSP.ora
+-rw-r--r--   1 oracle   dba         1911 Aug  4 09:14 initPMOPP.ora
+-rw-rw----   1 oracle   dba           24 Aug  4 09:20 lkPMOPP
+-rw-rw----   1 oracle   dba         1544 Aug  4 09:33 hc_PMOPT2.dat
+-rw-r--r--   1 oracle   dba         5018 Aug  4 10:13 tdpoerror.log
+-rw-rw----   1 oracle   dba         1544 Aug  4 10:19 hc_PMOPP.dat
+[su11sb304:PMOPP]cat initPMOPP.ora
+PMOPP.__db_cache_size=1124073472
+PMOPP.__java_pool_size=16777216
+PMOPP.__large_pool_size=50331648
+PMOPP.__shared_pool_size=905969664
+PMOPP.__streams_pool_size=16777216
+*.archive_lag_target=1200
+*.audit_file_dest='/natpmop/opt/oracle/admin/PMOPT2/adump'
+*.background_dump_dest='/natpmop/opt/oracle/admin/PMOPT2/bdump'
+*.backup_tape_io_slaves=TRUE
+*.compatible='10.2.0.5.0'
+*.control_file_record_keep_time=35
+*.control_files='/natpmop/oradata/PMOPT2/control_1.ctl','/natpmop/oradata/PMOPT2/control_2.ctl','/natpmop/oradata/PMOPT2/control_3.ctl'
+*.core_dump_dest='/natpmop/opt/oracle/admin/PMOPT2/cdump'
+*.db_block_size=4096
+*.db_domain=''
+*.db_file_multiblock_read_count=32
+*.db_files=256
+*.db_name='PMOPP'
+*.job_queue_processes=10
+*.log_archive_dest_1='LOCATION=/natpmop/archivelogs/'
+*.log_archive_format='PMOPP_%S_%T_%r.arc'
+*.max_dump_file_size='10240'
+*.open_cursors=550
+*.pga_aggregate_target=250M
+*.processes=550
+*.remote_login_passwordfile='exclusive'
+*.remote_os_authent=TRUE
+*.sessions=600
+*.sga_target=2147483648
+*.timed_statistics=TRUE
+*.undo_management='auto'
+*.undo_tablespace='UNDOTBS1'
+*.user_dump_dest='/natpmop/opt/oracle/admin/PMOPT2/udump'
+*.utl_file_dir='/natpmop/apps/home/pmopp/DTNFiles/batch/send','/natpmop/apps/home/pmopp/DTNFiles/ecoes_extract','/natpmop/apps/home/pmopp/DTNFiles/from_mop','/natpmop/apps/home/pmopp/DTNFiles/received_flows','/natpmop/apps/home/pmopp/DTNFiles/rejected','/natpmop/apps/home/pmopp/DTNFiles/to_mop','/natpmop/apps/home/pmopp/DTNFiles/wmis_jobs','/natpmop/apps/home/pmopp/reports/tmp','/natpmop/apps/home/rsdinter/rsdinterface/Output','/natpmop/apps/home/rsdinter/rsdinterface/OutputStage','/tmp','/users/datamign/data-fix/daily','/natpmop/apps/home/pmopp/ImportAmethystAssets/in/','/natpmop/apps/home/pmopp/ImportAmethystAssets/amethystErrors/','/natpmop/apps/home/pmopp/ImportAmethystAssets/archive/','/natpmop/apps/home/pmopp/ImportAmethystAssets/logs/'
+[su11sb304:PMOPP]ls -ltr
+total 1109191
+-rw-r-----   1 oracle   dba         8385 Sep 11  1998 init.ora
+-rw-r--r--   1 oracle   dba        12920 May  3  2001 initdw.ora
+-rw-r--r--   1 oracle   dba         1884 Jun 11  2012 initPMOPT2.ora_bkp
+-rw-rw----   1 oracle   dba           24 Jun 11  2012 lkPMOPT2
+-rw-------   1 oracle   dba      29405509 May 23  2015 core
+-rw-r-----   1 oracle   dba         4608 Jul 27 22:31 spfilePMOPT2.ora_28072016
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:44 c-2114484738-20160801-01
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-02
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-03
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-04
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-05
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-06
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-07
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-08
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-09
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-0a
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-0b
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-0c
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-0d
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-0e
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-0f
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-10
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-11
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-12
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-13
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-14
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-15
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-16
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:46 c-2114484738-20160801-17
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:47 c-2114484738-20160801-18
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:47 c-2114484738-20160801-19
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:47 c-2114484738-20160801-1a
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:47 c-2114484738-20160801-1b
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:47 c-2114484738-20160801-1c
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:47 c-2114484738-20160801-1d
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:47 c-2114484738-20160801-1e
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:47 c-2114484738-20160801-1f
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:47 c-2114484738-20160801-20
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:47 c-2114484738-20160801-21
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:47 c-2114484738-20160801-22
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:47 c-2114484738-20160801-23
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:47 c-2114484738-20160801-24
+-rw-r-----   1 oracle   dba      14155776 Aug  1 13:53 c-2114484738-20160801-25
+-rw-r-----   1 oracle   dba         3584 Aug  1 15:03 orapwPMOPT2
+-rw-r-----   1 oracle   dba      14106624 Aug  1 20:00 snapcf_PMOPT2.f
+-rw-r--r--   1 oracle   dba         1883 Aug  2 12:17 initPMOPT2.ora
+-rw-r-----   1 oracle   dba         5614 Aug  2 12:24 alert_PMOPT2.log
+-rw-r--r--   1 oracle   dba         1581 Aug  3 16:43 initPASSP.ora
+-rw-r--r--   1 oracle   dba         1911 Aug  4 09:14 initPMOPP.ora
+-rw-rw----   1 oracle   dba           24 Aug  4 09:20 lkPMOPP
+-rw-rw----   1 oracle   dba         1544 Aug  4 09:33 hc_PMOPT2.dat
+-rw-r--r--   1 oracle   dba         5018 Aug  4 10:13 tdpoerror.log
+-rw-rw----   1 oracle   dba         1544 Aug  4 10:19 hc_PMOPP.dat
+[su11sb304:PMOPP]cat initPMOPP.ora
+PMOPP.__db_cache_size=1124073472
+PMOPP.__java_pool_size=16777216
+PMOPP.__large_pool_size=50331648
+PMOPP.__shared_pool_size=905969664
+PMOPP.__streams_pool_size=16777216
+*.archive_lag_target=1200
+*.audit_file_dest='/natpmop/opt/oracle/admin/PMOPT2/adump'
+*.background_dump_dest='/natpmop/opt/oracle/admin/PMOPT2/bdump'
+*.backup_tape_io_slaves=TRUE
+*.compatible='10.2.0.5.0'
+*.control_file_record_keep_time=35
+*.control_files='/natpmop/oradata/PMOPT2/control_1.ctl','/natpmop/oradata/PMOPT2/control_2.ctl','/natpmop/oradata/PMOPT2/control_3.ctl'
+*.core_dump_dest='/natpmop/opt/oracle/admin/PMOPT2/cdump'
+*.db_block_size=4096
+*.db_domain=''
+*.db_file_multiblock_read_count=32
+*.db_files=256
+*.db_name='PMOPP'
+*.job_queue_processes=10
+*.log_archive_dest_1='LOCATION=/natpmop/archivelogs/'
+*.log_archive_format='PMOPP_%S_%T_%r.arc'
+*.max_dump_file_size='10240'
+*.open_cursors=550
+*.pga_aggregate_target=250M
+*.processes=550
+*.remote_login_passwordfile='exclusive'
+*.remote_os_authent=TRUE
+*.sessions=600
+*.sga_target=2147483648
+*.timed_statistics=TRUE
+*.undo_management='auto'
+*.undo_tablespace='UNDOTBS1'
+*.user_dump_dest='/natpmop/opt/oracle/admin/PMOPT2/udump'
+*.utl_file_dir='/natpmop/apps/home/pmopp/DTNFiles/batch/send','/natpmop/apps/home/pmopp/DTNFiles/ecoes_extract','/natpmop/apps/home/pmopp/DTNFiles/from_mop','/natpmop/apps/home/pmopp/DTNFiles/received_flows','/natpmop/apps/home/pmopp/DTNFiles/rejected','/natpmop/apps/home/pmopp/DTNFiles/to_mop','/natpmop/apps/home/pmopp/DTNFiles/wmis_jobs','/natpmop/apps/home/pmopp/reports/tmp','/natpmop/apps/home/rsdinter/rsdinterface/Output','/natpmop/apps/home/rsdinter/rsdinterface/OutputStage','/tmp','/users/datamign/data-fix/daily','/natpmop/apps/home/pmopp/ImportAmethystAssets/in/','/natpmop/apps/home/pmopp/ImportAmethystAssets/amethystErrors/','/natpmop/apps/home/pmopp/ImportAmethystAssets/archive/','/natpmop/apps/home/pmopp/ImportAmethystAssets/logs/'
+[su11sb304:PMOPP]sqlplus
+
+SQL*Plus: Release 10.2.0.5.0 - Production on Thu Aug 4 10:35:40 2016
+
+Copyright (c) 1982, 2010, Oracle.  All Rights Reserved.
+
+Enter user-name: / as sysdba
+
+Connected to:
+Oracle Database 10g Enterprise Edition Release 10.2.0.5.0 - 64bit Production
+With the Partitioning, Oracle Label Security, OLAP, Data Mining Scoring Engine
+and Real Application Testing options
+
+SQL> alter database drop logfile Group 1;
+alter database drop logfile Group 1
+*
+ERROR at line 1:
+ORA-01623: log 1 is current log for instance PMOPP (thread 1) - cannot drop
+ORA-00312: online log 1 thread 1: '/natpmop/oradata/PMOPP/MOPP_redo_1_1.log'
+ORA-00312: online log 1 thread 1: '/natpmop/oradata/PMOPP/MOPP_redo_1_2.log'
+
+
+SQL> alter database drop logfile Group 2;
+alter database drop logfile Group 2
+*
+ERROR at line 1:
+ORA-01624: log 2 needed for crash recovery of instance PMOPP (thread 1)
+ORA-00312: online log 2 thread 1: '/natpmop/oradata/PMOPP/MOPP_redo_2_1.log'
+ORA-00312: online log 2 thread 1: '/natpmop/oradata/PMOPP/MOPP_redo_2_2.log'
+
+
+SQL> alter database open resetlogs;
+alter database open resetlogs
+*
+ERROR at line 1:
+ORA-00344: unable to re-create online log
+'/natpmop/oradata/PMOPP/MOPP_redo_1_1.log'
+ORA-27040: file create error, unable to create file
+SVR4 Error: 2: No such file or directory
+
+
+SQL> exit
+Disconnected from Oracle Database 10g Enterprise Edition Release 10.2.0.5.0 - 64bit Production
+With the Partitioning, Oracle Label Security, OLAP, Data Mining Scoring Engine
+and Real Application Testing options
+[su11sb304:PMOPP]df -h
+Filesystem             size   used  avail capacity  Mounted on
+/                       94G   5.6G    88G     7%    /
+/UC4                   250M    11M   239M     5%    /UC4
+/dev                    94G   5.6G    88G     7%    /dev
+/export/home           2.0G    86M   1.9G     5%    /export/home
+/lib                    66G   5.9G    60G     9%    /lib
+/lib/svc/method         66G   5.9G    60G     9%    /lib/svc/method
+/natpassign/apps       1.0G   6.0M  1018M     1%    /natpassign/apps
+/natpassign/archivelogs
+                       5.0G    36M   5.0G     1%    /natpassign/archivelogs
+/natpassign/opt         15G   2.8G    12G    19%    /natpassign/opt
+/natpassign/oradata     20G   8.8G    11G    44%    /natpassign/oradata
+/natpcafi/apps         1.0G    64M   960M     7%    /natpcafi/apps
+/natpmop/apps          5.0G   1.4G   3.6G    28%    /natpmop/apps
+/natpmop/archivelogs   5.0G   3.8G   1.2G    77%    /natpmop/archivelogs
+/natpmop/opt            15G   3.9G    11G    26%    /natpmop/opt
+/natpmop/oradata       100G    78G    22G    78%    /natpmop/oradata
+/opt/TAD4D             500M    83M   417M    17%    /opt/TAD4D
+/platform               66G   5.9G    60G     9%    /platform
+/rwe                   2.0G    12M   2.0G     1%    /rwe
+/sbin                   66G   5.9G    60G     9%    /sbin
+/usr                    66G   5.9G    60G     9%    /usr
+/usr/bin                66G   5.9G    60G     9%    /usr/bin
+/usr/local             8.0G  1016M   7.0G    13%    /usr/local
+proc                     0K     0K     0K     0%    /proc
+ctfs                     0K     0K     0K     0%    /system/contract
+mnttab                   0K     0K     0K     0%    /etc/mnttab
+objfs                    0K     0K     0K     0%    /system/object
+swap                   2.4G   336K   2.4G     1%    /etc/svc/volatile
+/platform/sun4v/lib/libc_psr/libc_psr_hwcap3.so.1
+                        66G   5.9G    60G     9%    /platform/sun4v/lib/libc_psr.so.1
+/platform/sun4v/lib/sparcv9/libc_psr/libc_psr_hwcap3.so.1
+                        66G   5.9G    60G     9%    /platform/sun4v/lib/sparcv9/libc_psr.so.1
+fd                       0K     0K     0K     0%    /dev/fd
+swap                   2.4G    40K   2.4G     1%    /tmp
+swap                   2.4G    56K   2.4G     1%    /var/run
+js-server:/Migration    93G    82G    11G    88%    /mnt
+su14sl001:/rwe         2.0G   396M   1.6G    20%    /rwe_mnt
+[su11sb304:PMOPP]cd /natpmop/oradata
+[su11sb304:PMOPP]ls -ltr
+total 18
+drwxr-xr-x   2 oracle   dba          191 Aug  1 12:37 arc
+drwxr-xr-x   2 oracle   dba          143 Aug  4 10:32 PMOPT2
+[su11sb304:PMOPP]cd PMOPT2
+[su11sb304:PMOPP]ls -ltr
+total 149964969
+-rw-r-----   1 oracle   dba      52429312 Aug  3 01:00 redo_02_01.log
+-rw-r-----   1 oracle   dba      52429312 Aug  3 01:00 redo_02_02.log
+-rw-r-----   1 oracle   dba      4718596096 Aug  3 22:00 temporary_data_01.dbf
+-rw-r-----   1 oracle   dba      52429312 Aug  4 06:00 redo_03_01.log
+-rw-r-----   1 oracle   dba      52429312 Aug  4 06:00 redo_03_02.log
+-rw-r-----   1 oracle   dba      52429312 Aug  4 09:30 redo_01_01.log
+-rw-r-----   1 oracle   dba      52429312 Aug  4 09:30 redo_01_02.log
+-rw-r-----   1 oracle   dba      32571904 Aug  4 09:32 change_tracking_01.dbf
+-rw-r-----   1 oracle   dba      14106624 Aug  4 09:33 control_02.ctl_old
+-rw-r-----   1 oracle   dba      14106624 Aug  4 09:33 control_01.ctl_old
+-rw-r-----   1 oracle   dba      14106624 Aug  4 09:33 control_03.ctl_old
+-rw-r-----   1 oracle   dba      629149696 Aug  4 10:19 MOPP_system_01.dbf
+-rw-r-----   1 oracle   dba      2097156096 Aug  4 10:19 MOPP_user_data_01.dbf
+-rw-r-----   1 oracle   dba      943722496 Aug  4 10:19 MOPP_tools_data_01.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_mop_data_01.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_mop_data_02.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_mop_data_03.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_mop_data_04.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_mop_data_05.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_mop_data_06.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_mop_data_07.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_mop_data_08.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_09.dbf
+-rw-r-----   1 oracle   dba      503320576 Aug  4 10:19 MOPP_mop_data_10.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_11.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_12.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_13.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_14.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_15.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_16.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_17.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_18.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_19.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_20.dbf
+-rw-r-----   1 oracle   dba      503320576 Aug  4 10:19 MOPP_mop_data_21.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_22.dbf
+-rw-r-----   1 oracle   dba      734007296 Aug  4 10:19 MOPP_mop_data_23.dbf
+-rw-r-----   1 oracle   dba      1258295296 Aug  4 10:19 MOPP_natnet_data_01.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_natnet_data_02.dbf
+-rw-r-----   1 oracle   dba      734007296 Aug  4 10:19 MOPP_natnet_data_03.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_natnet_data_05.dbf
+-rw-r-----   1 oracle   dba      2147487744 Aug  4 10:19 MOPP_natnet_data_06.dbf
+-rw-r-----   1 oracle   dba      1048580096 Aug  4 10:19 MOPP_natnet_index_01.dbf
+-rw-r-----   1 oracle   dba      1048580096 Aug  4 10:19 MOPP_natnet_index_02.dbf
+-rw-r-----   1 oracle   dba      1048580096 Aug  4 10:19 MOPP_natnet_index_03.dbf
+-rw-r-----   1 oracle   dba      838864896 Aug  4 10:19 MOPP_natnet_index_05.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_natnet_index_04.dbf
+-rw-r-----   1 oracle   dba      1761611776 Aug  4 10:19 MOPP_natnet_data_04.dbf
+-rw-r-----   1 oracle   dba      1159729152 Aug  4 10:19 MOPP_index_data_06.dbf
+-rw-r-----   1 oracle   dba      4294971392 Aug  4 10:19 MOPP_index_data_01.dbf
+-rw-r-----   1 oracle   dba      1363152896 Aug  4 10:19 MOPP_index_data_02.dbf
+-rw-r-----   1 oracle   dba      314576896 Aug  4 10:19 MOPP_index_data_09.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_index_data_07.dbf
+-rw-r-----   1 oracle   dba      1258295296 Aug  4 10:19 MOPP_index_data_03.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_index_data_08.dbf
+-rw-r-----   1 oracle   dba      1258295296 Aug  4 10:19 MOPP_index_data_05.dbf
+-rw-r-----   1 oracle   dba      1159729152 Aug  4 10:19 MOPP_index_data_04.dbf
+-rw-r-----   1 oracle   dba      209719296 Aug  4 10:19 MOPP_index_data_10.dbf
+-rw-r-----   1 oracle   dba      2147487744 Aug  4 10:19 MOPP_index_data_15.dbf
+-rw-r-----   1 oracle   dba      20975616 Aug  4 10:19 MOPP_remote_data_01.dbf
+-rw-r-----   1 oracle   dba      5246976 Aug  4 10:19 MOPP_remote_data_02.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_remote_data_03.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_remote_data_04.dbf
+-rw-r-----   1 oracle   dba      104861696 Aug  4 10:19 MOPP_index_data_14.dbf
+-rw-r-----   1 oracle   dba      314576896 Aug  4 10:19 MOPP_index_data_13.dbf
+-rw-r-----   1 oracle   dba      314576896 Aug  4 10:19 MOPP_index_data_12.dbf
+-rw-r-----   1 oracle   dba      209719296 Aug  4 10:19 MOPP_index_data_11.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_remote_data_05.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_natnet_index_06.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_natnet_index_07.dbf
+-rw-r-----   1 oracle   dba      419434496 Aug  4 10:19 MOPP_natnet_index_08.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_natnet_index_09.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_yelg_index_03.dbf
+-rw-r-----   1 oracle   dba      838864896 Aug  4 10:19 MOPP_natnet_index_10.dbf
+-rw-r-----   1 oracle   dba      838864896 Aug  4 10:19 MOPP_index_data_16.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_yelg_index_04.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_interlect_data01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_interlect_index01.dbf
+-rw-r-----   1 oracle   dba      419434496 Aug  4 10:19 fieldcommsdata01.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 fieldcommsindex01.dbf
+-rw-r-----   1 oracle   dba      2831159296 Aug  4 10:19 MOPP_natnet_index_11.dbf
+-rw-r-----   1 oracle   dba      52432896 Aug  4 10:19 MOPP_ers_data_01.dbf
+-rw-r-----   1 oracle   dba      2101248 Aug  4 10:19 MOPP_jiss_data_01.dbf
+-rw-r-----   1 oracle   dba      1717571584 Aug  4 10:19 snapshotlog_data01.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 bgelecdata01.dbf
+-rw-r-----   1 oracle   dba      52432896 Aug  4 10:19 MOPP_remote_index_01.dbf
+-rw-r-----   1 oracle   dba      1048580096 Aug  4 10:19 MOPP_mop_data_25
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_jiss_index_01.dbf
+-rw-r-----   1 oracle   dba      734007296 Aug  4 10:19 assign_data01.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 xdb_data01.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 bgelecindex01.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 assign_index01.dbf
+-rw-r-----   1 oracle   dba      209719296 Aug  4 10:19 wamint_index01.dbf
+-rw-r-----   1 oracle   dba      52432896 Aug  4 10:19 MOPP_ers_index_01.dbf
+-rw-r-----   1 oracle   dba      314576896 Aug  4 10:19 wamint_data01.dbf
+-rw-r-----   1 oracle   dba      83890176 Aug  4 10:19 mapindex01.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_yelg_data_01.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_mop_data_24.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_batch_data_01.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_batch_index_1.dbf
+-rw-r-----   1 oracle   dba      73404416 Aug  4 10:19 MOPP_mars_data_01.dbf
+-rw-r-----   1 oracle   dba      73404416 Aug  4 10:19 mapdata01.dbf
+-rw-r-----   1 oracle   dba      41947136 Aug  4 10:19 MOPP_mars_index_01.dbf
+-rw-r-----   1 oracle   dba      36704256 Aug  4 10:19 MOPP_remote_index_02.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_yelg_index_01.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 amethyst_data01.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 amethyst_index01.dbf
+-rw-r-----   1 oracle   dba      83890176 Aug  4 10:19 MOPP_bus_obj_data_01.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_bus_obj_index_01.dbf
+-rw-r-----   1 oracle   dba      262148096 Aug  4 10:19 MOPP_tools_data_02.dbf
+-rw-r-----   1 oracle   dba      2524975104 Aug  4 10:19 MOP_INDEX _01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_jumbo_data01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_jumbo_index01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_rgma_data01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_rgma_index01.dbf
+-rw-r-----   1 oracle   dba      52432896 Aug  4 10:19 MOPP_gas_data01.dbf
+-rw-r-----   1 oracle   dba      78647296 Aug  4 10:19 MOPP_gas_index01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_scan_data01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_scan_index01.dbf
+-rw-r-----   1 oracle   dba      26218496 Aug  4 10:19 fc_data01.dbf
+-rw-r-----   1 oracle   dba      178262016 Aug  4 10:19 MOPP_dtn_data_01.dbf
+-rw-r-----   1 oracle   dba      157290496 Aug  4 10:19 MOPP_dtn_index_01.dbf
+-rw-r-----   1 oracle   dba      26218496 Aug  4 10:19 fc_index01.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 sysaux_01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_ers2prs_data_01.dbf
+-rw-r-----   1 oracle   dba      20975616 Aug  4 10:19 MOPP_ers2prs_index_01.dbf
+-rw-r-----   1 oracle   dba      891293696 Aug  4 10:19 undotbs1_01.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_yelg_index_02.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_mts_data_01.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_mts_index_01.dbf
+-rw-r-----   1 oracle   dba      1073742336 Aug  4 10:30 redo_05_01.log
+-rw-r-----   1 oracle   dba      1073742336 Aug  4 10:30 redo_05_02.log
+-rw-r-----   1 oracle   dba      1073742336 Aug  4 10:32 redo_06_01.log
+-rw-r-----   1 oracle   dba      1073742336 Aug  4 10:32 redo_06_02.log
+-rw-r-----   1 oracle   dba      1073742336 Aug  4 10:32 redo_07_01.log
+-rw-r-----   1 oracle   dba      1073742336 Aug  4 10:32 redo_07_02.log
+-rw-r-----   1 oracle   dba      1073742336 Aug  4 10:32 redo_08_01.log
+-rw-r-----   1 oracle   dba      1073742336 Aug  4 10:32 redo_08_02.log
+-rw-r-----   1 oracle   dba      24514560 Aug  4 10:39 control_1.ctl
+-rw-r-----   1 oracle   dba      24514560 Aug  4 10:39 control_2.ctl
+-rw-r-----   1 oracle   dba      24514560 Aug  4 10:39 control_3.ctl
+[su11sb304:PMOPP]pwd
+/natpmop/oradata/PMOPT2
+[su11sb304:PMOPP]sqlplus
+
+SQL*Plus: Release 10.2.0.5.0 - Production on Thu Aug 4 10:40:22 2016
+
+Copyright (c) 1982, 2010, Oracle.  All Rights Reserved.
+
+Enter user-name: / as sysdba
+
+Connected to:
+Oracle Database 10g Enterprise Edition Release 10.2.0.5.0 - 64bit Production
+With the Partitioning, Oracle Label Security, OLAP, Data Mining Scoring Engine
+and Real Application Testing options
+
+SQL> select name from v$logfile;
+select name from v$logfile
+       *
+ERROR at line 1:
+ORA-00904: "NAME": invalid identifier
+
+
+SQL> desc v$logfile;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ GROUP#                                             NUMBER
+ STATUS                                             VARCHAR2(7)
+ TYPE                                               VARCHAR2(7)
+ MEMBER                                             VARCHAR2(513)
+ IS_RECOVERY_DEST_FILE                              VARCHAR2(3)
+
+SQL> select member from v$logfile;
+
+MEMBER
+--------------------------------------------------------------------------------
+/natpmop/oradata/PMOPP/MOPP_redo_4_1.log
+/natpmop/oradata/PMOPP/MOPP_redo_4_2.log
+/natpmop/oradata/PMOPP/MOPP_redo_3_1.log
+/natpmop/oradata/PMOPP/MOPP_redo_3_2.log
+/natpmop/oradata/PMOPP/MOPP_redo_2_1.log
+/natpmop/oradata/PMOPP/MOPP_redo_2_2.log
+/natpmop/oradata/PMOPP/MOPP_redo_1_1.log
+/natpmop/oradata/PMOPP/MOPP_redo_1_2.log
+/natpmop/oradata/PMOPT2/redo_05_01.log
+/natpmop/oradata/PMOPT2/redo_05_02.log
+/natpmop/oradata/PMOPT2/redo_06_01.log
+
+MEMBER
+--------------------------------------------------------------------------------
+/natpmop/oradata/PMOPT2/redo_06_02.log
+/natpmop/oradata/PMOPT2/redo_07_01.log
+/natpmop/oradata/PMOPT2/redo_07_02.log
+/natpmop/oradata/PMOPT2/redo_08_01.log
+/natpmop/oradata/PMOPT2/redo_08_02.log
+
+16 rows selected.
+
+SQL> alter database rename logfile '/natpmop/oradata/PMOPP/MOPP_redo_4_1.log' to '/natpmop/oradata/PMOPT2/MOPP_redo_4_1.log';
+alter database rename logfile '/natpmop/oradata/PMOPP/MOPP_redo_4_1.log' to '/natpmop/oradata/PMOPT2/MOPP_redo_4_1.log'
+                      *
+ERROR at line 1:
+ORA-02231: missing or invalid option to ALTER DATABASE
+
+
+SQL> alter database rename file '/natpmop/oradata/PMOPP/MOPP_redo_4_1.log' to '/natpmop/oradata/PMOPT2/MOPP_redo_4_1.log';
+
+Database altered.
+
+SQL> select member from v$logfile;
+
+MEMBER
+--------------------------------------------------------------------------------
+/natpmop/oradata/PMOPT2/MOPP_redo_4_1.log
+/natpmop/oradata/PMOPP/MOPP_redo_4_2.log
+/natpmop/oradata/PMOPP/MOPP_redo_3_1.log
+/natpmop/oradata/PMOPP/MOPP_redo_3_2.log
+/natpmop/oradata/PMOPP/MOPP_redo_2_1.log
+/natpmop/oradata/PMOPP/MOPP_redo_2_2.log
+/natpmop/oradata/PMOPP/MOPP_redo_1_1.log
+/natpmop/oradata/PMOPP/MOPP_redo_1_2.log
+/natpmop/oradata/PMOPT2/redo_05_01.log
+/natpmop/oradata/PMOPT2/redo_05_02.log
+/natpmop/oradata/PMOPT2/redo_06_01.log
+
+MEMBER
+--------------------------------------------------------------------------------
+/natpmop/oradata/PMOPT2/redo_06_02.log
+/natpmop/oradata/PMOPT2/redo_07_01.log
+/natpmop/oradata/PMOPT2/redo_07_02.log
+/natpmop/oradata/PMOPT2/redo_08_01.log
+/natpmop/oradata/PMOPT2/redo_08_02.log
+
+16 rows selected.
+
+SQL> exit
+Disconnected from Oracle Database 10g Enterprise Edition Release 10.2.0.5.0 - 64bit Production
+With the Partitioning, Oracle Label Security, OLAP, Data Mining Scoring Engine
+and Real Application Testing options
+[su11sb304:PMOPP]ls -ltr
+total 149964969
+-rw-r-----   1 oracle   dba      52429312 Aug  3 01:00 redo_02_01.log
+-rw-r-----   1 oracle   dba      52429312 Aug  3 01:00 redo_02_02.log
+-rw-r-----   1 oracle   dba      4718596096 Aug  3 22:00 temporary_data_01.dbf
+-rw-r-----   1 oracle   dba      52429312 Aug  4 06:00 redo_03_01.log
+-rw-r-----   1 oracle   dba      52429312 Aug  4 06:00 redo_03_02.log
+-rw-r-----   1 oracle   dba      52429312 Aug  4 09:30 redo_01_01.log
+-rw-r-----   1 oracle   dba      52429312 Aug  4 09:30 redo_01_02.log
+-rw-r-----   1 oracle   dba      32571904 Aug  4 09:32 change_tracking_01.dbf
+-rw-r-----   1 oracle   dba      14106624 Aug  4 09:33 control_02.ctl_old
+-rw-r-----   1 oracle   dba      14106624 Aug  4 09:33 control_01.ctl_old
+-rw-r-----   1 oracle   dba      14106624 Aug  4 09:33 control_03.ctl_old
+-rw-r-----   1 oracle   dba      629149696 Aug  4 10:19 MOPP_system_01.dbf
+-rw-r-----   1 oracle   dba      2097156096 Aug  4 10:19 MOPP_user_data_01.dbf
+-rw-r-----   1 oracle   dba      943722496 Aug  4 10:19 MOPP_tools_data_01.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_mop_data_01.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_mop_data_02.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_mop_data_03.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_mop_data_04.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_mop_data_05.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_mop_data_06.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_mop_data_07.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_mop_data_08.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_09.dbf
+-rw-r-----   1 oracle   dba      503320576 Aug  4 10:19 MOPP_mop_data_10.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_11.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_12.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_13.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_14.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_15.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_16.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_17.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_18.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_19.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_20.dbf
+-rw-r-----   1 oracle   dba      503320576 Aug  4 10:19 MOPP_mop_data_21.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_mop_data_22.dbf
+-rw-r-----   1 oracle   dba      734007296 Aug  4 10:19 MOPP_mop_data_23.dbf
+-rw-r-----   1 oracle   dba      1258295296 Aug  4 10:19 MOPP_natnet_data_01.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_natnet_data_02.dbf
+-rw-r-----   1 oracle   dba      734007296 Aug  4 10:19 MOPP_natnet_data_03.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_natnet_data_05.dbf
+-rw-r-----   1 oracle   dba      2147487744 Aug  4 10:19 MOPP_natnet_data_06.dbf
+-rw-r-----   1 oracle   dba      1048580096 Aug  4 10:19 MOPP_natnet_index_01.dbf
+-rw-r-----   1 oracle   dba      1048580096 Aug  4 10:19 MOPP_natnet_index_02.dbf
+-rw-r-----   1 oracle   dba      1048580096 Aug  4 10:19 MOPP_natnet_index_03.dbf
+-rw-r-----   1 oracle   dba      838864896 Aug  4 10:19 MOPP_natnet_index_05.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_natnet_index_04.dbf
+-rw-r-----   1 oracle   dba      1761611776 Aug  4 10:19 MOPP_natnet_data_04.dbf
+-rw-r-----   1 oracle   dba      1159729152 Aug  4 10:19 MOPP_index_data_06.dbf
+-rw-r-----   1 oracle   dba      4294971392 Aug  4 10:19 MOPP_index_data_01.dbf
+-rw-r-----   1 oracle   dba      1363152896 Aug  4 10:19 MOPP_index_data_02.dbf
+-rw-r-----   1 oracle   dba      314576896 Aug  4 10:19 MOPP_index_data_09.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_index_data_07.dbf
+-rw-r-----   1 oracle   dba      1258295296 Aug  4 10:19 MOPP_index_data_03.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_index_data_08.dbf
+-rw-r-----   1 oracle   dba      1258295296 Aug  4 10:19 MOPP_index_data_05.dbf
+-rw-r-----   1 oracle   dba      1159729152 Aug  4 10:19 MOPP_index_data_04.dbf
+-rw-r-----   1 oracle   dba      209719296 Aug  4 10:19 MOPP_index_data_10.dbf
+-rw-r-----   1 oracle   dba      2147487744 Aug  4 10:19 MOPP_index_data_15.dbf
+-rw-r-----   1 oracle   dba      20975616 Aug  4 10:19 MOPP_remote_data_01.dbf
+-rw-r-----   1 oracle   dba      5246976 Aug  4 10:19 MOPP_remote_data_02.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_remote_data_03.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_remote_data_04.dbf
+-rw-r-----   1 oracle   dba      104861696 Aug  4 10:19 MOPP_index_data_14.dbf
+-rw-r-----   1 oracle   dba      314576896 Aug  4 10:19 MOPP_index_data_13.dbf
+-rw-r-----   1 oracle   dba      314576896 Aug  4 10:19 MOPP_index_data_12.dbf
+-rw-r-----   1 oracle   dba      209719296 Aug  4 10:19 MOPP_index_data_11.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_remote_data_05.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_natnet_index_06.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_natnet_index_07.dbf
+-rw-r-----   1 oracle   dba      419434496 Aug  4 10:19 MOPP_natnet_index_08.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 MOPP_natnet_index_09.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_yelg_index_03.dbf
+-rw-r-----   1 oracle   dba      838864896 Aug  4 10:19 MOPP_natnet_index_10.dbf
+-rw-r-----   1 oracle   dba      838864896 Aug  4 10:19 MOPP_index_data_16.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_yelg_index_04.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_interlect_data01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_interlect_index01.dbf
+-rw-r-----   1 oracle   dba      419434496 Aug  4 10:19 fieldcommsdata01.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 fieldcommsindex01.dbf
+-rw-r-----   1 oracle   dba      2831159296 Aug  4 10:19 MOPP_natnet_index_11.dbf
+-rw-r-----   1 oracle   dba      52432896 Aug  4 10:19 MOPP_ers_data_01.dbf
+-rw-r-----   1 oracle   dba      2101248 Aug  4 10:19 MOPP_jiss_data_01.dbf
+-rw-r-----   1 oracle   dba      1717571584 Aug  4 10:19 snapshotlog_data01.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 bgelecdata01.dbf
+-rw-r-----   1 oracle   dba      52432896 Aug  4 10:19 MOPP_remote_index_01.dbf
+-rw-r-----   1 oracle   dba      1048580096 Aug  4 10:19 MOPP_mop_data_25
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_jiss_index_01.dbf
+-rw-r-----   1 oracle   dba      734007296 Aug  4 10:19 assign_data01.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 xdb_data01.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 bgelecindex01.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 assign_index01.dbf
+-rw-r-----   1 oracle   dba      209719296 Aug  4 10:19 wamint_index01.dbf
+-rw-r-----   1 oracle   dba      52432896 Aug  4 10:19 MOPP_ers_index_01.dbf
+-rw-r-----   1 oracle   dba      314576896 Aug  4 10:19 wamint_data01.dbf
+-rw-r-----   1 oracle   dba      83890176 Aug  4 10:19 mapindex01.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_yelg_data_01.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 MOPP_mop_data_24.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_batch_data_01.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_batch_index_1.dbf
+-rw-r-----   1 oracle   dba      73404416 Aug  4 10:19 MOPP_mars_data_01.dbf
+-rw-r-----   1 oracle   dba      73404416 Aug  4 10:19 mapdata01.dbf
+-rw-r-----   1 oracle   dba      41947136 Aug  4 10:19 MOPP_mars_index_01.dbf
+-rw-r-----   1 oracle   dba      36704256 Aug  4 10:19 MOPP_remote_index_02.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_yelg_index_01.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 amethyst_data01.dbf
+-rw-r-----   1 oracle   dba      1073745920 Aug  4 10:19 amethyst_index01.dbf
+-rw-r-----   1 oracle   dba      83890176 Aug  4 10:19 MOPP_bus_obj_data_01.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_bus_obj_index_01.dbf
+-rw-r-----   1 oracle   dba      262148096 Aug  4 10:19 MOPP_tools_data_02.dbf
+-rw-r-----   1 oracle   dba      2524975104 Aug  4 10:19 MOP_INDEX _01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_jumbo_data01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_jumbo_index01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_rgma_data01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_rgma_index01.dbf
+-rw-r-----   1 oracle   dba      52432896 Aug  4 10:19 MOPP_gas_data01.dbf
+-rw-r-----   1 oracle   dba      78647296 Aug  4 10:19 MOPP_gas_index01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_scan_data01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_scan_index01.dbf
+-rw-r-----   1 oracle   dba      26218496 Aug  4 10:19 fc_data01.dbf
+-rw-r-----   1 oracle   dba      178262016 Aug  4 10:19 MOPP_dtn_data_01.dbf
+-rw-r-----   1 oracle   dba      157290496 Aug  4 10:19 MOPP_dtn_index_01.dbf
+-rw-r-----   1 oracle   dba      26218496 Aug  4 10:19 fc_index01.dbf
+-rw-r-----   1 oracle   dba      524292096 Aug  4 10:19 sysaux_01.dbf
+-rw-r-----   1 oracle   dba      15732736 Aug  4 10:19 MOPP_ers2prs_data_01.dbf
+-rw-r-----   1 oracle   dba      20975616 Aug  4 10:19 MOPP_ers2prs_index_01.dbf
+-rw-r-----   1 oracle   dba      891293696 Aug  4 10:19 undotbs1_01.dbf
+-rw-r-----   1 oracle   dba      1052672 Aug  4 10:19 MOPP_yelg_index_02.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_mts_data_01.dbf
+-rw-r-----   1 oracle   dba      10489856 Aug  4 10:19 MOPP_mts_index_01.dbf
+-rw-r-----   1 oracle   dba      1073742336 Aug  4 10:30 redo_05_01.log
+-rw-r-----   1 oracle   dba      1073742336 Aug  4 10:30 redo_05_02.log
+-rw-r-----   1 oracle   dba      1073742336 Aug  4 10:32 redo_06_01.log
+-rw-r-----   1 oracle   dba      1073742336 Aug  4 10:32 redo_06_02.log
+-rw-r-----   1 oracle   dba      1073742336 Aug  4 10:32 redo_07_01.log
+-rw-r-----   1 oracle   dba      1073742336 Aug  4 10:32 redo_07_02.log
+-rw-r-----   1 oracle   dba      1073742336 Aug  4 10:32 redo_08_01.log
+-rw-r-----   1 oracle   dba      1073742336 Aug  4 10:32 redo_08_02.log
+-rw-r-----   1 oracle   dba      24514560 Aug  4 10:45 control_1.ctl
+-rw-r-----   1 oracle   dba      24514560 Aug  4 10:45 control_2.ctl
+-rw-r-----   1 oracle   dba      24514560 Aug  4 10:45 control_3.ctl
+[su11sb304:PMOPP]ls -ltr|grep MOPP_redo_4_1.log
+[su11sb304:PMOPP]touch MOPP_redo_4_1.log
+[su11sb304:PMOPP]sqlplus
+
+SQL*Plus: Release 10.2.0.5.0 - Production on Thu Aug 4 10:47:38 2016
+
+Copyright (c) 1982, 2010, Oracle.  All Rights Reserved.
+
+Enter user-name: / as sysdba
+
+Connected to:
+Oracle Database 10g Enterprise Edition Release 10.2.0.5.0 - 64bit Production
+With the Partitioning, Oracle Label Security, OLAP, Data Mining Scoring Engine
+and Real Application Testing options
+
+SQL> ALTER DATABASE DROP LOGFILE GROUP 3;
+
+Database altered.
+
+SQL> ALTER DATABASE DROP LOGFILE GROUP 2;
+ALTER DATABASE DROP LOGFILE GROUP 2
+*
+ERROR at line 1:
+ORA-01624: log 2 needed for crash recovery of instance PMOPP (thread 1)
+ORA-00312: online log 2 thread 1: '/natpmop/oradata/PMOPP/MOPP_redo_2_1.log'
+ORA-00312: online log 2 thread 1: '/natpmop/oradata/PMOPP/MOPP_redo_2_2.log'
+
+
+SQL> ALTER DATABASE DROP LOGFILE GROUP 2 force;
+ALTER DATABASE DROP LOGFILE GROUP 2 force
+                                    *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> alter database open resetlogs;
+alter database open resetlogs
+*
+ERROR at line 1:
+ORA-00344: unable to re-create online log
+'/natpmop/oradata/PMOPP/MOPP_redo_1_1.log'
+ORA-27040: file create error, unable to create file
+SVR4 Error: 2: No such file or directory
+
+
+SQL> ALTER DATABASE DROP LOGFILE GROUP 1;
+ALTER DATABASE DROP LOGFILE GROUP 1
+*
+ERROR at line 1:
+ORA-01623: log 1 is current log for instance PMOPP (thread 1) - cannot drop
+ORA-00312: online log 1 thread 1: '/natpmop/oradata/PMOPP/MOPP_redo_1_1.log'
+ORA-00312: online log 1 thread 1: '/natpmop/oradata/PMOPP/MOPP_redo_1_2.log'
+
+
+SQL> shut immediate;
+ORA-01109: database not open
+
+
+Database dismounted.
+ORACLE instance shut down.
+SQL> startup mount;
+ORACLE instance started.
+
+Total System Global Area 2147483648 bytes
+Fixed Size                  2053440 bytes
+Variable Size             989858496 bytes
+Database Buffers         1124073472 bytes
+Redo Buffers               31498240 bytes
+Database mounted.
+SQL> select group#, status from v$log;
+
+    GROUP# STATUS
+---------- ----------------
+         1 CURRENT
+         2 ACTIVE
+         4 ACTIVE
+         8 UNUSED
+         6 UNUSED
+         7 UNUSED
+         5 UNUSED
+
+7 rows selected.
+
+SQL> alter database open resetlogs;
+alter database open resetlogs
+*
+ERROR at line 1:
+ORA-00344: unable to re-create online log
+'/natpmop/oradata/PMOPP/MOPP_redo_1_1.log'
+ORA-27040: file create error, unable to create file
+SVR4 Error: 2: No such file or directory
+
+
+SQL> ALTER SYSTEM SWITCH LOGFILE;
+ALTER SYSTEM SWITCH LOGFILE
+*
+ERROR at line 1:
+ORA-01109: database not open
+
+
+SQL> alter database backup controlfile to trace as '/natpmop/oradata/PMOPT2/ctl.sql';
+
+Database altered.
+
+SQL> shut immediate;
+ORA-01109: database not open
+
+
+Database dismounted.
+ORACLE instance shut down.
+SQL> !vi 1.sql
+"1.sql" [New file]
+STARTUP NOMOUNT
+CREATE CONTROLFILE REUSE DATABASE "PMOPP" NORESETLOGS  ARCHIVELOG
+    MAXLOGFILES 16
+    MAXLOGMEMBERS 4
+    MAXDATAFILES 256
+    MAXINSTANCES 1
+    MAXLOGHISTORY 6784
+LOGFILE
+  GROUP 5 (
+    '/natpmop/oradata/PMOPT2/redo_05_01.log',
+    '/natpmop/oradata/PMOPT2/redo_05_02.log'
+  ) SIZE 1024M,
+  GROUP 6 (
+    '/natpmop/oradata/PMOPT2/redo_06_01.log',
+    '/natpmop/oradata/PMOPT2/redo_06_02.log'
+  ) SIZE 1024M,
+  GROUP 7 (
+    '/natpmop/oradata/PMOPT2/redo_07_01.log',
+    '/natpmop/oradata/PMOPT2/redo_07_02.log'
+  ) SIZE 1024M,
+  GROUP 8 (
+    '/natpmop/oradata/PMOPT2/redo_08_01.log',
+    '/natpmop/oradata/PMOPT2/redo_08_02.log'
+  ) SIZE 1024M
+-- STANDBY LOGFILE
+DATAFILE
+  '/natpmop/oradata/PMOPT2/MOPP_system_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_user_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_tools_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_02.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_03.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_04.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_05.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_06.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_07.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_08.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_09.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_10.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_11.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_12.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_13.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_14.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_15.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_16.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_17.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_18.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_19.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_20.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_21.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_22.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_23.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_data_02.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_data_03.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_data_05.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_data_06.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_index_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_index_02.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_index_03.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_index_04.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_index_05.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_data_04.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_02.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_03.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_04.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_05.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_06.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_07.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_08.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_09.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_10.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_11.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_12.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_13.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_14.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_15.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_remote_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_remote_data_02.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_remote_data_03.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_remote_data_04.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_remote_data_05.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_index_06.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_index_07.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_yelg_index_03.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_index_08.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_16.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_index_09.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_yelg_index_04.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_index_10.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_index_11.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_interlect_data01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_interlect_index01.dbf',
+  '/natpmop/oradata/PMOPT2/fieldcommsdata01.dbf',
+  '/natpmop/oradata/PMOPT2/fieldcommsindex01.dbf',
+  '/natpmop/oradata/PMOPT2/snapshotlog_data01.dbf',
+  '/natpmop/oradata/PMOPT2/bgelecdata01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_remote_index_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_ers_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_jiss_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_jiss_index_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_ers_index_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_25',
+  '/natpmop/oradata/PMOPT2/xdb_data01.dbf',
+  '/natpmop/oradata/PMOPT2/assign_data01.dbf',
+  '/natpmop/oradata/PMOPT2/assign_index01.dbf',
+  '/natpmop/oradata/PMOPT2/wamint_data01.dbf',
+  '/natpmop/oradata/PMOPT2/wamint_index01.dbf',
+  '/natpmop/oradata/PMOPT2/bgelecindex01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_yelg_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/mapdata01.dbf',
+  '/natpmop/oradata/PMOPT2/mapindex01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_24.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_batch_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_batch_index_1.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mars_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mars_index_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_remote_index_02.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_yelg_index_01.dbf',
+  '/natpmop/oradata/PMOPT2/amethyst_data01.dbf',
+  '/natpmop/oradata/PMOPT2/amethyst_index01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_bus_obj_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_bus_obj_index_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_tools_data_02.dbf',
+  '/natpmop/oradata/PMOPT2/MOP_INDEX _01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_jumbo_data01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_jumbo_index01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_rgma_data01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_rgma_index01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_gas_data01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_gas_index01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_scan_data01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_scan_index01.dbf',
+  '/natpmop/oradata/PMOPT2/fc_data01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_dtn_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_dtn_index_01.dbf',
+  '/natpmop/oradata/PMOPT2/fc_index01.dbf',
+  '/natpmop/oradata/PMOPT2/sysaux_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_ers2prs_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_ers2prs_index_01.dbf',
+  '/natpmop/oradata/PMOPT2/undotbs1_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_yelg_index_02.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mts_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mts_index_01.dbf'
+CHARACTER SET WE8DEC
+;
+
+
+"1.sql" [New file] 149 lines, 6778 characters
+
+SQL> @1
+ORACLE instance started.
+
+Total System Global Area 2147483648 bytes
+Fixed Size                  2053440 bytes
+Variable Size             989858496 bytes
+Database Buffers         1124073472 bytes
+Redo Buffers               31498240 bytes
+CREATE CONTROLFILE REUSE DATABASE "PMOPP" NORESETLOGS  ARCHIVELOG
+*
+ERROR at line 1:
+ORA-01503: CREATE CONTROLFILE failed
+ORA-01192: must have at least one enabled thread
+
+
+SQL> !vi 1.sql
+"1.sql" 149 lines, 6778 characters
+STARTUP NOMOUNT
+CREATE CONTROLFILE REUSE DATABASE "PMOPP" RESETLOGS  ARCHIVELOG
+    MAXLOGFILES 16
+    MAXLOGMEMBERS 4
+    MAXDATAFILES 256
+    MAXINSTANCES 1
+    MAXLOGHISTORY 6784
+LOGFILE
+  GROUP 5 (
+    '/natpmop/oradata/PMOPT2/redo_05_01.log',
+    '/natpmop/oradata/PMOPT2/redo_05_02.log'
+  ) SIZE 1024M,
+  GROUP 6 (
+    '/natpmop/oradata/PMOPT2/redo_06_01.log',
+    '/natpmop/oradata/PMOPT2/redo_06_02.log'
+  ) SIZE 1024M,
+  GROUP 7 (
+    '/natpmop/oradata/PMOPT2/redo_07_01.log',
+    '/natpmop/oradata/PMOPT2/redo_07_02.log'
+  ) SIZE 1024M,
+  GROUP 8 (
+    '/natpmop/oradata/PMOPT2/redo_08_01.log',
+    '/natpmop/oradata/PMOPT2/redo_08_02.log'
+  ) SIZE 1024M
+-- STANDBY LOGFILE
+DATAFILE
+  '/natpmop/oradata/PMOPT2/MOPP_system_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_user_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_tools_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_02.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_03.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_04.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_05.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_06.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_07.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_08.dbf',
+"1.sql" 148 lines, 6760 characters
+
+SQL> @1
+
+Control file created.
+
+SQL> alter database open resetlogs;
+
+Database altered.
+
+SQL> alter system switch logfile;
+
+System altered.
+
+SQL> /
+//
+
+/
+System altered.
+
+SQL>
+System altered.
+
+SQL> SQL> /
+
+System altered.
+
+SQL> shut immediate;
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+SQL> startup
+ORACLE instance started.
+
+Total System Global Area 2147483648 bytes
+Fixed Size                  2053440 bytes
+Variable Size             989858496 bytes
+Database Buffers         1124073472 bytes
+Redo Buffers               31498240 bytes
+Database mounted.
+Database opened.
+SQL>
+SQL> alter database backup controlfile to trace as '/natpmop/oradata/PMOPT2/create_ctl.sql';
+
+Database altered.
+
+SQL> shut immediate;
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+SQL> exit
+Disconnected from Oracle Database 10g Enterprise Edition Release 10.2.0.5.0 - 64bit Production
+With the Partitioning, Oracle Label Security, OLAP, Data Mining Scoring Engine
+and Real Application Testing options
+[su11sb304:PMOPP]
+[su11sb304:PMOPP]
+[su11sb304:PMOPP]
+[su11sb304:PMOPP]
+[su11sb304:PMOPP]vi "/natpmop/oradata/PMOPT2/create_ctl.sql"
+"/natpmop/oradata/PMOPT2/create_ctl.sql" 149 lines, 6775 characters
+STARTUP NOMOUNT
+CREATE CONTROLFILE set DATABASE "PMOPT2" RESETLOGS  ARCHIVELOG
+    MAXLOGFILES 16
+    MAXLOGMEMBERS 4
+    MAXDATAFILES 256
+    MAXINSTANCES 1
+    MAXLOGHISTORY 7011
+LOGFILE
+  GROUP 5 (
+    '/natpmop/oradata/PMOPT2/redo_05_01.log',
+    '/natpmop/oradata/PMOPT2/redo_05_02.log'
+  ) SIZE 1024M,
+  GROUP 6 (
+    '/natpmop/oradata/PMOPT2/redo_06_01.log',
+    '/natpmop/oradata/PMOPT2/redo_06_02.log'
+  ) SIZE 1024M,
+  GROUP 7 (
+    '/natpmop/oradata/PMOPT2/redo_07_01.log',
+    '/natpmop/oradata/PMOPT2/redo_07_02.log'
+  ) SIZE 1024M,
+  GROUP 8 (
+    '/natpmop/oradata/PMOPT2/redo_08_01.log',
+    '/natpmop/oradata/PMOPT2/redo_08_02.log'
+  ) SIZE 1024M
+-- STANDBY LOGFILE
+
+DATAFILE
+  '/natpmop/oradata/PMOPT2/MOPP_system_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_user_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_tools_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_02.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_03.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_04.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_05.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_06.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_07.dbf',
+"/natpmop/oradata/PMOPT2/create_ctl.sql" 148 lines, 6759 characters
+[su11sb304:PMOPP]
+[su11sb304:PMOPP]
+[su11sb304:PMOPP]cat "/natpmop/oradata/PMOPT2/create_ctl.sql"
+CREATE CONTROLFILE set DATABASE "PMOPT2" RESETLOGS  ARCHIVELOG
+    MAXLOGFILES 16
+    MAXLOGMEMBERS 4
+    MAXDATAFILES 256
+    MAXINSTANCES 1
+    MAXLOGHISTORY 7011
+LOGFILE
+  GROUP 5 (
+    '/natpmop/oradata/PMOPT2/redo_05_01.log',
+    '/natpmop/oradata/PMOPT2/redo_05_02.log'
+  ) SIZE 1024M,
+  GROUP 6 (
+    '/natpmop/oradata/PMOPT2/redo_06_01.log',
+    '/natpmop/oradata/PMOPT2/redo_06_02.log'
+  ) SIZE 1024M,
+  GROUP 7 (
+    '/natpmop/oradata/PMOPT2/redo_07_01.log',
+    '/natpmop/oradata/PMOPT2/redo_07_02.log'
+  ) SIZE 1024M,
+  GROUP 8 (
+    '/natpmop/oradata/PMOPT2/redo_08_01.log',
+    '/natpmop/oradata/PMOPT2/redo_08_02.log'
+  ) SIZE 1024M
+-- STANDBY LOGFILE
+
+DATAFILE
+  '/natpmop/oradata/PMOPT2/MOPP_system_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_user_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_tools_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_02.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_03.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_04.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_05.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_06.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_07.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_08.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_09.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_10.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_11.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_12.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_13.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_14.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_15.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_16.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_17.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_18.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_19.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_20.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_21.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_22.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_23.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_data_02.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_data_03.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_data_05.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_data_06.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_index_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_index_02.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_index_03.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_index_04.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_index_05.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_data_04.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_02.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_03.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_04.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_05.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_06.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_07.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_08.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_09.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_10.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_11.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_12.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_13.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_14.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_15.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_remote_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_remote_data_02.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_remote_data_03.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_remote_data_04.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_remote_data_05.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_index_06.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_index_07.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_yelg_index_03.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_index_08.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_index_data_16.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_index_09.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_yelg_index_04.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_index_10.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_natnet_index_11.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_interlect_data01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_interlect_index01.dbf',
+  '/natpmop/oradata/PMOPT2/fieldcommsdata01.dbf',
+  '/natpmop/oradata/PMOPT2/fieldcommsindex01.dbf',
+  '/natpmop/oradata/PMOPT2/snapshotlog_data01.dbf',
+  '/natpmop/oradata/PMOPT2/bgelecdata01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_remote_index_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_ers_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_jiss_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_jiss_index_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_ers_index_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_25',
+  '/natpmop/oradata/PMOPT2/xdb_data01.dbf',
+  '/natpmop/oradata/PMOPT2/assign_data01.dbf',
+  '/natpmop/oradata/PMOPT2/assign_index01.dbf',
+  '/natpmop/oradata/PMOPT2/wamint_data01.dbf',
+  '/natpmop/oradata/PMOPT2/wamint_index01.dbf',
+  '/natpmop/oradata/PMOPT2/bgelecindex01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_yelg_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/mapdata01.dbf',
+  '/natpmop/oradata/PMOPT2/mapindex01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_24.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_batch_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_batch_index_1.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mars_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mars_index_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_remote_index_02.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_yelg_index_01.dbf',
+  '/natpmop/oradata/PMOPT2/amethyst_data01.dbf',
+  '/natpmop/oradata/PMOPT2/amethyst_index01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_bus_obj_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_bus_obj_index_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_tools_data_02.dbf',
+  '/natpmop/oradata/PMOPT2/MOP_INDEX _01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_jumbo_data01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_jumbo_index01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_rgma_data01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_rgma_index01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_gas_data01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_gas_index01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_scan_data01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_scan_index01.dbf',
+  '/natpmop/oradata/PMOPT2/fc_data01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_dtn_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_dtn_index_01.dbf',
+  '/natpmop/oradata/PMOPT2/fc_index01.dbf',
+  '/natpmop/oradata/PMOPT2/sysaux_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_ers2prs_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_ers2prs_index_01.dbf',
+  '/natpmop/oradata/PMOPT2/undotbs1_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_yelg_index_02.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mts_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mts_index_01.dbf'
+CHARACTER SET WE8DEC
+;
+
+[su11sb304:PMOPP]vi "/natpmop/oradata/PMOPT2/create_ctl.sql"
+"/natpmop/oradata/PMOPT2/create_ctl.sql" 148 lines, 6759 characters
+CREATE CONTROLFILE SET DATABASE "PMOPT2" RESETLOGS  ARCHIVELOG
+    MAXLOGFILES 16
+    MAXLOGMEMBERS 4
+    MAXDATAFILES 256
+    MAXINSTANCES 1
+    MAXLOGHISTORY 7011
+LOGFILE
+  GROUP 5 (
+    '/natpmop/oradata/PMOPT2/redo_05_01.log',
+    '/natpmop/oradata/PMOPT2/redo_05_02.log'
+  ) SIZE 1024M,
+  GROUP 6 (
+    '/natpmop/oradata/PMOPT2/redo_06_01.log',
+    '/natpmop/oradata/PMOPT2/redo_06_02.log'
+  ) SIZE 1024M,
+  GROUP 7 (
+    '/natpmop/oradata/PMOPT2/redo_07_01.log',
+    '/natpmop/oradata/PMOPT2/redo_07_02.log'
+  ) SIZE 1024M,
+  GROUP 8 (
+    '/natpmop/oradata/PMOPT2/redo_08_01.log',
+    '/natpmop/oradata/PMOPT2/redo_08_02.log'
+  ) SIZE 1024M
+-- STANDBY LOGFILE
+
+DATAFILE
+  '/natpmop/oradata/PMOPT2/MOPP_system_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_user_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_tools_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_02.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_03.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_04.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_05.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_06.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_07.dbf',
+"/natpmop/oradata/PMOPT2/create_ctl.sql" 148 lines, 6759 characters
+[su11sb304:PMOPP]vi /natpmop/oradata/PMOPT2/create_ctl.sql
+"/natpmop/oradata/PMOPT2/create_ctl.sql" 148 lines, 6759 characters
+CREATE CONTROLFILE SET DATABASE "PMOPT2" RESETLOGS  ARCHIVELOG
+    MAXLOGFILES 16
+    MAXLOGMEMBERS 4
+    MAXDATAFILES 256
+    MAXINSTANCES 1
+    MAXLOGHISTORY 7011
+LOGFILE
+  GROUP 5 (
+    '/natpmop/oradata/PMOPT2/redo_05_01.log',
+    '/natpmop/oradata/PMOPT2/redo_05_02.log'
+  ) SIZE 1024M,
+  GROUP 6 (
+    '/natpmop/oradata/PMOPT2/redo_06_01.log',
+    '/natpmop/oradata/PMOPT2/redo_06_02.log'
+  ) SIZE 1024M,
+  GROUP 7 (
+    '/natpmop/oradata/PMOPT2/redo_07_01.log',
+    '/natpmop/oradata/PMOPT2/redo_07_02.log'
+  ) SIZE 1024M,
+  GROUP 8 (
+    '/natpmop/oradata/PMOPT2/redo_08_01.log',
+    '/natpmop/oradata/PMOPT2/redo_08_02.log'
+  ) SIZE 1024M
+DATAFILE
+  '/natpmop/oradata/PMOPT2/MOPP_system_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_user_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_tools_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_01.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_02.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_03.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_04.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_05.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_06.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_07.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_08.dbf',
+  '/natpmop/oradata/PMOPT2/MOPP_mop_data_09.dbf',
+"/natpmop/oradata/PMOPT2/create_ctl.sql" 146 lines, 6739 characters
+[su11sb304:PMOPP]

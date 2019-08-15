@@ -1,0 +1,329 @@
+NOTE: Make sure all the UC4 jobs on YMOPT2 is stopped.
+
+PMOPP to PMOPT2 refresh activity:
+
+
+1. Create a newname script in Prod using below query and move it to Target(Test).
+
+select 'set newname for datafile ' ||file#|| ' to ''' ||name|| ''';' from v$datafile; 
+
+2. Move Pfile from Source to Target.
+scp initPMOPP.ora oracle@su11sb304:/natpmop/opt/oracle/product/10.2.0/dbs
+
+3. Shutdown PMOPT2.
+
+4. . oraenv
+PMOPP
+
+5. startup nomount pfile='/natpmop/opt/oracle/product/10.2.0/dbs/initPMOPP.ora';
+In case, you get below error. Create required directories.
+
+SQL> startup nomount pfile='/nenhhdc/opt/oracle/product/10.2.0/dbs/initNDCP.ora';
+ORA-00444: background process "MMAN" failed while starting
+ORA-07446: sdnfy: bad value '' for parameter .
+SQL> exit
+
+6. In case Control file is not available in backup. Controlfile backup is available in ""/yenhhdc/opt/oracle/product/10.2.0/dbs/c-3214067332-20160909-11". You can copy the same to target and restore it using below command.
+
+7. rman target /
+restore controlfile from "/mnt1/PMOPP/control.ctl";
+
+8. alter database mount;
+
+You might get below error while trying to mount the database.
+ERROR at line 1:
+ORA-01990: error opening password file
+'/necafi/opt/oracle/product/9.2.0/dbs/orapw'
+ORA-27037: unable to obtain file status
+SVR4 Error: 2: No such file or directory
+Additional information: 3
+
+------> Create Password or move the password file from source to target using SCP.
+
+
+9. Create SH file as below:
+[su11sb203:NDCP] vi PMOPT2_restore_without_duplicate.sh
+$ORACLE_HOME/bin/rman << !
+@PMOPT2_restore_without_duplicate.rcv
+
+10. Create RCV file and put contents as below
+
+spool log to '/mnt1/PMOPP/restore.txt';
+connect target /
+
+
+run
+{
+allocate channel adsm_1 type DISK;
+allocate channel adsm_2 type DISK;
+set newname for datafile 1 to '/natpmop/oradata/PMOPT2/MOPP_system_01.dbf';
+set newname for datafile 2 to '/natpmop/oradata/PMOPT2/MOPP_user_data_01.dbf';
+set newname for datafile 3 to '/natpmop/oradata/PMOPT2/MOPP_tools_data_01.dbf';
+set newname for datafile 4 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_01.dbf';
+set newname for datafile 5 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_02.dbf';
+set newname for datafile 6 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_03.dbf';
+set newname for datafile 7 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_04.dbf';
+set newname for datafile 8 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_05.dbf';
+set newname for datafile 9 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_06.dbf';
+set newname for datafile 10 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_07.dbf';
+set newname for datafile 11 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_08.dbf';
+set newname for datafile 12 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_09.dbf';
+set newname for datafile 13 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_10.dbf';
+set newname for datafile 14 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_11.dbf';
+set newname for datafile 15 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_12.dbf';
+set newname for datafile 16 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_13.dbf';
+set newname for datafile 17 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_14.dbf';
+set newname for datafile 18 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_15.dbf';
+set newname for datafile 19 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_16.dbf';
+set newname for datafile 20 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_17.dbf';
+set newname for datafile 21 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_18.dbf';
+set newname for datafile 22 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_19.dbf';
+set newname for datafile 23 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_20.dbf';
+set newname for datafile 24 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_21.dbf';
+set newname for datafile 25 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_22.dbf';
+set newname for datafile 26 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_23.dbf';
+set newname for datafile 27 to '/natpmop/oradata/PMOPT2/MOPP_natnet_data_01.dbf';
+set newname for datafile 28 to '/natpmop/oradata/PMOPT2/MOPP_natnet_data_02.dbf';
+set newname for datafile 29 to '/natpmop/oradata/PMOPT2/MOPP_natnet_data_03.dbf';
+set newname for datafile 30 to '/natpmop/oradata/PMOPT2/MOPP_natnet_data_05.dbf';
+set newname for datafile 31 to '/natpmop/oradata/PMOPT2/MOPP_natnet_data_06.dbf';
+set newname for datafile 32 to '/natpmop/oradata/PMOPT2/MOPP_natnet_index_01.dbf';
+set newname for datafile 33 to '/natpmop/oradata/PMOPT2/MOPP_natnet_index_02.dbf';
+set newname for datafile 34 to '/natpmop/oradata/PMOPT2/MOPP_natnet_index_03.dbf';
+set newname for datafile 35 to '/natpmop/oradata/PMOPT2/MOPP_natnet_index_04.dbf';
+set newname for datafile 36 to '/natpmop/oradata/PMOPT2/MOPP_natnet_index_05.dbf';
+set newname for datafile 37 to '/natpmop/oradata/PMOPT2/MOPP_natnet_data_04.dbf';
+set newname for datafile 38 to '/natpmop/oradata/PMOPT2/MOPP_index_data_01.dbf';
+set newname for datafile 39 to '/natpmop/oradata/PMOPT2/MOPP_index_data_02.dbf';
+set newname for datafile 40 to '/natpmop/oradata/PMOPT2/MOPP_index_data_03.dbf';
+set newname for datafile 41 to '/natpmop/oradata/PMOPT2/MOPP_index_data_04.dbf';
+set newname for datafile 42 to '/natpmop/oradata/PMOPT2/MOPP_index_data_05.dbf';
+set newname for datafile 43 to '/natpmop/oradata/PMOPT2/MOPP_index_data_06.dbf';
+set newname for datafile 44 to '/natpmop/oradata/PMOPT2/MOPP_index_data_07.dbf';
+set newname for datafile 45 to '/natpmop/oradata/PMOPT2/MOPP_index_data_08.dbf';
+set newname for datafile 46 to '/natpmop/oradata/PMOPT2/MOPP_index_data_09.dbf';
+set newname for datafile 47 to '/natpmop/oradata/PMOPT2/MOPP_index_data_10.dbf';
+set newname for datafile 48 to '/natpmop/oradata/PMOPT2/MOPP_index_data_11.dbf';
+set newname for datafile 49 to '/natpmop/oradata/PMOPT2/MOPP_index_data_12.dbf';
+set newname for datafile 50 to '/natpmop/oradata/PMOPT2/MOPP_index_data_13.dbf';
+set newname for datafile 51 to '/natpmop/oradata/PMOPT2/MOPP_index_data_14.dbf';
+set newname for datafile 52 to '/natpmop/oradata/PMOPT2/MOPP_index_data_15.dbf';
+set newname for datafile 53 to '/natpmop/oradata/PMOPT2/MOPP_remote_data_01.dbf';
+set newname for datafile 54 to '/natpmop/oradata/PMOPT2/MOPP_remote_data_02.dbf';
+set newname for datafile 55 to '/natpmop/oradata/PMOPT2/MOPP_remote_data_03.dbf';
+set newname for datafile 56 to '/natpmop/oradata/PMOPT2/MOPP_remote_data_04.dbf';
+set newname for datafile 57 to '/natpmop/oradata/PMOPT2/MOPP_remote_data_05.dbf';
+set newname for datafile 58 to '/natpmop/oradata/PMOPT2/MOPP_natnet_index_06.dbf';
+set newname for datafile 59 to '/natpmop/oradata/PMOPT2/MOPP_natnet_index_07.dbf';
+set newname for datafile 60 to '/natpmop/oradata/PMOPT2/MOPP_yelg_index_03.dbf';
+set newname for datafile 61 to '/natpmop/oradata/PMOPT2/MOPP_natnet_index_08.dbf';
+set newname for datafile 62 to '/natpmop/oradata/PMOPT2/MOPP_index_data_16.dbf';
+set newname for datafile 63 to '/natpmop/oradata/PMOPT2/MOPP_natnet_index_09.dbf';
+set newname for datafile 64 to '/natpmop/oradata/PMOPT2/MOPP_yelg_index_04.dbf';
+set newname for datafile 65 to '/natpmop/oradata/PMOPT2/MOPP_natnet_index_10.dbf';
+set newname for datafile 66 to '/natpmop/oradata/PMOPT2/MOPP_natnet_index_11.dbf';
+set newname for datafile 67 to '/natpmop/oradata/PMOPT2/MOPP_interlect_data01.dbf';
+set newname for datafile 68 to '/natpmop/oradata/PMOPT2/MOPP_interlect_index01.dbf';
+set newname for datafile 69 to '/natpmop/oradata/PMOPT2/fieldcommsdata01.dbf';
+set newname for datafile 70 to '/natpmop/oradata/PMOPT2/fieldcommsindex01.dbf';
+set newname for datafile 71 to '/natpmop/oradata/PMOPT2/snapshotlog_data01.dbf';
+set newname for datafile 72 to '/natpmop/oradata/PMOPT2/bgelecdata01.dbf';
+set newname for datafile 73 to '/natpmop/oradata/PMOPT2/MOPP_remote_index_01.dbf';
+set newname for datafile 74 to '/natpmop/oradata/PMOPT2/MOPP_ers_data_01.dbf';
+set newname for datafile 75 to '/natpmop/oradata/PMOPT2/MOPP_jiss_data_01.dbf';
+set newname for datafile 76 to '/natpmop/oradata/PMOPT2/MOPP_jiss_index_01.dbf';
+set newname for datafile 77 to '/natpmop/oradata/PMOPT2/MOPP_ers_index_01.dbf';
+set newname for datafile 78 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_25';
+set newname for datafile 79 to '/natpmop/oradata/PMOPT2/xdb_data01.dbf';
+set newname for datafile 80 to '/natpmop/oradata/PMOPT2/assign_data01.dbf';
+set newname for datafile 81 to '/natpmop/oradata/PMOPT2/assign_index01.dbf';
+set newname for datafile 82 to '/natpmop/oradata/PMOPT2/wamint_data01.dbf';
+set newname for datafile 83 to '/natpmop/oradata/PMOPT2/wamint_index01.dbf';
+set newname for datafile 84 to '/natpmop/oradata/PMOPT2/bgelecindex01.dbf';
+set newname for datafile 85 to '/natpmop/oradata/PMOPT2/MOPP_yelg_data_01.dbf';
+set newname for datafile 86 to '/natpmop/oradata/PMOPT2/mapdata01.dbf';
+set newname for datafile 87 to '/natpmop/oradata/PMOPT2/mapindex01.dbf';
+set newname for datafile 88 to '/natpmop/oradata/PMOPT2/MOPP_mop_data_24.dbf';
+set newname for datafile 89 to '/natpmop/oradata/PMOPT2/MOPP_batch_data_01.dbf';
+set newname for datafile 90 to '/natpmop/oradata/PMOPT2/MOPP_batch_index_1.dbf';
+set newname for datafile 91 to '/natpmop/oradata/PMOPT2/MOPP_mars_data_01.dbf';
+set newname for datafile 92 to '/natpmop/oradata/PMOPT2/MOPP_mars_index_01.dbf';
+set newname for datafile 93 to '/natpmop/oradata/PMOPT2/MOPP_remote_index_02.dbf';
+set newname for datafile 94 to '/natpmop/oradata/PMOPT2/MOPP_yelg_index_01.dbf';
+set newname for datafile 95 to '/natpmop/oradata/PMOPT2/amethyst_data01.dbf';
+set newname for datafile 96 to '/natpmop/oradata/PMOPT2/amethyst_index01.dbf';
+set newname for datafile 97 to '/natpmop/oradata/PMOPT2/MOPP_bus_obj_data_01.dbf';
+set newname for datafile 98 to '/natpmop/oradata/PMOPT2/MOPP_bus_obj_index_01.dbf';
+set newname for datafile 99 to '/natpmop/oradata/PMOPT2/MOPP_tools_data_02.dbf';
+set newname for datafile 100 to '/natpmop/oradata/PMOPT2/MOP_INDEX _01.dbf';
+set newname for datafile 101 to '/natpmop/oradata/PMOPT2/MOPP_jumbo_data01.dbf';
+set newname for datafile 102 to '/natpmop/oradata/PMOPT2/MOPP_jumbo_index01.dbf';
+set newname for datafile 103 to '/natpmop/oradata/PMOPT2/MOPP_rgma_data01.dbf';
+set newname for datafile 104 to '/natpmop/oradata/PMOPT2/MOPP_rgma_index01.dbf';
+set newname for datafile 109 to '/natpmop/oradata/PMOPT2/MOPP_gas_data01.dbf';
+set newname for datafile 112 to '/natpmop/oradata/PMOPT2/MOPP_gas_index01.dbf';
+set newname for datafile 113 to '/natpmop/oradata/PMOPT2/MOPP_scan_data01.dbf';
+set newname for datafile 114 to '/natpmop/oradata/PMOPT2/MOPP_scan_index01.dbf';
+set newname for datafile 115 to '/natpmop/oradata/PMOPT2/fc_data01.dbf';
+set newname for datafile 116 to '/natpmop/oradata/PMOPT2/MOPP_dtn_data_01.dbf';
+set newname for datafile 117 to '/natpmop/oradata/PMOPT2/MOPP_dtn_index_01.dbf';
+set newname for datafile 118 to '/natpmop/oradata/PMOPT2/fc_index01.dbf';
+set newname for datafile 119 to '/natpmop/oradata/PMOPT2/sysaux_01.dbf';
+set newname for datafile 120 to '/natpmop/oradata/PMOPT2/MOPP_ers2prs_data_01.dbf';
+set newname for datafile 121 to '/natpmop/oradata/PMOPT2/MOPP_ers2prs_index_01.dbf';
+set newname for datafile 122 to '/natpmop/oradata/PMOPT2/undotbs1_01.dbf';
+set newname for datafile 128 to '/natpmop/oradata/PMOPT2/MOPP_yelg_index_02.dbf';
+set newname for datafile 129 to '/natpmop/oradata/PMOPT2/MOPP_mts_data_01.dbf';
+set newname for datafile 130 to '/natpmop/oradata/PMOPT2/MOPP_mts_index_01.dbf';restore database;
+switch datafile all;
+recover database;
+release channel adsm_1;
+release channel adsm_2;
+}
+
+spool off;
+
+Run the file: nohup PMOPT2_restore_without_duplicate.sh &
+
+Check the log.
+
+In case you get logscn difference error. Kindly perform below step:
+
+Go to Source(PROD) and perform below steps:
+cat /oracle/$ORACLE_SID/admin/$ORACLE_SID/etc/rmanc.conf |grep -i CATALOG
+
+connect catalog RMANUKMOPP/manrman@rma0p_app.rwe.com
+
+run
+{
+allocate channel adsm_9 type 'SBT_TAPE' parms 'ENV=(TDPO_OPTFILE=/opt/tivoli/tsm/client/oracle/bin64/tdpo_MOPP_arch.opt)';
+allocate channel adsm_10 type 'SBT_TAPE' parms 'ENV=(TDPO_OPTFILE=/opt/tivoli/tsm/client/oracle/bin64/tdpo_MOPP_arch.opt)';
+restore archivelog from logseq 602017 until logseq 602020;
+release channel adsm_9;
+release channel adsm_10;
+}
+
+Now Go to target(DEV) and perform below steps:
+catalog start with '/mnt/MOPP/arc';
+run
+{
+allocate channel adsm_1 type DISK;
+allocate channel adsm_2 type DISK;
+recover database until sequence 602020;
+release channel adsm_1;
+release channel adsm_2;
+}
+
+In case you get error while recovering the database. 
+RMAN-03002: failure of recover command at 09/14/2016 15:11:53
+ORA-19698: /yenhhdc/oradata/redo1_1.log is from different database: id=3016813469, db_name=YDCT1
+
+Follow below steps:
+1. shutdown immediate;
+
+2. Modfify pfile of NDCP($ORACLE_HOME/dbs – initNDCP.ora)
+Undo_MANAGMENT=MANUAL;
+*._ALLOW_RESETLOGS_CORRUPTION=TRUE
+
+3. startup nomount;
+
+4. alter database open resetlogs;
+
+5. alter system switch logfile;
+
+6. shutdown immediate;
+
+7. Startup nomount;
+
+8. alter database open;
+
+9. alter system switch logfile;(4 times)
+
+10. alter database backup controlfile to trace as '/mnt1/PMOPP/Control01.txt';
+
+11. Edit the Controlfile, Update NoRESETLOG with "RESETLOGS"  and REUSE with "SET" it to new name of the database.
+
+12. Shutdown the database;
+
+13. Startup nomount with NDCT1's pfile.
+startup nomount pfile='/yemop/opt/oracle/product/10.2.0/dbs/initYMOPT2.ora';
+
+14. @abc.txt
+
+You might face below error:
+SQL> @/mnt/MOPP/Control01.txt;
+CREATE CONTROLFILE SET DATABASE "YMOPT2" RESETLOGS  ARCHIVELOG
+*
+ERROR at line 1:
+ORA-01503: CREATE CONTROLFILE failed
+ORA-00200: control file could not be created
+ORA-00202: control file: '/yemop/opt/oracle/product/10.2.0/dbs/rolfile'
+ORA-27038: created file already exists
+Additional information: 1
+
+
+SQL> alter database open resetlogs;
+alter database open resetlogs
+*
+ERROR at line 1:
+ORA-01194: file 1 needs more recovery to be consistent
+ORA-01110: data file 1: '/nemop/oradata/NMOPT2/system01.ora'
+
+
+15. alter system switch logfile;
+
+16. Shutdown immediate;
+
+17. Startup;
+
+18. lsnrctl start listener_NDCT1
+
+19. Incase you face ORA-00965: tablespace doesn't exits. Follow below steps:
+
+	select 'alter user '||username ||' temporary tablespace TEMP;' from dba_users where TEMPORARY_TABLESPACE not in ('TEMP');
+		You can find the tablespace name as '_$deleted'. To resolve the issue, you need to create new TEMP tablespace and allign default tablespace.
+
+select 'ALTER USER ' || USERNAME || ' default tablespace ' || DEFAULT_TABLESPACE || ' temporary tablespace' || ' TEMP;' from dba_users where temporary_tablespace like '%_$dele%';
+
+	create temporary TABLESPACE TEMPORARY_DATA TEMPFILE '/oracle/PHOEQ/temp/temp.001' SIZE 10G;
+  
+	ALTER DATABASE DEFAULT TEMPORARY TABLESPACE TEMPORARY_DATA;
+
+	drop TABLESPACE TEMP including contents and datafiles;
+
+	alter tablespace TEMPORARY_DATA  rename to TEMP;
+
+Once it is done, unregister the database and register it again(Go through queries.xml file for more details).
+
+
+SQL> alter database tempfile 2 offline ;
+
+Database altered.
+
+SQL> alter database rename file '
+  2
+SQL> !mv /neeacaa/oradata/temp/temp001.dbf /neeacaa/oradata/temp/temp02.dbf
+
+SQL>  alter database rename file '/neeacaa/oradata/temp/temp001.dbf' to '/neeacaa/oradata/temp/temp02.dbf';
+
+Database altered.
+
+SQL>  alter database tempfile 2 online ;
+
+Database altered.
+
+SQL> select file_name ,file_id from  dba_temp_Files;
+
+FILE_NAME
+--------------------------------------------------------------------------------
+   FILE_ID
+----------
+/neeacaa/oradata/temp/temp01.dbf
+         1
+
+/neeacaa/oradata/temp/temp02.dbf
+         2
+
+
+
+

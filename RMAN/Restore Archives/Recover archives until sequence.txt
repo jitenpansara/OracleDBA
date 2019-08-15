@@ -1,0 +1,41 @@
+run
+{
+allocate channel dev1 type disk;
+set until time "to_date('2016-11-30:00:00:15', 'yyyy-mm-dd:hh24:mi:ss')";
+recover database; 
+}
+
+run
+{
+allocate channel dev1 type disk;
+set until SEQUENCE 406147 THREAD 1;
+recover database; 
+}
+
+RMAN> run
+{
+allocate channel dev1 type disk;2> 3>
+4> set until SEQUENCE 406147 THREAD 1;
+5> recover database;
+6> }
+
+allocated channel: dev1
+channel dev1: sid=18 devtype=DISK
+
+executing command: SET until clause
+
+Starting recover at 30-NOV-16
+
+starting media recovery
+
+archive log thread 1 sequence 406144 is already on disk as file /yecafi/archivelogs/arch_0000406144.log
+archive log thread 1 sequence 406145 is already on disk as file /yecafi/archivelogs/arch_0000406145.log
+archive log filename=/yecafi/archivelogs/arch_0000406144.log thread=1 sequence=406144
+archive log filename=/yecafi/archivelogs/arch_0000406145.log thread=1 sequence=406145
+archive log filename=/yecafi/archivelogs/arch_0000406146.log thread=1 sequence=406146
+media recovery complete
+Finished recover at 30-NOV-16
+released channel: dev1
+
+RMAN> exit
+

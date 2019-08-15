@@ -1,0 +1,53 @@
+Issu1: SBT_LAYER resolution step:
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-03009: failure of allocate command on adsm_5 channel at 08/25/2016 08:50:21
+ORA-19554: error allocating device, device type: SBT_TAPE, device name:
+ORA-27000: skgfqsbi: failed to initialize storage subsystem (SBT) layer
+IBM AIX RISC System/6000 Error: 104: For future use
+Additional information: 7011
+ORA-19511: Error received from media manager layer, error text:
+   SBT error = 7011, errno = 104, sbtopen: system error
+
+RMAN> **end-of-file**
+
+
+Database version: 11.2.0.2.0
+Database name: SONQ
+
+In case you face above error, you have to remove release channel command from RCV file because once the channel is allocated, it will not release the channel. It is a bug in oracle.
+
+Issue 2:
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-03002: failure of Duplicate Db command at 08/26/2016 07:01:01
+RMAN-03015: error occurred in stored script Memory Script
+ORA-27191: sbtinfo2 returned error
+Additional information: 2
+
+Step 1: Reset the password of TSM.
+Step 2: Shut down all Oracle instances that use $ORACLE_HOME
+	Go to the $ORACLE_HOME/lib64 directory. In case you didn't find the directory go to $ORACLE_HOME/lib
+
+	Remove the libobk.so symbolic link:
+	$ rm $ORACLE_HOME/lib64/libobk.so or rm $ORACLE_HOME/lib/libobk.so
+
+	Symbolically link the library file to libobk.so:
+	ls -l /opt/tivoli/tsm/client/oracle/bin64/libo*
+	ln -s /opt/tivoli/tsm/client/oracle/bin64/libobk.so libobk.so
+	ls -l libobk*
+ 
+	Start the Oracle instances.
+
+Step 2: Contact Solaris team or backup team.
+
+
+Issue 3:
+
+While resetting password, you might get below error.
+ANU2534E Option file error.
+
+Kindly give correct path for the option file. If it is solaris, you need to use /opt and if is AIX you have to use /usr.

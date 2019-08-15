@@ -1,0 +1,2901 @@
+login as: UI628427
+UI628427@rs294a's password:
+Last unsuccessful login: Thu 12 Jul 07:57:20 2018 on ssh from 10.174.241.162
+Last login: Mon 16 Jul 14:25:11 2018 on ssh from 10.174.217.150
+*******************************************************************************
+*                                                                             *
+*                                                                             *
+*       This system is owned by INNOGY                                        *
+*                                                                             *
+*       Access to it for any reason must be specifically authorised.          *
+*       Your continued access and further inquiry may expose you to           *
+*       criminal activities and/or civil proceedings.                         *
+*       INNOGY reserves the right to access and disclose all information sent *
+*       through  or stored in this computer system, for any purposes.         *
+*                                                                             *
+*       Your activities are subject to full monitoring and logging.           *
+*                                                                             *
+*                                                                             *
+*                                                                             *
+*******************************************************************************
+
+
+#     # ####### #     #
+##    # #     # ##    #
+# #   # #     # # #   #
+#  #  # #     # #  #  #
+#   # # #     # #   # #
+#    ## #     # #    ##
+#     # ####### #     #
+
+######
+#     #  #####    ####   #####   #    #   ####    #####     #     ####   #    #
+#     #  #    #  #    #  #    #  #    #  #    #     #       #    #    #  ##   #
+######   #    #  #    #  #    #  #    #  #          #       #    #    #  # #  #
+#        #####   #    #  #    #  #    #  #          #       #    #    #  #  # #
+#        #   #   #    #  #    #  #    #  #    #     #       #    #    #  #   ##
+#        #    #   ####   #####    ####    ####      #       #     ####   #    #
+
+#####
+#     #   #   #   ####    #####  ######  #    #
+#          # #   #          #    #       ##  ##
+#####      #     ####      #    #####   # ## #
+      #     #         #     #    #       #    #
+#     #     #    #    #     #    #       #    #
+#####      #     ####      #    ######  #    #
+
+$ ps -ef | grep pmn
+UI628427 51577028 27656396   0 12:45:09  pts/5  0:00 grep pmn
+$ ps -ef | grep pmon
+oraftss  3080316        1   0   12 Jul      -  0:13 ora_pmon_CDB_FTSS
+oraftsq 49872990        1   0 11:31:43      -  0:00 ora_pmon_CDB_FTSQ
+UI628427 51577030 27656396   0 12:45:13  pts/5  0:00 grep pmon
+oramoffb 13894044        1   0   12 Jul      -  0:13 ora_pmon_CDB_MOFB
+  orapmq 22741370        1   0 14:32:51      -  0:01 ora_pmon_CMOFFPMQ
+oraftsd  2621952        1   0   12 Jul      -  0:13 ora_pmon_CDB_FTSD
+  orapms 10682882        1   0   12 Jul      -  0:13 ora_pmon_CMOFFPMS
+$ sudo su - oraftsq
+oraftsq.CDB_FTSQ - sql
+
+SQL*Plus: Release 12.1.0.2.0 Production on Tue Jul 17 12:45:24 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+
+SQL> show pdbs;
+
+    CON_ID CON_NAME                       OPEN MODE  RESTRICTED
+---------- ------------------------------ ---------- ----------
+         2 PDB$SEED                       MOUNTED
+         3 FTSS                           MOUNTED
+SQL> select name,open_mode,database_Role from v$database ;
+
+NAME      OPEN_MODE            DATABASE_ROLE
+--------- -------------------- ----------------
+CDB_FTSS  MOUNTED              PRIMARY
+
+SQL> select FHSCN,CON_ID from
+  2
+SQL>
+SQL> select distinct FHSCN,CON_ID from X$KCVFH ;
+
+FHSCN                CON_ID
+---------------- ----------
+0                         1
+0                         3
+9113399874999             2
+9147866186190             1
+9147866186190             3
+
+SQL> desc X$KCVFH
+Name                                      Null?    Type
+----------------------------------------- -------- ----------------------------
+ADDR                                               RAW(8)
+INDX                                               NUMBER
+INST_ID                                            NUMBER
+CON_ID                                             NUMBER
+HXFIL                                              NUMBER
+HXONS                                              NUMBER
+HXSTS                                              VARCHAR2(16)
+HXERR                                              NUMBER
+HXVER                                              NUMBER
+FHSWV                                              NUMBER
+FHCVN                                              NUMBER
+FHDBI                                              NUMBER
+FHDBN                                              VARCHAR2(9)
+FHCSQ                                              NUMBER
+FHFSZ                                              NUMBER
+FHBSZ                                              NUMBER
+FHFNO                                              NUMBER
+FHTYP                                              NUMBER
+FHRDB                                              NUMBER
+FHCRS                                              VARCHAR2(16)
+FHCRT                                              VARCHAR2(20)
+FHRLC                                              VARCHAR2(20)
+FHRLC_I                                            NUMBER
+FHRLS                                              VARCHAR2(16)
+FHPRC                                              VARCHAR2(20)
+FHPRC_I                                            NUMBER
+FHPRS                                              VARCHAR2(16)
+FHBTI                                              VARCHAR2(20)
+FHBSC                                              VARCHAR2(16)
+FHBTH                                              NUMBER
+FHSTA                                              NUMBER
+FHSCN                                              VARCHAR2(16)
+FHTIM                                              VARCHAR2(20)
+FHTHR                                              NUMBER
+FHRBA_SEQ                                          NUMBER
+FHRBA_BNO                                          NUMBER
+FHRBA_BOF                                          NUMBER
+FHETB                                              RAW(132)
+FHCPC                                              NUMBER
+FHRTS                                              VARCHAR2(20)
+FHCCC                                              NUMBER
+FHBCP_SCN                                          VARCHAR2(16)
+FHBCP_TIM                                          VARCHAR2(20)
+FHBCP_THR                                          NUMBER
+FHBCP_RBA_SEQ                                      NUMBER
+FHBCP_RBA_BNO                                      NUMBER
+FHBCP_RBA_BOF                                      NUMBER
+FHBCP_ETB                                          RAW(132)
+FHBHZ                                              NUMBER
+FHXCD                                              RAW(16)
+FHTSN                                              NUMBER
+FHTNM                                              VARCHAR2(30)
+FHRFN                                              NUMBER
+FHAFS                                              VARCHAR2(16)
+FHRFS                                              VARCHAR2(16)
+FHRFT                                              DATE
+HXIFZ                                              NUMBER
+HXNRCV                                             NUMBER
+HXFNM                                              VARCHAR2(257)
+FHPOFB                                             NUMBER
+FHPNFB                                             NUMBER
+FHPRE10                                            NUMBER
+FHFIRSTUNRECSCN                                    VARCHAR2(16)
+FHFIRSTUNRECTIME                                   VARCHAR2(20)
+HXLMDBA                                            NUMBER
+HXLMLD_SCN                                         VARCHAR2(16)
+FHFCRS                                             NUMBER
+FHFCRT                                             DATE
+FHFCPS                                             NUMBER
+FHFCPT                                             DATE
+FHPLUS                                             NUMBER
+FHFDBI                                             NUMBER
+FHPIDI                                             NUMBER
+FHPIFN                                             NUMBER
+FHPRLS                                             NUMBER
+FHPRLT                                             DATE
+FHPTSN                                             NUMBER
+FHBSSZ                                             NUMBER
+FHBSFMT                                            NUMBER
+FHBSEOFSCN                                         NUMBER
+FHBSMAP                                            RAW(32)
+HXUOPC_SCN                                         NUMBER
+FHPDBI                                             NUMBER
+FHPDBDBI                                           NUMBER
+FHPDBIDN                                           VARCHAR2(31)
+FHPIN_SCN                                          NUMBER
+FHPIN_time                                         DATE
+FHPBR_SCN                                          NUMBER
+FHPBR_time                                         DATE
+FHPER_SCN                                          NUMBER
+FHPER_time                                         DATE
+FHPIC                                              NUMBER
+
+SQL> select HXFIL,CON_ID from X$KCVFH  where FHSCN=0;
+
+     HXFIL     CON_ID
+---------- ----------
+         1          1
+         3          1
+         4          1
+       336          1
+       337          1
+       338          1
+       339          1
+      1336          3
+      1337          3
+      1568          3
+      1667          3
+
+     HXFIL     CON_ID
+---------- ----------
+      1668          3
+      1679          1
+      1688          3
+      1689          3
+      1690          3
+      1691          3
+      1692          3
+      1693          3
+      1694          3
+      1695          3
+      1696          3
+
+     HXFIL     CON_ID
+---------- ----------
+      1697          3
+      1698          3
+      1699          3
+      1700          3
+      1701          3
+      1702          3
+      1703          3
+      1704          3
+      1705          3
+      1706          3
+      1707          3
+
+     HXFIL     CON_ID
+---------- ----------
+      1708          3
+      1709          3
+
+35 rows selected.
+
+SQL> select HXFIL,CON_ID from X$KCVFH  where FHSCN!=0;
+
+     HXFIL     CON_ID
+---------- ----------
+         5          2
+         6          1
+         7          2
+      1665          3
+      1666          3
+
+SQL> select name from v$datafile where file_id=1709;
+select name from v$datafile where file_id=1709
+                                  *
+ERROR at line 1:
+ORA-00904: "FILE_ID": invalid identifier
+
+
+SQL> select name from v$datafile where file#=1709;
+
+NAME
+--------------------------------------------------------------------------------
+/oracle/ftss/data01/PDB_FTSS/MOFFICE_IDX_04.dbf
+
+SQL> !ls -ltr
+total 0
+
+SQL>
+SQL>  select name from v$datafile where file# IN ( select HXFIL,CON_ID from X$KCVFH  where FHSCN!=0);
+select name from v$datafile where file# IN ( select HXFIL,CON_ID from X$KCVFH  where FHSCN!=0)
+                                              *
+ERROR at line 1:
+ORA-00913: too many values
+
+
+SQL> select name from v$datafile where file# IN ( select HXFIL from X$KCVFH  where FHSCN!=0);
+
+NAME
+--------------------------------------------------------------------------------
+/oracle/ftss/data01/pdbseed/system01.dbf
+/oracle/ftss/data01/CDB_FTSS/users01.dbf
+/oracle/ftss/data01/pdbseed/sysaux01.dbf
+/oracle/ftss/data01/PDB_FTSS/quest_data01.dbf
+/oracle/ftss/data01/PDB_FTSS/quest_indexes01.dbf
+
+SQL>  select name from v$datafile;
+
+NAME
+--------------------------------------------------------------------------------
+/oracle/ftss/data01/CDB_FTSS/system01.dbf
+/oracle/ftss/data01/CDB_FTSS/sysaux01.dbf
+/oracle/ftss/data01/CDB_FTSS/undotbs01.dbf
+/oracle/ftss/data01/pdbseed/system01.dbf
+/oracle/ftss/data01/CDB_FTSS/users01.dbf
+/oracle/ftss/data01/pdbseed/sysaux01.dbf
+/oracle/ftss/data01/CDB_FTSS/undotbs02.dbf
+/oracle/ftss/data01/CDB_FTSS/undotbs03.dbf
+/oracle/ftss/data01/CDB_FTSS/undotbs04.dbf
+/oracle/ftss/data01/CDB_FTSS/undotbs05.dbf
+/oracle/ftss/data01/PDB_FTSS/system01.dbf
+
+NAME
+--------------------------------------------------------------------------------
+/oracle/ftss/data01/PDB_FTSS/sysaux01.dbf
+/oracle/ftss/data01/PDB_FTSS/user_data01.dbf
+/oracle/ftss/data01/PDB_FTSS/quest_data01.dbf
+/oracle/ftss/data01/PDB_FTSS/quest_indexes01.dbf
+/oracle/ftss/data01/PDB_FTSS/perfstat01.dbf
+/oracle/ftss/data01/PDB_FTSS/apex_data01.dbf
+/oracle/ftss/data01/CDB_FTSS/undotbs06.dbf
+/oracle/ftss/data01/PDB_FTSS/genf_data_ts01.dbf
+/oracle/ftss/data01/PDB_FTSS/genf_data_ts02.dbf
+/oracle/ftss/data01/PDB_FTSS/genf_data_ts03.dbf
+/oracle/ftss/data01/PDB_FTSS/genf_data_ts04.dbf
+
+NAME
+--------------------------------------------------------------------------------
+/oracle/ftss/data01/PDB_FTSS/genf_IDX_01.dbf
+/oracle/ftss/data01/PDB_FTSS/genf_IDX_02.dbf
+/oracle/ftss/data01/PDB_FTSS/genf_IDX_03.dbf
+/oracle/ftss/data01/PDB_FTSS/REPORTING_DATA_TS_01.dbf
+/oracle/ftss/data01/PDB_FTSS/REPORTING_DATA_TS_02.dbf
+/oracle/ftss/data01/PDB_FTSS/REPORTING_DATA_TS_03.dbf
+/oracle/ftss/data01/PDB_FTSS/REPORTING_DATA_TS_04.dbf
+/oracle/ftss/data01/PDB_FTSS/REPORTING_IDX_01.dbf
+/oracle/ftss/data01/PDB_FTSS/REPORTING_IDX_02.dbf
+/oracle/ftss/data01/PDB_FTSS/REPORTING_IDX_03.dbf
+/oracle/ftss/data01/PDB_FTSS/MOFFICE_DATA_TS01.dbf
+
+NAME
+--------------------------------------------------------------------------------
+/oracle/ftss/data01/PDB_FTSS/MOFFICE_DATA_TS02.dbf
+/oracle/ftss/data01/PDB_FTSS/MOFFICE_DATA_TS03.dbf
+/oracle/ftss/data01/PDB_FTSS/MOFFICE_DATA_TS04.dbf
+/oracle/ftss/data01/PDB_FTSS/MOFFICE_IDX_01.dbf
+/oracle/ftss/data01/PDB_FTSS/MOFFICE_IDX_02.dbf
+/oracle/ftss/data01/PDB_FTSS/MOFFICE_IDX_03.dbf
+/oracle/ftss/data01/PDB_FTSS/MOFFICE_IDX_04.dbf
+
+40 rows selected.
+
+SQL> show parameter convert
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+_convert_set_to_join                 boolean     FALSE
+db_file_name_convert                 string      /oracle/ftss/data01/CDB_FTSS,
+                                                 /oracle/FTSQ/data01/CDB_FTSQ,
+                                                 /oracle/ftss/data01/PDB_FTSS,
+                                                 /oracle/FTSQ/data01/PDB_FTSQ,
+                                                 /oracle/ftss/data01/pdbseed, /
+                                                 oracle/FTSQ/data01/pdbseed, /o
+                                                 racle/ftss/temp, /oracle/FTSQ/
+                                                 temp, /oracle/ftss/temp/CDB_FT
+                                                 SS, /oracle/FTSQ/temp/CDB_FTSQ
+log_file_name_convert                string      /oracle/ftss/redo01, /oracle/F
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+                                                 TSQ/redo01, /oracle/ftss/redo0
+                                                 2, /oracle/FTSQ/redo02
+pdb_file_name_convert                string
+SQL> set pages 500
+SQL> /
+
+NAME
+--------------------------------------------------------------------------------
+/oracle/ftss/data01/CDB_FTSS/system01.dbf
+/oracle/ftss/data01/CDB_FTSS/sysaux01.dbf
+/oracle/ftss/data01/CDB_FTSS/undotbs01.dbf
+/oracle/ftss/data01/pdbseed/system01.dbf
+/oracle/ftss/data01/CDB_FTSS/users01.dbf
+/oracle/ftss/data01/pdbseed/sysaux01.dbf
+/oracle/ftss/data01/CDB_FTSS/undotbs02.dbf
+/oracle/ftss/data01/CDB_FTSS/undotbs03.dbf
+/oracle/ftss/data01/CDB_FTSS/undotbs04.dbf
+/oracle/ftss/data01/CDB_FTSS/undotbs05.dbf
+/oracle/ftss/data01/PDB_FTSS/system01.dbf
+/oracle/ftss/data01/PDB_FTSS/sysaux01.dbf
+/oracle/ftss/data01/PDB_FTSS/user_data01.dbf
+/oracle/ftss/data01/PDB_FTSS/quest_data01.dbf
+/oracle/ftss/data01/PDB_FTSS/quest_indexes01.dbf
+/oracle/ftss/data01/PDB_FTSS/perfstat01.dbf
+/oracle/ftss/data01/PDB_FTSS/apex_data01.dbf
+/oracle/ftss/data01/CDB_FTSS/undotbs06.dbf
+/oracle/ftss/data01/PDB_FTSS/genf_data_ts01.dbf
+/oracle/ftss/data01/PDB_FTSS/genf_data_ts02.dbf
+/oracle/ftss/data01/PDB_FTSS/genf_data_ts03.dbf
+/oracle/ftss/data01/PDB_FTSS/genf_data_ts04.dbf
+/oracle/ftss/data01/PDB_FTSS/genf_IDX_01.dbf
+/oracle/ftss/data01/PDB_FTSS/genf_IDX_02.dbf
+/oracle/ftss/data01/PDB_FTSS/genf_IDX_03.dbf
+/oracle/ftss/data01/PDB_FTSS/REPORTING_DATA_TS_01.dbf
+/oracle/ftss/data01/PDB_FTSS/REPORTING_DATA_TS_02.dbf
+/oracle/ftss/data01/PDB_FTSS/REPORTING_DATA_TS_03.dbf
+/oracle/ftss/data01/PDB_FTSS/REPORTING_DATA_TS_04.dbf
+/oracle/ftss/data01/PDB_FTSS/REPORTING_IDX_01.dbf
+/oracle/ftss/data01/PDB_FTSS/REPORTING_IDX_02.dbf
+/oracle/ftss/data01/PDB_FTSS/REPORTING_IDX_03.dbf
+/oracle/ftss/data01/PDB_FTSS/MOFFICE_DATA_TS01.dbf
+/oracle/ftss/data01/PDB_FTSS/MOFFICE_DATA_TS02.dbf
+/oracle/ftss/data01/PDB_FTSS/MOFFICE_DATA_TS03.dbf
+/oracle/ftss/data01/PDB_FTSS/MOFFICE_DATA_TS04.dbf
+/oracle/ftss/data01/PDB_FTSS/MOFFICE_IDX_01.dbf
+/oracle/ftss/data01/PDB_FTSS/MOFFICE_IDX_02.dbf
+/oracle/ftss/data01/PDB_FTSS/MOFFICE_IDX_03.dbf
+/oracle/ftss/data01/PDB_FTSS/MOFFICE_IDX_04.dbf
+
+40 rows selected.
+
+SQL>
+SQL> show pdbs;
+
+    CON_ID CON_NAME                       OPEN MODE  RESTRICTED
+---------- ------------------------------ ---------- ----------
+         2 PDB$SEED                       MOUNTED
+         3 FTSS                           MOUNTED
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+oraftsq.CDB_FTSQ - env | grep ORA
+ORACLE_SID=CDB_FTSQ
+ORACLE_HOME=/oracle/FTSQ/12.1.0.2
+oraftsq.CDB_FTSQ -
+oraftsq.CDB_FTSQ -
+oraftsq.CDB_FTSQ - env | grep ORA
+ORACLE_SID=CDB_FTSQ
+ORACLE_HOME=/oracle/FTSQ/12.1.0.2
+oraftsq.CDB_FTSQ - sql
+
+SQL*Plus: Release 12.1.0.2.0 Production on Tue Jul 17 13:47:51 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+
+SQL> show parameter convert
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+_convert_set_to_join                 boolean     FALSE
+db_file_name_convert                 string      /oracle/ftss/data01/CDB_FTSS,
+                                                 /oracle/FTSQ/data01/CDB_FTSQ,
+                                                 /oracle/ftss/data01/PDB_FTSS,
+                                                 /oracle/FTSQ/data01/PDB_FTSQ,
+                                                 /oracle/ftss/data01/pdbseed, /
+                                                 oracle/FTSQ/data01/pdbseed, /o
+                                                 racle/ftss/temp, /oracle/FTSQ/
+                                                 temp, /oracle/ftss/temp/CDB_FT
+                                                 SS, /oracle/FTSQ/temp/CDB_FTSQ
+log_file_name_convert                string      /oracle/ftss/redo01, /oracle/F
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+                                                 TSQ/redo01, /oracle/ftss/redo0
+                                                 2, /oracle/FTSQ/redo02
+pdb_file_name_convert                string
+SQL> show pdbs;
+
+    CON_ID CON_NAME                       OPEN MODE  RESTRICTED
+---------- ------------------------------ ---------- ----------
+         2 PDB$SEED                       MOUNTED
+         3 FTSS                           MOUNTED
+SQL> select name from v$database ;
+
+NAME
+---------
+CDB_FTSS
+
+SQL> shu immediate
+ORA-01109: database not open
+
+
+Database dismounted.
+ORACLE instance shut down.
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+oraftsq.CDB_FTSQ - sql
+
+SQL*Plus: Release 12.1.0.2.0 Production on Tue Jul 17 13:50:28 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Connected to an idle instance.
+
+SQL> create pfile from spfile ;
+
+File created.
+
+SQL> exit
+Disconnected
+oraftsq.CDB_FTSQ - cd $ORACLE_HOME/dbs
+oraftsq.CDB_FTSQ - ls -trl
+total 120
+-rw-r--r--    1 oraftsq  dba            2992 03 Feb 2012  init.ora
+-rw-r-----    1 oraftsq  dba            7680 16 Jul 09:43 orapwCDB_FTSQ
+-rw-r-----    1 oraftsq  dba              24 17 Jul 11:11 lkCDB_FTSQ
+-rw-r-----    1 oraftsq  dba           22016 17 Jul 11:31 spfileCDB_FTSQ.ora
+-rw-r--r--    1 oraftsq  dba             528 17 Jul 11:32 _rm_dup_CDB_FTSQ.dat
+-rw-rw----    1 oraftsq  dba            1544 17 Jul 13:50 hc_CDB_FTSQ.dat
+-rw-r--r--    1 oraftsq  dba            9863 17 Jul 13:50 initCDB_FTSQ.ora
+oraftsq.CDB_FTSQ - cat initCDB_FTSQ.ora
+*.__data_transfer_cache_size=0
+CDB_FTSQ.__data_transfer_cache_size=0
+*.__db_cache_size=2192M
+CDB_FTSQ.__db_cache_size=2281701376
+*.__java_pool_size=192M
+CDB_FTSQ.__java_pool_size=201326592
+*.__large_pool_size=480M
+CDB_FTSQ.__large_pool_size=503316480
+*.__oracle_base='/oracle/FTSQ'# ORACLE_BASE set from environment
+*.__pga_aggregate_target=3G
+CDB_FTSQ.__pga_aggregate_target=3221225472
+*.__sga_target=5G
+CDB_FTSQ.__sga_target=5368709120
+*.__shared_io_pool_size=0
+CDB_FTSQ.__shared_io_pool_size=0
+*.__shared_pool_size=2G
+CDB_FTSQ.__shared_pool_size=2147483648
+*.__streams_pool_size=64M
+CDB_FTSQ.__streams_pool_size=67108864
+*._adaptive_window_consolidator_enabled=TRUE
+*._aggregation_optimization_settings=0
+*._always_anti_join='CHOOSE'
+*._always_semi_join='CHOOSE'
+*._and_pruning_enabled=TRUE
+*._b_tree_bitmap_plans=TRUE
+*._bloom_filter_enabled=TRUE
+*._bloom_folding_enabled=TRUE
+*._bloom_pruning_enabled=TRUE
+*._bloom_serial_filter='ON'
+*._complex_view_merging=TRUE
+*._compression_compatibility='12.1.0.2.0'
+*._connect_by_use_union_all='FALSE'
+*._convert_set_to_join=FALSE
+*._cost_equality_semi_join=TRUE
+*._cpu_to_io=0
+*._diag_adr_trace_dest='/oracle/FTSQ/diag/rdbms/cdb_ftsq/CDB_FTSQ/trace'
+*._dimension_skip_null=TRUE
+*._distinct_agg_optimization_gsets='CHOOSE'
+*._eliminate_common_subexpr=TRUE
+*._enable_type_dep_selectivity=TRUE
+*._fast_full_scan_enabled=TRUE
+*._first_k_rows_dynamic_proration=TRUE
+*._fix_control='13836796:0'
+*._gby_hash_aggregation_enabled=TRUE
+*._gby_vector_aggregation_enabled=TRUE
+*._generalized_pruning_enabled=TRUE
+*._globalindex_pnum_filter_enabled=TRUE
+*._gs_anti_semi_join_allowed=TRUE
+*._improved_outerjoin_card=TRUE
+*._improved_row_length_enabled=TRUE
+*._index_join_enabled=TRUE
+*._ksb_restart_policy_times='0','60','120','240'# internal update to set default
+*._left_nested_loops_random=TRUE
+*._local_communication_costing_enabled=TRUE
+*._minimal_stats_aggregation=TRUE
+*._mmv_query_rewrite_enabled=TRUE
+*._new_initial_join_orders=TRUE
+*._new_sort_cost_estimate=TRUE
+*._nlj_batching_enabled=1
+*._optim_adjust_for_part_skews=TRUE
+*._optim_enhance_nnull_detection=TRUE
+*._optim_new_default_join_sel=TRUE
+*._optim_peek_user_binds=TRUE
+*._optimizer_adaptive_cursor_sharing=TRUE
+*._optimizer_adaptive_plans=TRUE
+*._optimizer_aggr_groupby_elim=FALSE
+*._optimizer_ansi_join_lateral_enhance=TRUE
+*._optimizer_ansi_rearchitecture=TRUE
+*._optimizer_batch_table_access_by_rowid=TRUE
+*._optimizer_better_inlist_costing='ALL'
+*._optimizer_cbqt_no_size_restriction=TRUE
+*._optimizer_cluster_by_rowid=TRUE
+*._optimizer_cluster_by_rowid_batched=TRUE
+*._optimizer_cluster_by_rowid_control=129
+*._optimizer_coalesce_subqueries=TRUE
+*._optimizer_complex_pred_selectivity=TRUE
+*._optimizer_compute_index_stats=TRUE
+*._optimizer_connect_by_combine_sw=TRUE
+*._optimizer_connect_by_cost_based=TRUE
+*._optimizer_connect_by_elim_dups=TRUE
+*._optimizer_correct_sq_selectivity=TRUE
+*._optimizer_cost_based_transformation='OFF'
+*._optimizer_cost_hjsmj_multimatch=TRUE
+*._optimizer_cost_model='CHOOSE'
+*._optimizer_cube_join_enabled=TRUE
+*._optimizer_dim_subq_join_sel=TRUE
+*._optimizer_distinct_agg_transform=TRUE
+*._optimizer_distinct_elimination=TRUE
+*._optimizer_distinct_placement=TRUE
+*._optimizer_eliminate_filtering_join=TRUE
+*._optimizer_enable_density_improvements=TRUE
+*._optimizer_enable_extended_stats=TRUE
+*._optimizer_enable_table_lookup_by_nl=TRUE
+*._optimizer_enhanced_filter_push=TRUE
+*._optimizer_extend_jppd_view_types=TRUE
+*._optimizer_extended_cursor_sharing='UDO'
+*._optimizer_extended_cursor_sharing_rel='SIMPLE'
+*._optimizer_extended_stats_usage_control=192
+*._optimizer_false_filter_pred_pullup=TRUE
+*._optimizer_fast_access_pred_analysis=TRUE
+*._optimizer_fast_pred_transitivity=TRUE
+*._optimizer_filter_pred_pullup=TRUE
+*._optimizer_fkr_index_cost_bias=10
+*._optimizer_full_outer_join_to_outer=TRUE
+*._optimizer_gather_feedback=TRUE
+*._optimizer_gather_stats_on_load=TRUE
+*._optimizer_group_by_placement=TRUE
+*._optimizer_hybrid_fpwj_enabled=TRUE
+*._optimizer_improve_selectivity=TRUE
+*._optimizer_inmemory_access_path=TRUE
+*._optimizer_inmemory_autodop=TRUE
+*._optimizer_inmemory_bloom_filter=TRUE
+*._optimizer_inmemory_cluster_aware_dop=TRUE
+*._optimizer_inmemory_gen_pushable_preds=TRUE
+*._optimizer_inmemory_minmax_pruning=TRUE
+*._optimizer_inmemory_table_expansion=TRUE
+*._optimizer_interleave_jppd=TRUE
+*._optimizer_join_elimination_enabled=FALSE
+*._optimizer_join_factorization=TRUE
+*._optimizer_join_order_control=3
+*._optimizer_join_sel_sanity_check=TRUE
+*._optimizer_max_permutations=2000
+*._optimizer_mode_force=TRUE
+*._optimizer_multi_level_push_pred=TRUE
+*._optimizer_multi_table_outerjoin=TRUE
+*._optimizer_native_full_outer_join='FORCE'
+*._optimizer_new_join_card_computation=TRUE
+*._optimizer_null_accepting_semijoin=TRUE
+*._optimizer_null_aware_antijoin=TRUE
+*._optimizer_or_expansion='DEPTH'
+*._optimizer_order_by_elimination_enabled=TRUE
+*._optimizer_outer_join_to_inner=TRUE
+*._optimizer_outer_to_anti_enabled=TRUE
+*._optimizer_partial_join_eval=TRUE
+*._optimizer_proc_rate_level='BASIC'
+*._optimizer_push_down_distinct=0
+*._optimizer_push_pred_cost_based=TRUE
+*._optimizer_reduce_groupby_key=FALSE
+*._optimizer_rownum_bind_default=10
+*._optimizer_rownum_pred_based_fkr=TRUE
+*._optimizer_skip_scan_enabled=TRUE
+*._optimizer_sortmerge_join_inequality=TRUE
+*._optimizer_squ_bottomup=TRUE
+*._optimizer_star_tran_in_with_clause=TRUE
+*._optimizer_system_stats_usage=TRUE
+*._optimizer_table_expansion=TRUE
+*._optimizer_transitivity_retain=TRUE
+*._optimizer_try_st_before_jppd=TRUE
+*._optimizer_undo_cost_change='12.1.0.2'
+*._optimizer_unnest_corr_set_subq=TRUE
+*._optimizer_unnest_disjunctive_subq=TRUE
+*._optimizer_unnest_scalar_sq=TRUE
+*._optimizer_use_cbqt_star_transformation=TRUE
+*._optimizer_use_feedback=TRUE
+*._optimizer_use_gtt_session_stats=TRUE
+*._optimizer_use_histograms=TRUE
+*._optimizer_vector_transformation=TRUE
+*._or_expand_nvl_predicate=TRUE
+*._ordered_nested_loop=TRUE
+*._parallel_broadcast_enabled=TRUE
+*._partition_view_enabled=TRUE
+*._pivot_implementation_method='CHOOSE'
+*._pre_rewrite_push_pred=TRUE
+*._pred_move_around=TRUE
+*._push_join_predicate=TRUE
+*._push_join_union_view=TRUE
+*._push_join_union_view2=TRUE
+*._px_concurrent=TRUE
+*._px_cpu_autodop_enabled=TRUE
+*._px_external_table_default_stats=TRUE
+*._px_filter_parallelized=TRUE
+*._px_filter_skew_handling=TRUE
+*._px_groupby_pushdown='FORCE'
+*._px_join_skew_handling=TRUE
+*._px_minus_intersect=TRUE
+*._px_object_sampling_enabled=TRUE
+*._px_parallelize_expression=TRUE
+*._px_partial_rollup_pushdown='ADAPTIVE'
+*._px_partition_scan_enabled=TRUE
+*._px_pwg_enabled=TRUE
+*._px_replication_enabled=TRUE
+*._px_scalable_invdist=TRUE
+*._px_single_server_enabled=TRUE
+*._px_ual_serial_input=TRUE
+*._px_wif_dfo_declumping='CHOOSE'
+*._px_wif_extend_distribution_keys=TRUE
+*._query_rewrite_setopgrw_enable=TRUE
+*._remove_aggr_subquery=TRUE
+*._replace_virtual_columns=TRUE
+*._right_outer_hash_enable=TRUE
+*._selfjoin_mv_duplicates=TRUE
+*._sql_model_unfold_forloops='RUN_TIME'
+*._subquery_pruning_enabled=TRUE
+*._subquery_pruning_mv_enabled=FALSE
+*._table_scan_cost_plus_one=TRUE
+*._union_rewrite_for_gs='YES_GSET_MVS'
+*._unnest_subquery=TRUE
+*._use_column_stats_for_function=TRUE
+*._use_single_log_writer='true'
+*.audit_file_dest='/oracle/FTSQ/admin/adump'
+*.audit_trail='NONE'
+*.common_user_prefix='C##'
+*.compatible='12.1.0.2.0'
+*.connection_brokers='((TYPE=DEDICATED)(BROKERS=1))','((TYPE=EMON)(BROKERS=1))'# connection_brokers default value
+*.control_files='/oracle/FTSQ/redo01/control01.ctl','/oracle/FTSQ/redo02/control02.ctl'#Restore Controlfile
+*.core_dump_dest='/oracle/FTSQ/diag/rdbms/cdb_ftsq/CDB_FTSQ/cdump'
+*.db_block_size=8192
+*.db_cache_size=1856M
+*.db_domain=''
+*.db_file_multiblock_read_count=32
+*.db_file_name_convert='/oracle/ftss/data01/CDB_FTSS','/oracle/FTSQ/data01/CDB_FTSQ','/oracle/ftss/data01/PDB_FTSS','/oracle/FTSQ/data01/PDB_FTSQ','/oracle/ftss/data01/pdbseed','/oracle/FTSQ/data01/pdbseed','/oracle/ftss/temp','/oracle/FTSQ/temp','/oracle/ftss/temp/CDB_FTSS','/oracle/FTSQ/temp/CDB_FTSQ'
+*.db_files=2000
+*.db_flashback_retention_target=7200
+*.db_keep_cache_size=128M
+*.db_name='CDB_FTSS'#Modified by RMAN duplicate
+*.db_recovery_file_dest_size=220G
+*.db_unique_name='CDB_FTSQ'#Modified by RMAN duplicate
+*.deferred_segment_creation=FALSE
+*.diagnostic_dest='/oracle/FTSQ'
+*.dispatchers='(PROTOCOL=TCP) (SERVICE=CDB_FTSQXDB)'
+*.enable_pluggable_database=TRUE
+*.hash_area_size=2097152
+*.java_pool_size=192M
+*.job_queue_processes=10
+*.local_listener='LISTENER_FTSS'
+*.log_archive_dest_1='location=/oracle/FTSQ/arch'
+*.log_archive_format='FTSQ_%t_%s_%r.arc'
+*.log_buffer=12192K# log buffer update
+*.log_file_name_convert='/oracle/ftss/redo01','/oracle/FTSQ/redo01','/oracle/ftss/redo02','/oracle/FTSQ/redo02'
+*.nls_language='ENGLISH'
+*.nls_territory='UNITED KINGDOM'
+*.O7_DICTIONARY_ACCESSIBILITY=TRUE
+*.open_cursors=500
+*.open_links=8
+*.open_links_per_instance=8
+*.optimizer_adaptive_plans=FALSE
+*.optimizer_adaptive_statistics=FALSE
+*.optimizer_dynamic_sampling=2
+*.optimizer_mode='ALL_ROWS'
+*.optimizer_secure_view_merging=FALSE
+*.parallel_adaptive_multi_user=TRUE
+*.parallel_max_servers=400
+*.parallel_servers_target=200
+*.pga_aggregate_limit=8G
+*.pga_aggregate_target=3G
+*.plsql_warnings='DISABLE:ALL'# PL/SQL warnings at init.ora
+*.processes=800
+*.query_rewrite_enabled='TRUE'
+*.query_rewrite_integrity='TRUSTED'
+*.recyclebin='OFF'
+*.remote_login_passwordfile='EXCLUSIVE'
+*.resource_manager_plan=''
+*.result_cache_max_result=50
+*.result_cache_max_size=50M
+*.sec_case_sensitive_logon=FALSE#Deprecate parameter
+*.session_cached_cursors=500
+*.sga_max_size=5G# internally adjusted
+*.sga_target=5G
+*.shared_pool_size=2G
+*.skip_unusable_indexes=TRUE
+*.sort_area_size=1048576
+*.standby_file_management='AUTO'
+*.star_transformation_enabled='TRUE'
+*.streams_pool_size=64M
+*.undo_retention=3600
+*.undo_tablespace='UNDOTBS1'
+oraftsq.CDB_FTSQ - pwd
+/oracle/FTSQ/12.1.0.2/dbs
+oraftsq.CDB_FTSQ - ls -trl
+total 120
+-rw-r--r--    1 oraftsq  dba            2992 03 Feb 2012  init.ora
+-rw-r-----    1 oraftsq  dba            7680 16 Jul 09:43 orapwCDB_FTSQ
+-rw-r-----    1 oraftsq  dba              24 17 Jul 11:11 lkCDB_FTSQ
+-rw-r-----    1 oraftsq  dba           22016 17 Jul 11:31 spfileCDB_FTSQ.ora
+-rw-r--r--    1 oraftsq  dba             528 17 Jul 11:32 _rm_dup_CDB_FTSQ.dat
+-rw-rw----    1 oraftsq  dba            1544 17 Jul 13:50 hc_CDB_FTSQ.dat
+-rw-r--r--    1 oraftsq  dba            9863 17 Jul 13:50 initCDB_FTSQ.ora
+oraftsq.CDB_FTSQ - cat initCDB_FTSQ.ora | grep -i control
+*._fix_control='13836796:0'
+*._optimizer_cluster_by_rowid_control=129
+*._optimizer_extended_stats_usage_control=192
+*._optimizer_join_order_control=3
+*.control_files='/oracle/FTSQ/redo01/control01.ctl','/oracle/FTSQ/redo02/control02.ctl'#Restore Controlfile
+oraftsq.CDB_FTSQ - rm /oracle/FTSQ/redo01/control01.ctl /oracle/FTSQ/redo02/control02.ctl
+oraftsq.CDB_FTSQ - df -gt | grep -i ftsq
+/dev/ftsqlv00     15.00      0.10     14.90    1% /oracle/FTSQ
+/dev/ftsqlv01     30.00     13.96     16.04   47% /oracle/FTSQ/12.1.0.2
+/dev/ftsqlv02      5.00      0.02      4.98    1% /oracle/FTSQ/redo01
+/dev/ftsqlv03      5.00      0.02      4.98    1% /oracle/FTSQ/redo02
+/dev/ftsqlv04    300.00      0.55    299.45    1% /oracle/FTSQ/arch
+/dev/ftsqlv05     50.00      0.20     49.80    1% /oracle/FTSQ/temp
+/dev/ftsqlv06    500.00      1.55    498.45    1% /oracle/FTSQ/data01
+oraftsq.CDB_FTSQ - cd /oracle/FTSQ/redo01
+oraftsq.CDB_FTSQ - racle/FTSQ/arch /dev/ftsqlv06    500.00      1.55    498.45    1% /oracle/FTSQ/data01               <
+ls: 0653-341 The file 500.00 does not exist.
+ls: 0653-341 The file 1.55 does not exist.
+ls: 0653-341 The file 498.45 does not exist.
+ls: 0653-341 The file 1% does not exist.
+brw-rw----    1 root     system       45,  7 11 Jul 16:33 /dev/ftsqlv06
+
+/oracle/FTSQ/arch:
+total 0
+
+/oracle/FTSQ/data01:
+total 0
+drwxr-xr-x    2 oraftsq  dba             256 17 Jul 09:54 CDB_FTSQ
+drwxr-xr-x    2 oraftsq  dba             256 17 Jul 09:55 PDB_FTSQ
+drwxr-xr-x    2 oraftsq  dba             256 17 Jul 11:31 pdbseed
+
+/oracle/FTSQ/redo02:
+total 0
+
+/oracle/FTSQ/redo01:
+total 0
+oraftsq.CDB_FTSQ - clear
+oraftsq.CDB_FTSQ - cd /oracle/FTSQ/redo01
+oraftsq.CDB_FTSQ - df -gt | grep -i ftsq
+/dev/ftsqlv00     15.00      0.10     14.90    1% /oracle/FTSQ
+/dev/ftsqlv01     30.00     13.96     16.04   47% /oracle/FTSQ/12.1.0.2
+/dev/ftsqlv02      5.00      0.02      4.98    1% /oracle/FTSQ/redo01
+/dev/ftsqlv03      5.00      0.02      4.98    1% /oracle/FTSQ/redo02
+/dev/ftsqlv04    300.00      0.55    299.45    1% /oracle/FTSQ/arch
+/dev/ftsqlv05     50.00      0.20     49.80    1% /oracle/FTSQ/temp
+/dev/ftsqlv06    500.00      1.55    498.45    1% /oracle/FTSQ/data01
+oraftsq.CDB_FTSQ - cd /oracle/FTSQ/data01
+oraftsq.CDB_FTSQ - ls -tlr
+total 0
+drwxr-xr-x    2 oraftsq  dba             256 17 Jul 09:54 CDB_FTSQ
+drwxr-xr-x    2 oraftsq  dba             256 17 Jul 09:55 PDB_FTSQ
+drwxr-xr-x    2 oraftsq  dba             256 17 Jul 11:31 pdbseed
+oraftsq.CDB_FTSQ - du -sm *
+0.00    CDB_FTSQ
+0.00    PDB_FTSQ
+1000.02 pdbseed
+oraftsq.CDB_FTSQ - cd pdbseed
+oraftsq.CDB_FTSQ - ls -tlr
+total 2048048
+-rw-r-----    1 oraftsq  dba       283123712 17 Jul 11:32 system01.dbf
+-rw-r-----    1 oraftsq  dba       765468672 17 Jul 11:32 sysaux01.dbf
+oraftsq.CDB_FTSQ - rm system01.dbf sysaux01.dbf
+oraftsq.CDB_FTSQ - pwd
+/oracle/FTSQ/data01/pdbseed
+oraftsq.CDB_FTSQ - ls -trl
+total 0
+oraftsq.CDB_FTSQ - cd
+oraftsq.CDB_FTSQ -
+oraftsq.CDB_FTSQ - df -gt
+Filesystem    GB blocks      Used      Free %Used Mounted on
+/dev/hd4           2.00      1.65      0.35   83% /
+/dev/hd2           7.00      3.95      3.05   57% /usr
+/dev/hd9var        3.00      1.38      1.62   47% /var
+/dev/hd3          11.00      1.65      9.35   15% /tmp
+/dev/hd1           2.00      0.38      1.62   20% /home
+/dev/hd11admin      1.00      0.00      1.00    1% /admin
+/proc                 -         -         -    - /proc
+/dev/hd10opt       2.00      0.91      1.09   46% /opt
+/dev/livedump      1.00      0.00      1.00    1% /var/adm/ras/livedump
+/dev/rootlv01      1.00      0.00      1.00    1% /rwe
+/dev/rootlv02      2.00      0.07      1.93    4% /rwe/log
+/dev/rootlv03      1.00      0.00      1.00    1% /rwe/core
+/dev/rootlv04      1.00      0.04      0.96    4% /UC4
+/dev/patrollv      2.00      1.36      0.64   69% /opt/patrol
+/dev/varnmonlv      3.00      0.19      2.81    7% /var/nmon
+/dev/moffblv1     30.00     14.34     15.66   48% /oracle/CDB_MOFFB/12.1.0.2
+/dev/moffblv2      5.00      2.02      2.98   41% /oracle/CDB_MOFFB/redo01
+/dev/moffblv3      5.00      2.02      2.98   41% /oracle/CDB_MOFFB/redo02
+/dev/moffblv4    690.00    288.85    401.15   42% /oracle/CDB_MOFFB/arch
+/dev/moffblv5     50.00      1.77     48.23    4% /oracle/CDB_MOFFB/temp
+/dev/moffblv6    350.00    114.58    235.42   33% /oracle/CDB_MOFFB/data01
+/dev/moffblv7   2200.00   2068.45    131.55   95% /oracle/PDB_MOFFB/data01
+/dev/moffblv8   1400.00   1236.69    163.31   89% /oracle/PDB_MOFFB/data02
+/dev/moffblv9   1000.00    786.13    213.87   79% /oracle/PDB_MOFFB/data03
+/dev/moffblv10   1400.00   1291.59    108.41   93% /oracle/PDB_MOFFB/data04
+/dev/moffblv11      5.00      0.02      4.98    1% /oracle/MOFFB/app/temp
+/dev/ftsdlv00     15.00      0.12     14.88    1% /oracle/FTSD
+/dev/cmoffpmslv00     30.00     12.89     17.11   43% /oracle/CMOFFPMS/12.1.0.2
+/dev/cmoffpmslv01      5.00      2.02      2.98   41% /oracle/CMOFFPMS/redo01
+/dev/cmoffpmslv02      5.00      2.02      2.98   41% /oracle/CMOFFPMS/redo02
+/dev/cmoffpmslv03     60.00      7.95     52.05   14% /oracle/CMOFFPMS/temp
+/dev/cmoffpmslv04    250.00    114.60    135.40   46% /oracle/CMOFFPMS/data01
+/dev/cmoffpmslv05    700.00     77.02    622.98   12% /oracle/CMOFFPMS/arch
+/dev/cmoffpmslv06   2200.00   2068.49    131.51   95% /oracle/MOFFPMS/data01
+/dev/cmoffpmslv07   1500.00   1236.82    263.18   83% /oracle/MOFFPMS/data02
+/dev/cmoffpmslv08   1000.00    786.15    213.85   79% /oracle/MOFFPMS/data03
+/dev/cmoffpmslv09   1500.00   1291.73    208.27   87% /oracle/MOFFPMS/data04
+/dev/oemlv00      15.00      0.06     14.94    1% /u01/OEM/oracle
+/dev/ftsdlv01     30.00     14.39     15.61   48% /oracle/FTSD/12.1.0.2
+/dev/ftsdlv02      5.00      2.04      2.96   41% /oracle/FTSD/redo01
+/dev/ftsdlv03      5.00      2.04      2.96   41% /oracle/FTSD/redo02
+/dev/ftsdlv04    300.00      7.82    292.18    3% /oracle/FTSD/arch
+/dev/ftsdlv05     50.00     10.22     39.78   21% /oracle/FTSD/temp
+/dev/ftsdlv06    500.00    388.09    111.91   78% /oracle/FTSD/data01
+/dev/ftsslv00     15.00      0.13     14.87    1% /oracle/ftss
+/dev/ftsslv01     30.00     13.78     16.22   46% /oracle/ftss/12.1.0.2
+/dev/ftsslv02      5.00      2.04      2.96   41% /oracle/ftss/redo01
+/dev/ftsslv03      5.00      2.04      2.96   41% /oracle/ftss/redo02
+/dev/ftsslv04    300.00      6.76    293.24    3% /oracle/ftss/arch
+/dev/ftsslv05     50.00     40.21      9.79   81% /oracle/ftss/temp
+/dev/ftsslv06    500.00    388.11    111.89   78% /oracle/ftss/data01
+/dev/ftsqlv00     15.00      0.10     14.90    1% /oracle/FTSQ
+/dev/ftsqlv01     30.00     13.96     16.04   47% /oracle/FTSQ/12.1.0.2
+/dev/ftsqlv02      5.00      0.02      4.98    1% /oracle/FTSQ/redo01
+/dev/ftsqlv03      5.00      0.02      4.98    1% /oracle/FTSQ/redo02
+/dev/ftsqlv04    300.00      0.55    299.45    1% /oracle/FTSQ/arch
+/dev/ftsqlv05     50.00      0.20     49.80    1% /oracle/FTSQ/temp
+/dev/ftsqlv06    500.00      0.58    499.42    1% /oracle/FTSQ/data01
+/dev/moffpmqlv00     15.00      0.06     14.94    1% /oracle/MOFFPMQ
+/dev/moffpmqlv01     30.00     13.02     16.98   44% /oracle/MOFFPMQ/12.1.0.2
+/dev/moffpmqlv02   2190.00   2068.51    121.49   95% /oracle/MOFFPMQ/data01
+/dev/moffpmqlv03   1480.00   1295.80    184.20   88% /oracle/MOFFPMQ/data02
+/dev/moffpmqlv04    947.00    796.08    150.92   85% /oracle/MOFFPMQ/data03
+/dev/moffpmqlv05   1450.00   1365.68     84.32   95% /oracle/MOFFPMQ/data04
+/dev/moffpmqlv06      8.00      2.03      5.97   26% /oracle/MOFFPMQ/redo01
+/dev/moffpmqlv07      8.00      2.03      5.97   26% /oracle/MOFFPMQ/redo02
+/dev/moffpmqlv08    700.00     77.27    622.73   12% /oracle/MOFFPMQ/arch
+oraftsq.CDB_FTSQ - cd $ORACLE_HOME/dbs
+oraftsq.CDB_FTSQ - ls -trl
+total 120
+-rw-r--r--    1 oraftsq  dba            2992 03 Feb 2012  init.ora
+-rw-r-----    1 oraftsq  dba            7680 16 Jul 09:43 orapwCDB_FTSQ
+-rw-r-----    1 oraftsq  dba              24 17 Jul 11:11 lkCDB_FTSQ
+-rw-r-----    1 oraftsq  dba           22016 17 Jul 11:31 spfileCDB_FTSQ.ora
+-rw-r--r--    1 oraftsq  dba             528 17 Jul 11:32 _rm_dup_CDB_FTSQ.dat
+-rw-rw----    1 oraftsq  dba            1544 17 Jul 13:50 hc_CDB_FTSQ.dat
+-rw-r--r--    1 oraftsq  dba            9863 17 Jul 13:50 initCDB_FTSQ.ora
+oraftsq.CDB_FTSQ - mv initCDB_FTSQ.ora initCDB_FTSQ.ora_old
+oraftsq.CDB_FTSQ - vi initCDB_FTSQ.ora
+oraftsq.CDB_FTSQ - cp initCDB_FTSQ.ora_old initCDB_FTSQ.ora
+oraftsq.CDB_FTSQ - vi initCDB_FTSQ.ora
+oraftsq.CDB_FTSQ - opatch lsinventory  | grep applied
+Patch  20492076     : applied on Fri Jun 15 17:32:41 BST 2018
+Patch  20839705     : applied on Fri Jun 15 17:26:12 BST 2018
+Patch  21283337     : applied on Fri Jun 15 17:17:25 BST 2018
+Patch  21553593     : applied on Fri Jun 15 17:13:17 BST 2018
+Patch  21117072     : applied on Fri Jun 15 17:08:17 BST 2018
+Patch  26925263     : applied on Fri Jun 15 17:02:59 BST 2018
+oraftsq.CDB_FTSQ - sql
+
+SQL*Plus: Release 12.1.0.2.0 Production on Tue Jul 17 14:07:19 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Connected to an idle instance.
+
+SQL> create spfile from pfile ;
+
+File created.
+
+SQL> startup nomount
+ORA-32004: obsolete or deprecated parameter(s) specified for RDBMS instance
+ORACLE instance started.
+
+Total System Global Area 5368709120 bytes
+Fixed Size                  3795712 bytes
+Variable Size            2936014080 bytes
+Database Buffers         2415919104 bytes
+Redo Buffers               12980224 bytes
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+oraftsq.CDB_FTSQ - tnsping FTSS
+
+TNS Ping Utility for IBM/AIX RISC System/6000: Version 12.1.0.2.0 - Production on 17-JUL-2018 14:10:46
+
+Copyright (c) 1997, 2014, Oracle.  All rights reserved.
+
+Used parameter files:
+
+
+Used TNSNAMES adapter to resolve the alias
+Attempting to contact (DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = rs294a)(PORT = 1531))) (CONNECT_DATA = (SERVICE_NAME = FTSS)))
+OK (10 msec)
+oraftsq.CDB_FTSQ - cd $ORACLE_HOME/net*/admin
+oraftsq.CDB_FTSQ - ls -trl
+total 40
+-rw-r--r--    1 oraftsq  dba             373 28 Dec 2013  shrept.lst
+drwxr-xr-x    2 oraftsq  dba             256 15 Jun 15:13 samples
+-rw-r--r--    1 oraftsq  dba             961 13 Jul 16:17 tnsnames1807134PM1701.bak
+-rw-r--r--    1 oraftsq  dba            1137 13 Jul 16:52 tnsnames.ora
+-rw-r--r--    1 oraftsq  dba             405 13 Jul 17:46 listener.ora_old
+-rw-r--r--    1 oraftsq  dba             268 16 Jul 09:29 listener.ora
+oraftsq.CDB_FTSQ - cat tnsnames.ora
+LISTENER_FTSS =
+  (ADDRESS = (PROTOCOL = TCP)(HOST = rs294a)(PORT = 1531))
+
+RMANP =
+  (DESCRIPTION =
+      (ADDRESS_LIST =
+         (ADDRESS = (PROTOCOL = TCP)(HOST = 10.174.6.153)(PORT = 1522))
+      )
+      (CONNECT_DATA = (SID = RMANP)
+      )
+  )
+MOFFCP =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = rs282a.npower.com)(PORT = 1525))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (ORACLE_SID = MOFFCP)
+    )
+  )
+
+FTSS =
+  (DESCRIPTION =
+    (ADDRESS_LIST =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = rs294a)(PORT = 1531))
+    )
+    (CONNECT_DATA =
+      (SERVICE_NAME = FTSS)
+    )
+  )
+
+CDB_FTSS =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = rs294a)(PORT = 1531))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (ORACLE_SID = CDB_FTSS)
+    )
+  )
+
+CDB_FTSD =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = rs294a)(PORT = 1527))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (ORACLE_SID = CDB_FTSD)
+    )
+  )
+
+CDB_FTSQ =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = rs294a)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (ORACLE_SID = CDB_FTSQ)
+    )
+  )
+oraftsq.CDB_FTSQ - rman target sys/notsys@CDB_FTSS auxiliary /
+
+Recovery Manager: Release 12.1.0.2.0 - Production on Tue Jul 17 14:11:33 2018
+
+Copyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.
+
+connected to target database: CDB_FTSS (DBID=2842290229)
+connected to auxiliary database: CDB_FTSS (not mounted)
+
+RMAN>
+
+Recovery Manager complete.
+oraftsq.CDB_FTSQ - pwd
+/oracle/FTSQ/12.1.0.2/network/admin
+oraftsq.CDB_FTSQ - ls -trl
+total 40
+-rw-r--r--    1 oraftsq  dba             373 28 Dec 2013  shrept.lst
+drwxr-xr-x    2 oraftsq  dba             256 15 Jun 15:13 samples
+-rw-r--r--    1 oraftsq  dba             961 13 Jul 16:17 tnsnames1807134PM1701.bak
+-rw-r--r--    1 oraftsq  dba            1137 13 Jul 16:52 tnsnames.ora
+-rw-r--r--    1 oraftsq  dba             405 13 Jul 17:46 listener.ora_old
+-rw-r--r--    1 oraftsq  dba             268 16 Jul 09:29 listener.ora
+oraftsq.CDB_FTSQ - sql
+
+SQL*Plus: Release 12.1.0.2.0 Production on Tue Jul 17 14:11:52 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+
+SQL> shu immediate
+ORA-01507: database not mounted
+
+
+ORACLE instance shut down.
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+oraftsq.CDB_FTSQ - cd $ORACLE_HOME/dbs
+oraftsq.CDB_FTSQ - ls -tlr
+total 144
+-rw-r--r--    1 oraftsq  dba            2992 03 Feb 2012  init.ora
+-rw-r-----    1 oraftsq  dba            7680 16 Jul 09:43 orapwCDB_FTSQ
+-rw-r-----    1 oraftsq  dba              24 17 Jul 11:11 lkCDB_FTSQ
+-rw-r--r--    1 oraftsq  dba             528 17 Jul 11:32 _rm_dup_CDB_FTSQ.dat
+-rw-r--r--    1 oraftsq  dba            9863 17 Jul 13:50 initCDB_FTSQ.ora_old
+-rw-r--r--    1 oraftsq  dba            9867 17 Jul 14:06 initCDB_FTSQ.ora
+-rw-r-----    1 oraftsq  dba           20992 17 Jul 14:07 spfileCDB_FTSQ.ora
+-rw-rw----    1 oraftsq  dba            1544 17 Jul 14:12 hc_CDB_FTSQ.dat
+oraftsq.CDB_FTSQ - mv initCDB_FTSQ.ora initCDB_FTSQ.ora_FTSD
+oraftsq.CDB_FTSQ - mv initCDB_FTSQ.ora_old initCDB_FTSQ.ora
+oraftsq.CDB_FTSQ - vi initCDB_FTSQ.ora
+oraftsq.CDB_FTSQ - sql
+
+SQL*Plus: Release 12.1.0.2.0 Production on Tue Jul 17 14:12:56 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Connected to an idle instance.
+
+SQL> create pfile from spfile ;
+
+File created.
+
+SQL> startup nomount
+ORA-32004: obsolete or deprecated parameter(s) specified for RDBMS instance
+ORACLE instance started.
+
+Total System Global Area 5368709120 bytes
+Fixed Size                  3795712 bytes
+Variable Size            2936014080 bytes
+Database Buffers         2415919104 bytes
+Redo Buffers               12980224 bytes
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+oraftsq.CDB_FTSQ - sql
+
+SQL*Plus: Release 12.1.0.2.0 Production on Tue Jul 17 14:13:47 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+
+SQL> show parameter db_name
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+db_name                              string      CDB_FTSS
+SQL> show parameter convert
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+_convert_set_to_join                 boolean     FALSE
+db_file_name_convert                 string      /oracle/FTSD/data01/CDB_FTSD,
+                                                 /oracle/FTSQ/data01/CDB_FTSQ,
+                                                 /oracle/FTSD/data01/PDB_FTSD,
+                                                 /oracle/FTSQ/data01/PDB_FTSQ,
+                                                 /oracle/FTSD/data01/pdbseed, /
+                                                 oracle/FTSQ/data01/pdbseed, /o
+                                                 racle/FTSD/temp, /oracle/FTSQ/
+                                                 temp, /oracle/FTSD/temp/CDB_FT
+                                                 SD, /oracle/FTSQ/temp/CDB_FTSQ
+log_file_name_convert                string      /oracle/FTSD/redo01, /oracle/F
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+                                                 TSQ/redo01, /oracle/FTSD/redo0
+                                                 2, /oracle/FTSQ/redo02
+pdb_file_name_convert                string
+SQL> Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+oraftsq.CDB_FTSQ - clear
+oraftsq.CDB_FTSQ - rman target sys/notsys@CDB_FTSS
+
+Recovery Manager: Release 12.1.0.2.0 - Production on Tue Jul 17 14:14:44 2018
+
+Copyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.
+
+connected to target database: CDB_FTSS (DBID=2842290229)
+
+RMAN> connect auxilliary /
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "identifier": expecting one of: "auxiliary, catalog, target"
+RMAN-01008: the bad identifier was: auxilliary
+RMAN-01007: at line 1 column 9 file: standard input
+
+RMAN> connect auxiliary /
+
+connected to auxiliary database: CDB_FTSS (not mounted)
+
+RMAN> show akk;
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "identifier": expecting one of: "all, archivelog, auxiliary, auxname, backup, channel, compression, controlfile, datafile, db_unique_name, default, device, encryption, exclude, incremental, maxsetsize, retention, snapshot, "
+RMAN-01008: the bad identifier was: akk
+RMAN-01007: at line 1 column 6 file: standard input
+
+RMAN>
+
+RMAN> sow all;
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "identifier": expecting one of: "advise, allocate, alter, analyze, associate statistics, audit, backup, begin, @, call, catalog, change, comment, commit, configure, connect, convert, copy, create, create catalog, create global, create script, create virtual, crosscheck, declare, delete, delete from, describe, describe catalog, disassociate statistics, drop, drop catalog, drop database, duplicate, exit, explain plan, flashback, flashback table, grant, grant catalog, grant register, host, import, insert, list, lock, merge, mount, noaudit, open, print, purge, quit, recover, register, release, rename, repair, replace, report, "
+RMAN-01008: the bad identifier was: sow
+RMAN-01007: at line 2 column 1 file: standard input
+
+RMAN> show all;
+
+using target database control file instead of recovery catalog
+RMAN configuration parameters for database with db_unique_name CDB_FTSS are:
+CONFIGURE RETENTION POLICY TO REDUNDANCY 1; # default
+CONFIGURE BACKUP OPTIMIZATION OFF; # default
+CONFIGURE DEFAULT DEVICE TYPE TO DISK; # default
+CONFIGURE CONTROLFILE AUTOBACKUP ON;
+CONFIGURE CONTROLFILE AUTOBACKUP FORMAT FOR DEVICE TYPE DISK TO '%F'; # default
+CONFIGURE DEVICE TYPE DISK PARALLELISM 1 BACKUP TYPE TO BACKUPSET; # default
+CONFIGURE DATAFILE BACKUP COPIES FOR DEVICE TYPE DISK TO 1; # default
+CONFIGURE ARCHIVELOG BACKUP COPIES FOR DEVICE TYPE DISK TO 1; # default
+CONFIGURE MAXSETSIZE TO UNLIMITED; # default
+CONFIGURE ENCRYPTION FOR DATABASE OFF; # default
+CONFIGURE ENCRYPTION ALGORITHM 'AES128'; # default
+CONFIGURE COMPRESSION ALGORITHM 'BASIC' AS OF RELEASE 'DEFAULT' OPTIMIZE FOR LOAD TRUE ; # default
+CONFIGURE RMAN OUTPUT TO KEEP FOR 7 DAYS; # default
+CONFIGURE ARCHIVELOG DELETION POLICY TO NONE; # default
+CONFIGURE SNAPSHOT CONTROLFILE NAME TO '/oracle/ftss/12.1.0.2/dbs/snapcf_CDB_FTSS.f'; # default
+
+RMAN> CONFIGURE DEVICE TYPE DISK PARALLELISM 2 BACKUP TYPE TO BACKUPSET;
+
+new RMAN configuration parameters:
+CONFIGURE DEVICE TYPE DISK PARALLELISM 2 BACKUP TYPE TO BACKUPSET;
+new RMAN configuration parameters are successfully stored
+
+RMAN> duplicate target database to CDB_FTSQ from active database
+user interrupt received
+
+user interrupt received
+
+user interrupt received
+
+
+Recovery Manager complete.
+oraftsq.CDB_FTSQ -
+$ sudo su  - oraftsq
+oraftsq.CDB_FTSQ - pwd
+/home/oraftsq
+oraftsq.CDB_FTSQ - cd $ORACLE_HOME/dbs
+oraftsq.CDB_FTSQ - ls -trl
+total 144
+-rw-r--r--    1 oraftsq  dba            2992 03 Feb 2012  init.ora
+-rw-r-----    1 oraftsq  dba            7680 16 Jul 09:43 orapwCDB_FTSQ
+-rw-r-----    1 oraftsq  dba              24 17 Jul 11:11 lkCDB_FTSQ
+-rw-r--r--    1 oraftsq  dba             528 17 Jul 11:32 _rm_dup_CDB_FTSQ.dat
+-rw-r--r--    1 oraftsq  dba            9867 17 Jul 14:06 initCDB_FTSQ.ora_FTSD
+-rw-r-----    1 oraftsq  dba           20992 17 Jul 14:07 spfileCDB_FTSQ.ora
+-rw-r--r--    1 oraftsq  dba            9863 17 Jul 14:13 initCDB_FTSQ.ora
+-rw-rw----    1 oraftsq  dba            1544 17 Jul 14:15 hc_CDB_FTSQ.dat
+oraftsq.CDB_FTSQ - vi initCDB_FTSQ.ora
+oraftsq.CDB_FTSQ - sql
+
+SQL*Plus: Release 12.1.0.2.0 Production on Tue Jul 17 14:18:12 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+
+SQL> shu abort
+ORACLE instance shut down.
+SQL> create spfile from pfile ;
+
+File created.
+
+SQL> Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+oraftsq.CDB_FTSQ - sql
+
+SQL*Plus: Release 12.1.0.2.0 Production on Tue Jul 17 14:18:35 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Connected to an idle instance.
+
+SQL> startup nomount
+ORA-32004: obsolete or deprecated parameter(s) specified for RDBMS instance
+ORACLE instance started.
+
+Total System Global Area 5368709120 bytes
+Fixed Size                  3795712 bytes
+Variable Size            2936014080 bytes
+Database Buffers         2415919104 bytes
+Redo Buffers               12980224 bytes
+SQL> show parameter db_name
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+db_name                              string      CDB_FTSQ
+SQL> Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+oraftsq.CDB_FTSQ - rman target sys/notsys@CDB_FTSS auxiliary /
+
+Recovery Manager: Release 12.1.0.2.0 - Production on Tue Jul 17 14:19:15 2018
+
+Copyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.
+
+connected to target database: CDB_FTSS (DBID=2842290229)
+connected to auxiliary database: CDB_FTSQ (not mounted)
+
+RMAN> show all ;
+
+using target database control file instead of recovery catalog
+RMAN configuration parameters for database with db_unique_name CDB_FTSS are:
+CONFIGURE RETENTION POLICY TO REDUNDANCY 1; # default
+CONFIGURE BACKUP OPTIMIZATION OFF; # default
+CONFIGURE DEFAULT DEVICE TYPE TO DISK; # default
+CONFIGURE CONTROLFILE AUTOBACKUP ON;
+CONFIGURE CONTROLFILE AUTOBACKUP FORMAT FOR DEVICE TYPE DISK TO '%F'; # default
+CONFIGURE DEVICE TYPE DISK PARALLELISM 2 BACKUP TYPE TO BACKUPSET;
+CONFIGURE DATAFILE BACKUP COPIES FOR DEVICE TYPE DISK TO 1; # default
+CONFIGURE ARCHIVELOG BACKUP COPIES FOR DEVICE TYPE DISK TO 1; # default
+CONFIGURE MAXSETSIZE TO UNLIMITED; # default
+CONFIGURE ENCRYPTION FOR DATABASE OFF; # default
+CONFIGURE ENCRYPTION ALGORITHM 'AES128'; # default
+CONFIGURE COMPRESSION ALGORITHM 'BASIC' AS OF RELEASE 'DEFAULT' OPTIMIZE FOR LOAD TRUE ; # default
+CONFIGURE RMAN OUTPUT TO KEEP FOR 7 DAYS; # default
+CONFIGURE ARCHIVELOG DELETION POLICY TO NONE; # default
+CONFIGURE SNAPSHOT CONTROLFILE NAME TO '/oracle/ftss/12.1.0.2/dbs/snapcf_CDB_FTSS.f'; # default
+
+RMAN> duplicate target database to CDB_FTSQ from active database;
+
+Starting Duplicate Db at 17-JUL-18
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-03002: failure of Duplicate Db command at 07/17/2018 14:19:44
+RMAN-05501: aborting duplication of target database
+RMAN-05610: Must specify a username for auxiliary connection when using active duplicate
+
+RMAN>
+
+Recovery Manager complete.
+oraftsq.CDB_FTSQ - rman target sys/notsys@CDB_FTSS
+
+Recovery Manager: Release 12.1.0.2.0 - Production on Tue Jul 17 14:19:57 2018
+
+Copyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.
+
+connected to target database: CDB_FTSS (DBID=2842290229)
+
+RMAN> connect auxiliary sys/notsys
+
+connected to auxiliary database: CDB_FTSQ (not mounted)
+
+RMAN> duplicate target database to CDB_FTSQ from active database;
+
+Starting Duplicate Db at 17-JUL-18
+using target database control file instead of recovery catalog
+allocated channel: ORA_AUX_DISK_1
+channel ORA_AUX_DISK_1: SID=1145 device type=DISK
+allocated channel: ORA_AUX_DISK_2
+channel ORA_AUX_DISK_2: SID=1189 device type=DISK
+current log archived
+
+contents of Memory Script:
+{
+   sql clone "alter system set  db_name =
+''CDB_FTSS'' comment=
+''Modified by RMAN duplicate'' scope=spfile";
+   sql clone "alter system set  db_unique_name =
+''CDB_FTSQ'' comment=
+''Modified by RMAN duplicate'' scope=spfile";
+   shutdown clone immediate;
+   startup clone force nomount
+   restore clone from service  'CDB_FTSS' primary controlfile;
+   alter clone database mount;
+}
+executing Memory Script
+
+sql statement: alter system set  db_name =  ''CDB_FTSS'' comment= ''Modified by RMAN duplicate'' scope=spfile
+
+sql statement: alter system set  db_unique_name =  ''CDB_FTSQ'' comment= ''Modified by RMAN duplicate'' scope=spfile
+
+Oracle instance shut down
+
+Oracle instance started
+
+Total System Global Area    5368709120 bytes
+
+Fixed Size                     3795712 bytes
+Variable Size               2936014080 bytes
+Database Buffers            2415919104 bytes
+Redo Buffers                  12980224 bytes
+
+Starting restore at 17-JUL-18
+allocated channel: ORA_AUX_DISK_1
+channel ORA_AUX_DISK_1: SID=1145 device type=DISK
+allocated channel: ORA_AUX_DISK_2
+channel ORA_AUX_DISK_2: SID=1189 device type=DISK
+
+channel ORA_AUX_DISK_1: starting datafile backup set restore
+channel ORA_AUX_DISK_1: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_1: restoring control file
+channel ORA_AUX_DISK_1: restore complete, elapsed time: 00:00:02
+output file name=/oracle/FTSQ/redo01/control01.ctl
+output file name=/oracle/FTSQ/redo02/control02.ctl
+Finished restore at 17-JUL-18
+
+database mounted
+Oracle instance started
+
+Total System Global Area    5368709120 bytes
+
+Fixed Size                     3795712 bytes
+Variable Size               2936014080 bytes
+Database Buffers            2415919104 bytes
+Redo Buffers                  12980224 bytes
+
+contents of Memory Script:
+{
+   sql clone "alter system set  db_name =
+''CDB_FTSQ'' comment=
+''Reset to original value by RMAN'' scope=spfile";
+   sql clone "alter system reset  db_unique_name scope=spfile";
+   shutdown clone immediate;
+}
+executing Memory Script
+
+sql statement: alter system set  db_name =  ''CDB_FTSQ'' comment= ''Reset to original value by RMAN'' scope=spfile
+
+sql statement: alter system reset  db_unique_name scope=spfile
+
+Oracle instance shut down
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-03002: failure of Duplicate Db command at 07/17/2018 14:21:18
+RMAN-05501: aborting duplication of target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/MOFFICE_IDX_04.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/MOFFICE_IDX_03.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/MOFFICE_IDX_02.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/MOFFICE_IDX_01.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/MOFFICE_DATA_TS04.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/MOFFICE_DATA_TS03.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/MOFFICE_DATA_TS02.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/MOFFICE_DATA_TS01.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/REPORTING_IDX_03.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/REPORTING_IDX_02.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/REPORTING_IDX_01.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/REPORTING_DATA_TS_04.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/REPORTING_DATA_TS_03.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/REPORTING_DATA_TS_02.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/REPORTING_DATA_TS_01.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/genf_IDX_03.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/genf_IDX_02.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/genf_IDX_01.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/genf_data_ts04.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/genf_data_ts03.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/genf_data_ts02.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/genf_data_ts01.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/CDB_FTSS/undotbs06.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/apex_data01.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/perfstat01.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/quest_indexes01.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/quest_data01.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/user_data01.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/sysaux01.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/PDB_FTSS/system01.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/CDB_FTSS/undotbs05.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/CDB_FTSS/undotbs04.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/CDB_FTSS/undotbs03.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/CDB_FTSS/undotbs02.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/pdbseed/sysaux01.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/CDB_FTSS/users01.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/pdbseed/system01.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/CDB_FTSS/undotbs01.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/CDB_FTSS/sysaux01.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/data01/CDB_FTSS/system01.dbf conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/redo02/redo04b.rdo conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/redo01/redo4a.rdo conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/redo01/redo3a.rdo conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/redo02/redo03b.rdo conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/redo02/redo02b.rdo conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/redo01/redo2a.rdo conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/redo01/redo1a.rdo conflicts with a file used by the target database
+RMAN-05001: auxiliary file name /oracle/ftss/redo02/redo01b.rdo conflicts with a file used by the target database
+
+RMAN> exit
+
+
+Recovery Manager complete.
+oraftsq.CDB_FTSQ - sql
+
+SQL*Plus: Release 12.1.0.2.0 Production on Tue Jul 17 14:21:42 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Connected to an idle instance.
+
+SQL> exit
+Disconnected
+oraftsq.CDB_FTSQ - pwd
+/oracle/FTSQ/12.1.0.2/dbs
+oraftsq.CDB_FTSQ - ls -tlr
+total 144
+-rw-r--r--    1 oraftsq  dba            2992 03 Feb 2012  init.ora
+-rw-r-----    1 oraftsq  dba            7680 16 Jul 09:43 orapwCDB_FTSQ
+-rw-r-----    1 oraftsq  dba              24 17 Jul 11:11 lkCDB_FTSQ
+-rw-r--r--    1 oraftsq  dba             528 17 Jul 11:32 _rm_dup_CDB_FTSQ.dat
+-rw-r--r--    1 oraftsq  dba            9867 17 Jul 14:06 initCDB_FTSQ.ora_FTSD
+-rw-r--r--    1 oraftsq  dba            9836 17 Jul 14:18 initCDB_FTSQ.ora
+-rw-r-----    1 oraftsq  dba           22016 17 Jul 14:21 spfileCDB_FTSQ.ora
+-rw-rw----    1 oraftsq  dba            1544 17 Jul 14:21 hc_CDB_FTSQ.dat
+oraftsq.CDB_FTSQ - sql
+
+SQL*Plus: Release 12.1.0.2.0 Production on Tue Jul 17 14:21:58 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Connected to an idle instance.
+
+SQL> create pfile from spfile ;
+
+File created.
+
+SQL> startup nomount
+ORA-32004: obsolete or deprecated parameter(s) specified for RDBMS instance
+ORACLE instance started.
+
+Total System Global Area 5368709120 bytes
+Fixed Size                  3795712 bytes
+Variable Size            2936014080 bytes
+Database Buffers         2415919104 bytes
+Redo Buffers               12980224 bytes
+SQL> show parameter db_name
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+db_name                              string      CDB_FTSQ
+SQL> show parameter convert
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+_convert_set_to_join                 boolean     FALSE
+db_file_name_convert                 string      /oracle/FTSD/data01/CDB_FTSD,
+                                                 /oracle/FTSQ/data01/CDB_FTSQ,
+                                                 /oracle/FTSD/data01/PDB_FTSD,
+                                                 /oracle/FTSQ/data01/PDB_FTSQ,
+                                                 /oracle/FTSD/data01/pdbseed, /
+                                                 oracle/FTSQ/data01/pdbseed, /o
+                                                 racle/FTSD/temp, /oracle/FTSQ/
+                                                 temp, /oracle/FTSD/temp/CDB_FT
+                                                 SD, /oracle/FTSQ/temp/CDB_FTSQ
+log_file_name_convert                string      /oracle/FTSD/redo01, /oracle/F
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+                                                 TSQ/redo01, /oracle/FTSD/redo0
+                                                 2, /oracle/FTSQ/redo02
+pdb_file_name_convert                string
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+oraftsq.CDB_FTSQ - pwd
+/oracle/FTSQ/12.1.0.2/dbs
+oraftsq.CDB_FTSQ - ls -tlr
+total 144
+-rw-r--r--    1 oraftsq  dba            2992 03 Feb 2012  init.ora
+-rw-r-----    1 oraftsq  dba            7680 16 Jul 09:43 orapwCDB_FTSQ
+-rw-r-----    1 oraftsq  dba              24 17 Jul 11:11 lkCDB_FTSQ
+-rw-r--r--    1 oraftsq  dba             528 17 Jul 11:32 _rm_dup_CDB_FTSQ.dat
+-rw-r--r--    1 oraftsq  dba            9867 17 Jul 14:06 initCDB_FTSQ.ora_FTSD
+-rw-r-----    1 oraftsq  dba           22016 17 Jul 14:21 spfileCDB_FTSQ.ora
+-rw-r--r--    1 oraftsq  dba            9813 17 Jul 14:22 initCDB_FTSQ.ora
+-rw-rw----    1 oraftsq  dba            1544 17 Jul 14:22 hc_CDB_FTSQ.dat
+oraftsq.CDB_FTSQ - cat initCDB_FTSQ.ora
+*.__data_transfer_cache_size=0
+CDB_FTSQ.__data_transfer_cache_size=0
+*.__db_cache_size=2192M
+CDB_FTSQ.__db_cache_size=2281701376
+*.__java_pool_size=192M
+CDB_FTSQ.__java_pool_size=201326592
+*.__large_pool_size=480M
+CDB_FTSQ.__large_pool_size=503316480
+*.__oracle_base='/oracle/FTSQ'# ORACLE_BASE set from environment
+*.__pga_aggregate_target=3G
+CDB_FTSQ.__pga_aggregate_target=3221225472
+*.__sga_target=5G
+CDB_FTSQ.__sga_target=5368709120
+*.__shared_io_pool_size=0
+CDB_FTSQ.__shared_io_pool_size=0
+*.__shared_pool_size=2G
+CDB_FTSQ.__shared_pool_size=2147483648
+*.__streams_pool_size=64M
+CDB_FTSQ.__streams_pool_size=67108864
+*._adaptive_window_consolidator_enabled=TRUE
+*._aggregation_optimization_settings=0
+*._always_anti_join='CHOOSE'
+*._always_semi_join='CHOOSE'
+*._and_pruning_enabled=TRUE
+*._b_tree_bitmap_plans=TRUE
+*._bloom_filter_enabled=TRUE
+*._bloom_folding_enabled=TRUE
+*._bloom_pruning_enabled=TRUE
+*._bloom_serial_filter='ON'
+*._complex_view_merging=TRUE
+*._compression_compatibility='12.1.0.2.0'
+*._connect_by_use_union_all='FALSE'
+*._convert_set_to_join=FALSE
+*._cost_equality_semi_join=TRUE
+*._cpu_to_io=0
+*._diag_adr_trace_dest='/oracle/FTSQ/diag/rdbms/cdb_ftsq/CDB_FTSQ/trace'
+*._dimension_skip_null=TRUE
+*._distinct_agg_optimization_gsets='CHOOSE'
+*._eliminate_common_subexpr=TRUE
+*._enable_type_dep_selectivity=TRUE
+*._fast_full_scan_enabled=TRUE
+*._first_k_rows_dynamic_proration=TRUE
+*._fix_control='13836796:0'
+*._gby_hash_aggregation_enabled=TRUE
+*._gby_vector_aggregation_enabled=TRUE
+*._generalized_pruning_enabled=TRUE
+*._globalindex_pnum_filter_enabled=TRUE
+*._gs_anti_semi_join_allowed=TRUE
+*._improved_outerjoin_card=TRUE
+*._improved_row_length_enabled=TRUE
+*._index_join_enabled=TRUE
+*._ksb_restart_policy_times='0','60','120','240'# internal update to set default
+*._left_nested_loops_random=TRUE
+*._local_communication_costing_enabled=TRUE
+*._minimal_stats_aggregation=TRUE
+*._mmv_query_rewrite_enabled=TRUE
+*._new_initial_join_orders=TRUE
+*._new_sort_cost_estimate=TRUE
+*._nlj_batching_enabled=1
+*._optim_adjust_for_part_skews=TRUE
+*._optim_enhance_nnull_detection=TRUE
+*._optim_new_default_join_sel=TRUE
+*._optim_peek_user_binds=TRUE
+*._optimizer_adaptive_cursor_sharing=TRUE
+*._optimizer_adaptive_plans=TRUE
+*._optimizer_aggr_groupby_elim=FALSE
+*._optimizer_ansi_join_lateral_enhance=TRUE
+*._optimizer_ansi_rearchitecture=TRUE
+*._optimizer_batch_table_access_by_rowid=TRUE
+*._optimizer_better_inlist_costing='ALL'
+*._optimizer_cbqt_no_size_restriction=TRUE
+*._optimizer_cluster_by_rowid=TRUE
+*._optimizer_cluster_by_rowid_batched=TRUE
+*._optimizer_cluster_by_rowid_control=129
+*._optimizer_coalesce_subqueries=TRUE
+*._optimizer_complex_pred_selectivity=TRUE
+*._optimizer_compute_index_stats=TRUE
+*._optimizer_connect_by_combine_sw=TRUE
+*._optimizer_connect_by_cost_based=TRUE
+*._optimizer_connect_by_elim_dups=TRUE
+*._optimizer_correct_sq_selectivity=TRUE
+*._optimizer_cost_based_transformation='OFF'
+*._optimizer_cost_hjsmj_multimatch=TRUE
+*._optimizer_cost_model='CHOOSE'
+*._optimizer_cube_join_enabled=TRUE
+*._optimizer_dim_subq_join_sel=TRUE
+*._optimizer_distinct_agg_transform=TRUE
+*._optimizer_distinct_elimination=TRUE
+*._optimizer_distinct_placement=TRUE
+*._optimizer_eliminate_filtering_join=TRUE
+*._optimizer_enable_density_improvements=TRUE
+*._optimizer_enable_extended_stats=TRUE
+*._optimizer_enable_table_lookup_by_nl=TRUE
+*._optimizer_enhanced_filter_push=TRUE
+*._optimizer_extend_jppd_view_types=TRUE
+*._optimizer_extended_cursor_sharing='UDO'
+*._optimizer_extended_cursor_sharing_rel='SIMPLE'
+*._optimizer_extended_stats_usage_control=192
+*._optimizer_false_filter_pred_pullup=TRUE
+*._optimizer_fast_access_pred_analysis=TRUE
+*._optimizer_fast_pred_transitivity=TRUE
+*._optimizer_filter_pred_pullup=TRUE
+*._optimizer_fkr_index_cost_bias=10
+*._optimizer_full_outer_join_to_outer=TRUE
+*._optimizer_gather_feedback=TRUE
+*._optimizer_gather_stats_on_load=TRUE
+*._optimizer_group_by_placement=TRUE
+*._optimizer_hybrid_fpwj_enabled=TRUE
+*._optimizer_improve_selectivity=TRUE
+*._optimizer_inmemory_access_path=TRUE
+*._optimizer_inmemory_autodop=TRUE
+*._optimizer_inmemory_bloom_filter=TRUE
+*._optimizer_inmemory_cluster_aware_dop=TRUE
+*._optimizer_inmemory_gen_pushable_preds=TRUE
+*._optimizer_inmemory_minmax_pruning=TRUE
+*._optimizer_inmemory_table_expansion=TRUE
+*._optimizer_interleave_jppd=TRUE
+*._optimizer_join_elimination_enabled=FALSE
+*._optimizer_join_factorization=TRUE
+*._optimizer_join_order_control=3
+*._optimizer_join_sel_sanity_check=TRUE
+*._optimizer_max_permutations=2000
+*._optimizer_mode_force=TRUE
+*._optimizer_multi_level_push_pred=TRUE
+*._optimizer_multi_table_outerjoin=TRUE
+*._optimizer_native_full_outer_join='FORCE'
+*._optimizer_new_join_card_computation=TRUE
+*._optimizer_null_accepting_semijoin=TRUE
+*._optimizer_null_aware_antijoin=TRUE
+*._optimizer_or_expansion='DEPTH'
+*._optimizer_order_by_elimination_enabled=TRUE
+*._optimizer_outer_join_to_inner=TRUE
+*._optimizer_outer_to_anti_enabled=TRUE
+*._optimizer_partial_join_eval=TRUE
+*._optimizer_proc_rate_level='BASIC'
+*._optimizer_push_down_distinct=0
+*._optimizer_push_pred_cost_based=TRUE
+*._optimizer_reduce_groupby_key=FALSE
+*._optimizer_rownum_bind_default=10
+*._optimizer_rownum_pred_based_fkr=TRUE
+*._optimizer_skip_scan_enabled=TRUE
+*._optimizer_sortmerge_join_inequality=TRUE
+*._optimizer_squ_bottomup=TRUE
+*._optimizer_star_tran_in_with_clause=TRUE
+*._optimizer_system_stats_usage=TRUE
+*._optimizer_table_expansion=TRUE
+*._optimizer_transitivity_retain=TRUE
+*._optimizer_try_st_before_jppd=TRUE
+*._optimizer_undo_cost_change='12.1.0.2'
+*._optimizer_unnest_corr_set_subq=TRUE
+*._optimizer_unnest_disjunctive_subq=TRUE
+*._optimizer_unnest_scalar_sq=TRUE
+*._optimizer_use_cbqt_star_transformation=TRUE
+*._optimizer_use_feedback=TRUE
+*._optimizer_use_gtt_session_stats=TRUE
+*._optimizer_use_histograms=TRUE
+*._optimizer_vector_transformation=TRUE
+*._or_expand_nvl_predicate=TRUE
+*._ordered_nested_loop=TRUE
+*._parallel_broadcast_enabled=TRUE
+*._partition_view_enabled=TRUE
+*._pivot_implementation_method='CHOOSE'
+*._pre_rewrite_push_pred=TRUE
+*._pred_move_around=TRUE
+*._push_join_predicate=TRUE
+*._push_join_union_view=TRUE
+*._push_join_union_view2=TRUE
+*._px_concurrent=TRUE
+*._px_cpu_autodop_enabled=TRUE
+*._px_external_table_default_stats=TRUE
+*._px_filter_parallelized=TRUE
+*._px_filter_skew_handling=TRUE
+*._px_groupby_pushdown='FORCE'
+*._px_join_skew_handling=TRUE
+*._px_minus_intersect=TRUE
+*._px_object_sampling_enabled=TRUE
+*._px_parallelize_expression=TRUE
+*._px_partial_rollup_pushdown='ADAPTIVE'
+*._px_partition_scan_enabled=TRUE
+*._px_pwg_enabled=TRUE
+*._px_replication_enabled=TRUE
+*._px_scalable_invdist=TRUE
+*._px_single_server_enabled=TRUE
+*._px_ual_serial_input=TRUE
+*._px_wif_dfo_declumping='CHOOSE'
+*._px_wif_extend_distribution_keys=TRUE
+*._query_rewrite_setopgrw_enable=TRUE
+*._remove_aggr_subquery=TRUE
+*._replace_virtual_columns=TRUE
+*._right_outer_hash_enable=TRUE
+*._selfjoin_mv_duplicates=TRUE
+*._sql_model_unfold_forloops='RUN_TIME'
+*._subquery_pruning_enabled=TRUE
+*._subquery_pruning_mv_enabled=FALSE
+*._table_scan_cost_plus_one=TRUE
+*._union_rewrite_for_gs='YES_GSET_MVS'
+*._unnest_subquery=TRUE
+*._use_column_stats_for_function=TRUE
+*._use_single_log_writer='true'
+*.audit_file_dest='/oracle/FTSQ/admin/adump'
+*.audit_trail='NONE'
+*.common_user_prefix='C##'
+*.compatible='12.1.0.2.0'
+*.connection_brokers='((TYPE=DEDICATED)(BROKERS=1))','((TYPE=EMON)(BROKERS=1))'# connection_brokers default value
+*.control_files='/oracle/FTSQ/redo01/control01.ctl','/oracle/FTSQ/redo02/control02.ctl'#Restore Controlfile
+*.core_dump_dest='/oracle/FTSQ/diag/rdbms/cdb_ftsq/CDB_FTSQ/cdump'
+*.db_block_size=8192
+*.db_cache_size=1856M
+*.db_domain=''
+*.db_file_multiblock_read_count=32
+*.db_file_name_convert='/oracle/FTSD/data01/CDB_FTSD','/oracle/FTSQ/data01/CDB_FTSQ','/oracle/FTSD/data01/PDB_FTSD','/oracle/FTSQ/data01/PDB_FTSQ','/oracle/FTSD/data01/pdbseed','/oracle/FTSQ/data01/pdbseed','/oracle/FTSD/temp','/oracle/FTSQ/temp','/oracle/FTSD/temp/CDB_FTSD','/oracle/FTSQ/temp/CDB_FTSQ'
+*.db_files=2000
+*.db_flashback_retention_target=7200
+*.db_keep_cache_size=128M
+*.db_name='CDB_FTSQ'#Reset to original value by RMAN
+*.db_recovery_file_dest_size=220G
+*.deferred_segment_creation=FALSE
+*.diagnostic_dest='/oracle/FTSQ'
+*.dispatchers='(PROTOCOL=TCP) (SERVICE=CDB_FTSQXDB)'
+*.enable_pluggable_database=TRUE
+*.hash_area_size=2097152
+*.java_pool_size=192M
+*.job_queue_processes=10
+*.local_listener='LISTENER_FTSS'
+*.log_archive_dest_1='location=/oracle/FTSQ/arch'
+*.log_archive_format='FTSQ_%t_%s_%r.arc'
+*.log_buffer=12192K# log buffer update
+*.log_file_name_convert='/oracle/FTSD/redo01','/oracle/FTSQ/redo01','/oracle/FTSD/redo02','/oracle/FTSQ/redo02'
+*.nls_language='ENGLISH'
+*.nls_territory='UNITED KINGDOM'
+*.O7_DICTIONARY_ACCESSIBILITY=TRUE
+*.open_cursors=500
+*.open_links=8
+*.open_links_per_instance=8
+*.optimizer_adaptive_plans=FALSE
+*.optimizer_adaptive_statistics=FALSE
+*.optimizer_dynamic_sampling=2
+*.optimizer_mode='ALL_ROWS'
+*.optimizer_secure_view_merging=FALSE
+*.parallel_adaptive_multi_user=TRUE
+*.parallel_max_servers=400
+*.parallel_servers_target=200
+*.pga_aggregate_limit=8G
+*.pga_aggregate_target=3G
+*.plsql_warnings='DISABLE:ALL'# PL/SQL warnings at init.ora
+*.processes=800
+*.query_rewrite_enabled='TRUE'
+*.query_rewrite_integrity='TRUSTED'
+*.recyclebin='OFF'
+*.remote_login_passwordfile='EXCLUSIVE'
+*.resource_manager_plan=''
+*.result_cache_max_result=50
+*.result_cache_max_size=50M
+*.sec_case_sensitive_logon=FALSE#Deprecate parameter
+*.session_cached_cursors=500
+*.sga_max_size=5G# internally adjusted
+*.sga_target=5G
+*.shared_pool_size=2G
+*.skip_unusable_indexes=TRUE
+*.sort_area_size=1048576
+*.standby_file_management='AUTO'
+*.star_transformation_enabled='TRUE'
+*.streams_pool_size=64M
+*.undo_retention=3600
+*.undo_tablespace='UNDOTBS1'
+oraftsq.CDB_FTSQ - pwd
+/oracle/FTSQ/12.1.0.2/dbs
+oraftsq.CDB_FTSQ - ls -tlr
+total 144
+-rw-r--r--    1 oraftsq  dba            2992 03 Feb 2012  init.ora
+-rw-r-----    1 oraftsq  dba            7680 16 Jul 09:43 orapwCDB_FTSQ
+-rw-r-----    1 oraftsq  dba              24 17 Jul 11:11 lkCDB_FTSQ
+-rw-r--r--    1 oraftsq  dba             528 17 Jul 11:32 _rm_dup_CDB_FTSQ.dat
+-rw-r--r--    1 oraftsq  dba            9867 17 Jul 14:06 initCDB_FTSQ.ora_FTSD
+-rw-r-----    1 oraftsq  dba           22016 17 Jul 14:21 spfileCDB_FTSQ.ora
+-rw-r--r--    1 oraftsq  dba            9813 17 Jul 14:22 initCDB_FTSQ.ora
+-rw-rw----    1 oraftsq  dba            1544 17 Jul 14:22 hc_CDB_FTSQ.dat
+oraftsq.CDB_FTSQ - cat initCDB_FTSQ.ora | grep convert
+*._convert_set_to_join=FALSE
+*.db_file_name_convert='/oracle/FTSD/data01/CDB_FTSD','/oracle/FTSQ/data01/CDB_FTSQ','/oracle/FTSD/data01/PDB_FTSD','/oracle/FTSQ/data01/PDB_FTSQ','/oracle/FTSD/data01/pdbseed','/oracle/FTSQ/data01/pdbseed','/oracle/FTSD/temp','/oracle/FTSQ/temp','/oracle/FTSD/temp/CDB_FTSD','/oracle/FTSQ/temp/CDB_FTSQ'
+*.log_file_name_convert='/oracle/FTSD/redo01','/oracle/FTSQ/redo01','/oracle/FTSD/redo02','/oracle/FTSQ/redo02'
+oraftsq.CDB_FTSQ - vi initCDB_FTSQ.ora
+oraftsq.CDB_FTSQ - vi initCDB_FTSQ.ora
+oraftsq.CDB_FTSQ - sql
+
+SQL*Plus: Release 12.1.0.2.0 Production on Tue Jul 17 14:25:47 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+
+SQL> create spfile from pfile ;
+create spfile from pfile
+*
+ERROR at line 1:
+ORA-32002: cannot create SPFILE already being used by the instance
+
+
+SQL> show pdbs ;
+SQL> shu abort
+ORACLE instance shut down.
+SQL> create spfile from pfile ;
+
+File created.
+
+SQL> Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+oraftsq.CDB_FTSQ - sql
+
+SQL*Plus: Release 12.1.0.2.0 Production on Tue Jul 17 14:26:24 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Connected to an idle instance.
+
+SQL> startup nomount
+ORA-32004: obsolete or deprecated parameter(s) specified for RDBMS instance
+ORACLE instance started.
+
+Total System Global Area 5368709120 bytes
+Fixed Size                  3795712 bytes
+Variable Size            2936014080 bytes
+Database Buffers         2415919104 bytes
+Redo Buffers               12980224 bytes
+SQL> Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+oraftsq.CDB_FTSQ - rman target sys/notsys@CDB_FTSS auxiliary sys/notsys
+
+Recovery Manager: Release 12.1.0.2.0 - Production on Tue Jul 17 14:27:01 2018
+
+Copyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.
+
+connected to target database: CDB_FTSS (DBID=2842290229)
+connected to auxiliary database: CDB_FTSQ (not mounted)
+
+RMAN> exit
+
+
+Recovery Manager complete.
+oraftsq.CDB_FTSQ - sql
+
+SQL*Plus: Release 12.1.0.2.0 Production on Tue Jul 17 14:27:21 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+
+SQL> Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+oraftsq.CDB_FTSQ -
+oraftsq.CDB_FTSQ - rman target sys/notsys@CDB_FTSS auxiliary sys/notsys
+
+Recovery Manager: Release 12.1.0.2.0 - Production on Tue Jul 17 14:27:26 2018
+
+Copyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.
+
+connected to target database: CDB_FTSS (DBID=2842290229)
+connected to auxiliary database: CDB_FTSQ (not mounted)
+
+RMAN>
+
+Recovery Manager complete.
+oraftsq.CDB_FTSQ - sql
+
+SQL*Plus: Release 12.1.0.2.0 Production on Tue Jul 17 14:27:34 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+
+SQL> show parameter control
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+_fix_control                         string      13836796:0
+_optimizer_cluster_by_rowid_control  integer     129
+_optimizer_extended_stats_usage_cont integer     192
+rol
+_optimizer_join_order_control        integer     3
+control_file_record_keep_time        integer     7
+control_files                        string      /oracle/FTSQ/redo01/control01.
+                                                 ctl, /oracle/FTSQ/redo02/contr
+                                                 ol02.ctl
+control_management_pack_access       string      DIAGNOSTIC+TUNING
+SQL> !rm /oracle/FTSQ/redo01/control01.ctl /oracle/FTSQ/redo02/control02.ctl
+
+SQL> Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+oraftsq.CDB_FTSQ - rman target sys/notsys@CDB_FTSS auxiliary sys/notsys
+
+Recovery Manager: Release 12.1.0.2.0 - Production on Tue Jul 17 14:27:53 2018
+
+Copyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.
+
+connected to target database: CDB_FTSS (DBID=2842290229)
+connected to auxiliary database: CDB_FTSQ (not mounted)
+
+RMAN> duplicate target database to CDB_FTSQ from active database;
+
+Starting Duplicate Db at 17-JUL-18
+using target database control file instead of recovery catalog
+allocated channel: ORA_AUX_DISK_1
+channel ORA_AUX_DISK_1: SID=1145 device type=DISK
+allocated channel: ORA_AUX_DISK_2
+channel ORA_AUX_DISK_2: SID=1189 device type=DISK
+current log archived
+
+contents of Memory Script:
+{
+   sql clone "alter system set  db_name =
+''CDB_FTSS'' comment=
+''Modified by RMAN duplicate'' scope=spfile";
+   sql clone "alter system set  db_unique_name =
+''CDB_FTSQ'' comment=
+''Modified by RMAN duplicate'' scope=spfile";
+   shutdown clone immediate;
+   startup clone force nomount
+   restore clone from service  'CDB_FTSS' primary controlfile;
+   alter clone database mount;
+}
+executing Memory Script
+
+sql statement: alter system set  db_name =  ''CDB_FTSS'' comment= ''Modified by RMAN duplicate'' scope=spfile
+
+sql statement: alter system set  db_unique_name =  ''CDB_FTSQ'' comment= ''Modified by RMAN duplicate'' scope=spfile
+
+Oracle instance shut down
+
+Oracle instance started
+
+Total System Global Area    5368709120 bytes
+
+Fixed Size                     3795712 bytes
+Variable Size               2936014080 bytes
+Database Buffers            2415919104 bytes
+Redo Buffers                  12980224 bytes
+
+Starting restore at 17-JUL-18
+allocated channel: ORA_AUX_DISK_1
+channel ORA_AUX_DISK_1: SID=1145 device type=DISK
+allocated channel: ORA_AUX_DISK_2
+channel ORA_AUX_DISK_2: SID=1189 device type=DISK
+
+channel ORA_AUX_DISK_1: starting datafile backup set restore
+channel ORA_AUX_DISK_1: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_1: restoring control file
+channel ORA_AUX_DISK_1: restore complete, elapsed time: 00:00:02
+output file name=/oracle/FTSQ/redo01/control01.ctl
+output file name=/oracle/FTSQ/redo02/control02.ctl
+Finished restore at 17-JUL-18
+
+database mounted
+
+contents of Memory Script:
+{
+   set newname for datafile  1 to
+"/oracle/FTSQ/data01/CDB_FTSQ/system01.dbf";
+   set newname for datafile  3 to
+"/oracle/FTSQ/data01/CDB_FTSQ/sysaux01.dbf";
+   set newname for datafile  4 to
+"/oracle/FTSQ/data01/CDB_FTSQ/undotbs01.dbf";
+   set newname for datafile  5 to
+"/oracle/FTSQ/data01/pdbseed/system01.dbf";
+   set newname for datafile  6 to
+"/oracle/FTSQ/data01/CDB_FTSQ/users01.dbf";
+   set newname for datafile  7 to
+"/oracle/FTSQ/data01/pdbseed/sysaux01.dbf";
+   set newname for datafile  336 to
+"/oracle/FTSQ/data01/CDB_FTSQ/undotbs02.dbf";
+   set newname for datafile  337 to
+"/oracle/FTSQ/data01/CDB_FTSQ/undotbs03.dbf";
+   set newname for datafile  338 to
+"/oracle/FTSQ/data01/CDB_FTSQ/undotbs04.dbf";
+   set newname for datafile  339 to
+"/oracle/FTSQ/data01/CDB_FTSQ/undotbs05.dbf";
+   set newname for datafile  1336 to
+"/oracle/FTSQ/data01/PDB_FTSQ/system01.dbf";
+   set newname for datafile  1337 to
+"/oracle/FTSQ/data01/PDB_FTSQ/sysaux01.dbf";
+   set newname for datafile  1568 to
+"/oracle/FTSQ/data01/PDB_FTSQ/user_data01.dbf";
+   set newname for datafile  1665 to
+"/oracle/FTSQ/data01/PDB_FTSQ/quest_data01.dbf";
+   set newname for datafile  1666 to
+"/oracle/FTSQ/data01/PDB_FTSQ/quest_indexes01.dbf";
+   set newname for datafile  1667 to
+"/oracle/FTSQ/data01/PDB_FTSQ/perfstat01.dbf";
+   set newname for datafile  1668 to
+"/oracle/FTSQ/data01/PDB_FTSQ/apex_data01.dbf";
+   set newname for datafile  1679 to
+"/oracle/FTSQ/data01/CDB_FTSQ/undotbs06.dbf";
+   set newname for datafile  1688 to
+"/oracle/FTSQ/data01/PDB_FTSQ/genf_data_ts01.dbf";
+   set newname for datafile  1689 to
+"/oracle/FTSQ/data01/PDB_FTSQ/genf_data_ts02.dbf";
+   set newname for datafile  1690 to
+"/oracle/FTSQ/data01/PDB_FTSQ/genf_data_ts03.dbf";
+   set newname for datafile  1691 to
+"/oracle/FTSQ/data01/PDB_FTSQ/genf_data_ts04.dbf";
+   set newname for datafile  1692 to
+"/oracle/FTSQ/data01/PDB_FTSQ/genf_IDX_01.dbf";
+   set newname for datafile  1693 to
+"/oracle/FTSQ/data01/PDB_FTSQ/genf_IDX_02.dbf";
+   set newname for datafile  1694 to
+"/oracle/FTSQ/data01/PDB_FTSQ/genf_IDX_03.dbf";
+   set newname for datafile  1695 to
+"/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_DATA_TS_01.dbf";
+   set newname for datafile  1696 to
+"/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_DATA_TS_02.dbf";
+   set newname for datafile  1697 to
+"/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_DATA_TS_03.dbf";
+   set newname for datafile  1698 to
+"/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_DATA_TS_04.dbf";
+   set newname for datafile  1699 to
+"/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_IDX_01.dbf";
+   set newname for datafile  1700 to
+"/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_IDX_02.dbf";
+   set newname for datafile  1701 to
+"/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_IDX_03.dbf";
+   set newname for datafile  1702 to
+"/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_DATA_TS01.dbf";
+   set newname for datafile  1703 to
+"/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_DATA_TS02.dbf";
+   set newname for datafile  1704 to
+"/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_DATA_TS03.dbf";
+   set newname for datafile  1705 to
+"/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_DATA_TS04.dbf";
+   set newname for datafile  1706 to
+"/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_IDX_01.dbf";
+   set newname for datafile  1707 to
+"/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_IDX_02.dbf";
+   set newname for datafile  1708 to
+"/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_IDX_03.dbf";
+   set newname for datafile  1709 to
+"/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_IDX_04.dbf";
+   restore
+   from service  'CDB_FTSS'   clone database
+   ;
+   sql 'alter system archive log current';
+}
+executing Memory Script
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+Starting restore at 17-JUL-18
+using channel ORA_AUX_DISK_1
+using channel ORA_AUX_DISK_2
+
+channel ORA_AUX_DISK_1: starting datafile backup set restore
+channel ORA_AUX_DISK_1: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_1: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_1: restoring datafile 00001 to /oracle/FTSQ/data01/CDB_FTSQ/system01.dbf
+channel ORA_AUX_DISK_2: starting datafile backup set restore
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_2: restoring datafile 00003 to /oracle/FTSQ/data01/CDB_FTSQ/sysaux01.dbf
+channel ORA_AUX_DISK_1: restore complete, elapsed time: 00:00:35
+channel ORA_AUX_DISK_1: starting datafile backup set restore
+channel ORA_AUX_DISK_1: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_1: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_1: restoring datafile 00004 to /oracle/FTSQ/data01/CDB_FTSQ/undotbs01.dbf
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:01:30
+channel ORA_AUX_DISK_2: starting datafile backup set restore
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_2: restoring datafile 00005 to /oracle/FTSQ/data01/pdbseed/system01.dbf
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:00:08
+channel ORA_AUX_DISK_2: starting datafile backup set restore
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_2: restoring datafile 00006 to /oracle/FTSQ/data01/CDB_FTSQ/users01.dbf
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:00:01
+channel ORA_AUX_DISK_2: starting datafile backup set restore
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_2: restoring datafile 00007 to /oracle/FTSQ/data01/pdbseed/sysaux01.dbf
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:00:15
+channel ORA_AUX_DISK_2: starting datafile backup set restore
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_2: restoring datafile 00336 to /oracle/FTSQ/data01/CDB_FTSQ/undotbs02.dbf
+channel ORA_AUX_DISK_1: restore complete, elapsed time: 00:14:55
+channel ORA_AUX_DISK_1: starting datafile backup set restore
+channel ORA_AUX_DISK_1: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_1: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_1: restoring datafile 00337 to /oracle/FTSQ/data01/CDB_FTSQ/undotbs03.dbf
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:14:41
+channel ORA_AUX_DISK_2: starting datafile backup set restore
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_2: restoring datafile 00338 to /oracle/FTSQ/data01/CDB_FTSQ/undotbs04.dbf
+channel ORA_AUX_DISK_1: restore complete, elapsed time: 00:13:41
+channel ORA_AUX_DISK_1: starting datafile backup set restore
+channel ORA_AUX_DISK_1: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_1: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_1: restoring datafile 00339 to /oracle/FTSQ/data01/CDB_FTSQ/undotbs05.dbf
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:14:51
+channel ORA_AUX_DISK_2: starting datafile backup set restore
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_2: restoring datafile 01336 to /oracle/FTSQ/data01/PDB_FTSQ/system01.dbf
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:00:45
+channel ORA_AUX_DISK_2: starting datafile backup set restore
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_2: restoring datafile 01337 to /oracle/FTSQ/data01/PDB_FTSQ/sysaux01.dbf
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:02:15
+channel ORA_AUX_DISK_2: starting datafile backup set restore
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_2: restoring datafile 01568 to /oracle/FTSQ/data01/PDB_FTSQ/user_data01.dbf
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:00:36
+channel ORA_AUX_DISK_2: starting datafile backup set restore
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_2: restoring datafile 01665 to /oracle/FTSQ/data01/PDB_FTSQ/quest_data01.dbf
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:00:03
+channel ORA_AUX_DISK_2: starting datafile backup set restore
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_2: restoring datafile 01666 to /oracle/FTSQ/data01/PDB_FTSQ/quest_indexes01.dbf
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:00:03
+channel ORA_AUX_DISK_2: starting datafile backup set restore
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_2: restoring datafile 01667 to /oracle/FTSQ/data01/PDB_FTSQ/perfstat01.dbf
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:00:55
+channel ORA_AUX_DISK_2: starting datafile backup set restore
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_2: restoring datafile 01668 to /oracle/FTSQ/data01/PDB_FTSQ/apex_data01.dbf
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:00:15
+channel ORA_AUX_DISK_2: starting datafile backup set restore
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_2: restoring datafile 01679 to /oracle/FTSQ/data01/CDB_FTSQ/undotbs06.dbf
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:03:56
+channel ORA_AUX_DISK_2: starting datafile backup set restore
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_2: restoring datafile 01688 to /oracle/FTSQ/data01/PDB_FTSQ/genf_data_ts01.dbf
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:01:55
+channel ORA_AUX_DISK_2: starting datafile backup set restore
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_2: restoring datafile 01689 to /oracle/FTSQ/data01/PDB_FTSQ/genf_data_ts02.dbf
+channel ORA_AUX_DISK_1: restore complete, elapsed time: 00:13:13
+channel ORA_AUX_DISK_1: starting datafile backup set restore
+channel ORA_AUX_DISK_1: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_1: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_1: restoring datafile 01690 to /oracle/FTSQ/data01/PDB_FTSQ/genf_data_ts03.dbf
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:01:50
+channel ORA_AUX_DISK_2: starting datafile backup set restore
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_2: restoring datafile 01691 to /oracle/FTSQ/data01/PDB_FTSQ/genf_data_ts04.dbf
+channel ORA_AUX_DISK_1: restore complete, elapsed time: 00:01:42
+channel ORA_AUX_DISK_1: starting datafile backup set restore
+channel ORA_AUX_DISK_1: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_1: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_1: restoring datafile 01692 to /oracle/FTSQ/data01/PDB_FTSQ/genf_IDX_01.dbf
+channel ORA_AUX_DISK_1: restore complete, elapsed time: 00:00:55
+channel ORA_AUX_DISK_1: starting datafile backup set restore
+channel ORA_AUX_DISK_1: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_1: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_1: restoring datafile 01693 to /oracle/FTSQ/data01/PDB_FTSQ/genf_IDX_02.dbf
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:01:38
+channel ORA_AUX_DISK_2: starting datafile backup set restore
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_2: restoring datafile 01694 to /oracle/FTSQ/data01/PDB_FTSQ/genf_IDX_03.dbf
+channel ORA_AUX_DISK_1: restore complete, elapsed time: 00:01:11
+channel ORA_AUX_DISK_1: starting datafile backup set restore
+channel ORA_AUX_DISK_1: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_1: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_1: restoring datafile 01695 to /oracle/FTSQ/data01/PDB_FTSQ/REPORTING_DATA_TS_01.dbf
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:01:01
+channel ORA_AUX_DISK_2: starting datafile backup set restore
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_2: restoring datafile 01696 to /oracle/FTSQ/data01/PDB_FTSQ/REPORTING_DATA_TS_02.dbf
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:00:45
+channel ORA_AUX_DISK_2: starting datafile backup set restore
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_2: restoring datafile 01697 to /oracle/FTSQ/data01/PDB_FTSQ/REPORTING_DATA_TS_03.dbf
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:01:05
+channel ORA_AUX_DISK_2: starting datafile backup set restore
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_2: restoring datafile 01698 to /oracle/FTSQ/data01/PDB_FTSQ/REPORTING_DATA_TS_04.dbf
+channel ORA_AUX_DISK_1: restore complete, elapsed time: 00:02:23
+channel ORA_AUX_DISK_1: starting datafile backup set restore
+channel ORA_AUX_DISK_1: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_1: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_1: restoring datafile 01699 to /oracle/FTSQ/data01/PDB_FTSQ/REPORTING_IDX_01.dbf
+channel ORA_AUX_DISK_1: restore complete, elapsed time: 00:01:05
+channel ORA_AUX_DISK_1: starting datafile backup set restore
+channel ORA_AUX_DISK_1: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_1: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_1: restoring datafile 01700 to /oracle/FTSQ/data01/PDB_FTSQ/REPORTING_IDX_02.dbf
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:01:13
+channel ORA_AUX_DISK_2: starting datafile backup set restore
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_2: restoring datafile 01701 to /oracle/FTSQ/data01/PDB_FTSQ/REPORTING_IDX_03.dbf
+channel ORA_AUX_DISK_1: restore complete, elapsed time: 00:01:15
+channel ORA_AUX_DISK_1: starting datafile backup set restore
+channel ORA_AUX_DISK_1: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_1: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_1: restoring datafile 01702 to /oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_DATA_TS01.dbf
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:01:15
+channel ORA_AUX_DISK_2: starting datafile backup set restore
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_2: restoring datafile 01703 to /oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_DATA_TS02.dbf
+channel ORA_AUX_DISK_1: restore complete, elapsed time: 00:05:46
+channel ORA_AUX_DISK_1: starting datafile backup set restore
+channel ORA_AUX_DISK_1: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_1: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_1: restoring datafile 01704 to /oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_DATA_TS03.dbf
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:05:46
+channel ORA_AUX_DISK_2: starting datafile backup set restore
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_2: restoring datafile 01705 to /oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_DATA_TS04.dbf
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:05:25
+channel ORA_AUX_DISK_2: starting datafile backup set restore
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_2: restoring datafile 01706 to /oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_IDX_01.dbf
+channel ORA_AUX_DISK_1: restore complete, elapsed time: 00:05:33
+channel ORA_AUX_DISK_1: starting datafile backup set restore
+channel ORA_AUX_DISK_1: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_1: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_1: restoring datafile 01707 to /oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_IDX_02.dbf
+channel ORA_AUX_DISK_1: restore complete, elapsed time: 00:01:35
+channel ORA_AUX_DISK_1: starting datafile backup set restore
+channel ORA_AUX_DISK_1: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_1: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_1: restoring datafile 01708 to /oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_IDX_03.dbf
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:01:43
+channel ORA_AUX_DISK_2: starting datafile backup set restore
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: specifying datafile(s) to restore from backup set
+channel ORA_AUX_DISK_2: restoring datafile 01709 to /oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_IDX_04.dbf
+channel ORA_AUX_DISK_1: restore complete, elapsed time: 00:01:45
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:01:45
+Finished restore at 17-JUL-18
+
+sql statement: alter system archive log current
+current log archived
+
+contents of Memory Script:
+{
+   restore clone force from service  'CDB_FTSS'
+           archivelog from scn  9147866196827;
+   switch clone datafile all;
+}
+executing Memory Script
+
+Starting restore at 17-JUL-18
+using channel ORA_AUX_DISK_1
+using channel ORA_AUX_DISK_2
+
+channel ORA_AUX_DISK_1: starting archived log restore to default destination
+channel ORA_AUX_DISK_1: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_1: restoring archived log
+archived log thread=1 sequence=38
+channel ORA_AUX_DISK_2: starting archived log restore to default destination
+channel ORA_AUX_DISK_2: using network backup set from service CDB_FTSS
+channel ORA_AUX_DISK_2: restoring archived log
+archived log thread=1 sequence=39
+channel ORA_AUX_DISK_1: restore complete, elapsed time: 00:00:00
+channel ORA_AUX_DISK_2: restore complete, elapsed time: 00:00:00
+Finished restore at 17-JUL-18
+
+datafile 1 switched to datafile copy
+input datafile copy RECID=78 STAMP=981732868 file name=/oracle/FTSQ/data01/CDB_FTSQ/system01.dbf
+datafile 3 switched to datafile copy
+input datafile copy RECID=79 STAMP=981732869 file name=/oracle/FTSQ/data01/CDB_FTSQ/sysaux01.dbf
+datafile 4 switched to datafile copy
+input datafile copy RECID=80 STAMP=981732869 file name=/oracle/FTSQ/data01/CDB_FTSQ/undotbs01.dbf
+datafile 5 switched to datafile copy
+input datafile copy RECID=81 STAMP=981732869 file name=/oracle/FTSQ/data01/pdbseed/system01.dbf
+datafile 6 switched to datafile copy
+input datafile copy RECID=82 STAMP=981732869 file name=/oracle/FTSQ/data01/CDB_FTSQ/users01.dbf
+datafile 7 switched to datafile copy
+input datafile copy RECID=83 STAMP=981732869 file name=/oracle/FTSQ/data01/pdbseed/sysaux01.dbf
+datafile 336 switched to datafile copy
+input datafile copy RECID=84 STAMP=981732869 file name=/oracle/FTSQ/data01/CDB_FTSQ/undotbs02.dbf
+datafile 337 switched to datafile copy
+input datafile copy RECID=85 STAMP=981732869 file name=/oracle/FTSQ/data01/CDB_FTSQ/undotbs03.dbf
+datafile 338 switched to datafile copy
+input datafile copy RECID=86 STAMP=981732869 file name=/oracle/FTSQ/data01/CDB_FTSQ/undotbs04.dbf
+datafile 339 switched to datafile copy
+input datafile copy RECID=87 STAMP=981732869 file name=/oracle/FTSQ/data01/CDB_FTSQ/undotbs05.dbf
+datafile 1336 switched to datafile copy
+input datafile copy RECID=88 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/system01.dbf
+datafile 1337 switched to datafile copy
+input datafile copy RECID=89 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/sysaux01.dbf
+datafile 1568 switched to datafile copy
+input datafile copy RECID=90 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/user_data01.dbf
+datafile 1665 switched to datafile copy
+input datafile copy RECID=91 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/quest_data01.dbf
+datafile 1666 switched to datafile copy
+input datafile copy RECID=92 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/quest_indexes01.dbf
+datafile 1667 switched to datafile copy
+input datafile copy RECID=93 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/perfstat01.dbf
+datafile 1668 switched to datafile copy
+input datafile copy RECID=94 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/apex_data01.dbf
+datafile 1679 switched to datafile copy
+input datafile copy RECID=95 STAMP=981732869 file name=/oracle/FTSQ/data01/CDB_FTSQ/undotbs06.dbf
+datafile 1688 switched to datafile copy
+input datafile copy RECID=96 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/genf_data_ts01.dbf
+datafile 1689 switched to datafile copy
+input datafile copy RECID=97 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/genf_data_ts02.dbf
+datafile 1690 switched to datafile copy
+input datafile copy RECID=98 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/genf_data_ts03.dbf
+datafile 1691 switched to datafile copy
+input datafile copy RECID=99 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/genf_data_ts04.dbf
+datafile 1692 switched to datafile copy
+input datafile copy RECID=100 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/genf_IDX_01.dbf
+datafile 1693 switched to datafile copy
+input datafile copy RECID=101 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/genf_IDX_02.dbf
+datafile 1694 switched to datafile copy
+input datafile copy RECID=102 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/genf_IDX_03.dbf
+datafile 1695 switched to datafile copy
+input datafile copy RECID=103 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_DATA_TS_01.dbf
+datafile 1696 switched to datafile copy
+input datafile copy RECID=104 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_DATA_TS_02.dbf
+datafile 1697 switched to datafile copy
+input datafile copy RECID=105 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_DATA_TS_03.dbf
+datafile 1698 switched to datafile copy
+input datafile copy RECID=106 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_DATA_TS_04.dbf
+datafile 1699 switched to datafile copy
+input datafile copy RECID=107 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_IDX_01.dbf
+datafile 1700 switched to datafile copy
+input datafile copy RECID=108 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_IDX_02.dbf
+datafile 1701 switched to datafile copy
+input datafile copy RECID=109 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_IDX_03.dbf
+datafile 1702 switched to datafile copy
+input datafile copy RECID=110 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_DATA_TS01.dbf
+datafile 1703 switched to datafile copy
+input datafile copy RECID=111 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_DATA_TS02.dbf
+datafile 1704 switched to datafile copy
+input datafile copy RECID=112 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_DATA_TS03.dbf
+datafile 1705 switched to datafile copy
+input datafile copy RECID=113 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_DATA_TS04.dbf
+datafile 1706 switched to datafile copy
+input datafile copy RECID=114 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_IDX_01.dbf
+datafile 1707 switched to datafile copy
+input datafile copy RECID=115 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_IDX_02.dbf
+datafile 1708 switched to datafile copy
+input datafile copy RECID=116 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_IDX_03.dbf
+datafile 1709 switched to datafile copy
+input datafile copy RECID=117 STAMP=981732869 file name=/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_IDX_04.dbf
+
+contents of Memory Script:
+{
+   set until scn  9147866199846;
+   recover
+   clone database
+    delete archivelog
+   ;
+}
+executing Memory Script
+
+executing command: SET until clause
+
+Starting recover at 17-JUL-18
+using channel ORA_AUX_DISK_1
+using channel ORA_AUX_DISK_2
+
+starting media recovery
+
+archived log for thread 1 with sequence 38 is already on disk as file /oracle/FTSQ/arch/FTSQ_1_38_979076217.arc
+archived log for thread 1 with sequence 39 is already on disk as file /oracle/FTSQ/arch/FTSQ_1_39_979076217.arc
+archived log file name=/oracle/FTSQ/arch/FTSQ_1_38_979076217.arc thread=1 sequence=38
+archived log file name=/oracle/FTSQ/arch/FTSQ_1_39_979076217.arc thread=1 sequence=39
+media recovery complete, elapsed time: 00:00:04
+Finished recover at 17-JUL-18
+Oracle instance started
+
+Total System Global Area    5368709120 bytes
+
+Fixed Size                     3795712 bytes
+Variable Size               2936014080 bytes
+Database Buffers            2415919104 bytes
+Redo Buffers                  12980224 bytes
+
+contents of Memory Script:
+{
+   sql clone "alter system set  db_name =
+''CDB_FTSQ'' comment=
+''Reset to original value by RMAN'' scope=spfile";
+   sql clone "alter system reset  db_unique_name scope=spfile";
+}
+executing Memory Script
+
+sql statement: alter system set  db_name =  ''CDB_FTSQ'' comment= ''Reset to original value by RMAN'' scope=spfile
+
+sql statement: alter system reset  db_unique_name scope=spfile
+Oracle instance started
+
+Total System Global Area    5368709120 bytes
+
+Fixed Size                     3795712 bytes
+Variable Size               2936014080 bytes
+Database Buffers            2415919104 bytes
+Redo Buffers                  12980224 bytes
+sql statement: CREATE CONTROLFILE REUSE SET DATABASE "CDB_FTSQ" RESETLOGS ARCHIVELOG
+  MAXLOGFILES     16
+  MAXLOGMEMBERS      3
+  MAXDATAFILES     2048
+  MAXINSTANCES     8
+  MAXLOGHISTORY     3505
+LOGFILE
+  GROUP   1 ( '/oracle/FTSQ/redo02/redo01b.rdo', '/oracle/FTSQ/redo01/redo1a.rdo' ) SIZE 512 M  REUSE,
+  GROUP   2 ( '/oracle/FTSQ/redo01/redo2a.rdo', '/oracle/FTSQ/redo02/redo02b.rdo' ) SIZE 512 M  REUSE,
+  GROUP   3 ( '/oracle/FTSQ/redo02/redo03b.rdo', '/oracle/FTSQ/redo01/redo3a.rdo' ) SIZE 512 M  REUSE,
+  GROUP   4 ( '/oracle/FTSQ/redo01/redo4a.rdo', '/oracle/FTSQ/redo02/redo04b.rdo' ) SIZE 512 M  REUSE
+DATAFILE
+  '/oracle/FTSQ/data01/CDB_FTSQ/system01.dbf',
+  '/oracle/FTSQ/data01/pdbseed/system01.dbf',
+  '/oracle/FTSQ/data01/PDB_FTSQ/system01.dbf'
+CHARACTER SET WE8ISO8859P1
+
+
+contents of Memory Script:
+{
+   set newname for tempfile  1 to
+"/oracle/FTSQ/temp/CDB_FTSS/temp01.dbf";
+   set newname for tempfile  2 to
+"/oracle/FTSQ/temp/temporary_data01_01.dbf";
+   set newname for tempfile  3 to
+"/oracle/FTSQ/temp/temporary_data01_02.dbf";
+   set newname for tempfile  4 to
+"/oracle/FTSQ/temp/temporary_data01_03.dbf";
+   set newname for tempfile  5 to
+"/oracle/FTSQ/temp/temporary_data01_04.dbf";
+   set newname for tempfile  6 to
+"/oracle/FTSQ/data01/pdbseed/pdbseed_temp012017-04-20_01-46-13-PM.dbf";
+   switch clone tempfile all;
+   catalog clone datafilecopy  "/oracle/FTSQ/data01/CDB_FTSQ/sysaux01.dbf",
+"/oracle/FTSQ/data01/CDB_FTSQ/undotbs01.dbf",
+"/oracle/FTSQ/data01/CDB_FTSQ/users01.dbf",
+"/oracle/FTSQ/data01/pdbseed/sysaux01.dbf",
+"/oracle/FTSQ/data01/CDB_FTSQ/undotbs02.dbf",
+"/oracle/FTSQ/data01/CDB_FTSQ/undotbs03.dbf",
+"/oracle/FTSQ/data01/CDB_FTSQ/undotbs04.dbf",
+"/oracle/FTSQ/data01/CDB_FTSQ/undotbs05.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/sysaux01.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/user_data01.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/quest_data01.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/quest_indexes01.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/perfstat01.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/apex_data01.dbf",
+"/oracle/FTSQ/data01/CDB_FTSQ/undotbs06.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/genf_data_ts01.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/genf_data_ts02.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/genf_data_ts03.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/genf_data_ts04.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/genf_IDX_01.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/genf_IDX_02.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/genf_IDX_03.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_DATA_TS_01.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_DATA_TS_02.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_DATA_TS_03.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_DATA_TS_04.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_IDX_01.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_IDX_02.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_IDX_03.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_DATA_TS01.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_DATA_TS02.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_DATA_TS03.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_DATA_TS04.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_IDX_01.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_IDX_02.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_IDX_03.dbf",
+"/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_IDX_04.dbf";
+   switch clone datafile all;
+}
+executing Memory Script
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+executing command: SET NEWNAME
+
+renamed tempfile 1 to /oracle/FTSQ/temp/CDB_FTSS/temp01.dbf in control file
+renamed tempfile 2 to /oracle/FTSQ/temp/temporary_data01_01.dbf in control file
+renamed tempfile 3 to /oracle/FTSQ/temp/temporary_data01_02.dbf in control file
+renamed tempfile 4 to /oracle/FTSQ/temp/temporary_data01_03.dbf in control file
+renamed tempfile 5 to /oracle/FTSQ/temp/temporary_data01_04.dbf in control file
+renamed tempfile 6 to /oracle/FTSQ/data01/pdbseed/pdbseed_temp012017-04-20_01-46-13-PM.dbf in control file
+
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/CDB_FTSQ/sysaux01.dbf RECID=1 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/CDB_FTSQ/undotbs01.dbf RECID=2 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/CDB_FTSQ/users01.dbf RECID=3 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/pdbseed/sysaux01.dbf RECID=4 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/CDB_FTSQ/undotbs02.dbf RECID=5 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/CDB_FTSQ/undotbs03.dbf RECID=6 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/CDB_FTSQ/undotbs04.dbf RECID=7 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/CDB_FTSQ/undotbs05.dbf RECID=8 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/sysaux01.dbf RECID=9 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/user_data01.dbf RECID=10 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/quest_data01.dbf RECID=11 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/quest_indexes01.dbf RECID=12 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/perfstat01.dbf RECID=13 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/apex_data01.dbf RECID=14 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/CDB_FTSQ/undotbs06.dbf RECID=15 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/genf_data_ts01.dbf RECID=16 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/genf_data_ts02.dbf RECID=17 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/genf_data_ts03.dbf RECID=18 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/genf_data_ts04.dbf RECID=19 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/genf_IDX_01.dbf RECID=20 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/genf_IDX_02.dbf RECID=21 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/genf_IDX_03.dbf RECID=22 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_DATA_TS_01.dbf RECID=23 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_DATA_TS_02.dbf RECID=24 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_DATA_TS_03.dbf RECID=25 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_DATA_TS_04.dbf RECID=26 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_IDX_01.dbf RECID=27 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_IDX_02.dbf RECID=28 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_IDX_03.dbf RECID=29 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_DATA_TS01.dbf RECID=30 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_DATA_TS02.dbf RECID=31 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_DATA_TS03.dbf RECID=32 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_DATA_TS04.dbf RECID=33 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_IDX_01.dbf RECID=34 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_IDX_02.dbf RECID=35 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_IDX_03.dbf RECID=36 STAMP=981732915
+cataloged datafile copy
+datafile copy file name=/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_IDX_04.dbf RECID=37 STAMP=981732915
+
+datafile 3 switched to datafile copy
+input datafile copy RECID=1 STAMP=981732915 file name=/oracle/FTSQ/data01/CDB_FTSQ/sysaux01.dbf
+datafile 4 switched to datafile copy
+input datafile copy RECID=2 STAMP=981732915 file name=/oracle/FTSQ/data01/CDB_FTSQ/undotbs01.dbf
+datafile 6 switched to datafile copy
+input datafile copy RECID=3 STAMP=981732915 file name=/oracle/FTSQ/data01/CDB_FTSQ/users01.dbf
+datafile 7 switched to datafile copy
+input datafile copy RECID=4 STAMP=981732915 file name=/oracle/FTSQ/data01/pdbseed/sysaux01.dbf
+datafile 336 switched to datafile copy
+input datafile copy RECID=5 STAMP=981732915 file name=/oracle/FTSQ/data01/CDB_FTSQ/undotbs02.dbf
+datafile 337 switched to datafile copy
+input datafile copy RECID=6 STAMP=981732915 file name=/oracle/FTSQ/data01/CDB_FTSQ/undotbs03.dbf
+datafile 338 switched to datafile copy
+input datafile copy RECID=7 STAMP=981732915 file name=/oracle/FTSQ/data01/CDB_FTSQ/undotbs04.dbf
+datafile 339 switched to datafile copy
+input datafile copy RECID=8 STAMP=981732915 file name=/oracle/FTSQ/data01/CDB_FTSQ/undotbs05.dbf
+datafile 1337 switched to datafile copy
+input datafile copy RECID=9 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/sysaux01.dbf
+datafile 1568 switched to datafile copy
+input datafile copy RECID=10 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/user_data01.dbf
+datafile 1665 switched to datafile copy
+input datafile copy RECID=11 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/quest_data01.dbf
+datafile 1666 switched to datafile copy
+input datafile copy RECID=12 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/quest_indexes01.dbf
+datafile 1667 switched to datafile copy
+input datafile copy RECID=13 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/perfstat01.dbf
+datafile 1668 switched to datafile copy
+input datafile copy RECID=14 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/apex_data01.dbf
+datafile 1679 switched to datafile copy
+input datafile copy RECID=15 STAMP=981732915 file name=/oracle/FTSQ/data01/CDB_FTSQ/undotbs06.dbf
+datafile 1688 switched to datafile copy
+input datafile copy RECID=16 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/genf_data_ts01.dbf
+datafile 1689 switched to datafile copy
+input datafile copy RECID=17 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/genf_data_ts02.dbf
+datafile 1690 switched to datafile copy
+input datafile copy RECID=18 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/genf_data_ts03.dbf
+datafile 1691 switched to datafile copy
+input datafile copy RECID=19 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/genf_data_ts04.dbf
+datafile 1692 switched to datafile copy
+input datafile copy RECID=20 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/genf_IDX_01.dbf
+datafile 1693 switched to datafile copy
+input datafile copy RECID=21 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/genf_IDX_02.dbf
+datafile 1694 switched to datafile copy
+input datafile copy RECID=22 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/genf_IDX_03.dbf
+datafile 1695 switched to datafile copy
+input datafile copy RECID=23 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_DATA_TS_01.dbf
+datafile 1696 switched to datafile copy
+input datafile copy RECID=24 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_DATA_TS_02.dbf
+datafile 1697 switched to datafile copy
+input datafile copy RECID=25 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_DATA_TS_03.dbf
+datafile 1698 switched to datafile copy
+input datafile copy RECID=26 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_DATA_TS_04.dbf
+datafile 1699 switched to datafile copy
+input datafile copy RECID=27 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_IDX_01.dbf
+datafile 1700 switched to datafile copy
+input datafile copy RECID=28 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_IDX_02.dbf
+datafile 1701 switched to datafile copy
+input datafile copy RECID=29 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/REPORTING_IDX_03.dbf
+datafile 1702 switched to datafile copy
+input datafile copy RECID=30 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_DATA_TS01.dbf
+datafile 1703 switched to datafile copy
+input datafile copy RECID=31 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_DATA_TS02.dbf
+datafile 1704 switched to datafile copy
+input datafile copy RECID=32 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_DATA_TS03.dbf
+datafile 1705 switched to datafile copy
+input datafile copy RECID=33 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_DATA_TS04.dbf
+datafile 1706 switched to datafile copy
+input datafile copy RECID=34 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_IDX_01.dbf
+datafile 1707 switched to datafile copy
+input datafile copy RECID=35 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_IDX_02.dbf
+datafile 1708 switched to datafile copy
+input datafile copy RECID=36 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_IDX_03.dbf
+datafile 1709 switched to datafile copy
+input datafile copy RECID=37 STAMP=981732915 file name=/oracle/FTSQ/data01/PDB_FTSQ/MOFFICE_IDX_04.dbf
+Reenabling controlfile options for auxiliary database
+Executing: alter database force logging
+
+contents of Memory Script:
+{
+   Alter clone database open resetlogs;
+}
+executing Memory Script
+
+database opened
+
+contents of Memory Script:
+{
+   sql clone "alter pluggable database all open";
+}
+executing Memory Script
+
+sql statement: alter pluggable database all open
+Finished Duplicate Db at 17-JUL-18
+
+RMAN> exit
+
+
+Recovery Manager complete.
+oraftsq.CDB_FTSQ - sql
+
+SQL*Plus: Release 12.1.0.2.0 Production on Tue Jul 17 15:40:43 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+
+SQL> show pdbs;
+
+    CON_ID CON_NAME                       OPEN MODE  RESTRICTED
+---------- ------------------------------ ---------- ----------
+         2 PDB$SEED                       READ ONLY  NO
+         3 FTSS                           READ WRITE NO
+SQL> Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+oraftsq.CDB_FTSQ -
+oraftsq.CDB_FTSQ - sql
+
+SQL*Plus: Release 12.1.0.2.0 Production on Tue Jul 17 15:40:52 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+
+SQL> select name,open_mode,database_role from v$database ;
+
+NAME      OPEN_MODE            DATABASE_ROLE
+--------- -------------------- ----------------
+CDB_FTSQ  READ WRITE           PRIMARY
+
+SQL> select file_name from cdb_temp_files;
+select file_name from cdb_temp_files
+*
+ERROR at line 1:
+ORA-12801: error signaled in parallel query server P000
+ORA-01157: cannot identify/lock data file 2001 - see DBWR trace file
+ORA-01110: data file 2001: '/oracle/FTSQ/temp/CDB_FTSS/temp01.dbf'
+
+
+SQL> show pdbs;
+
+    CON_ID CON_NAME                       OPEN MODE  RESTRICTED
+---------- ------------------------------ ---------- ----------
+         2 PDB$SEED                       READ ONLY  NO
+         3 FTSS                           READ WRITE NO
+SQL> Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
+oraftsq.CDB_FTSQ -
+
+Thanks & Regards,
+Balaji Ankalle
+Database Administrator 
+Email : balaji.ankalle@innogy.com 
+
