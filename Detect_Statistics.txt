@@ -1,0 +1,36 @@
+select owner,table_name,partition_name,stale_stats,last_analyzed from dba_tab_statistics;
+
+select owner,table_name,index_name,stale_stats,last_analyzed from dba_ind_statistics;
+
+--------------------
+
+REM LOCATION:   Object Management\Tables\Reports
+REM FUNCTION:   Report on Table Statistics
+REM TESTED ON:  10.2.0.3 and 11.1.0.6 (should work on Oracle 8 and later versions)
+REM PLATFORM:   non-specific
+REM REQUIRES:   dba_tables
+REM
+REM  This is a part of the Knowledge Xpert for Oracle Administration library.
+REM  Copyright (C) 2001 Quest Software
+REM  All rights reserved.
+REM
+REM ******************** Knowledge Xpert for Oracle Administration ********************
+UNDEF OWNER_NAME
+UNDEF TABLE_NAME
+COLUMN owner             format a20 wrap           heading "Table|Owner"
+COLUMN table_name        format a20 wrap           heading "Table|Name"
+COLUMN Tablespace_name   format a20 wrap           heading "Tablespace|Name"
+COLUMN num_rows          format 9,999,999          Heading "Numer|Of|Rows"
+COLUMN blocks            format 9,999,999          Heading "Numer|Of|Blocks"
+COLUMN empty_blocks      format 9,999,999          Heading "Numer|Of|Empty|Blocks"
+COLUMN avg_row_len       format 9,999,999          Heading "Average|Row|Length"
+COLUMN sample_size       format 999                Heading "Sample|Size"
+COLUMN last_analyzed     heading "Date|Last|Analyzed"
+SET PAGES 58 LINES 132 VERIFY OFF FEEDBACK OFF
+TTITLE left _date center 'Table Statistics Report' skip 2
+SELECT   owner, table_name, tablespace_name, num_rows, blocks, empty_blocks,
+         avg_row_len, sample_size, last_analyzed
+    FROM dba_tables
+   WHERE UPPER (owner) LIKE '&&OWNER_NAME'
+     AND UPPER (table_name) LIKE '&&TABLE_NAME'
+ORDER BY owner, table_name;

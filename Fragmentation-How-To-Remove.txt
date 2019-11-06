@@ -1,0 +1,91 @@
+********************HOW TO REMOVE TO FRAGMENTATION**********************************************
+
+
+Additional Information:
+Method for defragmenting the database
+
+NOTE : NOTE : NOTE :  Following query will only work when the tables are analyzed
+
+1) Issue the command below to Find fragmented tables.
+++++++++++++++++++++++++++++++
+col FRAGMENTED_SPACE for a20
+col TOTAL_SIZE for a20
+col ACTUAL_SIZE for a20
+column OWNER for a10
+column table_name for a20
+
+
+select owner,table_name,num_rows,round(((blocks*8/1024)),2)||'MB' "TOTAL_SIZE",
+ round((num_rows*avg_row_len/1024/1024),2)||'Mb' "ACTUAL_SIZE", 
+round(((blocks*8/1024)-(num_rows*avg_row_len/1024/1024)),2)  "FRAGMENTED_SPACE(in MB)", LAST_ANALYZED
+ from dba_tables
+ where table_name in (select table_name from dba_tables where owner in
+            (select distinct(owner) from dba_tables where owner not in('SYS','SYSTEM'))) and round(((blocks*8/1024)-(num_rows*avg_row_len/1024/1024)),2)>100 order by 6 desc;
++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+2) Check the size of tables which comes in above output. This size will be Pre Size
+
+SQLPLUS > Select segment_name, bytes/1048576 from dba_segments where segment_name in ('XXXX','YYYY','ZZZZ')
+
+
+
+
+3) Perform the following steps for all Segments
++++++++++++++++++++++++++++++++++
+# Step to enable the row movement 
+
+alter table table_name enable row movement; 
+
+#Rearrange the rows 
+
+alter table table_name shrink space compact;—–(rearranging) 
+
+--All the DML operation can be done during this. 
+
+#Reset the High Water Mark (HWM) 
+
+alter table table_name shrink space;—–(Reset HWM) 
+
+++++++++++++++++++++++++++++++++++
+
+4) Identify the indexes for each tables who are defragmented
+
+SQLPLUS> select index_name from dba_indexes where table_name='XXX';
+
+5) Rebuild the Indexes
+
+SQLPLUS > Alter index XXXX rebuild online;
+
+6) Analyze the table
+
+Analyze table XXX compute statistics
+
+
+7) Issue the command below to verify whether fragmentation is removed.
+++++++++++++++++++++++++++++++
+col FRAGMENTED_SPACE for a20
+col TOTAL_SIZE for a20
+col ACTUAL_SIZE for a20
+column OWNER for a10
+column table_name for a20
+
+
+select owner,table_name,num_rows,round(((blocks*8/1024)),2)||'MB' "TOTAL_SIZE",
+ round((num_rows*avg_row_len/1024/1024),2)||'Mb' "ACTUAL_SIZE", 
+round(((blocks*8/1024)-(num_rows*avg_row_len/1024/1024)),2)  "FRAGMENTED_SPACE(in MB)", LAST_ANALYZED
+ from dba_tables
+ where table_name in (select table_name from dba_tables where owner in
+            (select distinct(owner) from dba_tables where owner not in('SYS','SYSTEM'))) and round(((blocks*8/1024)-(num_rows*avg_row_len/1024/1024)),2)>100 order by 6 desc;
++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+8) Check the size of tables which comes in above output. This size will be Post Size
+
+SQLPLUS > Select segment_name, bytes/1048576 from dba_segments where segment_name in ('XXXX','YYYY','ZZZZ')
+
+
+9) Check for size of Materialized View Logs. If the Size is more then 1 Mb.. Truncate the MV logs
+
+select segment_name,bytes/1048576 from dba_segments where segment_name like 'MLOG$_%'
+
+
+10) create a Report on How much space was reclaimed.

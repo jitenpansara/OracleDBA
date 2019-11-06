@@ -1,0 +1,68 @@
+--locks and inactive sessions
+
+select count(sid) as Count_inactive_sessions from v$session where status='INACTIVE';
+select sid, serial#, status,LOGON_TIME,username, osuser, program from v$session where sid in (select sid from v$lock where block=1);
+
+---------------------------------------------------------------
+-- time for inactive session
+col LOGON_TIME for a20
+col IDLE_TIME for a20
+SELECT
+s.sid,s.serial#,s.username
+,s.status
+,s.osuser
+,to_char(logon_time, 'mm/dd/yy hh24:mi:ss') logon_time
+-- idle time
+-- days separately
+,substr('0'||trunc(last_call_et/86400),-2,2) || ':' ||
+-- hours
+substr('0'||trunc(mod(last_call_et,86400)/3600),-2,2) || ':' ||
+-- minutes
+substr('0'||trunc(mod(mod(last_call_et,86400),3600)/60),-2,2) || ':' ||
+--seconds
+substr('0'||mod(mod(mod(last_call_et,86400),3600),60),-2,2) idle_time
+FROM v$session s, v$process p
+WHERE s.username IS NOT NULL
+-- use outer join to show sniped sessions in
+-- v$session that don't have an OS process
+AND p.addr(+) = s.paddr and s.status='ACTIVE'
+ORDER BY
+idle_time desc;
+
+
+------------------------------------------------------------
+
+--sessions were logged on and consuming the most resources
+
+select  sess_id,
+        username,
+        program,
+        wait_event,
+        sess_time,
+        round(100 * (sess_time / total_time),2) pct_time_waited
+from
+(select a.session_id sess_id,
+        decode(session_type,'background',session_type,c.username) username,
+        a.program program,
+        b.name wait_event,
+        sum(a.time_waited) sess_time
+from    sys.v_$active_session_history a,
+        sys.v_$event_name b,
+        sys.dba_users c
+where   a.event# = b.event# and
+        a.user_id = c.user_id and
+        sample_time > '16-DEC-14 12:00:00 AM' and 
+        sample_time < '16-DEC-14 23:59:00 AM' and
+        b.wait_class = 'User I/O'
+group by a.session_id,
+        decode(session_type,'background',session_type,c.username),
+        a.program,
+        b.name),
+(select sum(a.time_waited) total_time
+from    sys.v_$active_session_history a,
+        sys.v_$event_name b
+where   a.event# = b.event# and
+        sample_time > '16-DEC-14 12:00:00 AM' and 
+        sample_time < '16-DEC-14 23:59:00 AM' and
+        b.wait_class = 'User I/O')
+order by 6 desc;

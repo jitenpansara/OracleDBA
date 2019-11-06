@@ -1,0 +1,76 @@
+--long running SID timing
+
+SQL> select sid, serial#, osuser, username, round(LAST_CALL_ET/60/60) IDLE_HRS, status,TO_CHAR(LOGON_TIME, 'MM/DD/YYYY HH24:MI:SS') "LOGON_TIME",machine,sql_id from v$session where sid=343;
+
+------------------------------------------------------
+--Long running script
+
+col PID for a10
+col LOCKWAIT for a5
+col USER for a10
+col EVENT for a20
+col SQL for a60
+SELECT 
+SUBSTR(SS.USERNAME,1,8) USERNAME,
+SS.OSUSER "USER",
+SS.PROCESS PID,
+TO_CHAR(AR.LAST_LOAD_TIME, 'DD-Mon HH24:MM:SS') LOAD_TIME,
+SUBSTR(SS.LOCKWAIT,1,10) LOCKWAIT,
+W.EVENT EVENT,
+SS.status,
+AR.SQL_fullTEXT SQL
+FROM V$SESSION_WAIT W,
+V$SQLAREA AR,
+V$SESSION SS, 
+v$timer T
+WHERE SS.SQL_ADDRESS = AR.ADDRESS
+AND SS.SQL_HASH_VALUE = AR.HASH_VALUE
+AND SS.SID = w.SID (+)
+AND ss.STATUS = 'ACTIVE'  
+AND W.EVENT != 'client message'
+ORDER BY  SS.LOCKWAIT ASC, SS.USERNAME, AR.DISK_READS DESC
+/
+----------------------------
+
+--Show long running SQL Statements--
+
+
+	SELECT s.username,
+		   sl.sid,
+		   sq.executions,
+		   sl.last_update_time,
+		   sl.sql_id,
+		   sl.sql_hash_value,
+		   opname,
+		   target,
+		   elapsed_seconds,
+		   time_remaining,
+		   sq.sql_fulltext
+	  FROM v$session_longops sl
+	 INNER JOIN v$sql sq ON sq.sql_id = sl.sql_id
+	 INNER JOIN v$session s ON sl.SID = s.SID AND sl.serial# = s.serial#
+	 WHERE time_remaining > 0;
+
+OR
+
+ col USERNAME for a10
+ col OPNAME for a10
+ col TARGET for a10
+ col SQL_FULLTEXT for a30
+ col sid for a10
+ col sid for 999999
+SELECT s.username,
+       sl.sid,
+       sq.executions,
+       sl.last_update_time,
+       sl.sql_id,
+       sl.sql_hash_value,
+       opname,
+       target,
+       elapsed_seconds,
+       time_remaining,
+       sq.sql_fulltext
+  FROM v$session_longops sl
+ INNER JOIN v$sql sq ON sq.sql_id = sl.sql_id
+ INNER JOIN v$session s ON sl.SID = s.SID AND sl.serial# = s.serial#
+ WHERE time_remaining > 0;

@@ -1,0 +1,39 @@
+--To determine SQL statements with the most disk reads per execution:
+
+column per_exec format 999,999,999
+column disk_reads format 999,999,999  
+
+select disk_reads, executions, disk_reads/executions per_exec,
+       substr(sql_text,1,4000) SQL
+  from v$sqlarea
+ where executions > 1
+   and disk_reads/executions > 10000
+order by disk_reads/executions desc
+/
+
+--To determine SQL statements with the most buffer gets per execution:
+
+column per_exec format 999,999,999
+column buffer_gets format 999,999,999  
+
+select buffer_gets, executions, buffer_gets/executions per_exec,
+       substr(sql_text,1,4000) SQL
+  from v$sqlarea
+ where executions > 1
+   and buffer_gets/executions > 10000
+order by buffer_gets/executions desc
+/
+
+--To check the buffer cache hit ratio:
+
+col "Buffer Cache Hit Ratio" format a23   
+
+select to_char((sum(decode(name, 'consistent gets',value, 0)) + 
+       sum(decode(name, 'db block gets',value, 0)) - 
+       sum(decode(name, 'physical reads',value, 0)) - 
+       sum(decode(name, 'physical reads direct',value, 0))) / 
+       (sum(decode(name, 'consistent gets',value, 0)) + 
+       sum(decode(name, 'db block gets',value, 0))) * 
+       100,'999.99') || ' %' "Buffer Cache Hit Ratio"  
+from v$sysstat st 
+/

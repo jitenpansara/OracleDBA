@@ -1,0 +1,49 @@
+Finding blocking sessions:
+Using v$session:
+SELECT
+   s.blocking_session, 
+   s.sid, 
+   s.serial#, 
+   s.seconds_in_wait
+FROM
+   v$session s
+WHERE
+   blocking_session IS NOT NULL;
+------------------------------
+
+Using v$lock:
+select * from v$lock where block=1;select count(*) from gv$lock where block=1;select sid from v$lock where block=1;
+Which Session is blocking?
+
+select
+(select username from v$session where sid=a.sid) blocker,
+a.sid,' is blocking ',(select username from v$session where sid=b.sid) blockee,b
+.sid
+from v$lock a, v$lock b
+where a.block = 1
+and b.request > 0
+and a.id1 = b.id1
+and a.id2 = b.id2;
+Finding the query of the sessions:
+SELECT a.sql_text, b.sql_hash_value
+FROM   v$sqltext a,
+       v$session b
+WHERE  a.address = b.sql_address
+AND    a.hash_value = b.sql_hash_value
+AND    b.sid = &1
+ORDER BY a.piece;
+
+------------------------------
+
+Complete Details of blocking sessions:
+
+select distinct
+a.sid "waiting sid"
+, d.sql_text "waiting SQL"
+, a.ROW_WAIT_OBJ# "locked object"
+, a.BLOCKING_SESSION "blocking sid"
+, c.sql_text "SQL from blocking session"
+from v$session a, v$active_session_history b, v$sql c, v$sql d
+where a.event='enq: TX - row lock contention'
+and a.sql_id=d.sql_id
+and a.blocking_session=b.session_id

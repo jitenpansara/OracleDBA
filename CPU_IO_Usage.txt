@@ -1,0 +1,39 @@
+--CPU utilization per user
+
+select 
+   ss.username,
+   se.SID,
+   VALUE/100 cpu_usage_seconds
+from
+   v$session ss, 
+   v$sesstat se, 
+   v$statname sn
+where
+   se.STATISTIC# = sn.STATISTIC#
+and
+   NAME like '%CPU used by this session%'
+and
+   se.SID = ss.SID
+and 
+   ss.status='INACTIVE'
+and 
+   ss.username is not null
+order by VALUE desc;
+
+OR
+
+-- Show IO per session,CPU in seconds, sessionIOS.
+set linesize 140
+col USERNAME for a15
+col PROGRAM for a20
+col spid for a6
+col program for a35 trunc
+select p.spid SPID,to_char(s.LOGON_TIME,'DDMonYY HH24:MI') date_login,s.username,decode(nvl(p.background,0),1,bg.description, s.program ) program,
+ss.value/100 CPU,physical_reads disk_io,(trunc(sysdate,'J')-trunc(logon_time,'J')) days,
+round((ss.value/100)/(decode((trunc(sysdate,'J')-trunc(logon_time,'J')),0,1,(trunc(sysdate,'J')-trunc(logon_time,'J')))),2) cpu_per_day 
+from V$PROCESS p,V$SESSION s,V$SESSTAT ss,V$SESS_IO si,V$BGPROCESS bg
+where s.paddr=p.addr and ss.sid=s.sid
+and ss.statistic#=12 and si.sid=s.sid
+and bg.paddr(+)=p.addr 
+and round((ss.value/100),0) > 5 
+order by 8;

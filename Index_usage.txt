@@ -1,0 +1,52 @@
+--v$object_view shows the index monitoring information of only the current schema. As a DBA, if you want to check all indexes, you should create a new view:
+
+CREATE VIEW dba_object_usage (owner,
+index_name, table_name, monitoring, used, start_monitoring, end_monitoring )
+AS
+SELECT do.owner, io.NAME, t.NAME,
+DECODE (BITAND (i.flags, 65536), 0, 'NO', 'YES'),
+DECODE (BITAND (ou.flags, 1), 0, 'NO', 'YES'), ou.start_monitoring,
+ou.end_monitoring
+FROM SYS.obj$ io,
+SYS.obj$ t,
+SYS.ind$ i,
+SYS.object_usage ou,
+dba_objects do
+WHERE i.obj# = ou.obj#
+AND io.obj# = ou.obj#
+AND t.obj# = i.bo#
+AND ou.obj# = do.object_id;
+
+-----------------------------
+
+--To enable monitoring on all indexes, run the following script:
+
+SET heading off
+SET echo off
+SET pages 10000
+SPOOL start_monitoring.sql
+SELECT 'alter index ' || owner || '.' || index_name || ' monitoring usage;'
+FROM dba_indexes
+WHERE owner NOT IN ('SYS', 'SYSTEM');
+SPOOL off
+@start_monitoring.sql
+
+---------------------------------
+
+--To stop monitoring on all indexes:
+
+SET heading off
+SET echo off
+SET pages 10000
+SPOOL stop_monitoring.sql
+SELECT 'alter index ' || owner || '.' || index_name || ' nomonitoring usage;'
+FROM dba_indexes
+WHERE owner NOT IN ('SYS', 'SYSTEM');
+SPOOL off
+@stop_monitoring.sql
+
+----------------------------------
+
+--You can run the following query to find unused indexes:
+
+SELECT * FROM dba_object_usage WHERE used = 'NO';

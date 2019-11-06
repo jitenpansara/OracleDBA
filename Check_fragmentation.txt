@@ -1,0 +1,61 @@
+-- TO CHECK FRAGMENTATION
+
+	select table_name,round((blocks*8),2) "Total_size (kb)" , 
+								round((num_rows*avg_row_len/1024),2) "Actual_size (kb)",
+								(round((blocks*8),2) - round((num_rows*avg_row_len/1024),2)) "Fragmented_space (kb)"
+	from dba_tables
+	where (round((blocks*8),2) > round((num_rows*avg_row_len/1024/1024/1024),2)) and TABLE_NAME IN
+(  );
+
+
+or 
+
+select
+tablespace_name,
+count(*) free_chunks,
+decode(
+round((max(bytes) / 1024000),2),
+null,0,
+round((max(bytes) / 1024000),2)) largest_chunk,
+nvl(round(sqrt(max(blocks)/sum(blocks))*(100/sqrt(sqrt(count(blocks)) )),2),
+0) fragmentation_index
+from
+sys.dba_free_space
+group by
+tablespace_name
+order by
+2 desc, 1;
+
+or
+
+select owner,table_name,num_rows,round(((blocks*8/1024)),2)||' MB' "TOTAL_SIZE", round((num_rows*avg_row_len/1024/1024),2)||' MB' "ACTUAL_SIZE", 
+round(((blocks*8/1024)-(num_rows*avg_row_len/1024/1024)),2)  "FRAGMENTED_SPACE(MB)", round(100 * (round(((blocks*8/1024)-(num_rows*avg_row_len/1024/1024)),2) / round(((blocks*8/1024)),2))) "FRAGMENTATION (%)"
+from dba_tables
+where table_name in ('STUDY_RECORDS','DIST_RECORDS','TIME','EBU_VOLUME_NORMALIZED') and owner in ('AK944','ISSS_FD','ASET_USER');
+
+or
+
+select owner,table_name,num_rows,round(((blocks*8/1024)),2)||' MB' "TOTAL_SIZE", round((num_rows*avg_row_len/1024/1024),2)||' MB' "ACTUAL_SIZE", 
+round(((blocks*8/1024)-(num_rows*avg_row_len/1024/1024)),2)  "FRAGMENTED_SPACE(MB)", round(100 * (round(((blocks*8/1024)-(num_rows*avg_row_len/1024/1024)),2) / round(((blocks*8/1024)),2))) "FRAGMENTATION (%)"
+from dba_tables
+where table_name in (select table_name from dba_tables 
+where owner in (select distinct(owner) from dba_tables where owner not in('SYS','SYSTEM'))) and round(((blocks*8/1024)-(num_rows*avg_row_len/1024/1024)),2)
+>100 order by 6 desc; 
+
+or 
+
+col FRAGMENTED_SPACE for a25
+ col OWNER for a10
+ col TABLE_NAME for a30
+  col TOTAL_SIZE for a25
+ set lines 200
+ col ACTUAL_SIZE for a20
+ col TABLE_NAME for a20
+  col TOTAL_SIZE for a15
+select owner,table_name,blocks,num_rows,avg_row_len,round(((blocks*8/1024)),2)||'MB' "TOTAL_SIZE",
+ round((num_rows*avg_row_len/1024/1024),2)||'Mb' "ACTUAL_SIZE", 
+round(((blocks*8/1024)-(num_rows*avg_row_len/1024/1024)),2) ||'MB' "FRAGMENTED_SPACE"
+ from all_tables where owner='ASTRA';
+
+ 
+ table_name ='&table_name';
